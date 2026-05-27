@@ -1,0 +1,72 @@
+name: Generate Account Report
+
+on:
+  workflow_dispatch:
+    inputs:
+      company:
+        description: 'Company name to generate report for'
+        required: true
+        type: string
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install @google/generative-ai dotenv
+
+      - name: Generate HTML report
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          COMPANY: ${{ github.event.inputs.company }}
+        run: node generate.js
+
+      - name: Install Puppeteer
+        run: npm install puppeteer
+
+      - name: Generate PDF from HTML
+        run: |
+          node -e "
+          const puppeteer = require('puppeteer');
+          const fs = require('fs');
+          const path = require('path');
+          const company = process.env.COMPANY;
+          const slug = company.toLowerCase().replace(/[^a-z0-9]/g, '_');
+          const htmlPath = path.resolve('reports/' + slug + '.html');
+          (async () => {
+            const browser = await puppeteer.launch({ args: ['--no-sandbox','--disable-setuid-sandbox'] });
+            const page = await browser.newPage();
+            await page.setViewport({ width: 390, height: 844 });
+            await page.goto('file://' + htmlPath, { waitUntil: 'networkidle0' });
+            await page.pdf({
+              path: 'reports/' + slug + '.pdf',
+              format: 'A4',
+              printBackground: true,
+              margin: { top: '10mm', bottom: '10mm', left: '8mm', right: '8mm' }
+            });
+            await browser.close();
+            console.log('PDF generated: reports/' + slug + '.pdf');
+          })();
+          "
+        env:
+          COMPANY: ${{ github.event.inputs.company }}
+
+      - name: Commit and push report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add reports/
+          git commit -m "Add report: ${{ github.event.inputs.company }}" || echo "Nothing to commit"
+          git push

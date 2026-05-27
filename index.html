@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>ITC Infotech · Intelligence Portal</title>
+<style>
+:root {
+  --navy:   #1F3864;
+  --blue:   #2E74B5;
+  --lblue:  #EBF3FB;
+  --vblue:  #9DC3E6;
+  --amber:  #BF8A14;
+  --bg:     #F0F2F5;
+  --card:   #FFFFFF;
+  --border: #E2E5EC;
+  --t1:     #1A1F36;
+  --t2:     #4A5568;
+  --t3:     #9AA3B0;
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(0,0,0,.06), 0 2px 10px rgba(0,0,0,.05);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--t1);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 60px;
+}
+
+/* ── HEADER ── */
+.top-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--navy);
+  padding: 14px 16px 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.18);
+}
+.top-bar-row { display: flex; justify-content: space-between; align-items: flex-start; }
+.top-brand { color: #fff; font-size: 15px; font-weight: 600; line-height: 1.2; }
+.top-sub   { color: var(--vblue); font-size: 10px; margin-top: 2px; }
+.top-date  { color: var(--vblue); font-size: 10px; text-align: right; }
+
+/* ── PORTAL HERO ── */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, #2E74B5 100%);
+  padding: 28px 16px 24px;
+  text-align: center;
+}
+.hero-title { color: #fff; font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+.hero-sub { color: var(--vblue); font-size: 12px; }
+
+/* ── SECTION ── */
+.section { padding: 20px 14px 0; }
+.section-hdr {
+  font-size: 11px; font-weight: 700;
+  color: var(--navy); letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+/* ── PORTAL CARDS ── */
+.portal-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  margin-bottom: 12px;
+  text-decoration: none;
+  display: block;
+  transition: transform .15s, box-shadow .15s;
+}
+.portal-card:active { transform: scale(.98); }
+.portal-card-header {
+  padding: 16px;
+  display: flex; align-items: center; gap: 14px;
+}
+.portal-card-icon {
+  width: 42px; height: 42px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0;
+}
+.icon-monthly  { background: #EBF3FB; }
+.icon-daily    { background: #FEF3C7; }
+.icon-account  { background: #F0FDF4; }
+.portal-card-label { font-size: 10px; font-weight: 700; color: var(--t3); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 3px; }
+.portal-card-title { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+.portal-card-desc  { font-size: 12px; color: var(--t2); }
+.portal-card-footer {
+  background: var(--bg);
+  padding: 10px 16px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-top: 1px solid var(--border);
+}
+.portal-card-footer-label { font-size: 11px; color: var(--t3); }
+.portal-card-arrow { color: var(--blue); font-size: 14px; font-weight: 700; }
+
+/* ── ACCOUNT GENERATOR PANEL ── */
+.gen-panel {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.gen-panel-header {
+  background: var(--navy);
+  padding: 14px 16px;
+}
+.gen-panel-title { color: #fff; font-size: 14px; font-weight: 600; }
+.gen-panel-sub   { color: var(--vblue); font-size: 11px; margin-top: 3px; }
+.gen-body { padding: 16px; }
+.gen-input-row { display: flex; gap: 8px; margin-bottom: 12px; }
+.gen-input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--t1);
+  outline: none;
+  transition: border-color .15s;
+}
+.gen-input:focus { border-color: var(--blue); }
+.gen-btn {
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .15s;
+}
+.gen-btn:hover { background: var(--navy); }
+.gen-btn:disabled { background: var(--t3); cursor: not-allowed; }
+
+/* ── STATUS ── */
+.status-box {
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  display: none;
+}
+.status-pending  { background: #FEF9EC; border: 1px solid #F0D080; color: #78350F; }
+.status-success  { background: #F0FDF4; border: 1px solid #86EFAC; color: #166534; }
+.status-error    { background: #FEF2F2; border: 1px solid #FECACA; color: #991B1B; }
+.status-box.show { display: block; }
+.status-spinner  { display: inline-block; animation: spin 1s linear infinite; margin-right: 6px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── RECENT REPORTS ── */
+.report-list { padding: 0; }
+.report-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 16px;
+  border-bottom: 0.5px solid var(--border);
+  text-decoration: none;
+}
+.report-item:last-child { border-bottom: none; }
+.report-item-name { font-size: 13px; font-weight: 600; color: var(--navy); }
+.report-item-date { font-size: 11px; color: var(--t3); margin-top: 2px; }
+.report-item-arrow { color: var(--blue); font-size: 14px; }
+
+/* ── FOOTER ── */
+.footer {
+  margin: 24px 14px 8px;
+  padding: 14px 16px;
+  background: var(--card);
+  border-radius: var(--radius);
+  border-top: 2px solid var(--navy);
+}
+.footer-text { font-size: 11px; color: var(--t3); text-align: center; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="top-bar">
+  <div class="top-bar-row">
+    <div>
+      <div class="top-brand">ITC Infotech</div>
+      <div class="top-sub">Intelligence Portal · Internal · Leadership Only</div>
+    </div>
+    <div class="top-date" id="headerDate"></div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-title">Market Intelligence</div>
+  <div class="hero-sub">Strategy · Competitive · Account Intelligence</div>
+</div>
+
+<!-- PORTAL CARDS -->
+<div class="section">
+  <div class="section-hdr">Reports</div>
+
+  <!-- Monthly Report -->
+  <a class="portal-card" href="https://chaakresh.github.io/ITCI_Intel/ITCI_Mobile_Report.html" target="_blank">
+    <div class="portal-card-header">
+      <div class="portal-card-icon icon-monthly">📊</div>
+      <div>
+        <div class="portal-card-label">Monthly</div>
+        <div class="portal-card-title">Market Intelligence Report</div>
+        <div class="portal-card-desc">IT services landscape, competitor analysis, market signals</div>
+      </div>
+    </div>
+    <div class="portal-card-footer">
+      <div class="portal-card-footer-label">Updated monthly · FY2025–26</div>
+      <div class="portal-card-arrow">→</div>
+    </div>
+  </a>
+
+  <!-- Daily Brief -->
+  <a class="portal-card" href="https://chaakresh.github.io/ITCI_Intel/daily.html" target="_blank">
+    <div class="portal-card-header">
+      <div class="portal-card-icon icon-daily">⚡</div>
+      <div>
+        <div class="portal-card-label">Daily</div>
+        <div class="portal-card-title">Intelligence Brief</div>
+        <div class="portal-card-desc">Morning signals, breaking news, executive alerts</div>
+      </div>
+    </div>
+    <div class="portal-card-footer">
+      <div class="portal-card-footer-label">Updated 7AM daily</div>
+      <div class="portal-card-arrow">→</div>
+    </div>
+  </a>
+
+</div>
+
+<!-- ACCOUNT REPORT GENERATOR -->
+<div class="section" style="margin-top:8px;">
+  <div class="section-hdr">Account Intelligence</div>
+
+  <div class="gen-panel">
+    <div class="gen-panel-header">
+      <div class="gen-panel-title">🎯 Account Report Generator</div>
+      <div class="gen-panel-sub">AI-powered pre-sales brief · Powered by Gemini + Claude</div>
+    </div>
+    <div class="gen-body">
+      <div class="gen-input-row">
+        <input class="gen-input" id="companyInput" type="text" placeholder="Enter company name (e.g. IKEA)" autocomplete="off" />
+        <button class="gen-btn" id="genBtn" onclick="generateReport()">Generate</button>
+      </div>
+      <div class="status-box status-pending" id="statusPending">
+        <span class="status-spinner">⏳</span>
+        <strong>Generating report for <span id="pendingCompany"></span>...</strong><br>
+        This takes 2–3 minutes. The page will auto-refresh every 30 seconds.<br>
+        <span style="font-size:11px;opacity:.8;">Run <span id="pendingCountdown"></span></span>
+      </div>
+      <div class="status-box status-success" id="statusSuccess">
+        ✅ <strong>Report ready!</strong> — <a id="reportLink" href="#" style="color:#166534;font-weight:600;">View Report →</a>
+        &nbsp;|&nbsp; <a id="pdfLink" href="#" style="color:#166534;font-weight:600;">Download PDF →</a>
+      </div>
+      <div class="status-box status-error" id="statusError">
+        ❌ <strong>Error:</strong> <span id="errorMsg"></span><br>
+        <span style="font-size:11px;">Check GitHub Actions for details.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Reports -->
+  <div class="gen-panel" id="recentPanel" style="display:none;">
+    <div style="padding:12px 16px;border-bottom:1px solid var(--border);">
+      <div style="font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.08em;text-transform:uppercase;">Recent Reports</div>
+    </div>
+    <div class="report-list" id="recentList"></div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-text">ITC Infotech Intelligence Portal · Internal Use Only · Prepared by CEO Office<br>AI-assisted research. Cross-check before acting on any data point.</div>
+</div>
+
+<script>
+// ── Config ──────────────────────────────────────────────────────────
+const GITHUB_OWNER = 'Chaakresh';
+const GITHUB_REPO  = 'account-intell';
+const GITHUB_PAT   = 'PASTE_YOUR_PAT_HERE'; // Replace with your PAT
+const BASE_URL     = `https://${GITHUB_OWNER}.github.io/${GITHUB_REPO}`;
+
+// ── Date header ─────────────────────────────────────────────────────
+document.getElementById('headerDate').textContent =
+  new Date().toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
+
+// ── Load recent reports from localStorage ──────────────────────────
+function loadRecent() {
+  const recent = JSON.parse(localStorage.getItem('recentReports') || '[]');
+  if (!recent.length) return;
+  document.getElementById('recentPanel').style.display = 'block';
+  const list = document.getElementById('recentList');
+  list.innerHTML = recent.slice(0, 5).map(r => `
+    <a class="report-item" href="${BASE_URL}/reports/${r.slug}.html" target="_blank">
+      <div>
+        <div class="report-item-name">${r.name}</div>
+        <div class="report-item-date">${r.date}</div>
+      </div>
+      <div class="report-item-arrow">→</div>
+    </a>
+  `).join('');
+}
+loadRecent();
+
+// ── Save recent report ──────────────────────────────────────────────
+function saveRecent(company, slug) {
+  const recent = JSON.parse(localStorage.getItem('recentReports') || '[]');
+  const entry = { name: company, slug, date: new Date().toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' }) };
+  const filtered = recent.filter(r => r.slug !== slug);
+  filtered.unshift(entry);
+  localStorage.setItem('recentReports', JSON.stringify(filtered.slice(0, 10)));
+}
+
+// ── Countdown timer ─────────────────────────────────────────────────
+let countdownInterval = null;
+function startCountdown(seconds) {
+  const el = document.getElementById('pendingCountdown');
+  let remaining = seconds;
+  el.textContent = `checking in ${remaining}s`;
+  countdownInterval = setInterval(() => {
+    remaining--;
+    if (remaining <= 0) {
+      el.textContent = 'checking now...';
+      clearInterval(countdownInterval);
+    } else {
+      el.textContent = `checking in ${remaining}s`;
+    }
+  }, 1000);
+}
+
+// ── Show status ─────────────────────────────────────────────────────
+function showStatus(type, data = {}) {
+  ['Pending','Success','Error'].forEach(t =>
+    document.getElementById(`status${t}`).classList.remove('show'));
+  document.getElementById(`status${type}`).classList.add('show');
+  if (type === 'Pending') {
+    document.getElementById('pendingCompany').textContent = data.company;
+  }
+  if (type === 'Success') {
+    document.getElementById('reportLink').href = data.htmlUrl;
+    document.getElementById('pdfLink').href = data.pdfUrl;
+  }
+  if (type === 'Error') {
+    document.getElementById('errorMsg').textContent = data.msg;
+  }
+}
+
+// ── Poll for report completion ──────────────────────────────────────
+async function pollForReport(slug, company, attempt = 0) {
+  if (attempt > 20) {
+    showStatus('Error', { msg: 'Timed out after 10 minutes. Check GitHub Actions.' });
+    document.getElementById('genBtn').disabled = false;
+    return;
+  }
+
+  const htmlUrl = `${BASE_URL}/reports/${slug}.html`;
+  const delay = 30000;
+
+  try {
+    const res = await fetch(htmlUrl, { method: 'HEAD', cache: 'no-cache' });
+    if (res.ok) {
+      saveRecent(company, slug);
+      loadRecent();
+      showStatus('Success', {
+        htmlUrl,
+        pdfUrl: `${BASE_URL}/reports/${slug}.pdf`
+      });
+      document.getElementById('genBtn').disabled = false;
+      return;
+    }
+  } catch(e) {}
+
+  if (countdownInterval) clearInterval(countdownInterval);
+  startCountdown(30);
+  setTimeout(() => pollForReport(slug, company, attempt + 1), delay);
+}
+
+// ── Trigger GitHub Actions ──────────────────────────────────────────
+async function generateReport() {
+  const company = document.getElementById('companyInput').value.trim();
+  if (!company) { alert('Please enter a company name.'); return; }
+
+  const slug = company.toLowerCase().replace(/[^a-z0-9]/g, '_');
+  document.getElementById('genBtn').disabled = true;
+  showStatus('Pending', { company });
+  startCountdown(30);
+
+  try {
+    const res = await fetch(
+      `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/workflows/generate.yml/dispatches`,
+      {
+        method: 'POST',
+        headers: {
+          'Authorization': `token ${GITHUB_PAT}`,
+          'Accept': 'application/vnd.github.v3+json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          ref: 'main',
+          inputs: { company }
+        })
+      }
+    );
+
+    if (!res.ok) {
+      const err = await res.text();
+      showStatus('Error', { msg: `GitHub API error: ${res.status}. ${err}` });
+      document.getElementById('genBtn').disabled = false;
+      return;
+    }
+
+    setTimeout(() => pollForReport(slug, company), 30000);
+
+  } catch(e) {
+    showStatus('Error', { msg: e.message });
+    document.getElementById('genBtn').disabled = false;
+  }
+}
+
+// ── Enter key support ───────────────────────────────────────────────
+document.getElementById('companyInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') generateReport();
+});
+</script>
+</body>
+</html>
