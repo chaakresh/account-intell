@@ -172,68 +172,55 @@ function formatContent(text) {
   while (i < lines.length) {
     const line = lines[i];
     const trimmed = line.trim();
-
-    // Skip empty lines
     if (!trimmed) { i++; continue; }
-
-    // Detect markdown table block
+    // Markdown table block
     if (trimmed.startsWith("|")) {
       const tableLines = [];
-      while (i < lines.length && lines[i].trim().startsWith("|")) {
-        tableLines.push(lines[i]);
-        i++;
-      }
+      while (i < lines.length && lines[i].trim().startsWith("|")) { tableLines.push(lines[i]); i++; }
       html += parseTable(tableLines);
       continue;
     }
-
-    // Numbered section header: "1. REVENUE & MARGIN: content"
-    const numMatch = trimmed.match(/^(\d+)\.\s+([A-Z][A-Z\s&\/()]+?):\s*(.*)/);
+    // Numbered section header — flexible pattern catches "(Last 6 months...)" variants
+    const numMatch = trimmed.match(/^(\d+)\.\s+([A-Z][A-Z\s&\/()]+?)(?::|\s*\()/);
     if (numMatch) {
-      const rest = numMatch[3].trim();
-      // Collect continuation lines (indented or bullet lines that follow)
-      let bodyLines = rest ? [rest] : [];
+      const label = numMatch[2].trim();
+      let bodyLines = [];
+      // Capture rest of same line after colon if present
+      const colonIdx = trimmed.indexOf(":", numMatch[0].length - 1);
+      if (colonIdx !== -1) bodyLines.push(trimmed.slice(colonIdx + 1).trim());
       i++;
       while (i < lines.length) {
         const next = lines[i].trim();
         if (!next) { i++; break; }
-        if (/^\d+\.\s+[A-Z]/.test(next)) break; // next numbered item
+        if (/^\d+\.\s+[A-Z]/.test(next)) break;
         bodyLines.push(next);
         i++;
       }
-      // Build body — check if body contains table
       let bodyHtml = "";
       let j = 0;
       while (j < bodyLines.length) {
         const bl = bodyLines[j];
+        if (!bl) { j++; continue; }
         if (bl.startsWith("|")) {
           const tbl = [];
           while (j < bodyLines.length && bodyLines[j].startsWith("|")) { tbl.push(bodyLines[j]); j++; }
           bodyHtml += parseTable(tbl);
-        } else if (/^[*•-]\s+/.test(bl)) {
-          bodyHtml += `<div class="content-bullet"><span class="bullet-dot"></span><span>${bl.replace(/^[*•-]\s+/, "")}</span></div>`;
+        } else if (/^[*•\-]\s+/.test(bl)) {
+          bodyHtml += `<div class="content-bullet"><span class="bullet-dot"></span><span>${bl.replace(/^[*•\-]\s+/, "")}</span></div>`;
           j++;
         } else {
           bodyHtml += `<div class="content-text">${bl}</div>`;
           j++;
         }
       }
-      html += `<div class="content-item">
-        <div class="content-num">${numMatch[1]}</div>
-        <div class="content-body">
-          <div class="content-label">${numMatch[2].trim()}</div>
-          ${bodyHtml}
-        </div>
-      </div>`;
+      html += `<div class="content-item"><div class="content-num">${numMatch[1]}</div><div class="content-body"><div class="content-label">${label}</div>${bodyHtml}</div></div>`;
       continue;
     }
-
-    // Bullet items (*, -, •)
-    if (/^[*•-]\s+/.test(trimmed)) {
-      html += `<div class="content-bullet"><span class="bullet-dot"></span><span>${trimmed.replace(/^[*•-]\s+/, "")}</span></div>`;
+    // Bullet items
+    if (/^[*•\-]\s+/.test(trimmed)) {
+      html += `<div class="content-bullet"><span class="bullet-dot"></span><span>${trimmed.replace(/^[*•\-]\s+/, "")}</span></div>`;
       i++; continue;
     }
-
     // Regular text
     html += `<div class="content-text">${trimmed}</div>`;
     i++;
@@ -247,26 +234,20 @@ function buildHTML(company, sections) {
   const slug = company.toLowerCase().replace(/[^a-z0-9]/g, "_");
 
   const sectionDefs = [
-    { key: "s1", id: "snapshot",    label: "Company Snapshot",              icon: "🏢" },
-    { key: "s2", id: "strategy",    label: "Strategic Direction",           icon: "🎯" },
-    { key: "s3", id: "leadership",  label: "Leadership & Org",              icon: "👥" },
-    { key: "s4", id: "signals",     label: "Buying Signals",                icon: "📡" },
-    { key: "s5", id: "vendors",     label: "Competitive & Vendors",         icon: "🔍" },
-    { key: "s6", id: "salesplay",   label: "Sales Play",                    icon: "⚡" },
+    { key: "s1", id: "snapshot",   label: "Company Snapshot",    icon: "🏢" },
+    { key: "s2", id: "strategy",   label: "Strategic Direction",  icon: "🎯" },
+    { key: "s3", id: "leadership", label: "Leadership & Org",     icon: "👥" },
+    { key: "s4", id: "signals",    label: "Buying Signals",       icon: "📡" },
+    { key: "s5", id: "vendors",    label: "Competitive & Vendors",icon: "🔍" },
+    { key: "s6", id: "salesplay",  label: "Sales Play",           icon: "⚡" },
   ];
 
-  const navPills = sectionDefs.map(s =>
-    `<a href="#${s.id}">${s.icon} ${s.label}</a>`
-  ).join("");
-
+  const navPills = sectionDefs.map(s => `<a href="#${s.id}">${s.icon} ${s.label}</a>`).join("");
   const sectionCards = sectionDefs.map(s => `
     <div class="section" id="${s.id}">
       <div class="section-hdr">${s.icon} ${s.label}</div>
-      <div class="card">
-        <div class="card-body">${formatContent(clean(sections[s.key] || ""))}</div>
-      </div>
-    </div>
-  `).join("");
+      <div class="card"><div class="card-body">${formatContent(clean(sections[s.key] || ""))}</div></div>
+    </div>`).join("");
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -309,11 +290,7 @@ body {
 .top-brand { color: #fff; font-size: 15px; font-weight: 600; line-height: 1.2; }
 .top-sub   { color: var(--vblue); font-size: 10px; margin-top: 2px; }
 .top-date  { color: var(--vblue); font-size: 10px; text-align: right; white-space: nowrap; margin-top: 2px; }
-.sec-nav {
-  display: flex; gap: 4px;
-  overflow-x: auto; padding-bottom: 10px;
-  scrollbar-width: none;
-}
+.sec-nav { display: flex; gap: 4px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; }
 .sec-nav::-webkit-scrollbar { display: none; }
 .sec-nav a {
   flex-shrink: 0; color: rgba(255,255,255,.65);
@@ -325,99 +302,92 @@ body {
 .sec-nav a:hover { background: rgba(255,255,255,.15); color: #fff; border-color: rgba(255,255,255,.4); }
 
 /* Hero */
-.hero {
-  background: linear-gradient(135deg, var(--navy) 0%, #2E74B5 100%);
-  padding: 24px 16px 20px;
-}
-.hero-company { color: #fff; font-size: 22px; font-weight: 700; margin-bottom: 4px; }
-.hero-label   { color: var(--vblue); font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 10px; }
-.hero-meta    { display: flex; gap: 10px; flex-wrap: wrap; }
-.hero-badge   { background: rgba(255,255,255,.12); color: #fff; font-size: 10px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
+.hero { background: linear-gradient(135deg, var(--navy) 0%, #2E74B5 100%); padding: 24px 16px 20px; }
+.hero-label { color: var(--vblue); font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 6px; }
+.hero-company { color: #fff; font-size: 24px; font-weight: 700; margin-bottom: 12px; }
+.hero-meta { display: flex; gap: 8px; flex-wrap: wrap; }
+.hero-badge { background: rgba(255,255,255,.12); color: #fff; font-size: 10px; font-weight: 600; padding: 4px 12px; border-radius: 20px; }
 
 /* PDF Banner */
-.pdf-banner {
-  background: var(--lblue);
-  border-bottom: 1px solid #C4DCF0;
-  padding: 10px 16px;
-  display: flex; justify-content: space-between; align-items: center;
-}
-.pdf-banner-text { font-size: 12px; color: var(--navy); }
-.pdf-btn {
-  background: var(--navy); color: #fff;
-  font-size: 11px; font-weight: 600;
-  padding: 6px 14px; border-radius: 20px;
-  text-decoration: none; white-space: nowrap;
-}
+.pdf-banner { background: var(--lblue); border-bottom: 1px solid #C4DCF0; padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; }
+.pdf-banner-text { font-size: 12px; color: var(--navy); font-weight: 500; }
+.pdf-btn { background: var(--navy); color: #fff; font-size: 11px; font-weight: 600; padding: 7px 16px; border-radius: 20px; text-decoration: none; }
 
 /* Sections */
 .section { padding: 20px 14px 0; }
-.section-hdr {
-  font-size: 11px; font-weight: 700; color: var(--navy);
-  letter-spacing: .1em; text-transform: uppercase; margin-bottom: 10px;
-}
-.card {
-  background: var(--card);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  overflow: hidden; margin-bottom: 12px;
-}
-.card-body { padding: 14px 16px; }
+.section-hdr { font-size: 11px; font-weight: 700; color: var(--navy); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 10px; }
+.card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; margin-bottom: 12px; }
+.card-body { padding: 0; overflow: hidden; }
 
-/* Content formatting */
-.content-item {
-  display: flex; gap: 12px;
-  padding: 10px 0;
-  border-bottom: 0.5px solid var(--border);
-}
+/* Content items */
+.content-item { display: flex; gap: 12px; padding: 14px 16px; border-bottom: 0.5px solid var(--border); min-width: 0; }
 .content-item:last-child { border-bottom: none; }
 .content-num {
-  flex-shrink: 0; width: 22px; height: 22px;
+  flex-shrink: 0; width: 24px; height: 24px;
   background: var(--navy); color: #fff; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 700; margin-top: 1px;
+  font-size: 11px; font-weight: 700; margin-top: 2px;
 }
-.content-body { flex: 1; }
-.content-label { font-size: 11px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 3px; }
-.content-text  { font-size: 13px; color: var(--t2); line-height: 1.6; }
-.content-bullet {
-  display: flex; gap: 8px; font-size: 12.5px; color: var(--t2);
-  line-height: 1.5; padding: 3px 0;
-}
-.bullet-dot { flex-shrink: 0; width: 5px; height: 5px; background: var(--blue); border-radius: 50%; margin-top: 7px; }
-.tbl-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 8px 0; }
-.data-table { border-collapse: collapse; width: 100%; font-size: 12px; }
+.content-body { flex: 1; min-width: 0; overflow-wrap: break-word; word-break: break-word; }
+.content-label { font-size: 10px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+.content-text { font-size: 13px; color: var(--t2); line-height: 1.65; margin-bottom: 4px; word-wrap: break-word; }
+.content-text:last-child { margin-bottom: 0; }
+
+/* Bullets */
+.content-bullet { display: flex; gap: 10px; padding: 3px 0; }
+.bullet-dot { flex-shrink: 0; width: 5px; height: 5px; background: var(--blue); border-radius: 50%; margin-top: 8px; }
+.content-bullet > span:last-child { font-size: 12.5px; color: var(--t2); line-height: 1.6; }
+
+/* Tables */
+.tbl-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 6px 0; }
+.data-table { border-collapse: collapse; width: 100%; font-size: 12px; min-width: 300px; }
 .data-table th { background: var(--navy); color: #fff; padding: 8px 10px; text-align: left; font-size: 11px; font-weight: 600; white-space: nowrap; }
-.data-table td { padding: 7px 10px; border-bottom: 0.5px solid var(--border); color: var(--t2); vertical-align: top; }
+.data-table td { padding: 8px 10px; border-bottom: 0.5px solid var(--border); color: var(--t2); vertical-align: top; line-height: 1.5; }
 .data-table tr:last-child td { border-bottom: none; }
 .data-table tr:nth-child(even) td { background: #FAFBFC; }
 
-/* Sales play section — special styling */
+/* Sales play special */
 #salesplay .card { border-top: 3px solid var(--blue); }
+.sp-pitch { background: #EBF3FB; border-left: 3px solid var(--blue); padding: 12px 14px; border-radius: 0 6px 6px 0; margin: 6px 0; }
+.sp-pitch-tag { font-size: 10px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 5px; }
+.sp-pitch-text { font-size: 13px; color: var(--t1); line-height: 1.65; }
+.sp-landmine { background: #FFF8EC; border-left: 3px solid var(--amber); padding: 10px 14px; border-radius: 0 6px 6px 0; margin-bottom: 8px; }
+.sp-landmine-title { font-size: 12px; font-weight: 700; color: #92600A; margin-bottom: 3px; }
+.sp-landmine-text { font-size: 12px; color: #78350F; line-height: 1.6; }
+.sp-entry { background: #F0FDF4; border-left: 3px solid #16a34a; padding: 12px 14px; border-radius: 0 6px 6px 0; margin: 6px 0; }
+.sp-entry-name { font-size: 15px; font-weight: 700; color: #166534; margin-bottom: 2px; }
+.sp-entry-role { font-size: 11px; font-weight: 600; color: #16a34a; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; }
+.sp-entry-text { font-size: 12.5px; color: #166534; line-height: 1.6; text-transform: none; }
+.sp-nextstep { background: #F8F9FA; border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; margin: 6px 0; font-size: 13px; color: var(--t2); line-height: 1.65; }
 
 /* Footer */
-.report-footer {
-  margin: 24px 14px 8px;
-  padding: 16px;
-  background: var(--card);
-  border-radius: var(--radius);
-  border-top: 2px solid var(--navy);
-}
-.footer-disclaimer { font-size: 11px; color: var(--t3); line-height: 1.7; margin-bottom: 8px; }
-.footer-meta { font-size: 10px; color: var(--t3); text-align: center; font-style: italic; }
+.report-footer { margin: 24px 14px 8px; padding: 16px; background: var(--card); border-radius: var(--radius); border-top: 2px solid var(--navy); }
+.footer-disclaimer { font-size: 11px; color: var(--t3); line-height: 1.7; }
+.footer-meta { font-size: 10px; color: var(--t3); text-align: center; font-style: italic; margin-top: 8px; }
 
-/* Print / PDF styles */
 @media print {
-  .top-bar, .pdf-banner { position: relative; }
+  .top-bar { position: relative; }
   .sec-nav { display: none; }
   body { padding-bottom: 0; }
   .section { padding: 12px 10px 0; }
   .card { break-inside: avoid; }
 }
+
+/* Hide orphan intro text that floats outside numbered items */
+.card-body > .content-text:first-child { 
+  padding: 12px 16px 0; 
+  font-size: 12px; 
+  color: var(--t3); 
+  font-style: italic; 
+}
+/* Ensure bullets inside content-body have proper padding */
+.content-body .content-bullet { padding: 2px 0; }
+/* Prevent text overflow in table cells */
+.data-table td, .data-table th { word-break: break-word; max-width: 200px; }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <div class="top-bar">
   <div class="top-bar-row">
     <div>
@@ -426,31 +396,25 @@ body {
     </div>
     <div class="top-date">${generated}</div>
   </div>
-  <div class="sec-nav">
-    ${navPills}
-  </div>
+  <div class="sec-nav">${navPills}</div>
 </div>
 
-<!-- HERO -->
 <div class="hero">
   <div class="hero-label">Pre-Sales Intelligence Brief</div>
   <div class="hero-company">${company}</div>
-  <div class="hero-meta" id="hero-meta-badges">
+  <div class="hero-meta">
     <span class="hero-badge">📅 ${generated}</span>
     <span class="hero-badge" id="ownership-badge">⚠️ Verify before use</span>
   </div>
 </div>
 
-<!-- PDF DOWNLOAD BANNER -->
 <div class="pdf-banner">
   <div class="pdf-banner-text">📄 Download full report as PDF</div>
   <a class="pdf-btn" href="${slug}.pdf" download>Download PDF →</a>
 </div>
 
-<!-- SECTIONS -->
 ${sectionCards}
 
-<!-- FOOTER -->
 <div class="report-footer">
   <div class="footer-disclaimer">This report was generated with AI assistance. Data is sourced from publicly available information including company websites, press releases, earnings calls, and news sources. AI tools can introduce errors. Cross-check any data point you intend to act on. Do not share outside ITC Infotech.</div>
   <div class="footer-meta">ITC Infotech · Account Intelligence Engine v0.1 · ${generated}</div>
@@ -458,19 +422,320 @@ ${sectionCards}
 
 <script>
 (function() {
-  const s1 = document.querySelector("#snapshot .card-body");
-  const badge = document.getElementById("ownership-badge");
-  if (!s1 || !badge) return;
-  const t = s1.innerText.toLowerCase();
-  if (t.includes("nasdaq") || t.includes("nyse") || t.includes("publicly traded") || t.includes("listed on") || t.includes("stock exchange")) {
-    badge.textContent = "📈 Public Company";
-  } else if (t.includes("private equity") || t.includes("pe-backed") || t.includes("pe backed")) {
-    badge.textContent = "💼 PE-Backed";
-  } else if (t.includes("privately held") || t.includes("private company") || t.includes("family-owned") || t.includes("not publicly traded")) {
-    badge.textContent = "🔒 Private Company";
-  } else {
-    badge.textContent = "⚠️ Verify before use";
+  var cardBodies = document.querySelectorAll('.card-body');
+  cardBodies.forEach(function(cb) {
+    var children = Array.from(cb.children);
+    
+    // Find all content-text children that look like numbered headers
+    var hasNumberedText = children.some(function(el) {
+      return el.classList.contains('content-text') && /^\d+\.\s+[A-Z]/.test(el.textContent.trim());
+    });
+    if (!hasNumberedText) return;
+
+    // Group all children into blocks: each block starts at a numbered header
+    var blocks = [];
+    var currentBlock = null;
+    var preItems = []; // items before first numbered header
+
+    children.forEach(function(el) {
+      var text = el.textContent.trim();
+      var isNumHeader = el.classList.contains('content-text') && /^\d+\.\s+[A-Z]/.test(text);
+      var isExistingItem = el.classList.contains('content-item');
+
+      if (isNumHeader) {
+        if (currentBlock) blocks.push(currentBlock);
+        var match = text.match(/^(\d+)\.\s+([^:(]+)/);
+        var num = match ? match[1] : '';
+        var label = match ? match[2].trim() : text;
+        currentBlock = { num: num, label: label, children: [], el: el };
+      } else if (isExistingItem) {
+        if (currentBlock) blocks.push(currentBlock);
+        currentBlock = null;
+        blocks.push({ existing: el });
+      } else {
+        if (currentBlock) {
+          currentBlock.children.push(el);
+        } else {
+          preItems.push(el);
+        }
+      }
+    });
+    if (currentBlock) blocks.push(currentBlock);
+
+    if (blocks.length === 0) return;
+
+    // Rebuild card body
+    cb.innerHTML = '';
+
+    // Add pre-items as hidden (intro text)
+    preItems.forEach(function(el) {
+      el.style.display = 'none';
+      cb.appendChild(el);
+    });
+
+    blocks.forEach(function(block) {
+      if (block.existing) {
+        cb.appendChild(block.existing);
+        return;
+      }
+      var wrapper = document.createElement('div');
+      wrapper.className = 'content-item';
+      var bodyHtml = '<div class="content-body"><div class="content-label">' + block.label + '</div>';
+      wrapper.innerHTML = '<div class="content-num">' + block.num + '</div>' + bodyHtml + '</div>';
+      var bodyEl = wrapper.querySelector('.content-body');
+      block.children.forEach(function(child) {
+        bodyEl.appendChild(child.cloneNode(true));
+      });
+      cb.appendChild(wrapper);
+    });
+  });
+})();
+
+(function() {
+  var cardBodies = document.querySelectorAll('.card-body');
+  cardBodies.forEach(function(cb) {
+    var hasItem = cb.querySelector('.content-item');
+    if (!hasItem) return;
+
+    // Repeatedly scan until no more orphans exist
+    var changed = true;
+    var safety = 0;
+    while (changed && safety < 20) {
+      changed = false;
+      safety++;
+      var children = Array.from(cb.childNodes).filter(function(n) {
+        return n.nodeType === 1; // element nodes only
+      });
+
+      for (var i = 0; i < children.length; i++) {
+        var el = children[i];
+        var isOrphan = (el.classList.contains('content-text') || el.classList.contains('content-bullet'));
+        if (!isOrphan) continue;
+
+        // Find the previous content-item sibling
+        var prevItem = null;
+        for (var j = i - 1; j >= 0; j--) {
+          if (children[j].classList.contains('content-item')) {
+            prevItem = children[j];
+            break;
+          }
+        }
+
+        if (prevItem) {
+          var body = prevItem.querySelector('.content-body');
+          if (body) {
+            body.appendChild(el);
+            changed = true;
+            break; // restart loop after DOM mutation
+          }
+        } else {
+          // No preceding content-item — just hide it
+          el.style.display = 'none';
+          changed = true;
+          break;
+        }
+      }
+    }
+  });
+})();
+
+(function() {
+  // Fix Section 6 Sales Play formatting
+  var salesplay = document.querySelector('#salesplay .card-body');
+  if (salesplay) {
+    var rawText = salesplay.innerText || '';
+    if (rawText.indexOf('RECOMMENDED PITCH ANGLE') !== -1) {
+      function extractBlock(text, startMarker, endMarkers) {
+        var start = text.indexOf(startMarker);
+        if (start === -1) return '';
+        var end = text.length;
+        for (var i = 0; i < endMarkers.length; i++) {
+          var pos = text.indexOf(endMarkers[i], start + startMarker.length);
+          if (pos !== -1 && pos < end) end = pos;
+        }
+        return text.slice(start + startMarker.length, end).trim();
+      }
+
+      var M = ['RECOMMENDED PITCH ANGLE','CONVERSATION OPENER QUESTIONS','LANDMINES TO AVOID','SUGGESTED NEXT STEP','BEST ENTRY POINT'];
+      var pitch    = extractBlock(rawText, M[0], M.slice(1));
+      var openers  = extractBlock(rawText, M[1], M.slice(2));
+      var landmine = extractBlock(rawText, M[2], M.slice(3));
+      var nextstep = extractBlock(rawText, M[3], M.slice(4));
+      var entry    = extractBlock(rawText, M[4], []);
+
+      // Pitch - first line is play type, rest is body
+      var pitchLines = pitch.split('\n').map(function(l){return l.trim();}).filter(function(l){return l.length>0;});
+      var pitchTitle = pitchLines.length > 0 ? pitchLines[0] : '';
+      var pitchBody  = pitchLines.slice(1).join(' ') || pitchTitle;
+
+      // Openers - each non-empty line is a question
+      var openerLines = openers.split('\n').map(function(l){
+        return l.trim().replace(/^Question\s*\d+:\s*/i,'');
+      }).filter(function(l){return l.length > 20;});
+
+      // Landmines - paragraph blocks
+      var lmParas = landmine.split('\n\n').map(function(p){return p.replace(/\n/g,' ').trim();}).filter(function(p){return p.length>0;});
+      if (lmParas.length === 1) {
+        lmParas = landmine.split('\n').filter(function(l){return l.trim().length > 0;});
+      }
+
+      // Entry point - split by paragraph, skip uppercase blocks
+      var entryParas = entry.split('\n\n').map(function(p){return p.trim();}).filter(function(p){return p.length>0;});
+      // If no double newlines, try single
+      if (entryParas.length <= 1) {
+        entryParas = entry.split('\n').map(function(p){return p.trim();}).filter(function(p){return p.length>0;});
+      }
+      // Filter out paragraphs where >65% of letters are uppercase (raw artifact)
+      function isUpperCase(str) {
+        var letters = str.replace(/[^A-Za-z]/g,'');
+        if (letters.length < 10) return false;
+        var upCount = letters.split('').filter(function(c){return c===c.toUpperCase()&&c!==c.toLowerCase();}).length;
+        return (upCount / letters.length) > 0.65;
+      }
+      var entryClean = entryParas.filter(function(p){ return !isUpperCase(p); });
+      // Fallback to all paras if filter removed everything
+      if (entryClean.length === 0) entryClean = entryParas;
+      var entryName = entryClean.length > 0 ? entryClean[0] : '';
+      var entryRole = entryClean.length > 1 ? entryClean[1] : '';
+      var entryText = entryClean.slice(2).join(' ') || entryClean.slice(1).join(' ');
+
+      // Build HTML
+      var html = '';
+
+      // 1. Pitch angle
+      html += '<div class="content-item"><div class="content-num">1</div><div class="content-body">';
+      html += '<div class="content-label">Recommended Pitch Angle</div>';
+      html += '<div class="sp-pitch"><div class="sp-pitch-tag">' + pitchTitle + '</div>';
+      html += '<div class="sp-pitch-text">' + pitchBody + '</div></div>';
+      html += '</div></div>';
+
+      // 2. Openers
+      html += '<div class="content-item"><div class="content-num">2</div><div class="content-body">';
+      html += '<div class="content-label">Conversation Opener Questions</div>';
+      openerLines.forEach(function(q) {
+        html += '<div class="content-bullet"><span class="bullet-dot"></span><span>' + q + '</span></div>';
+      });
+      html += '</div></div>';
+
+      // 3. Landmines
+      html += '<div class="content-item"><div class="content-num">3</div><div class="content-body">';
+      html += '<div class="content-label">Landmines to Avoid</div>';
+      lmParas.forEach(function(lm) {
+        var parts = lm.match(/^([^:]{5,60}):\s*(.*)/);
+        if (parts) {
+          html += '<div class="sp-landmine"><div class="sp-landmine-title">&#9888;&#65039; ' + parts[1] + '</div><div class="sp-landmine-text">' + parts[2] + '</div></div>';
+        } else {
+          html += '<div class="sp-landmine"><div class="sp-landmine-text">' + lm + '</div></div>';
+        }
+      });
+      html += '</div></div>';
+
+      // 4. Next step
+      html += '<div class="content-item"><div class="content-num">4</div><div class="content-body">';
+      html += '<div class="content-label">Suggested Next Step</div>';
+      html += '<div class="sp-nextstep">' + nextstep + '</div>';
+      html += '</div></div>';
+
+      // 5. Entry point
+      html += '<div class="content-item"><div class="content-num">5</div><div class="content-body">';
+      html += '<div class="content-label">Best Entry Point</div>';
+      html += '<div class="sp-entry"><div class="sp-entry-name">' + entryName + '</div>';
+      html += '<div class="sp-entry-role">' + entryRole + '</div>';
+      html += '<div class="sp-entry-text">' + entryText + '</div></div>';
+      html += '</div></div>';
+
+      salesplay.innerHTML = html;
+    }
   }
+
+  // Ownership badge
+  var s1 = document.querySelector('#snapshot .card-body');
+  var badge = document.getElementById('ownership-badge');
+  if (s1 && badge) {
+    var t = (s1.innerText || '').toLowerCase();
+    if (t.indexOf('nasdaq') !== -1 || t.indexOf('nyse') !== -1 || t.indexOf('publicly traded') !== -1) {
+      badge.textContent = 'Public Company';
+    } else if (t.indexOf('private equity') !== -1 || t.indexOf('pe-backed') !== -1) {
+      badge.textContent = 'PE-Backed';
+    } else if (t.indexOf('privately held') !== -1 || t.indexOf('private company') !== -1 || t.indexOf('family-owned') !== -1) {
+      badge.textContent = 'Private Company';
+    }
+  }
+})();
+
+(function() {
+  function runLeadershipFix() {
+    var leadership = document.querySelector('#leadership .card-body');
+    if (!leadership) return;
+    var items = leadership.querySelectorAll('.content-item');
+    items.forEach(function(item) {
+      var label = item.querySelector('.content-label');
+      if (!label || label.textContent.trim() !== 'KEY DECISION MAKERS') return;
+      var body = item.querySelector('.content-body');
+      if (!body) return;
+
+      // Collect all text lines from bullets AND content-text inside body
+      var lines = [];
+      Array.from(body.children).forEach(function(child) {
+        if (child.classList.contains('content-bullet')) {
+          var span = child.querySelector('span:last-child');
+          if (span) lines.push(span.textContent.trim());
+        } else if (child.classList.contains('content-text')) {
+          var t = child.textContent.trim();
+          if (t) lines.push(t);
+        }
+      });
+
+      if (lines.length === 0) return;
+
+      var personGroups = [];
+      var current = null;
+      lines.forEach(function(line) {
+        var isNewPerson = /^(CEO|CFO|CTO|COO|Chief|Executive Vice President|President|Global Chief)/i.test(line);
+        if (isNewPerson) {
+          if (current) personGroups.push(current);
+          var colonIdx = line.indexOf(':');
+          if (colonIdx !== -1) {
+            current = { role: line.slice(0, colonIdx).trim(), name: line.slice(colonIdx+1).trim(), tenure: '', background: '', details: [] };
+          } else {
+            current = { role: line, name: '', tenure: '', background: '', details: [] };
+          }
+        } else if (current) {
+          if (/^Tenure:/i.test(line)) {
+            current.tenure = line.replace(/^Tenure:\s*/i, '');
+          } else if (/^Background:/i.test(line)) {
+            current.background = line.replace(/^Background:\s*/i, '');
+          } else {
+            current.details.push(line);
+          }
+        }
+      });
+      if (current) personGroups.push(current);
+      if (personGroups.length === 0) return;
+
+      var html = '<div class="content-label" style="margin-bottom:10px;">KEY DECISION MAKERS</div>';
+      personGroups.forEach(function(p) {
+        html += '<div style="background:#F8F9FA;border-radius:8px;padding:12px 14px;margin-bottom:10px;border-left:3px solid var(--blue);">';
+        if (p.name) {
+          html += '<div style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:2px;">' + p.name.trim() + '</div>';
+        }
+        html += '<div style="font-size:11px;font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">' + p.role + '</div>';
+        if (p.tenure) {
+          html += '<div style="font-size:11px;color:var(--t3);margin-bottom:5px;">In role: ' + p.tenure + '</div>';
+        }
+        if (p.background) {
+          html += '<div style="font-size:12.5px;color:var(--t2);line-height:1.6;">' + p.background + '</div>';
+        }
+        p.details.forEach(function(d) {
+          html += '<div style="font-size:12px;color:var(--t2);margin-top:4px;padding-left:8px;border-left:2px solid var(--border);">' + d + '</div>';
+        });
+        html += '</div>';
+      });
+      body.innerHTML = html;
+    });
+  }
+  // Run after a short delay to ensure orphan fix has completed
+  setTimeout(runLeadershipFix, 50);
 })();
 </script>
 </body>
