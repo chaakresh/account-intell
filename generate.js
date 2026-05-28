@@ -150,39 +150,93 @@ SECTION 6 — SALES PLAY & CONVERSATION STARTERS:
   });
 }
 
+// ─── Parse markdown table to HTML ────────────────────────────────────────────
+function parseTable(lines) {
+  const rows = lines.filter(l => l.trim().startsWith("|") && !l.trim().match(/^[|\s:-]+$/));
+  if (rows.length === 0) return "";
+  let html = `<div class="tbl-wrap"><table class="data-table">`;
+  rows.forEach((row, i) => {
+    const cells = row.split("|").map(c => c.trim()).filter((c, idx, arr) => idx > 0 && idx < arr.length - 1);
+    const tag = i === 0 ? "th" : "td";
+    html += `<tr>${cells.map(c => `<${tag}>${c}</${tag}>`).join("")}</tr>`;
+  });
+  html += `</table></div>`;
+  return html;
+}
+
 // ─── Format section content to HTML ──────────────────────────────────────────
 function formatContent(text) {
   const lines = text.split("\n");
   let html = "";
-  for (const line of lines) {
+  let i = 0;
+  while (i < lines.length) {
+    const line = lines[i];
     const trimmed = line.trim();
-    if (!trimmed) { html += "<br>"; continue; }
-    // Numbered items like "1. TITLE: content"
-    if (/^\d+\.\s+[A-Z\s&]+:/.test(trimmed)) {
-      const match = trimmed.match(/^(\d+)\.\s+([A-Z\s&]+):(.*)/);
-      if (match) {
-        html += `<div class="content-item">
-          <div class="content-num">${match[1]}</div>
-          <div class="content-body">
-            <div class="content-label">${match[2].trim()}</div>
-            <div class="content-text">${match[3].trim()}</div>
-          </div>
-        </div>`;
-        continue;
-      }
-    }
-    // Bullet items
-    if (/^\s*[-•]\s+/.test(line)) {
-      html += `<div class="content-bullet"><span class="bullet-dot"></span><span>${trimmed.replace(/^[-•]\s+/, "")}</span></div>`;
-      continue;
-    }
-    // Table rows
+
+    // Skip empty lines
+    if (!trimmed) { i++; continue; }
+
+    // Detect markdown table block
     if (trimmed.startsWith("|")) {
-      html += `<div class="table-row">${trimmed}</div>`;
+      const tableLines = [];
+      while (i < lines.length && lines[i].trim().startsWith("|")) {
+        tableLines.push(lines[i]);
+        i++;
+      }
+      html += parseTable(tableLines);
       continue;
     }
+
+    // Numbered section header: "1. REVENUE & MARGIN: content"
+    const numMatch = trimmed.match(/^(\d+)\.\s+([A-Z][A-Z\s&\/()]+?):\s*(.*)/);
+    if (numMatch) {
+      const rest = numMatch[3].trim();
+      // Collect continuation lines (indented or bullet lines that follow)
+      let bodyLines = rest ? [rest] : [];
+      i++;
+      while (i < lines.length) {
+        const next = lines[i].trim();
+        if (!next) { i++; break; }
+        if (/^\d+\.\s+[A-Z]/.test(next)) break; // next numbered item
+        bodyLines.push(next);
+        i++;
+      }
+      // Build body — check if body contains table
+      let bodyHtml = "";
+      let j = 0;
+      while (j < bodyLines.length) {
+        const bl = bodyLines[j];
+        if (bl.startsWith("|")) {
+          const tbl = [];
+          while (j < bodyLines.length && bodyLines[j].startsWith("|")) { tbl.push(bodyLines[j]); j++; }
+          bodyHtml += parseTable(tbl);
+        } else if (/^[*•-]\s+/.test(bl)) {
+          bodyHtml += `<div class="content-bullet"><span class="bullet-dot"></span><span>${bl.replace(/^[*•-]\s+/, "")}</span></div>`;
+          j++;
+        } else {
+          bodyHtml += `<div class="content-text">${bl}</div>`;
+          j++;
+        }
+      }
+      html += `<div class="content-item">
+        <div class="content-num">${numMatch[1]}</div>
+        <div class="content-body">
+          <div class="content-label">${numMatch[2].trim()}</div>
+          ${bodyHtml}
+        </div>
+      </div>`;
+      continue;
+    }
+
+    // Bullet items (*, -, •)
+    if (/^[*•-]\s+/.test(trimmed)) {
+      html += `<div class="content-bullet"><span class="bullet-dot"></span><span>${trimmed.replace(/^[*•-]\s+/, "")}</span></div>`;
+      i++; continue;
+    }
+
     // Regular text
     html += `<div class="content-text">${trimmed}</div>`;
+    i++;
   }
   return html;
 }
@@ -330,7 +384,12 @@ body {
   line-height: 1.5; padding: 3px 0;
 }
 .bullet-dot { flex-shrink: 0; width: 5px; height: 5px; background: var(--blue); border-radius: 50%; margin-top: 7px; }
-.table-row { font-size: 11px; color: var(--t2); padding: 3px 0; font-family: monospace; border-bottom: 0.5px dotted var(--border); }
+.tbl-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 8px 0; }
+.data-table { border-collapse: collapse; width: 100%; font-size: 12px; }
+.data-table th { background: var(--navy); color: #fff; padding: 8px 10px; text-align: left; font-size: 11px; font-weight: 600; white-space: nowrap; }
+.data-table td { padding: 7px 10px; border-bottom: 0.5px solid var(--border); color: var(--t2); vertical-align: top; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:nth-child(even) td { background: #FAFBFC; }
 
 /* Sales play section — special styling */
 #salesplay .card { border-top: 3px solid var(--blue); }
@@ -376,10 +435,9 @@ body {
 <div class="hero">
   <div class="hero-label">Pre-Sales Intelligence Brief</div>
   <div class="hero-company">${company}</div>
-  <div class="hero-meta">
+  <div class="hero-meta" id="hero-meta-badges">
     <span class="hero-badge">📅 ${generated}</span>
-    <span class="hero-badge">🤖 Gemini + Claude</span>
-    <span class="hero-badge">⚠️ Verify before use</span>
+    <span class="hero-badge" id="ownership-badge">⚠️ Verify before use</span>
   </div>
 </div>
 
@@ -394,10 +452,27 @@ ${sectionCards}
 
 <!-- FOOTER -->
 <div class="report-footer">
-  <div class="footer-disclaimer">This report was generated with AI assistance using Gemini (research) and Claude (synthesis). Data is sourced from publicly available information including company websites, press releases, earnings calls, and news sources. AI tools can introduce errors. Cross-check any data point you intend to act on. Do not share outside ITC Infotech.</div>
+  <div class="footer-disclaimer">This report was generated with AI assistance. Data is sourced from publicly available information including company websites, press releases, earnings calls, and news sources. AI tools can introduce errors. Cross-check any data point you intend to act on. Do not share outside ITC Infotech.</div>
   <div class="footer-meta">ITC Infotech · Account Intelligence Engine v0.1 · ${generated}</div>
 </div>
 
+<script>
+(function() {
+  const s1 = document.querySelector("#snapshot .card-body");
+  const badge = document.getElementById("ownership-badge");
+  if (!s1 || !badge) return;
+  const t = s1.innerText.toLowerCase();
+  if (t.includes("nasdaq") || t.includes("nyse") || t.includes("publicly traded") || t.includes("listed on") || t.includes("stock exchange")) {
+    badge.textContent = "📈 Public Company";
+  } else if (t.includes("private equity") || t.includes("pe-backed") || t.includes("pe backed")) {
+    badge.textContent = "💼 PE-Backed";
+  } else if (t.includes("privately held") || t.includes("private company") || t.includes("family-owned") || t.includes("not publicly traded")) {
+    badge.textContent = "🔒 Private Company";
+  } else {
+    badge.textContent = "⚠️ Verify before use";
+  }
+})();
+</script>
 </body>
 </html>`;
 }
