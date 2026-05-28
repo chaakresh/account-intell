@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>ITC Infotech · Account Intelligence</title>
+<style>
+:root {
+  --navy:   #1F3864;
+  --blue:   #2E74B5;
+  --lblue:  #EBF3FB;
+  --vblue:  #9DC3E6;
+  --green:  #059669;
+  --amber:  #BF8A14;
+  --bg:     #F0F2F5;
+  --card:   #FFFFFF;
+  --border: #E2E5EC;
+  --t1:     #1A1F36;
+  --t2:     #4A5568;
+  --t3:     #9AA3B0;
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(0,0,0,.06), 0 2px 10px rgba(0,0,0,.05);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  background: var(--bg); color: var(--t1);
+  font-size: 14px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 60px;
+}
+
+/* Header */
+.top-bar { background: var(--navy); padding: 12px 16px 0; box-shadow: 0 2px 12px rgba(0,0,0,.18); }
+.home-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  color: rgba(255,255,255,.7); font-size: 11px; font-weight: 500;
+  text-decoration: none; padding: 3px 10px; border-radius: 20px;
+  border: 1px solid rgba(255,255,255,.2); transition: all .15s;
+  white-space: nowrap; margin-bottom: 8px;
+}
+.home-btn:hover { background: rgba(255,255,255,.15); color: #fff; border-color: rgba(255,255,255,.4); }
+.top-bar-row { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 12px; }
+.top-brand { color: #fff; font-size: 15px; font-weight: 600; line-height: 1.2; }
+.top-sub { color: var(--vblue); font-size: 10px; margin-top: 2px; }
+.top-date { color: var(--vblue); font-size: 10px; text-align: right; }
+
+/* Hero */
+.hero { background: linear-gradient(135deg, var(--navy) 0%, #2E74B5 100%); padding: 24px 16px 20px; }
+.hero-label { color: var(--vblue); font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 6px; }
+.hero-title { color: #fff; font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+.hero-sub { color: var(--vblue); font-size: 12px; }
+
+/* Generator */
+.section { padding: 20px 14px 0; }
+.section-hdr { font-size: 11px; font-weight: 700; color: var(--navy); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 10px; }
+.card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; margin-bottom: 14px; }
+
+.gen-header { background: var(--navy); padding: 14px 16px; }
+.gen-header-title { color: #fff; font-size: 14px; font-weight: 600; }
+.gen-header-sub { color: var(--vblue); font-size: 11px; margin-top: 3px; }
+.gen-body { padding: 16px; }
+.gen-row { display: flex; gap: 8px; }
+.gen-input {
+  flex: 1; padding: 11px 14px;
+  border: 1.5px solid var(--border); border-radius: 8px;
+  font-size: 14px; color: var(--t1); outline: none;
+  transition: border-color .15s; background: #fff;
+}
+.gen-input:focus { border-color: var(--blue); }
+.gen-btn {
+  background: var(--blue); color: #fff; border: none;
+  border-radius: 8px; padding: 11px 20px;
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  transition: background .15s; white-space: nowrap;
+}
+.gen-btn:hover { background: var(--navy); }
+.gen-btn:disabled { background: var(--t3); cursor: not-allowed; }
+
+/* Status boxes */
+.status { border-radius: 8px; padding: 12px 14px; font-size: 12.5px; line-height: 1.6; display: none; margin-top: 12px; }
+.status.show { display: block; }
+.status-pending { background: #FEF9EC; border: 1px solid #F0D080; color: #78350F; }
+.status-success { background: #ECFDF5; border: 1px solid #86EFAC; color: #166534; }
+.status-error   { background: #FEF2F2; border: 1px solid #FECACA; color: #991B1B; }
+.spin { display: inline-block; animation: spin 1s linear infinite; margin-right: 4px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.countdown { font-size: 11px; opacity: .75; margin-top: 4px; }
+
+/* Report list */
+.report-list { padding: 0; }
+.report-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 13px 16px; border-bottom: 0.5px solid var(--border);
+  text-decoration: none; transition: background .1s;
+}
+.report-item:last-child { border-bottom: none; }
+.report-item:hover { background: var(--bg); }
+.report-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: #ECFDF5; display: flex; align-items: center;
+  justify-content: center; font-size: 16px; flex-shrink: 0;
+}
+.report-info { flex: 1; min-width: 0; }
+.report-name { font-size: 14px; font-weight: 600; color: var(--navy); }
+.report-meta { font-size: 11px; color: var(--t3); margin-top: 2px; }
+.report-actions { display: flex; gap: 6px; flex-shrink: 0; }
+.report-btn {
+  font-size: 11px; font-weight: 600; padding: 4px 10px;
+  border-radius: 6px; text-decoration: none; transition: all .15s;
+}
+.report-btn-view { background: var(--lblue); color: var(--blue); }
+.report-btn-pdf  { background: #FEF3C7; color: #92600A; }
+.report-btn-view:hover { background: var(--blue); color: #fff; }
+.report-btn-pdf:hover  { background: #92600A; color: #fff; }
+.empty-state { padding: 32px 16px; text-align: center; color: var(--t3); font-size: 13px; }
+.empty-icon { font-size: 32px; margin-bottom: 10px; }
+
+/* Footer */
+.footer { margin: 24px 14px 0; padding: 14px 16px; background: var(--card); border-radius: var(--radius); }
+.footer-text { font-size: 11px; color: var(--t3); text-align: center; line-height: 1.7; }
+
+/* Floating home button */
+.home-fab {
+  position: fixed; bottom: 20px; left: 16px; z-index: 150;
+  background: var(--navy);
+  color: #fff; font-size: 12px; font-weight: 600;
+  padding: 11px 18px; border-radius: 24px;
+  text-decoration: none; white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(0,0,0,.22);
+  letter-spacing: .02em;
+  transition: opacity .15s, transform .15s;
+}
+.home-fab:hover { opacity: .92; transform: translateY(-2px); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="top-bar">
+<div class="top-bar-row">
+    <div>
+      <div class="top-brand">ITC Infotech</div>
+      <div class="top-sub">Account Intelligence · Internal · Sales Only</div>
+    </div>
+    <div class="top-date" id="headerDate"></div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">AI-Powered Pre-Sales Research</div>
+  <div class="hero-title">Account Intelligence</div>
+  <div class="hero-sub">Enter any company name to generate a full intelligence brief</div>
+</div>
+
+<!-- GENERATOR -->
+<div class="section">
+  <div class="section-hdr">Generate New Report</div>
+  <div class="card">
+    <div class="gen-header">
+      <div class="gen-header-title">🎯 Account Report Generator</div>
+      <div class="gen-header-sub">Web Scraping Agent · Synthesizing Agent · 2–3 minutes</div>
+    </div>
+    <div class="gen-body">
+      <div class="gen-row">
+        <input class="gen-input" id="companyInput" type="text" placeholder="Enter company name (e.g. IKEA, Boeing, Adobe)" autocomplete="off" />
+        <button class="gen-btn" id="genBtn" onclick="generateReport()">Generate</button>
+      </div>
+      <div class="status status-pending" id="statusPending">
+        <div><span class="spin">⏳</span><strong>Generating report for <span id="pendingCompany"></span>...</strong></div>
+        <div class="countdown" id="countdown">Checking in 30s</div>
+      </div>
+      <div class="status status-success" id="statusSuccess">
+        ✅ <strong>Report ready!</strong> &nbsp;
+        <a id="reportLink" href="#" style="color:#166534;font-weight:600;">View Report →</a>
+        &nbsp;|&nbsp;
+        <a id="pdfLink" href="#" style="color:#166534;font-weight:600;">Download PDF →</a>
+      </div>
+      <div class="status status-error" id="statusError">
+        ❌ <strong>Error:</strong> <span id="errorMsg"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RECENT REPORTS -->
+<div class="section">
+  <div class="section-hdr">Available Reports</div>
+  <div class="card" id="reportsCard">
+    <div class="report-list" id="reportList">
+      <div class="empty-state">
+        <div class="empty-icon">📂</div>
+        No reports generated yet. Enter a company name above to get started.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-text">ITC Infotech Intelligence Portal · Internal Use Only<br>AI-assisted research — cross-check before acting on any data point</div>
+</div>
+
+<script>
+const GITHUB_OWNER  = 'Chaakresh';
+const GITHUB_REPO   = 'account-intell';
+const RENDER_SERVER = 'https://account-intell.onrender.com';
+const BASE_URL      = 'https://' + GITHUB_OWNER + '.github.io/' + GITHUB_REPO;
+const STORAGE_KEY   = 'accountIntelReports';
+
+// Date header
+document.getElementById('headerDate').textContent =
+  new Date().toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
+
+// ── Storage helpers ──────────────────────────────────────────────────
+function getReports() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
+  catch(e) { return []; }
+}
+function saveReport(company, slug) {
+  var reports = getReports();
+  reports = reports.filter(function(r){ return r.slug !== slug; });
+  reports.unshift({
+    company: company,
+    slug: slug,
+    generated: new Date().toISOString(),
+    displayDate: new Date().toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' })
+  });
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(reports.slice(0, 20)));
+  renderReports();
+}
+
+// ── Render report list ───────────────────────────────────────────────
+function renderReports() {
+  var reports = getReports();
+  var list = document.getElementById('reportList');
+  if (reports.length === 0) {
+    list.innerHTML = '<div class="empty-state"><div class="empty-icon">📂</div>No reports generated yet. Enter a company name above to get started.</div>';
+    return;
+  }
+  list.innerHTML = reports.map(function(r) {
+    return '<div class="report-item">' +
+      '<div class="report-icon">🏢</div>' +
+      '<div class="report-info">' +
+        '<div class="report-name">' + r.company + '</div>' +
+        '<div class="report-meta">Generated ' + r.displayDate + '</div>' +
+      '</div>' +
+      '<div class="report-actions">' +
+        '<a class="report-btn report-btn-view" href="' + BASE_URL + '/reports/' + r.slug + '.html" target="_blank">View</a>' +
+        '<a class="report-btn report-btn-pdf" href="' + BASE_URL + '/reports/' + r.slug + '.pdf" target="_blank">PDF</a>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+renderReports();
+
+// ── Status helpers ───────────────────────────────────────────────────
+function showStatus(type, data) {
+  ['Pending','Success','Error'].forEach(function(t) {
+    document.getElementById('status' + t).classList.remove('show');
+  });
+  document.getElementById('status' + type).classList.add('show');
+  if (type === 'Pending') document.getElementById('pendingCompany').textContent = data.company;
+  if (type === 'Success') {
+    document.getElementById('reportLink').href = data.htmlUrl;
+    document.getElementById('pdfLink').href = data.pdfUrl;
+  }
+  if (type === 'Error') document.getElementById('errorMsg').textContent = data.msg;
+}
+
+// ── Countdown timer ──────────────────────────────────────────────────
+var countdownInterval = null;
+function startCountdown(secs) {
+  if (countdownInterval) clearInterval(countdownInterval);
+  var el = document.getElementById('countdown');
+  var remaining = secs;
+  el.textContent = 'Checking in ' + remaining + 's';
+  countdownInterval = setInterval(function() {
+    remaining--;
+    if (remaining <= 0) {
+      el.textContent = 'Checking now...';
+      clearInterval(countdownInterval);
+    } else {
+      el.textContent = 'Checking in ' + remaining + 's';
+    }
+  }, 1000);
+}
+
+// ── Poll for completion ──────────────────────────────────────────────
+function pollForReport(slug, company, attempt) {
+  attempt = attempt || 0;
+  if (attempt > 20) {
+    showStatus('Error', { msg: 'Timed out. Check GitHub Actions for details.' });
+    document.getElementById('genBtn').disabled = false;
+    return;
+  }
+  var htmlUrl = BASE_URL + '/reports/' + slug + '.html';
+  fetch(htmlUrl, { method: 'HEAD', cache: 'no-cache' })
+    .then(function(res) {
+      if (res.ok) {
+        saveReport(company, slug);
+        showStatus('Success', {
+          htmlUrl: htmlUrl,
+          pdfUrl: BASE_URL + '/reports/' + slug + '.pdf'
+        });
+        document.getElementById('genBtn').disabled = false;
+      } else {
+        startCountdown(30);
+        setTimeout(function(){ pollForReport(slug, company, attempt + 1); }, 30000);
+      }
+    })
+    .catch(function() {
+      startCountdown(30);
+      setTimeout(function(){ pollForReport(slug, company, attempt + 1); }, 30000);
+    });
+}
+
+// ── Generate report ──────────────────────────────────────────────────
+function generateReport() {
+  var company = document.getElementById('companyInput').value.trim();
+  if (!company) { alert('Please enter a company name.'); return; }
+  var slug = company.toLowerCase().replace(/[^a-z0-9]/g, '_');
+  document.getElementById('genBtn').disabled = true;
+  showStatus('Pending', { company: company });
+  startCountdown(30);
+
+  fetch(RENDER_SERVER + '/generate', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ company: company })
+  })
+  .then(function(res) { return res.json().then(function(data) { return { ok: res.ok, data: data }; }); })
+  .then(function(r) {
+    if (!r.ok) {
+      showStatus('Error', { msg: r.data.error || 'Server error' });
+      document.getElementById('genBtn').disabled = false;
+      return;
+    }
+    setTimeout(function(){ pollForReport(slug, company, 0); }, 30000);
+  })
+  .catch(function(e) {
+    showStatus('Error', { msg: e.message });
+    document.getElementById('genBtn').disabled = false;
+  });
+}
+
+// Enter key support
+document.getElementById('companyInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') generateReport();
+});
+</script>
+
+<a href="index.html" class="home-fab">← Home</a>
+</body>
+</html>

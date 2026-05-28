@@ -9,7 +9,7 @@ const gemini = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const company = process.env.COMPANY || process.argv[2];
 
 if (!company) {
-  console.error("Usage: COMPANY='IKEA' node generate.js");
+  console.error("Usage: COMPANY=\'IKEA\' node generate.js");
   process.exit(1);
 }
 
@@ -29,7 +29,7 @@ async function withRetry(fn, label, retries = 3, delayMs = 8000) {
   }
 }
 
-// ─── Gemini research ──────────────────────────────────────────────────────────
+// ─── Gemini research (returns text + sources) ─────────────────────────────────
 async function research(prompt, label) {
   return withRetry(async () => {
     const model = gemini.getGenerativeModel({
@@ -37,7 +37,22 @@ async function research(prompt, label) {
       tools: [{ googleSearch: {} }],
     });
     const result = await model.generateContent(prompt);
-    return result.response.text();
+    const text = result.response.text();
+
+    // Extract sources from grounding metadata
+    const sources = [];
+    try {
+      const candidates = result.response.candidates || [];
+      const meta = candidates[0]?.groundingMetadata;
+      const chunks = meta?.groundingChunks || [];
+      chunks.forEach(chunk => {
+        if (chunk.web?.uri) {
+          sources.push({ url: chunk.web.uri, title: chunk.web.title || chunk.web.uri });
+        }
+      });
+    } catch(e) { /* sources unavailable */ }
+
+    return { text, sources };
   }, label);
 }
 
@@ -96,30 +111,12 @@ function prompts(c) {
   };
 }
 
-// ─── Claude synthesis ─────────────────────────────────────────────────────────
-async function synthesize(c, sections) {
-  const context = Object.entries(sections).map(([k,v]) => `SECTION ${k.toUpperCase()}:\n${v}`).join("\n\n");
-
-  const prompt = `You are an expert B2B sales strategist. Based on research below, generate Section 6 of a pre-sales intelligence brief. Use plain text only. No markdown.
-
-${context}
-
-SECTION 6 — SALES PLAY & CONVERSATION STARTERS:
-
-1. RECOMMENDED PITCH ANGLE: Single strongest hook. (Cost / Transformation / GTM / Compliance / AI play). Explain WHY in 3-4 lines citing specific findings above.
-
-2. CONVERSATION OPENER QUESTIONS: 4-5 specific, informed questions referencing real things happening at the company.
-
-3. LANDMINES TO AVOID: 3-4 specific topics that could kill the conversation. Be direct.
-
-4. SUGGESTED NEXT STEP: Most logical first meeting ask. Be specific.
-
-5. BEST ENTRY POINT: Single most likely first contact. Name the role and person. Complete your answer fully.`;
-
+// ─── Claude API call helper ───────────────────────────────────────────────────
+function claudeCall(prompt, maxTokens = 2000) {
   return new Promise((resolve, reject) => {
     const body = JSON.stringify({
       model: "claude-sonnet-4-5",
-      max_tokens: 3000,
+      max_tokens: maxTokens,
       messages: [{ role: "user", content: prompt }],
     });
     const options = {
@@ -148,6 +145,75 @@ SECTION 6 — SALES PLAY & CONVERSATION STARTERS:
     req.write(body);
     req.end();
   });
+}
+
+// ─── Claude gap checker ───────────────────────────────────────────────────────
+async function checkGaps(c, sections) {
+  const sectionSummary = Object.entries(sections).map(([k, v]) =>
+    `${k.toUpperCase()}: ${v.text.slice(0, 800)}`
+  ).join("\n\n");
+
+  const prompt = `You are a senior sales researcher reviewing research on "${c}".
+
+Review the sections below and identify SPECIFIC data gaps — missing numbers, unknown executives, vague tech stack info, missing financials etc.
+
+Return ONLY a JSON array. Each item has:
+- "section": one of "s1","s2","s3","s4","s5"
+- "gap": one sentence describing what is missing
+- "query": a specific Google search query to fill that gap (5-10 words max)
+
+Return maximum 5 gaps total. Only flag genuinely missing data, not minor gaps. If data is sufficient, return empty array [].
+
+SECTIONS:
+${sectionSummary}
+
+Return ONLY valid JSON. No explanation. No markdown.`;
+
+  const raw = await claudeCall(prompt, 1000);
+  try {
+    const cleaned = raw.replace(/```json|```/g, "").trim();
+    return JSON.parse(cleaned);
+  } catch(e) {
+    console.log("  Gap check parse failed, skipping gap fill");
+    return [];
+  }
+}
+
+// ─── Targeted gap fill ────────────────────────────────────────────────────────
+async function fillGap(gap, label) {
+  const prompt = `You are a senior sales researcher. Search for this specific information and return ONLY the relevant data. No intro sentence.
+
+Query: ${gap.query}
+
+Return only the specific data found. Be concise. 3-5 lines max.`;
+
+  const result = await research(prompt, label);
+  return result;
+}
+
+// ─── Claude synthesis ─────────────────────────────────────────────────────────
+async function synthesize(c, sections) {
+  const context = Object.entries(sections).map(([k,v]) =>
+    `SECTION ${k.toUpperCase()}:\n${v.text}`
+  ).join("\n\n");
+
+  const prompt = `You are an expert B2B sales strategist. Based on research below, generate Section 6 of a pre-sales intelligence brief. Use plain text only. No markdown.
+
+${context}
+
+SECTION 6 — SALES PLAY & CONVERSATION STARTERS:
+
+1. RECOMMENDED PITCH ANGLE: Single strongest hook. (Cost / Transformation / GTM / Compliance / AI play). Explain WHY in 3-4 lines citing specific findings above.
+
+2. CONVERSATION OPENER QUESTIONS: 4-5 specific, informed questions referencing real things happening at the company.
+
+3. LANDMINES TO AVOID: 3-4 specific topics that could kill the conversation. Be direct.
+
+4. SUGGESTED NEXT STEP: Most logical first meeting ask. Be specific.
+
+5. BEST ENTRY POINT: Single most likely first contact. Name the role and person. Complete your answer fully.`;
+
+  return claudeCall(prompt, 3000);
 }
 
 // ─── Parse markdown table to HTML ────────────────────────────────────────────
@@ -229,7 +295,7 @@ function formatContent(text) {
 }
 
 // ─── Build HTML report ────────────────────────────────────────────────────────
-function buildHTML(company, sections) {
+function buildHTML(company, sections, sources = []) {
   const generated = new Date().toLocaleDateString("en-GB", { day:"numeric", month:"long", year:"numeric" });
   const slug = company.toLowerCase().replace(/[^a-z0-9]/g, "_");
 
@@ -248,6 +314,32 @@ function buildHTML(company, sections) {
       <div class="section-hdr">${s.icon} ${s.label}</div>
       <div class="card"><div class="card-body">${formatContent(clean(sections[s.key] || ""))}</div></div>
     </div>`).join("");
+
+  // Build collapsible sources panel
+  let sourcesPanel = "";
+  if (sources.length > 0) {
+    const grouped = {};
+    sources.forEach(s => {
+      const sec = s.section || "General";
+      if (!grouped[sec]) grouped[sec] = [];
+      grouped[sec].push(s);
+    });
+    let srcHtml = "";
+    Object.entries(grouped).forEach(([sec, srcs]) => {
+      srcHtml += `<div class="src-group"><div class="src-group-label">${sec}</div>`;
+      srcs.forEach(s => {
+        srcHtml += `<a class="src-link" href="${s.url}" target="_blank" rel="noopener">${s.title}</a>`;
+      });
+      srcHtml += `</div>`;
+    });
+    sourcesPanel = `
+<div class="sources-panel">
+  <button class="sources-toggle" onclick="this.parentElement.classList.toggle('open')">
+    📎 Sources & References (${sources.length}) <span class="src-chevron">▼</span>
+  </button>
+  <div class="sources-body">${srcHtml}</div>
+</div>`;
+  }
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -384,6 +476,20 @@ body {
 .content-body .content-bullet { padding: 2px 0; }
 /* Prevent text overflow in table cells */
 .data-table td, .data-table th { word-break: break-word; max-width: 200px; }
+
+/* Sources panel */
+.sources-panel { margin: 0 14px 24px; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.sources-toggle { width: 100%; background: var(--navy); color: #fff; border: none; padding: 12px 16px; font-size: 12px; font-weight: 600; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+.src-chevron { transition: transform .2s; }
+.sources-panel.open .src-chevron { transform: rotate(180deg); }
+.sources-body { display: none; background: var(--card); padding: 12px 16px; }
+.sources-panel.open .sources-body { display: block; }
+.src-group { margin-bottom: 12px; }
+.src-group:last-child { margin-bottom: 0; }
+.src-group-label { font-size: 10px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+.src-link { display: block; font-size: 11px; color: var(--t2); text-decoration: none; padding: 4px 0; border-bottom: 0.5px solid var(--border); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.src-link:last-child { border-bottom: none; }
+.src-link:hover { color: var(--blue); }
 </style>
 </head>
 <body>
@@ -419,6 +525,9 @@ ${sectionCards}
   <div class="footer-disclaimer">This report was generated with AI assistance. Data is sourced from publicly available information including company websites, press releases, earnings calls, and news sources. AI tools can introduce errors. Cross-check any data point you intend to act on. Do not share outside ITC Infotech.</div>
   <div class="footer-meta">ITC Infotech · Account Intelligence Engine v0.1 · ${generated}</div>
 </div>
+
+<!-- SOURCES PANEL -->
+${sourcesPanel}
 
 <script>
 (function() {
@@ -747,7 +856,9 @@ async function main() {
   console.log(`\n📊 Generating report for: ${company}`);
   const p = prompts(company);
   const sections = {};
+  const allSources = [];
 
+  // ── Step 1: Gemini research ──────────────────────────────────────────────────
   const sectionList = [
     { key: "s1", label: "Company Snapshot" },
     { key: "s2", label: "Strategic Direction" },
@@ -757,23 +868,60 @@ async function main() {
   ];
 
   for (const { key, label } of sectionList) {
-    process.stdout.write(`⏳ ${label}...`);
-    sections[key] = await research(p[key], label);
-    console.log(" ✅");
+    process.stdout.write(`⏳ [Web Scraping Agent] ${label}...`);
+    const result = await research(p[key], label);
+    sections[key] = result;
+    if (result.sources.length) {
+      allSources.push(...result.sources.map(s => ({ ...s, section: label })));
+    }
+    console.log(` ✅ (${result.sources.length} sources)`);
   }
 
-  process.stdout.write(`🧠 Claude: Sales Play...`);
-  sections.s6 = await synthesize(company, sections);
-  console.log(" ✅");
+  // ── Step 2: Claude gap check ─────────────────────────────────────────────────
+  process.stdout.write(`🔍 [Synthesizing Agent] Checking for gaps...`);
+  const gaps = await checkGaps(company, sections);
+  console.log(` ✅ (${gaps.length} gaps found)`);
 
-  const html = buildHTML(company, sections);
+  // ── Step 3: Fill gaps ────────────────────────────────────────────────────────
+  if (gaps.length > 0) {
+    for (const gap of gaps) {
+      process.stdout.write(`⏳ [Web Scraping Agent] Filling gap: ${gap.gap.slice(0, 50)}...`);
+      const fillResult = await fillGap(gap, gap.gap);
+      // Append to existing section
+      sections[gap.section].text += `\n\n[GAP FILL] ${fillResult.text}`;
+      if (fillResult.sources.length) {
+        allSources.push(...fillResult.sources.map(s => ({
+          ...s,
+          section: gap.section + " (gap fill)"
+        })));
+      }
+      console.log(` ✅`);
+    }
+  }
+
+  // ── Step 4: Claude synthesis ─────────────────────────────────────────────────
+  process.stdout.write(`🧠 [Synthesizing Agent] Building Sales Play...`);
+  const s6text = await synthesize(company, sections);
+  sections.s6 = { text: s6text, sources: [] };
+  console.log(` ✅`);
+
+  // ── Step 5: Deduplicate sources ──────────────────────────────────────────────
+  const seen = new Set();
+  const uniqueSources = allSources.filter(s => {
+    if (seen.has(s.url)) return false;
+    seen.add(s.url);
+    return true;
+  });
+
+  // ── Step 6: Build HTML ───────────────────────────────────────────────────────
+  const html = buildHTML(company, sections, uniqueSources);
   if (!fs.existsSync("reports")) fs.mkdirSync("reports");
   const outPath = path.join("reports", `${slug}.html`);
   fs.writeFileSync(outPath, html);
-  console.log(`\n✅ Report saved: ${outPath}`);
+  console.log(`\n✅ Report saved: ${outPath} (${uniqueSources.length} sources)`);
 }
 
 main().catch(err => {
-  console.error("❌ Error:", err.message);
+  console.error("\n❌ Error:", err.message);
   process.exit(1);
 });
