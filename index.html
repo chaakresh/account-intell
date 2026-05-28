@@ -285,10 +285,10 @@ body {
 
 <script>
 // ── Config ──────────────────────────────────────────────────────────
-const GITHUB_OWNER = 'Chaakresh';
-const GITHUB_REPO  = 'account-intell';
-const GITHUB_PAT   = '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'; // Replace with your PAT
-const BASE_URL     = `https://${GITHUB_OWNER}.github.io/${GITHUB_REPO}`;
+const GITHUB_OWNER  = 'Chaakresh';
+const GITHUB_REPO   = 'account-intell';
+const RENDER_SERVER = 'PASTE_YOUR_RENDER_URL_HERE'; // e.g. https://account-intell.onrender.com
+const BASE_URL      = `https://${GITHUB_OWNER}.github.io/${GITHUB_REPO}`;
 
 // ── Date header ─────────────────────────────────────────────────────
 document.getElementById('headerDate').textContent =
@@ -396,25 +396,16 @@ async function generateReport() {
   startCountdown(30);
 
   try {
-    const res = await fetch(
-      `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/workflows/generate.yml/dispatches`,
-      {
-        method: 'POST',
-        headers: {
-          'Authorization': `token ${GITHUB_PAT}`,
-          'Accept': 'application/vnd.github.v3+json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          ref: 'main',
-          inputs: { company }
-        })
-      }
-    );
+    const res = await fetch(`${RENDER_SERVER}/generate`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ company })
+    });
+
+    const data = await res.json();
 
     if (!res.ok) {
-      const err = await res.text();
-      showStatus('Error', { msg: `GitHub API error: ${res.status}. ${err}` });
+      showStatus('Error', { msg: data.error || `Server error: ${res.status}` });
       document.getElementById('genBtn').disabled = false;
       return;
     }
