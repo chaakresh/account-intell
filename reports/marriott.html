@@ -39,11 +39,7 @@ body {
 .top-brand { color: #fff; font-size: 15px; font-weight: 600; line-height: 1.2; }
 .top-sub   { color: var(--vblue); font-size: 10px; margin-top: 2px; }
 .top-date  { color: var(--vblue); font-size: 10px; text-align: right; white-space: nowrap; margin-top: 2px; }
-.sec-nav {
-  display: flex; gap: 4px;
-  overflow-x: auto; padding-bottom: 10px;
-  scrollbar-width: none;
-}
+.sec-nav { display: flex; gap: 4px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; }
 .sec-nav::-webkit-scrollbar { display: none; }
 .sec-nav a {
   flex-shrink: 0; color: rgba(255,255,255,.65);
@@ -55,99 +51,92 @@ body {
 .sec-nav a:hover { background: rgba(255,255,255,.15); color: #fff; border-color: rgba(255,255,255,.4); }
 
 /* Hero */
-.hero {
-  background: linear-gradient(135deg, var(--navy) 0%, #2E74B5 100%);
-  padding: 24px 16px 20px;
-}
-.hero-company { color: #fff; font-size: 22px; font-weight: 700; margin-bottom: 4px; }
-.hero-label   { color: var(--vblue); font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 10px; }
-.hero-meta    { display: flex; gap: 10px; flex-wrap: wrap; }
-.hero-badge   { background: rgba(255,255,255,.12); color: #fff; font-size: 10px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
+.hero { background: linear-gradient(135deg, var(--navy) 0%, #2E74B5 100%); padding: 24px 16px 20px; }
+.hero-label { color: var(--vblue); font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 6px; }
+.hero-company { color: #fff; font-size: 24px; font-weight: 700; margin-bottom: 12px; }
+.hero-meta { display: flex; gap: 8px; flex-wrap: wrap; }
+.hero-badge { background: rgba(255,255,255,.12); color: #fff; font-size: 10px; font-weight: 600; padding: 4px 12px; border-radius: 20px; }
 
 /* PDF Banner */
-.pdf-banner {
-  background: var(--lblue);
-  border-bottom: 1px solid #C4DCF0;
-  padding: 10px 16px;
-  display: flex; justify-content: space-between; align-items: center;
-}
-.pdf-banner-text { font-size: 12px; color: var(--navy); }
-.pdf-btn {
-  background: var(--navy); color: #fff;
-  font-size: 11px; font-weight: 600;
-  padding: 6px 14px; border-radius: 20px;
-  text-decoration: none; white-space: nowrap;
-}
+.pdf-banner { background: var(--lblue); border-bottom: 1px solid #C4DCF0; padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; }
+.pdf-banner-text { font-size: 12px; color: var(--navy); font-weight: 500; }
+.pdf-btn { background: var(--navy); color: #fff; font-size: 11px; font-weight: 600; padding: 7px 16px; border-radius: 20px; text-decoration: none; }
 
 /* Sections */
 .section { padding: 20px 14px 0; }
-.section-hdr {
-  font-size: 11px; font-weight: 700; color: var(--navy);
-  letter-spacing: .1em; text-transform: uppercase; margin-bottom: 10px;
-}
-.card {
-  background: var(--card);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  overflow: hidden; margin-bottom: 12px;
-}
-.card-body { padding: 14px 16px; }
+.section-hdr { font-size: 11px; font-weight: 700; color: var(--navy); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 10px; }
+.card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; margin-bottom: 12px; }
+.card-body { padding: 0; overflow: hidden; }
 
-/* Content formatting */
-.content-item {
-  display: flex; gap: 12px;
-  padding: 10px 0;
-  border-bottom: 0.5px solid var(--border);
-}
+/* Content items */
+.content-item { display: flex; gap: 12px; padding: 14px 16px; border-bottom: 0.5px solid var(--border); min-width: 0; }
 .content-item:last-child { border-bottom: none; }
 .content-num {
-  flex-shrink: 0; width: 22px; height: 22px;
+  flex-shrink: 0; width: 24px; height: 24px;
   background: var(--navy); color: #fff; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 700; margin-top: 1px;
+  font-size: 11px; font-weight: 700; margin-top: 2px;
 }
-.content-body { flex: 1; }
-.content-label { font-size: 11px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 3px; }
-.content-text  { font-size: 13px; color: var(--t2); line-height: 1.6; }
-.content-bullet {
-  display: flex; gap: 8px; font-size: 12.5px; color: var(--t2);
-  line-height: 1.5; padding: 3px 0;
-}
-.bullet-dot { flex-shrink: 0; width: 5px; height: 5px; background: var(--blue); border-radius: 50%; margin-top: 7px; }
-.tbl-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 8px 0; }
-.data-table { border-collapse: collapse; width: 100%; font-size: 12px; }
+.content-body { flex: 1; min-width: 0; overflow-wrap: break-word; word-break: break-word; }
+.content-label { font-size: 10px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+.content-text { font-size: 13px; color: var(--t2); line-height: 1.65; margin-bottom: 4px; word-wrap: break-word; }
+.content-text:last-child { margin-bottom: 0; }
+
+/* Bullets */
+.content-bullet { display: flex; gap: 10px; padding: 3px 0; }
+.bullet-dot { flex-shrink: 0; width: 5px; height: 5px; background: var(--blue); border-radius: 50%; margin-top: 8px; }
+.content-bullet > span:last-child { font-size: 12.5px; color: var(--t2); line-height: 1.6; }
+
+/* Tables */
+.tbl-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 6px 0; }
+.data-table { border-collapse: collapse; width: 100%; font-size: 12px; min-width: 300px; }
 .data-table th { background: var(--navy); color: #fff; padding: 8px 10px; text-align: left; font-size: 11px; font-weight: 600; white-space: nowrap; }
-.data-table td { padding: 7px 10px; border-bottom: 0.5px solid var(--border); color: var(--t2); vertical-align: top; }
+.data-table td { padding: 8px 10px; border-bottom: 0.5px solid var(--border); color: var(--t2); vertical-align: top; line-height: 1.5; }
 .data-table tr:last-child td { border-bottom: none; }
 .data-table tr:nth-child(even) td { background: #FAFBFC; }
 
-/* Sales play section — special styling */
+/* Sales play special */
 #salesplay .card { border-top: 3px solid var(--blue); }
+.sp-pitch { background: #EBF3FB; border-left: 3px solid var(--blue); padding: 12px 14px; border-radius: 0 6px 6px 0; margin: 6px 0; }
+.sp-pitch-tag { font-size: 10px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 5px; }
+.sp-pitch-text { font-size: 13px; color: var(--t1); line-height: 1.65; }
+.sp-landmine { background: #FFF8EC; border-left: 3px solid var(--amber); padding: 10px 14px; border-radius: 0 6px 6px 0; margin-bottom: 8px; }
+.sp-landmine-title { font-size: 12px; font-weight: 700; color: #92600A; margin-bottom: 3px; }
+.sp-landmine-text { font-size: 12px; color: #78350F; line-height: 1.6; }
+.sp-entry { background: #F0FDF4; border-left: 3px solid #16a34a; padding: 12px 14px; border-radius: 0 6px 6px 0; margin: 6px 0; }
+.sp-entry-name { font-size: 15px; font-weight: 700; color: #166534; margin-bottom: 2px; }
+.sp-entry-role { font-size: 11px; font-weight: 600; color: #16a34a; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; }
+.sp-entry-text { font-size: 12.5px; color: #166534; line-height: 1.6; text-transform: none; }
+.sp-nextstep { background: #F8F9FA; border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; margin: 6px 0; font-size: 13px; color: var(--t2); line-height: 1.65; }
 
 /* Footer */
-.report-footer {
-  margin: 24px 14px 8px;
-  padding: 16px;
-  background: var(--card);
-  border-radius: var(--radius);
-  border-top: 2px solid var(--navy);
-}
-.footer-disclaimer { font-size: 11px; color: var(--t3); line-height: 1.7; margin-bottom: 8px; }
-.footer-meta { font-size: 10px; color: var(--t3); text-align: center; font-style: italic; }
+.report-footer { margin: 24px 14px 8px; padding: 16px; background: var(--card); border-radius: var(--radius); border-top: 2px solid var(--navy); }
+.footer-disclaimer { font-size: 11px; color: var(--t3); line-height: 1.7; }
+.footer-meta { font-size: 10px; color: var(--t3); text-align: center; font-style: italic; margin-top: 8px; }
 
-/* Print / PDF styles */
 @media print {
-  .top-bar, .pdf-banner { position: relative; }
+  .top-bar { position: relative; }
   .sec-nav { display: none; }
   body { padding-bottom: 0; }
   .section { padding: 12px 10px 0; }
   .card { break-inside: avoid; }
 }
+
+/* Hide orphan intro text that floats outside numbered items */
+.card-body > .content-text:first-child { 
+  padding: 12px 16px 0; 
+  font-size: 12px; 
+  color: var(--t3); 
+  font-style: italic; 
+}
+/* Ensure bullets inside content-body have proper padding */
+.content-body .content-bullet { padding: 2px 0; }
+/* Prevent text overflow in table cells */
+.data-table td, .data-table th { word-break: break-word; max-width: 200px; }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <div class="top-bar">
   <div class="top-bar-row">
     <div>
@@ -156,175 +145,49 @@ body {
     </div>
     <div class="top-date">28 May 2026</div>
   </div>
-  <div class="sec-nav">
-    <a href="#snapshot">🏢 Company Snapshot</a><a href="#strategy">🎯 Strategic Direction</a><a href="#leadership">👥 Leadership & Org</a><a href="#signals">📡 Buying Signals</a><a href="#vendors">🔍 Competitive & Vendors</a><a href="#salesplay">⚡ Sales Play</a>
-  </div>
+  <div class="sec-nav"><a href="#snapshot">🏢 Company Snapshot</a><a href="#strategy">🎯 Strategic Direction</a><a href="#leadership">👥 Leadership & Org</a><a href="#signals">📡 Buying Signals</a><a href="#vendors">🔍 Competitive & Vendors</a><a href="#salesplay">⚡ Sales Play</a></div>
 </div>
 
-<!-- HERO -->
 <div class="hero">
   <div class="hero-label">Pre-Sales Intelligence Brief</div>
   <div class="hero-company">marriott</div>
-  <div class="hero-meta" id="hero-meta-badges">
+  <div class="hero-meta">
     <span class="hero-badge">📅 28 May 2026</span>
     <span class="hero-badge" id="ownership-badge">⚠️ Verify before use</span>
   </div>
 </div>
 
-<!-- PDF DOWNLOAD BANNER -->
 <div class="pdf-banner">
   <div class="pdf-banner-text">📄 Download full report as PDF</div>
   <a class="pdf-btn" href="marriott.pdf" download>Download PDF →</a>
 </div>
 
-<!-- SECTIONS -->
 
     <div class="section" id="snapshot">
       <div class="section-hdr">🏢 Company Snapshot</div>
-      <div class="card">
-        <div class="card-body"><div class="content-item">
-        <div class="content-num">1</div>
-        <div class="content-body">
-          <div class="content-label">REVENUE & MARGIN</div>
-          <div class="content-bullet"><span class="bullet-dot"></span><span>Last reported annual revenue: $26.19 billion for fiscal year 2025.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Operating margin: 12.96% for fiscal year 2025. The trailing twelve months (TTM) operating margin as of May 2026 was 16.05%.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Net margin: 9.93% for fiscal year 2025 (calculated from $2.6 billion net income and $26.19 billion revenue). A direct source states a net margin of 9.72% (likely for 2025, although not explicitly stated with year).</span></div>
-        </div>
-      </div><div class="content-item">
-        <div class="content-num">2</div>
-        <div class="content-body">
-          <div class="content-label">REVENUE TREND</div>
-          <div class="tbl-wrap"><table class="data-table"><tr><th>Year</th><th>Annual Revenue (USD Billions)</th><th>Operating Margin (%)</th><th>Net Income (USD Billions)</th><th>Net Margin (%)</th></tr><tr><td>2025</td><td>$26.19</td><td>12.96%</td><td>$2.60</td><td>9.93%</td></tr><tr><td>2024</td><td>$25.10</td><td>12.55%</td><td>$2.37</td><td>9.44%</td></tr><tr><td>2023</td><td>$23.71</td><td>14.25%</td><td>Not publicly available</td><td>Not publicly available</td></tr><tr><td>2022</td><td>$20.77</td><td>14.99%</td><td>Not publicly available</td><td>Not publicly available</td></tr><tr><td>2021</td><td>$13.86</td><td>8.52%</td><td>Not publicly available</td><td>Not publicly available</td></tr></table></div>
-        </div>
-      </div><div class="content-item">
-        <div class="content-num">3</div>
-        <div class="content-body">
-          <div class="content-label">EMPLOYEES</div>
-          <div class="content-bullet"><span class="bullet-dot"></span><span>Total global headcount: 414,000 in 2025. Another source reported 255,457 employees as of April 30, 2026.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Breakdown by high-cost locations (US, UK, Germany, Australia, Canada): Not publicly available.</span></div>
-        </div>
-      </div><div class="content-item">
-        <div class="content-num">4</div>
-        <div class="content-body">
-          <div class="content-label">INDIA PRESENCE</div>
-          <div class="content-bullet"><span class="bullet-dot"></span><span>Marriott International is establishing its first Global Capability Center (GCC) in Hyderabad, India, named the Marriott Tech Accelerator.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Headcount: The company plans to hire approximately 300 professionals in the initial phase by the first quarter of 2025.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Location: Hyderabad.</span></div>
-        </div>
-      </div><div class="content-text">5.  RECENT NEWS (Last 6 months: December 2025 - May 2026):</div><div class="content-bullet"><span class="bullet-dot"></span><span>(a) Product News:</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Marriott Bonvoy launched a Hotel-Inspired Design Shop (May 21, 2026).</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Marriott and The Fern Hotels & Resorts announced 75 signings and 50 openings for Series by Marriott in India (May 20, 2026).</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Frasers House Singapore joined the Marriott Bonvoy staycation campaign (May 20, 2026).</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>A new JW Marriott Resort & Spa near Vrindavan was announced (May 4, 2026).</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Marriott partnered with Grupo Satli and Aimbridge Hospitality to develop its first all-inclusive resort in Riviera Maya.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>(b) Company News:</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Deerfield Beach Fairfield Inn & Suites received a $16.8 million loan (May 22, 2026).</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Marriott International stockholders reelected the Board as the CEO addressed the global outlook (May 11, 2026).</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Marriott (MAR) Q1 2026 Earnings Transcript was released (May 7, 2026).</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Marriott International reported Q1 2026 revenue of $6.65 billion, up 6.24% year over year (May 6, 2026).</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Marriott and Vinpearl signed an agreement for two hotels in Vietnam (May 5, 2026).</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>The Aquaculture Stewardship Council (ASC), Laylanta, and Bangkok Marriott signed an MoU for Barramundi Farming (April 14, 2026).</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Marriott International reported fourth-quarter and full-year 2025 financial results, showing increased revenue and a record pipeline (February 10-11, 2026).</span></div><div class="content-text">6.  M&A ACTIVITY (Last 2 years: May 2024 - May 2026):</div><div class="content-bullet"><span class="bullet-dot"></span><span>Acquisitions:</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Completed the acquisition of citizenM, a lifestyle hotel brand, in July 2025 for $355 million.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Expanded into outdoor-focused lodging through the acquisition of Postcard Cabins and a long-term partnership agreement with Trailborn in December 2024.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Divestitures:</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Portman Hospitality Fund I, LP acquired the Westin Peachtree Plaza, a 1,073-key hotel in Atlanta, from Marriott International (May 26, 2026). The hotel will remain in Marriott's portfolio under a long-term management agreement.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Investment Rounds:</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Marriott International's most recent investment round was a Grant (prize money) in July 2022. No investment rounds in the last 2 years (May 2024 - May 2026) were publicly reported.</span></div><div class="content-item">
-        <div class="content-num">7</div>
-        <div class="content-body">
-          <div class="content-label">OWNERSHIP STRUCTURE</div>
-          <div class="content-bullet"><span class="bullet-dot"></span><span>Publicly traded on the NASDAQ stock exchange under the ticker symbol MAR.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>The ownership structure is diverse, with institutional investors holding approximately 65% of the company's shares as of July 2025. Key institutional shareholders include Vanguard Group Inc. and BlackRock, Inc. Members of the Marriott family are also significant insider shareholders.</span></div>
-        </div>
-      </div><div class="content-item">
-        <div class="content-num">8</div>
-        <div class="content-body">
-          <div class="content-label">KEY COMPETITORS</div>
-          <div class="content-bullet"><span class="bullet-dot"></span><span>Hilton Worldwide (Hilton)</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Hyatt Hotels Corporation (Hyatt)</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>InterContinental Hotels Group (IHG)</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Accor</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Wyndham Hotels & Resorts</span></div>
-        </div>
-      </div></div>
-      </div>
+      <div class="card"><div class="card-body"><div class="content-item"><div class="content-num">1</div><div class="content-body"><div class="content-label">REVENUE & MARGIN</div><div class="content-bullet"><span class="bullet-dot"></span><span>Last reported annual revenue: $26.19 billion (2025)</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Operating margin: 15.81% (2025)</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Net margin: 9.93% (2025)</span></div></div></div><div class="content-item"><div class="content-num">2</div><div class="content-body"><div class="content-label">REVENUE TREND</div></div></div><div class="tbl-wrap"><table class="data-table"><tr><th>Year</th><th>Revenue (in billions)</th><th>Operating Margin</th><th>Net Margin</th></tr><tr><td>2025</td><td>$26.19</td><td>15.81%</td><td>9.93%</td></tr><tr><td>2024</td><td>$25.10</td><td>12.96%</td><td>Not publicly available</td></tr><tr><td>2023</td><td>$23.71</td><td>Not publicly available</td><td>Not publicly available</td></tr><tr><td>2022</td><td>$20.77</td><td>Not publicly available</td><td>Not publicly available</td></tr><tr><td>2021</td><td>$13.86</td><td>Not publicly available</td><td>Not publicly available</td></tr></table></div><div class="content-item"><div class="content-num">3</div><div class="content-body"><div class="content-label">EMPLOYEES</div><div class="content-bullet"><span class="bullet-dot"></span><span>Total global headcount: 414,000 (2025)</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Breakdown by high-cost locations (US, UK, Germany, Australia, Canada): Not publicly available. However, some sources indicate that the U.S. leads global hotel employment, and the U.K. is a major hospitality labor market. Marriott's workforce is distributed across 2,312 locations, with the highest headcount in Bethesda, MD (2,972) and Dallas, TX (2,701).</span></div></div></div><div class="content-item"><div class="content-num">4</div><div class="content-body"><div class="content-label">INDIA PRESENCE</div><div class="content-bullet"><span class="bullet-dot"></span><span>Yes, Marriott International is establishing its first Global Capability Centre (GCC) in India, called the "Marriott Tech Accelerator" (MTA).</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Location: Hyderabad, Telangana.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Headcount: Marriott plans to start small and grow, but specific headcount numbers for the GCC were not officially released at the initial announcement. The center is expected to commence full-scale operations by the first quarter of 2025.</span></div></div></div><div class="content-item"><div class="content-num">5</div><div class="content-body"><div class="content-label">RECENT NEWS</div><div class="content-bullet"><span class="bullet-dot"></span><span>(a) Product News:</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Marriott expanded its brand portfolio in 2025 with the acquisition of citizenM, adding over 35 hotels and nearly 9,000 rooms. The acquisition was completed in July 2025.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Marriott also introduced "Series by Marriott," opening 37 properties across 23 cities in India in 2025.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Launched "Outdoor Collection by Marriott Bonvoy," which ended 2025 with over 30 open properties.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Accelerated its presence in the midscale segment through three brands: City Express by Marriott, StudioRes, and Four Points Flex by Sheraton.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>In December 2024, Marriott announced plans to expand into outdoor-focused lodging through the acquisition of Postcard Cabins and a long-term partnership agreement with Trailborn.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>(b) Company News:</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Marriott International reported Q1 2026 revenue of $6.65 billion, up 6.24% year over year.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>In February 2026, Marriott announced fourth-quarter and full-year 2025 financial results, with full-year revenue of $26.19 billion.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Marriott International (NASDAQ: MAR) added nearly 100,000 rooms across more than 700 properties globally in 2025, representing a 4.3% net room growth.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Marriott International announced an increase in its quarterly cash dividend.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>In October 2024, Marriott International announced the establishment of its first global capability center (GCC) in Hyderabad, India, named "Marriott Tech Accelerator". This center was officially inaugurated in November 2025.</span></div></div></div><div class="content-item"><div class="content-num">6</div><div class="content-body"><div class="content-label">M&A ACTIVITY</div><div class="content-bullet"><span class="bullet-dot"></span><span>Acquisition of citizenM, a Dutch-based hotel brand, completed in July 2025.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Acquisition of Postcard Cabins and a long-term partnership agreement with Trailborn to expand into outdoor-focused lodging, announced in December 2024.</span></div></div></div><div class="content-item"><div class="content-num">7</div><div class="content-body"><div class="content-label">OWNERSHIP STRUCTURE</div><div class="content-bullet"><span class="bullet-dot"></span><span>Public (ticker+exchange): Publicly traded on NASDAQ, ticker symbol MAR.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Ownership is primarily distributed among public shareholders, with institutional investors holding a significant portion (approximately 65% as of July 2025, and often 80% of float). Key institutional shareholders include Vanguard Group Inc. and BlackRock, Inc.. Members of the Marriott family are also significant insider shareholders.</span></div></div></div><div class="content-item"><div class="content-num">8</div><div class="content-body"><div class="content-label">KEY COMPETITORS</div><div class="content-bullet"><span class="bullet-dot"></span><span>Hilton Worldwide</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Hyatt Hotels Corporation</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>InterContinental Hotels Group (IHG)</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Accor</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Wyndham Worldwide Corporation / Wyndham Hotels & Resorts</span></div></div></div></div></div>
     </div>
-  
     <div class="section" id="strategy">
       <div class="section-hdr">🎯 Strategic Direction</div>
-      <div class="card">
-        <div class="card-body"><div class="content-item">
-        <div class="content-num">1</div>
-        <div class="content-body">
-          <div class="content-label">CORPORATE VISION & DIRECTION</div>
-          
-        </div>
-      </div><div class="content-text">Marriott's leadership is steering the company towards sustained global growth, enhanced guest experiences through technology, and robust shareholder returns in the next 12-18 months. CEO Anthony Capuano acknowledged "near-term volatility in the US driven by low consumer confidence and macro uncertainty, but strong long-term fundamentals for travel". He emphasized a focus on balancing associates, guests, and particularly owners who are still rebuilding asset value post-pandemic.</div><div class="content-text">Key aspects of their direction include:</div><div class="content-bullet"><span class="bullet-dot"></span><span>Growth & Expansion: Marriott anticipates 4.5%-5% net rooms growth for 2026, driven by robust development and a record pipeline. The global pipeline exceeded 618,000 rooms at the end of Q1 2026, with conversions being a significant growth driver, accounting for over 35% of signings and 40% of openings in the quarter. "2025 was a defining year for Marriott, marked by bold expansion and global milestones," Capuano stated.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Market Focus: The company has raised its outlook for the U.S., Canada, and China, while acknowledging that the Middle East conflict and airlift disruptions are impacting performance in EMEA and APAC. Luxury and premium leisure segments continue to show strong demand, with luxury RevPAR increasing over 6% in 2025.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Shareholder Value: Marriott plans to return over $4.4 billion to shareholders in 2026 through dividends and buybacks, following over $4 billion returned in 2025.</span></div><div class="content-item">
-        <div class="content-num">2</div>
-        <div class="content-body">
-          <div class="content-label">BIG STRATEGIC INITIATIVES</div>
-          
-        </div>
-      </div><div class="content-text">Marriott is implementing several strategic initiatives focused on expansion, sustainability, and operational efficiency:</div><div class="content-bullet"><span class="bullet-dot"></span><span>Global Development & Brand Portfolio: Marriott continues to expand its global footprint, with a record number of deals signed in various regions in 2025. This includes reinforcing its luxury leadership with a record 114 luxury deals in 2025. The company also launched the "Outdoor Collection by Marriott Bonvoy" in 2025, which includes over 30 open properties, and acquired the citizenM brand in July 2025, integrating over 35 hotels and nearly 9,000 rooms. Maintaining brand integrity, especially in the luxury segment, is a key focus.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Sustainability Mandates (Serve 360): Under its "Serve 360: Doing Good in Every Direction" platform, Marriott has established comprehensive 2025 Sustainability and Social Impact Goals. These include a target to achieve net-zero value chain greenhouse gas emissions by no later than 2050. Specific 2025 targets aim to reduce carbon intensity by 30%, water intensity by 15%, and waste to landfill by 45% (including a 50% reduction in food waste). Marriott is also committed to hiring over 3,000 refugees globally by 2026 and responsibly sourcing 95% of its top 10 product categories by 2025. Denise Naguib, Marriott's Vice President of Sustainability & Supplier Diversity, stated, "We want to be known as the world's favourite travel company while fulfilling our global responsibility to be a force for good".</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Cost Transformation: Marriott expects $80-$90 million in annual G&A cost savings from 2025 through an enterprise-wide initiative designed to enhance efficiency and productivity.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Loyalty Program Evolution: The Marriott Bonvoy loyalty program is undergoing replatforming to support faster innovation and advanced personalization for its 271 million members worldwide. The company is also reducing loyalty charge-out rates by approximately 5%.</span></div><div class="content-item">
-        <div class="content-num">3</div>
-        <div class="content-body">
-          <div class="content-label">TECHNOLOGY STRATEGY</div>
-          
-        </div>
-      </div><div class="content-text">Marriott is undertaking a multi-year digital and technology transformation, committing over $1.1 billion in investment spending in 2026, with more than one-third dedicated to this area.</div><div class="content-bullet"><span class="bullet-dot"></span><span>Cloud Migration & Platform Consolidation: Marriott is replatforming its three core systems – property management, central reservations, and loyalty – into cloud-native environments to enable unified guest data and real-time analytics. These systems are moving from development to deployment, with rollouts planned at a significant number of hotels in 2026. The strategy involves building a cloud-native infrastructure and an "agentic mesh".</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>AI Adoption Stance: Marriott is "rearchitecting its entire technology backbone around AI". Global Chief Information Officer Naveen Manga stated that "2025 was a year of experimentation, learning and piloting for the company, whereas '2026 is a year for scale'" for AI deployment. CEO Anthony Capuano sees AI as "an opportunity to potentially redefine the customer acquisition paradigm that has governed our industry for the past several decades".</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Agentic Mesh: The company is building an "agentic mesh," a shared intelligence layer that will allow AI capabilities to be reused across various functions like operations, marketing, customer service, and revenue optimization. This "horizontal protocol and model-agnostic AI chassis" will serve as the foundation for AI use cases across guests, associates, and owners.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>AI Applications: Marriott is deploying natural language search on its website and app, powered by OpenAI, and exploring agentic booking integrations with Google's AI Mode. The focus is on automating high-cost processes, enhancing guest experiences, and providing streamlined insights for hotel owners.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Responsible AI: Marriott is approaching AI with "ambition and caution". Naveen Manga emphasized the company's commitment to responsible AI use, stating, "We want this tech to be powered by trust. We want to deploy technology that is responsible, ethical and lawful".</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Vendor Relationships & Build vs. Buy: While building its core AI architecture and platforms, Marriott is also collaborating with technology leaders. This includes partnerships with OpenAI for natural language search and Google on their forthcoming Google AI Mode travel product. This indicates a strategic mix of building foundational capabilities internally and partnering for specialized AI features and integration.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Cybersecurity: Improving cybersecurity is a critical component of the digital transformation strategy, especially following a settlement with the Federal Trade Commission regarding past data breaches. Marriott is enhancing data privacy and security programs, with a focus on governance, risk management, operations, compliance, and utilizing AI tools for cybersecurity.</span></div></div>
-      </div>
+      <div class="card"><div class="card-body"><div class="content-text">Marriott International's corporate strategy for the next 12-18 months (2026-early 2027) is characterized by a "Growing Forward" approach, focusing on global expansion, technological transformation, and deepening loyalty, while maintaining a disciplined financial outlook.</div><div class="content-text">1. CORPORATE VISION & DIRECTION</div><div class="content-text">Under the leadership of President and CEO Anthony Capuano, Marriott is driving an "Enterprise Transformation" that centers on global ecosystem growth, technology modernization, and leveraging artificial intelligence (AI) to enhance efficiency and guest experience. Capuano emphasizes a dual focus: "deepening engagement within the Marriott Bonvoy loyalty program and accelerating net room growth globally." The company's overarching vision is to be "at the center of how people dream, plan, and ultimately experience travel." Marriott aims to balance near-term market volatility, particularly in the U.S. due to consumer confidence, with strong long-term fundamentals for global travel.</div><div class="content-text">For 2026, Marriott projects a global RevPAR (Revenue Per Available Room) growth of 2% to 3%. The company expects net rooms growth to be between 4.5% and 5%. Gross fee revenues are anticipated to increase by 9% to 10%, reaching $5.93 billion to $5.99 billion. Adjusted EBITDA is forecasted to grow by 8% to 10%, landing between $5.8 billion and $5.9 billion. Adjusted diluted earnings per share (EPS) growth is projected at 13% to 15%. Marriott plans to return over $4.4 billion to shareholders in 2026 through dividends and buybacks.</div><div class="content-text">Marriott's development pipeline reached a record of nearly 618,000 rooms, with 43% already under construction, indicating robust future growth. The company is seeing strong leisure demand, particularly in the luxury and premium segments, and robust global group travel. International markets continue to be a significant growth driver, with a raised outlook for the U.S., Canada, and China. India is identified as a crucial growth market, targeted to become Marriott's third-largest. The company remains committed to its asset-light business model, focusing on management and franchising rather than real estate ownership.</div><div class="content-text">2. BIG STRATEGIC INITIATIVES</div><div class="content-text">Expansion: Marriott is aggressively expanding its global footprint. It aims for 4.5% to 5% net rooms growth in 2026, with an ambition to surpass 1.8 million open rooms by 2028–2030. Conversions of existing hotels to Marriott brands are a major growth engine, accounting for over 35% of signings and 40% of openings in Q1 2026.</div><div class="content-bullet"><span class="bullet-dot"></span><span>Luxury Segment: Marriott signed a record 114 luxury deals in 2025, with nearly 35 luxury hotels slated to open in 2026 across Europe, Asia, the Middle East, and the Americas. The 2026 luxury roadmap focuses on well-being and longevity, social connection, and culturally rooted transformational experiences.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Midscale & Extended Stay: To penetrate new markets and appeal to a broader traveler base, Marriott is expanding its midscale offerings, including the "Four Points Flex" and "StudioRes" brands. The 2024 acquisition of City Express by Marriott in Latin America is a key part of this strategy, with plans to add thousands of incremental midscale rooms by 2026–2027. By year-end 2025, Marriott's midscale brands accounted for 216 open properties and over 250 in the pipeline.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Geographic Focus: The company is prioritizing growth in high-potential regions such as Greater China, India, the Middle East (driven by initiatives like Saudi Vision 2030), Mediterranean resorts, Mexico/Caribbean, and Southeast Asia.</span></div><div class="content-text">Sustainability Mandates: Marriott has launched initiatives to embed sustainability across its operations and offerings.</div><div class="content-bullet"><span class="bullet-dot"></span><span>"Connect Responsibly with Marriott Bonvoy Events": This program helps meeting planners integrate sustainability into events by providing Meeting Impact Reports that analyze carbon and water footprints, and offers options to invest in carbon credits.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>"Sip for a Cause": Linked to Earth Hour 2026, this campaign raised funds from coffee sales to plant 500 fruit trees and support environmental education in communities.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Marriott's broader sustainability goals, with targets extending beyond 2025 into 2026, include reducing carbon intensity by 30%, water intensity by 15%, and waste to landfill by 45% (with a 50% cut in food waste), and aiming for 30% renewable electricity. The company is committed to having 100% of properties certified to a recognized green building standard.</span></div><div class="content-text">Cost Transformation/Restructuring: Marriott has undertaken an "enterprise-wide process to enhance effectiveness and efficiency," aiming to achieve $80 million to $90 million in annual pre-tax general and administrative (G&A) cost reductions starting in 2025. These efforts are also designed to deliver cost savings to hotel owners and franchisees. Additionally, a strategic leadership transition and realignment across global operations took effect in March 2026 to streamline operations and foster greater collaboration.</div><div class="content-text">3. TECHNOLOGY STRATEGY</div><div class="content-text">Marriott is committing $1.1 billion in investment spending in 2026, with over one-third dedicated to digital and technology transformation.</div><div class="content-text">Cloud Migration & Platform Consolidation: The company is undergoing a multiyear transformation to retool its core systems and is replatforming three critical systems to cloud-native environments: its property management system (PMS), central reservations infrastructure (CRS), and loyalty platform. Beta launches for these new systems commenced in September 2025, with a phased rollout planned over 18 months. This architectural shift is designed around unified guest data, API-first integrations, and real-time analytics, with a focus on enhancing personalization and fostering faster innovation.</div><div class="content-text">AI Adoption Stance: Marriott is leveraging AI to improve efficiency and guest experiences. CEO Anthony Capuano states, "We see AI as an opportunity to potentially redefine the customer acquisition paradigm that has governed our industry for the past several decades," though he cautions that the technology is still early in its practical application. A key part of the strategy is building an "agentic mesh" or shared intelligence layer, which will support AI agents across various functions like marketing, operations, customer service, and revenue optimization. This aims to create "capacity" for associates, freeing them from manual tasks to deliver a more personal human connection to guests. Marriott's AI initiatives are guided by a four-part framework emphasizing trust, accountability, prioritization, and human-centered innovation.</div><div class="content-text">AI Pilots & Features:</div><div class="content-bullet"><span class="bullet-dot"></span><span>The company is piloting Microsoft Copilot for internal uses like meeting summaries and transcriptions.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>AI coaches are being experimented with for call center agents.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>An AI-powered trip planning tool is being monitored for Marriott Bonvoy members.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Marriott has launched a "Natural Language Search" feature on its mobile app and Homes & Villas website, powered by OpenAI.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>It is also exploring agentic booking integrations with Google's AI Mode.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Generative AI is being used to create content and boost SEO traffic to its website.</span></div><div class="content-text">Vendor Relationships & Build vs. Buy Signals: Marriott's comprehensive replatforming of core systems indicates a significant "build" component in its technology strategy. However, its partnerships with companies like OpenAI and exploration of integrations with Google's AI Mode suggest a strategic "buy" or partnership approach for specific, advanced AI functionalities. The company also emphasizes building technology "with" its 800,000 associates through end-user councils. Following past data breaches, Marriott is strengthening its cybersecurity, data privacy, and risk management protocols, integrating AI as part of its defense strategy.</div></div></div>
     </div>
-  
     <div class="section" id="leadership">
       <div class="section-hdr">👥 Leadership & Org</div>
-      <div class="card">
-        <div class="card-body"><div class="content-text">Marriott International Leadership:</div><div class="content-item">
-        <div class="content-num">1</div>
-        <div class="content-body">
-          <div class="content-label">KEY DECISION MAKERS</div>
-          
-        </div>
-      </div><div class="content-bullet"><span class="bullet-dot"></span><span>CEO: Anthony Capuano</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Tenure: Appointed CEO in February 2021.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Background: Capuano joined Marriott in 1995. Before becoming CEO, he was Group President, Global Development, Design, and Operations Services, overseeing strategic unit growth and global operating standards.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>CFO: Jen Mason (effective April 1, 2026)</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Tenure: Will assume the role of Executive Vice President and CFO on April 1, 2026.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Background: A 33-year Marriott veteran, Mason currently serves as global officer, treasurer and risk management. She has held various leadership roles including CFO for the U.S. & Canada division, senior vice president of IT Business Partnership & Planning, and senior vice president, sales and marketing planning support.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Global Chief Technology Officer (CTO): Naveen Manga</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Tenure: Since August 2021.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Background: Manga is responsible for global technology strategy, innovation, and transformation to support growth and drive long-term business value at Marriott. He has over 20 years of business technology leadership experience across various industries, including 10 years at Hilton prior to Marriott.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Executive Vice President and Chief Revenue & Technology Officer: Drew Pinto</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Tenure: Appointed in February 2023.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Background: Pinto leads sales, revenue management, distribution channels, digital, and information technology for Marriott. He has spent 17-18 years at Marriott in leadership roles focused on developing innovative strategies and transforming organizations.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Executive Vice President and Chief Development Officer, Global: Shawn Hill (effective January 1, 2026)</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Tenure: Will assume this global role on January 1, 2026.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Background: Currently, Shawn Hill serves as the Chief Development Officer, Asia Pacific excluding China (APEC), a role he is transitioning from in early 2026. Previously, he was Senior Vice President, Development and Operations, holding dual responsibilities in development and overseeing operations of Premium and Select brand hotels in Singapore and the Maldives.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Chief Operating Officer (COO): Marriott International appears to have a decentralized COO structure with multiple COOs for different regions and segments rather than a single global COO. Examples include Sandeep Walia (COO, Middle East & Luxury, EMEA) and Julius W. Robinson (COO, Western US & Gaylord Hotels Nationwide).</span></div><div class="content-text">2.  RECENT LEADERSHIP CHANGES (Last 12 months - May 2025 to May 2026):</div><div class="content-bullet"><span class="bullet-dot"></span><span>CFO Retirement and Succession: Leeny Oberg, CFO and Executive Vice President, Development, is retiring effective March 31, 2026, after 26 years with the company. Jen Mason will succeed her as Executive Vice President and CFO, effective April 1, 2026. (Timing Signal)</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Global Chief Development Officer Appointment: Shawn Hill will become Executive Vice President and Chief Development Officer, Global, on January 1, 2026. (Timing Signal)</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Asia Pacific Chief Development Officer Appointment: Gautam Bhandari was named Chief Development Officer, Asia Pacific excluding China (APEC), effective January 1, 2026. He succeeds Shawn Hill in this role. (Timing Signal)</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Regional Group President Appointments: Effective March 28, 2026:</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Satya Anand (currently President, EMEA) will become Group President for the U.S., Canada, and the Caribbean and Latin America region. (Timing Signal)</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Neal Jones (currently COO for Europe and Africa and Global Leader for Design Hotels) will assume the role of President of EMEA. (Timing Signal)</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Federico “Fede” Greppi (currently COO for CALA) will become the region's President. (Timing Signal)</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Executive Departures: Liam Brown (Group President for the U.S. and Canada) and Brian King (President of Enterprise Transformation and CALA) are stepping down from their roles at the end of March 2026 and will remain in advisory roles through June 2026. (Timing Signal)</span></div><div class="content-item">
-        <div class="content-num">3</div>
-        <div class="content-body">
-          <div class="content-label">ORG STRUCTURE SIGNALS</div>
-          
-        </div>
-      </div><div class="content-bullet"><span class="bullet-dot"></span><span>Marriott's technology leadership, with a Global CTO (Naveen Manga) responsible for overall technology strategy and transformation, and an Executive Vice President and Chief Revenue & Technology Officer (Drew Pinto) leading IT, digital, sales, revenue management, and distribution channels, indicates a largely centralized approach for core technology and revenue-generating technology functions. The company is undergoing a multi-year digital and technology transformation, replacing key platforms like reservations, property management, and loyalty, and delivering a modern technology platform to fuel growth. This strategic initiative further points to a centralized and unified technology direction.</span></div><div class="content-item">
-        <div class="content-num">4</div>
-        <div class="content-body">
-          <div class="content-label">BOARD COMPOSITION</div>
-          
-        </div>
-      </div><div class="content-bullet"><span class="bullet-dot"></span><span>Chairman of the Board: David S. Marriott. He was elected to the Marriott International Board of Directors in March 2021 and assumed the position of Chairman in May 2022. He is the third Chairman in the company's history, preceded by his father, J.W. Marriott, Jr., and grandfather J.W. Marriott.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>CEO Representation: Anthony Capuano also serves on the company's Board of Directors.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>PE Representation/Notable Strategic Investors: No specific private equity (PE) representation or notable strategic investors on the Board of Directors were explicitly identified in the search results.</span></div></div>
-      </div>
+      <div class="card"><div class="card-body"><div class="content-item"><div class="content-num">1</div><div class="content-body"><div class="content-label">KEY DECISION MAKERS</div></div></div><div class="content-bullet"><span class="bullet-dot"></span><span>CEO: Anthony "Tony" Capuano</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Tenure: Appointed CEO in February 2021.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Background: Prior to his CEO appointment, Mr. Capuano served as Group President, Global Development, Design and Operations Services, leading strategic unit growth, global design, and operating standards. He joined Marriott in 1995 and was instrumental in its growth, including the acquisition of Starwood Hotels & Resorts Worldwide.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>CFO: Jen Mason (Effective March 31, 2026)</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Tenure: Will assume the role of Executive Vice President and CFO on March 31, 2026.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Background: A 33-year Marriott veteran, Ms. Mason currently serves as Global Officer, Treasurer and Risk Management. Her previous roles include CFO for the U.S. & Canada division, Senior Vice President of IT Business Partnership & Planning, and Senior Vice President of Sales and Marketing Planning Support.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Current CFO (Retiring): Kathleen Kelly "Leeny" Oberg</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Tenure: CFO since January 2016; retiring March 31, 2026.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Background: Ms. Oberg joined Marriott in 1999 and has held various finance leadership positions, including CFO for The Ritz-Carlton Hotel Company. In February 2023, she was also tasked with leading the strategic growth of the company's global lodging portfolio.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>CTO/CDO:</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Global Chief Technology Officer (CTO): Naveen Manga</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Tenure: Since August 2021.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Background: Mr. Manga is responsible for Marriott's global technology strategy, innovation, and transformation to support growth and drive long-term business value. He has over 20 years of business technology leadership experience across various industries.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Chief Development Officer, Global (CDO): Shawn Hill (Effective early 2026)</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Tenure: Will assume the role of Executive Vice President and Chief Development Officer, Global, in early 2026, initially reporting to Leeny Oberg and then to CEO Anthony Capuano.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Background: Mr. Hill previously served as Chief Development Officer, Asia Pacific (excluding China) and has been with Marriott for a long tenure.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>COO: Marriott International does not appear to have a single "Global Chief Operating Officer" but rather has regional operational leaders who report directly to the CEO.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Group President, U.S., Canada and Caribbean & Latin America (CALA): Satya Anand (Effective March 28, 2026)</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Tenure: Assumes this new unified regional role on March 28, 2026.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Background: A 37-year Marriott veteran, Mr. Anand previously served as President of Marriott's Europe, Middle East and Africa (EMEA) region since 2020. His experience spans operations, finance, and design.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>President, Europe, Middle East and Africa (EMEA): Neal Jones (Effective March 28, 2026)</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Tenure: Assumes this role on March 28, 2026.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Background: Mr. Jones has three decades of Marriott experience, with leadership roles in sales, marketing, and operations, including Chief Operating Officer for Europe and Africa.</span></div><div class="content-item"><div class="content-num">2</div><div class="content-body"><div class="content-label">RECENT LEADERSHIP CHANGES</div></div></div><div class="content-bullet"><span class="bullet-dot"></span><span>CFO and Chief Development Officer Transitions (Timing Signal: Announced July 2025 for 2026 effective dates):</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Leeny Oberg (CFO and EVP, Development) is retiring effective March 31, 2026.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Jen Mason will succeed Ms. Oberg as EVP and CFO, effective March 31, 2026.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Shawn Hill will become EVP and Chief Development Officer, Global, effective January 1, 2026.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Regional Leadership Restructuring (Timing Signal: Announced January 2026 for March/June 2026 effective dates):</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Liam Brown (Group President, U.S. and Canada) and Brian King (President, Enterprise Transformation & Caribbean and Latin America) will step down from their roles at the end of March 2026 and retire from the company at the end of June 2026.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Satya Anand (formerly President of EMEA) became Group President, U.S., Canada and CALA, effective March 28, 2026, unifying these regions.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Neal Jones (formerly COO for Europe and Africa) was promoted to President, EMEA, effective March 28, 2026.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Federico "Fede" Greppi (formerly COO for CALA) was promoted to President, CALA, effective March 28, 2026.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Asia Pacific Development Leadership (Timing Signal: Announced October 2025 for January 2026 effective date):</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Gautam Bhandari was named Chief Development Officer, Asia Pacific (excluding China), effective January 1, 2026, succeeding Shawn Hill.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Marriott Vacations Worldwide COO (Timing Signal: Announced/Effective February 2026):</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Michael "Mike" A. Flaskey became President and Chief Operating Officer of Marriott Vacations Worldwide in February 2026.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>New Board Member (Timing Signal: February 2025):</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Sean Tresvant, CEO of Taco Bell Corp., joined the Board of Directors in February 2025.</span></div><div class="content-item"><div class="content-num">3</div><div class="content-body"><div class="content-label">ORG STRUCTURE SIGNALS</div></div></div><div class="content-text">Marriott International's technology function appears to be centralized globally. Naveen Manga serves as the Global Chief Technology Officer, responsible for global technology strategy, innovation, and transformation across the company's more than 30 brands. This centralized approach aims to drive consistent digital experiences for guests and associates worldwide. Drew Pinto, as EVP and Chief Revenue and Technology Officer, also oversees IT, digital, sales, revenue management, and distribution channels for the company as a whole.</div><div class="content-item"><div class="content-num">4</div><div class="content-body"><div class="content-label">BOARD COMPOSITION</div></div></div><div class="content-bullet"><span class="bullet-dot"></span><span>Key Board Members:</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>David S. Marriott, Chairman of the Board.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Anthony Capuano, President and Chief Executive Officer.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>J.W. Marriott Jr., Executive Chairman.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Frederick A. "Fritz" Henderson, Lead Director (since 2022).</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Deborah Marriott Harrison, Global Cultural Ambassador Emeritus.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Debra L. Lee, Former Chair and CEO of BET Networks.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Eric Hippeau, Managing Partner at Lerer Hippeau.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Margaret M. McCarthy, Executive Vice President at CVS Health Corporation.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Horacio D. Rozanski, President and CEO, Booz Allen Hamilton Inc.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Sean Tresvant, CEO of Taco Bell Corp. (joined February 2025).</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>PE Representation: No specific private equity (PE) representation on the Board of Directors is explicitly mentioned in the search results.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Notable Strategic Investors: Marriott International's ownership is primarily driven by institutional investors.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Top Institutional Shareholders (as of late 2025/early 2026): The Vanguard Group, Inc., BlackRock, Inc., State Street Corp., Wellington Management Group LLP, and FMR LLC (Fidelity Investments).</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Marriott Family: Members of the Marriott family are also significant insider shareholders.</span></div></div></div>
     </div>
-  
     <div class="section" id="signals">
       <div class="section-hdr">📡 Buying Signals</div>
-      <div class="card">
-        <div class="card-body"><div class="content-text">Here are Marriott's buying signals and pain points based on recent activities:</div><div class="content-item">
-        <div class="content-num">1</div>
-        <div class="content-body">
-          <div class="content-label">FINANCIAL STRESS SIGNALS</div>
-          <div class="content-bullet"><span class="bullet-dot"></span><span>Marriott's net profit margin decreased from 37.1% a year prior to 35% in Q1 2026, influenced by rising costs and substantial technology investments. The Q1 2026 profit margin was 9.7%, down from 41% in Q1 2025, largely due to higher expenses.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>In October 2025, Marriott implemented layoffs affecting a portion of its customer engagement center workforce.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Approximately a year prior to October 2025, Marriott underwent a company-wide restructuring that led to over 800 corporate employee layoffs. A Work Adjustment and Retraining Notification (WARN) was filed in Maryland in November 2024, indicating 833 layoffs at its Bethesda headquarters, effective January 3, 2025.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>The company's CEO was challenged by shareholders to increase profits and reduce costs.</span></div>
-        </div>
-      </div><div class="content-item">
-        <div class="content-num">2</div>
-        <div class="content-body">
-          <div class="content-label">TECHNOLOGY PAIN SIGNALS</div>
-          <div class="content-bullet"><span class="bullet-dot"></span><span>Marriott is engaged in a significant "worldwide technology transformation" to replatform its core systems, including the property management system, central reservations infrastructure, and loyalty platform, indicating previous reliance on legacy systems. The company was also operating on legacy HR systems that were nearing end-of-life when it launched a new Oracle Fusion Cloud Human Capital Management system in 2021.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Past security failures and potential tech debt are evident from data breaches between 2014 and 2020, which resulted in a $52 million settlement and a mandate to implement a robust information security program for two decades. These failures included inadequate password and access controls, insufficient firewall and network segmentation, unpatched software, poor network monitoring, and a lack of multi-factor authentication.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Marriott is investing heavily in digital and technology transformation, with $1.1 billion committed for 2026, over one-third of which is for this transformation. Since 2023, the company has invested $1.8 billion in capital and technology expenditures for this initiative. The strategy involves migrating core platforms to cloud-native environments and developing an "agentic mesh" for AI integration, with rollouts of new platforms planned for a "meaningful number" of hotels in 2026.</span></div>
-        </div>
-      </div><div class="content-item">
-        <div class="content-num">3</div>
-        <div class="content-body">
-          <div class="content-label">OPERATIONAL PAIN SIGNALS</div>
-          <div class="content-bullet"><span class="bullet-dot"></span><span>Marriott is actively working to make its supply chain more sustainable, with approved science-based targets for reducing greenhouse gas emissions. The company has a complaints procedure for human rights and environmental risks within its supply chain, suggesting ongoing areas for attention.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>The company settled a lawsuit with the U.S. Equal Employment Opportunity Commission (EEOC) for $175,000 in December 2025 due to religious accommodation discrimination, highlighting compliance challenges. In June 2024, Marriott agreed with the Department of Justice to address deficiencies in its reservation systems regarding accessible rooms and ensure accurate listing of accessible inventory, indicating past ADA compliance issues.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>While not explicitly stated as "scaling problems," Marriott's continuous expansion, including the acquisition of citizenM in July 2025 and the partnership with Gruppo Lefay in April 2026, along with the extensive technology transformation across its nearly 10,000 properties, presents inherent challenges in integrating new assets and maintaining operational consistency across a vast global portfolio.</span></div>
-        </div>
-      </div><div class="content-item">
-        <div class="content-num">4</div>
-        <div class="content-body">
-          <div class="content-label">HIRING SIGNALS</div>
-          <div class="content-bullet"><span class="bullet-dot"></span><span>The layoffs in the customer engagement center workforce in October 2025 and the earlier corporate layoffs in late 2024/early 2025 indicate cost pressure and a focus on organizational efficiency.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Marriott reported significant growth in 2025, adding nearly 100,000 rooms and expanding its global portfolio through new brand introductions and acquisitions, which suggests a need for ongoing talent acquisition to support this growth.</span></div>
-        </div>
-      </div><div class="content-item">
-        <div class="content-num">5</div>
-        <div class="content-body">
-          <div class="content-label">TIMING TRIGGERS</div>
-          <div class="content-bullet"><span class="bullet-dot"></span><span>Marriott announced a significant leadership restructuring in January 2026, effective March 28, 2026, involving the retirement of two senior executives and the appointment of new presidents for the U.S., Canada, Caribbean and Latin America (CALA), and Europe, Middle East, and Africa (EMEA) regions. The Chief Financial Officer and Executive Vice President of Development also retired in March 2026.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Marriott completed the acquisition of the citizenM brand in July 2025, with its portfolio integrated into Marriott's platforms in Q4 2025. The company also established a global partnership with Gruppo Lefay in April 2026, which will integrate Lefay's operating model into Marriott's global distribution network.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>A settlement with the Federal Trade Commission (FTC) in October 2024 mandates Marriott to implement a comprehensive information security program and ensure compliance for 20 years, including annual certifications and biennial third-party assessments. Additionally, an agreement in June 2024 with the Department of Justice requires Marriott to address ADA compliance for accessible room reservations. Marriott also adheres to the German Supply Chain Duty of Care Act (LkSG) for supply chain sustainability.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Marriott has publicly announced a "worldwide technology transformation," a multi-year overhaul involving over $1 billion in investment for 2026 to replatform its key systems and embrace cloud-native environments and AI initiatives. The company views AI as a significant opportunity to redefine customer acquisition.</span></div>
-        </div>
-      </div></div>
-      </div>
+      <div class="card"><div class="card-body"><div class="content-text">Here's an analysis of Marriott's buying signals and pain points:</div><div class="content-item"><div class="content-num">1</div><div class="content-body"><div class="content-label">FINANCIAL STRESS SIGNALS</div></div></div><div class="content-bullet"><span class="bullet-dot"></span><span>Cost-cutting: Marriott announced plans in late 2024 for $80-$90 million in annual general and administrative (G&A) cost reductions starting in 2025, with potential growth to $100 million. These initiatives followed a Q3 2024 earnings miss and revised earnings guidance. The company is also seeking to identify tangible cost-saving opportunities for hotel owners and franchisees.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Layoffs: Marriott initiated layoffs affecting 833 corporate employees in January 2025 as part of a restructuring plan. Additionally, in October 2025, a portion of the customer engagement center workforce was laid off following a strategic review of guest interaction channels. These customer engagement center reductions occurred approximately a year after the broader corporate restructuring that involved over 800 corporate layoffs. While AI was not cited as a direct cause for the customer engagement center layoffs by Marriott, some discussions on Reddit linked these to a move towards AI-driven solutions.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Restructuring: Marriott underwent a company-wide restructuring in late 2024 and early 2025, which included job cuts in corporate and regional offices with the aim of "reshaping the way we work" and enhancing enterprise-wide effectiveness. This restructuring also involved leadership changes in key global regions, effective March 28, 2026.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Margin compression: Marriott's reported net income for Q4 2025 decreased by 2% to $445 million compared to $455 million in Q4 2024. Similarly, Q1 2026 reported net income saw a 3% decrease compared to Q1 2025. The company's 2026 room revenue growth forecast was projected to be below Wall Street estimates due to weak travel spending from lower- and middle-income U.S. households. Revenue per available room (RevPAR) in the U.S. and Canada experienced a 0.1% decline in Q4 2025, although international markets showed growth. Marriott Vacations Worldwide, a separate entity, reported a 16% decline in adjusted EBITDA for Q1 2026 and recorded impairment charges in Q4 2025 as part of strategic adjustments. However, Marriott International's adjusted EBITDA and operating margins have shown increases, with operating margins stabilizing at 15.81% in late 2025.</span></div><div class="content-item"><div class="content-num">2</div><div class="content-body"><div class="content-label">TECHNOLOGY PAIN SIGNALS</div></div></div><div class="content-bullet"><span class="bullet-dot"></span><span>Legacy system mentions / Tech debt: Marriott is actively investing in technology and AI to enhance guest experiences and improve operational efficiency. The company is undergoing a "digital technology transformation," with approximately 30% to 35% of its increased 2026 investment spending (totaling $1.05 billion to $1.15 billion) allocated to this area. Marriott has transitioned its 1,000th hotel to a new ecosystem and plans to roll out AI-powered natural language search on its website and app by the end of Q2 2026. An upgraded property management, reservations, and loyalty technology system is expected to roll out in late 2025, which is anticipated to benefit owners. Marriott Vacations Worldwide is also focusing on digital transformation.</span></div><div class="content-item"><div class="content-num">3</div><div class="content-body"><div class="content-label">OPERATIONAL PAIN SIGNALS</div></div></div><div class="content-bullet"><span class="bullet-dot"></span><span>Scaling problems: Marriott's CEO noted in early 2025 that the company has more than doubled in size and entered over 60 new countries since its last organizational structure review, now operating in 142 countries with over 9,000 properties. This significant growth prompted an enterprise-wide process to enhance effectiveness and efficiency, suggesting a need to optimize operations for its expanded scale.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Supply chain issues / Compliance challenges: No specific mentions of recent supply chain issues or compliance challenges were found in the provided search results.</span></div><div class="content-item"><div class="content-num">4</div><div class="content-body"><div class="content-label">HIRING SIGNALS</div></div></div><div class="content-bullet"><span class="bullet-dot"></span><span>Layoffs (Cost pressure signal): As noted in financial stress signals, Marriott conducted layoffs in January 2025 (833 corporate employees) and October 2025 (customer engagement center staff) as part of restructuring and efficiency efforts. This indicates cost pressure and a focus on streamlining operations.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>New positions (Build signal): As part of its corporate restructuring, Marriott plans to add "several hundred new positions" and expects many affected employees to transition into these roles. This suggests a reallocation of talent and a focus on different areas within the company.</span></div><div class="content-item"><div class="content-num">5</div><div class="content-body"><div class="content-label">TIMING TRIGGERS</div></div></div><div class="content-bullet"><span class="bullet-dot"></span><span>New leadership: Marriott announced a significant leadership restructuring effective March 28, 2026. This includes the retirement of two veteran executives (Liam Brown and Brian King) and the appointment of new leaders to key regional group president and president roles (Satya Anand, Neal Jones, Federico Greppi). These changes aim to streamline operations and enhance alignment across global regions.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Post-M&A integration: Marriott completed its acquisition of the CitizenM brand in 2025.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Announced transformation: Marriott is undergoing an "enterprise-wide process to enhance effectiveness and efficiency" and a "digital technology transformation". The company is implementing an upgraded property management, reservations, and loyalty technology system in late 2025. They are also rolling out AI-powered tools, including natural language search on their website and app by the end of Q2 2026.</span></div></div></div>
     </div>
-  
     <div class="section" id="vendors">
       <div class="section-hdr">🔍 Competitive & Vendors</div>
-      <div class="card">
-        <div class="card-body"><div class="content-text">Marriott International, a global leader in hospitality with a portfolio of nearly 8,700 properties across over 30 brands in 139 countries and territories, is undergoing a significant digital and technological transformation.</div><div class="content-text">1. CURRENT TECH VENDORS</div><div class="content-text">Marriott utilizes a diverse range of technology vendors to power its extensive operations:</div><div class="content-bullet"><span class="bullet-dot"></span><span>ERP (Enterprise Resource Planning): Marriott implemented Oracle PeopleSoft ERP for its financial functions in 2015. Oracle Fusion Cloud Human Capital Management (HCM) also includes financial capabilities.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>CRM (Customer Relationship Management): Salesforce is a key CRM partner, with Marriott leveraging its platform, including Service Cloud, since at least 2018 to unify guest services, personalize experiences, and gain a 360-degree view of guests across various touchpoints like call centers, web, and mobile. In the past, around 2001, Marriott used Siebel Systems Inc.'s CRM package.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>HCM (Human Capital Management): Oracle Fusion Cloud Human Capital Management (HCM) was launched in December 2020 to manage global HR data, core HR processes, recruiting, payroll, absence management, performance evaluation, compensation, and learning across its vast workforce. Oracle Analytics Cloud is used for dashboards and data analytics in conjunction with HCM. Kronos is also referenced for workforce management.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Cloud & Data Platforms:</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>AWS (Amazon Web Services): Marriott migrated its Data Platform to AWS, integrating batch and streaming data into cloud object storage and processing data with technologies like Spark, Terraform, and Snowflake. Marriott is also migrating other infrastructure components to AWS and has a strong partnership with AWS for its AI initiatives. An AWS-backed Travel Assistant is also in use.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Snowflake: Since 2019, Marriott has been using Snowflake as its data warehouse for users to consume data, often through Tableau, aiming to simplify its data architecture and improve performance and cost savings.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Oracle Cloud Infrastructure (OCI): Oracle Hospitality OPERA Cloud Property Management System (PMS) and Sales and Event Management are built on OCI. Marriott is also modernizing its full technology footprint, including Fusion Apps, database, and industry applications, with Oracle.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Microsoft Azure: Marriott is expanding its IT capabilities through multi-cloud architectures, utilizing both OCI and Microsoft Azure. The company is also piloting Microsoft Copilot.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>IBM: Prior to 2019, Marriott was an early adopter of Netezza and Hadoop, leveraging the IBM BigInsights platform. Around 2015, Marriott adopted IBM's public cloud technology.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Property Management Systems (PMS): In January 2024, Marriott selected Oracle Hospitality OPERA Cloud PMS and Sales and Event Management as its hospitality cloud platform for luxury, premium, select service, and midscale properties. Beta launches of new property management systems are currently underway across some properties. Marriott also selected Agilysys as a PMS provider for its U.S. and Canada Luxury, Premium, and Select Service properties.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Contact Center/Customer Experience: Marriott implemented NICE CXone for its international customer service operations, going live in March 2023.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Other Key Technologies:</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Tableau: Used for consuming data from Snowflake.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>FreeWheel Demandsuite: Implemented in 2021 for Agency Management related to advertising on its website.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>CXMpro ATS: Used as an Applicant Tracking System (ATS) since 2015.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Harness: Utilized for DevSecOps and software engineering practices.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Google & OpenAI: Marriott is actively collaborating with Google on its forthcoming Google AI Mode Travel product and with OpenAI on its AdPilot program, as well as deploying natural language search on its website and app powered by OpenAI.</span></div><div class="content-text">2. KNOWN SI/CONSULTING PARTNERS</div><div class="content-text">Marriott collaborates with several prominent systems integrators and consulting firms for its technology initiatives:</div><div class="content-bullet"><span class="bullet-dot"></span><span>Accenture: A trusted partner in developing Marriott's transformation strategy and implementing global HR platforms, including one of the largest Oracle Cloud HCM deployments. Accenture focused on technology enablement and implementation.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Deloitte: Partners with Marriott for cybersecurity, leveraging AWS and AI/ML technologies. Deloitte's ConvergeSECURITY platform provides integrated, cloud-managed security services.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Publicis Groupe: Marriott consolidated its entire paid media business under Publicis Groupe in 2018 to enhance its data focus.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Harness: Identified as an AWS Partner, Harness works with Marriott on its DevSecOps and software engineering transformation.</span></div><div class="content-text">3. PROCUREMENT SIGNALS</div><div class="content-text">Marriott is demonstrating strong procurement signals through its ongoing and planned investments:</div><div class="content-bullet"><span class="bullet-dot"></span><span>Multi-Year Digital and Technology Transformation: Marriott is in the midst of a multi-year transformation, committing significant capital expenditures, including $1.8 billion since 2023 and an anticipated $1.1 billion in 2026, with 35% to 40% directed towards replatforming efforts.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Core Systems Replatforming: The company is actively replatforming its central reservation, property management, and loyalty systems into cloud-native environments. Beta launches of these new systems began in late August 2025, with a phased rollout planned over the next 18 months.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Aggressive AI and Cloud Adoption: Marriott is heavily investing in AI, including piloting Microsoft Copilot, experimenting with AI coaches for call centers, and developing an AI-powered trip planning tool for Bonvoy members. The company is also building an "agentic mesh" layer to enable reusable AI capabilities and accelerate innovation. They are strategically working with Google on its AI Mode Travel product and OpenAI on its AdPilot program, aiming to revolutionize booking and customer experience.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Cloud-First Strategy: Marriott is actively migrating from legacy on-premises systems to multi-cloud architectures, including Oracle Cloud Infrastructure (OCI), AWS, and Microsoft Azure, and has a global data center exit strategy.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Data Modernization: Efforts are focused on simplifying its data platform with Snowflake to achieve unified guest data, real-time analytics, and support AI/ML initiatives.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Cybersecurity Enhancement: Following past breaches, Marriott is prioritizing and tightening its cybersecurity posture, including governance, risk management, operations, and compliance, integrating AI tools into its defense strategy.</span></div><div class="content-text">4. COMPETITIVE DYNAMICS</div><div class="content-text">Marriott operates in a highly competitive global hospitality market, with key competitors including:</div><div class="content-bullet"><span class="bullet-dot"></span><span>Hilton Worldwide</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Hyatt Hotels Corporation</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>InterContinental Hotels Group (IHG)</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Accor</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Choice Hotels International</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Radisson Hotel Group</span></div><div class="content-text">Gaining or Losing Market Share:</div><div class="content-text">Marriott is currently the world's largest hotel company by number of rooms and properties, underscoring its significant market presence. The broader hospitality industry is intensely competitive, with a strong focus on delivering personalized experiences to attract and retain guests.</div><div class="content-text">Competitors are also heavily investing in technology, with IHG, Choice Hotels, and Radisson rolling out cloud-based global reservation systems to enhance personalization. Hyatt is differentiating itself with a mobile-first, data-rich guest experience, while Accor is modernizing contact services and leveraging AI at scale. Wyndham and other rivals are also pursuing their own AI and digital strategies.</div><div class="content-text">Marriott's extensive digital transformation, particularly its investments in AI and cloud-native platforms, position it to gain a competitive advantage by creating more consistent and personalized guest experiences across its diverse brands and geographies. The company views AI as a significant opportunity to "redefine the customer acquisition paradigm" and strengthen direct booking channels, although it acknowledges that AI platforms could also direct demand to third-party intermediaries, potentially increasing distribution costs. By actively partnering with tech giants like Google and OpenAI and integrating agentic AI features directly into booking processes, Marriott aims to shape the evolving booking environment and maintain a direct relationship with its customers.</div></div>
-      </div>
+      <div class="card"><div class="card-body"><div class="content-text">Marriott International is undergoing a significant technological transformation, investing heavily in AI and cloud-native systems to enhance guest experiences and operational efficiency. The company faces a highly competitive landscape from traditional hotel chains and alternative lodging platforms.</div><div class="content-text">1. Current Tech Vendors</div><div class="content-text">Marriott leverages a diverse technology stack across various functions:</div><div class="content-bullet"><span class="bullet-dot"></span><span>ERP/Financials: Accenture implemented Marriott's Oracle-based accounting platform, indicating a long-standing relationship with Oracle for financial functions.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>CRM: Marriott uses its own customer relationship management (CRM) systems to simplify customer relationships, boost sales by collecting customer data, and integrate technological and human interfaces for maximizing customer service. In 2018, Marriott also rolled out a global customer recognition platform powered by Salesforce Service Cloud, providing personalized service across guest channels. In 2001, Marriott was implementing Siebel Systems Inc.'s CRM package.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>HCM: Marriott launched an Oracle Fusion Cloud Human Capital Management (HCM) system in December 2020/early 2021, which is considered one of the largest Oracle Cloud HCM deployments globally. This cloud-based platform, called mHUB, enables quick, personalized access to associate information and HR resources across 15 languages. Marriott is also implementing Oracle Fusion Cloud HCM for its workforce and HR processes. In May 2026, Marriott modernized its HCM integration architecture using Oracle Integration Cloud and an Autonomous Transaction Processing database.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Cloud Platforms: Marriott utilizes a multi-cloud architecture, including Amazon Web Services (AWS) for its Marriott Data Platform, Oracle Cloud Infrastructure (OCI), and Microsoft Azure. Around 2015, Marriott adopted IBM's public cloud computing platform for core IT systems and applications.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Data Platforms: Marriott's data platform moved to AWS, integrating batch and streaming data into cloud object storage and processing data with technologies like Spark and Terraform. The company is on a mission to use Snowflake's data platform as a data warehouse to simplify its complex tech stack, replacing older systems like Netezza and Hadoop (prior to 2019). Marriott also uses AI and Big Data analytics for dynamic pricing, demand forecasting, and personalized services.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Property Management (PMS) & Central Reservation (CRS): Marriott is currently replatforming its property management, central reservations, and loyalty systems into cloud-native environments to support unified guest data and real-time analytics. In January 2024, Marriott selected Oracle Hospitality OPERA Cloud PMS and Sales and Event Management as its hospitality cloud platform.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Other Key Technologies:</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Amadeus and Agilisys are partners in Marriott's transition to modern, scalable, cloud-based systems.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>NICE CXone is Marriott's contact center customer experience (CX) platform, which went live in March 2023.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Marriott collaborated with Publicis Sapient on a natural language-based search tool for Homes & Villas by Marriott Bonvoy.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>The Marriott Bethesda hotel piloted a GPON fiber network for guestrooms to provide faster internet speeds.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Marriott conducted an initial pilot of Microsoft 365 Copilot with approximately 100 associates.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Marriott is leveraging OpenAI for natural language search on its website and app and exploring agentic booking integrations with Google's AI Mode.</span></div><div class="content-text">2. Known SI/Consulting Partners</div><div class="content-text">Marriott has established relationships with several key system integrators and consulting firms:</div><div class="content-bullet"><span class="bullet-dot"></span><span>Accenture: A long-term partner, Accenture collaborated with Marriott on developing and implementing a new global HR hub powered by Oracle Fusion Cloud HCM. Accenture also partnered with Marriott on the "Known Traveler Digital Identity" concept with the World Economic Forum in 2018. Historically, Accenture has provided management consulting, IT projects (e.g., marriott.com website platform), and implemented Marriott's Oracle-based accounting platform. In 2013/2014, Marriott transitioned its finance and accounting (F&A) services to Accenture, leading to the formation of Accenture Hospitality Services (AHS). In 2025, Marriott International and Accenture in India launched a skill development program for youth in hospitality.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Publicis Sapient: Collaborated with Marriott on a generative AI search tool for Homes & Villas by Marriott Bonvoy.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Oracle Customer Success Services: Provides ongoing support and strategic guidance to maximize value from Marriott's Oracle Cloud HCM system.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>NiCE: Partnered with Marriott for the thoughtful staging and rollout of the CXone contact center platform across 20 global customer engagement centers.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>ANSR: The Marriott Tech Accelerator works with ANSR's full-stack Global Capability Center (GCC) platform.</span></div><div class="content-text">3. Procurement Signals</div><div class="content-text">Marriott's recent activities indicate several procurement signals:</div><div class="content-bullet"><span class="bullet-dot"></span><span>Significant Technology Investment: Marriott plans to invest between $1 billion and $1.2 billion in technology in 2024, marking its highest tech expenditure to date, with a strong focus on artificial intelligence (AI). Since 2023, the company has invested $1.8 billion in capital and technology expenditures for its digital tech transformation.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Core System Replatforming: Marriott is actively engaged in a multiyear digital and technology transformation plan to retool the company, replace systems, and develop a cloud-native innovation fabric. This includes replatforming its property management, central reservation, and loyalty systems into cloud-native environments, with rollouts across a "meaningful number of properties" planned for 2026. This signals ongoing procurement for cloud services, modern PMS, CRS, and loyalty platform solutions.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>AI-Driven Initiatives: The company has created an AI Incubator to explore over 150 AI use cases, developing initiatives like the AI-powered virtual assistant "RenAI" and a generative AI search tool for vacation rentals. Marriott is also building an "agentic mesh," a shared intelligence layer for reusable AI capabilities across operations, marketing, customer service, and revenue optimization, and piloting Microsoft 365 Copilot. This indicates a strong demand for AI platforms, tools, and potentially AI consulting services.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Data Architecture Modernization: Marriott is simplifying its data platform with Snowflake, aiming to consolidate batch and streaming data, reduce complexity, and improve data accessibility for business users, analysts, and data scientists.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>HCM Integration Modernization: The replacement of numerous point-to-point HCM data integrations with a centralized, event-driven framework using Oracle Integration Cloud and an Autonomous Transaction Processing database suggests ongoing needs for integration platform as a service (iPaaS) solutions and database optimization services.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Procurement of RFP Tools: Marriott has adopted AI to overhaul its RFP process for sales teams, focusing on faster content development and improved customer service. While Marriott uses RFPs for event bookings, this indicates a move towards internal development or vendor solutions for optimizing their internal RFP processes.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Job Postings: Recent job postings for roles like "FLEX Sr. Manager - Growth Partner Technology Management," "FLEX Sr. Systems Engineer - Observability," "FLEX Senior Software Engineer – Data and Analytics Technology," and "FLEX ServiceNow Senior Developer" highlight active projects and talent acquisition in areas of partner technology, IT infrastructure, data engineering, and IT service management.</span></div><div class="content-text">4. Competitive Dynamics</div><div class="content-text">Marriott International holds a dominant position in the global hospitality sector but faces intense competition.</div><div class="content-bullet"><span class="bullet-dot"></span><span>Top 2-3 Competitors:</span></div><div class="content-text">1.  Hilton Worldwide Holdings: Marriott's most storied rival, Hilton boasts over 7,000 properties and approximately 1.1 million rooms, second only to Marriott in global rooms. Hilton is aggressively expanding through franchise and management deals and focuses on being asset-light.</div><div class="content-text">2.  Hyatt Hotels Corporation: While smaller in scale (around 1,350 hotels compared to Marriott's 8,000+), Hyatt challenges Marriott by excelling in niches such as luxury resorts, lifestyle boutiques, and wellness offerings. Hyatt ranks higher than Marriott in CEO Score, Gender Score, and Diversity Score on Comparably.</div><div class="content-text">3.  InterContinental Hotels Group (IHG): IHG is a significant global player with approximately 925,320 rooms in over 6,227 hotels as of 2022.</div><div class="content-text">Other notable competitors include Accor, Wyndham Hotels & Resorts, and Choice Hotels International. Alternative lodging platforms like Airbnb and Vrbo are also significant disruptors, expanding the competitive landscape beyond traditional hotels.</div><div class="content-bullet"><span class="bullet-dot"></span><span>Gaining or Losing Market Share?</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Gaining/Defending Market Share: Marriott commands a dominant position as the largest hotel company worldwide by room count, operating approximately 9,500 properties and over 1.7 million rooms globally as of early 2025. It recorded a net room growth of 6.8% in 2024. Marriott's strengths include its extensive and diversified brand portfolio (36 distinct brands), global scale, asset-light model (franchising and management), and the robust Marriott Bonvoy loyalty program, which surpassed 200 million members in 2024 and drives direct bookings. Its continuous investment in technology and AI also enhances its competitive edge.</span></div><div class="content-bullet"><span class="bullet-dot"></span><span>Challenges/Intense Competition: The hospitality industry is highly competitive, with rivals constantly vying for market share through competitive pricing, service innovation, brand differentiation, and robust distribution channels. The fragmented technology landscape within the hotel industry, where Property Management Systems (PMS) ownership often rests with property owners and franchisees rather than the brand, can pose challenges for system-wide tech upgrades and AI implementation across its vast portfolio. Marriott's CEO Score ranks 3rd among its competitors, with Hyatt and Four Seasons scoring higher. Market volatility, economic downturns, geopolitical events, and health crises also pose threats to Marriott's growth trajectory. Overall, Marriott is actively working to maintain and grow its market share through strategic investments in technology, brand diversification, and loyalty programs amidst a dynamic competitive environment.</span></div></div></div>
     </div>
-  
     <div class="section" id="salesplay">
       <div class="section-hdr">⚡ Sales Play</div>
-      <div class="card">
-        <div class="card-body"><div class="content-text">SECTION 6 — SALES PLAY & CONVERSATION STARTERS</div><div class="content-text">1. RECOMMENDED PITCH ANGLE</div><div class="content-text">AI-Accelerated Transformation Play</div><div class="content-text">Marriott is in the execution phase of a massive multi-year technology transformation with over $1.1 billion committed for 2026, specifically replatforming three core systems while building an agentic mesh architecture to enable AI at scale. CTO Naveen Manga explicitly stated that 2026 is the year to move from AI experimentation to deployment at scale. With new cloud-native PMS, reservations, and loyalty platforms now in beta and rolling out to a meaningful number of hotels in 2026, Marriott needs partners who can accelerate AI integration across this new infrastructure, help operationalize the agentic mesh concept across 8,700 properties, and ensure their ambitious timeline delivers ROI while managing the complexity of a phased 18-month rollout. The CEO views AI as the opportunity to redefine customer acquisition entirely, creating urgency to get this right as competitors like IHG, Hyatt, and Accor pursue parallel strategies.</div><div class="content-text">2. CONVERSATION OPENER QUESTIONS</div><div class="content-text">Question 1: Your replatforming of property management, central reservations, and loyalty systems into cloud-native environments started beta in late August 2025 with an 18-month phased rollout planned. As you scale these new platforms across your portfolio in 2026, what are the biggest integration challenges you are facing in ensuring the agentic mesh architecture can actually deliver reusable AI capabilities across operations, marketing, and revenue optimization simultaneously?</div><div class="content-text">Question 2: Naveen mentioned building a horizontal, model-agnostic AI chassis to serve guests, associates, and owners. Given your partnerships with both OpenAI for natural language search and Google for AI Mode integration, plus your Microsoft Copilot pilots, how are you managing governance and orchestration across multiple AI vendors to maintain the trust and responsible AI standards you have committed to?</div><div class="content-text">Question 3: You have transitioned leadership across multiple regions effective March 2026, with new presidents in US-Canada, EMEA, and CALA, plus a new CFO in Jen Mason as of April 1st who comes from treasury and risk management. How is this leadership transition impacting prioritization and decision-making around the technology transformation roadmap, especially given the pressure to deliver $80-90 million in annual G&A cost savings?</div><div class="content-text">Question 4: The citizenM acquisition integration was completed in Q4 2025, and you are integrating Lefay into your global distribution network following the April 2026 partnership. How are you approaching the technology integration for these new brands into your replatformed core systems, and what lessons from citizenM are informing how you handle future conversions given that conversions now represent 40% of your openings?</div><div class="content-text">Question 5: With your FTC settlement mandating 20 years of information security program compliance including biennial third-party assessments, and your stated goal of integrating AI tools into cybersecurity defenses, how are you balancing the velocity of AI deployment across guest-facing and operational systems with the heightened security and compliance requirements your settlement demands?</div><div class="content-text">3. LANDMINES TO AVOID</div><div class="content-text">Legacy System Criticism: Do not criticize their previous technology choices or the data breaches from 2014-2020 directly. The FTC settlement and DOJ agreement are already forcing comprehensive remediation with third-party oversight for 20 years. Raising past failures will trigger defensiveness, especially with new CFO Jen Mason coming from risk management and the company under regulatory scrutiny. Focus forward on the new cloud-native architecture.</div><div class="content-text">Vendor Displacement Messaging: Marriott has made major strategic vendor commitments to Oracle for PMS and HCM, AWS for data platform and AI infrastructure, Salesforce for CRM, and Snowflare for data warehousing, with partnerships announced with Google and OpenAI. Do not position your solution as a replacement for any of these named platforms. Instead, position as an accelerator, integrator, or complementary capability that enhances their existing investments.</div><div class="content-text">Margin Pressure Insensitivity: Net profit margin dropped from 41% in Q1 2025 to 9.7% in Q1 2026 due to higher expenses and technology investments, and the company executed 833 corporate layoffs in early 2025 plus customer engagement center cuts in October 2025. Do not pitch expensive, long-timeline engagements or solutions that add operational overhead. Everything must tie directly to the stated $80-90 million G&A savings target, revenue acceleration, or measurable guest experience ROI.</div><div class="content-text">Implementation Timeline Ignorance: They are in month 9 of an 18-month rollout of core systems that started beta in August 2025, with meaningful hotel deployments happening in 2026. Do not propose solutions that require ripping out and replacing what they are actively deploying right now. Any offering must integrate with Oracle OPERA Cloud PMS, the new cloud-native reservations system, and the replatformed loyalty system, and fit within their current deployment cadence without disrupting the rollout.</div><div class="content-text">4. SUGGESTED NEXT STEP</div><div class="content-text">Request a 45-minute discovery session specifically focused on reviewing their current agentic mesh architecture design and identifying 2-3 high-impact AI use cases that could be accelerated within their existing deployment timeline for the replatformed core systems. The meeting objective is to map your capabilities against their stated goal of moving from AI experimentation to scale in 2026, and to identify where integration support, orchestration across multiple AI vendors, or specific operational AI applications could deliver measurable results within the next two quarters. Propose to bring a technical architect who has experience with Oracle Cloud, AWS, and multi-vendor AI orchestration to make the conversation immediately actionable. Position this as a no-obligation technical collaboration to help them derisk the agentic mesh deployment, not a sales meeting.</div><div class="content-text">5. BEST ENTRY POINT</div><div class="content-text">Naveen Manga, Global Chief Technology Officer</div><div class="content-text">Naveen Manga is the single best entry point. He has been in role since August 2021 and is directly accountable for the global technology strategy, innovation, and the entire digital transformation initiative. He publicly stated that 2026 is the year to scale AI after 2025 experimentation, and he owns the agentic mesh architecture concept that is central to their AI strategy. He has the technical depth to evaluate solutions credibly, the enterprise mandate to make decisions, and the budget authority given that over one-third of the $1.1 billion 2026 investment is allocated to digital and technology transformation under his purview. His background includes 10 years at Hilton, so he understands competitive dynamics and hospitality technology deeply. With the core systems replatforming now in active deployment phase and the pressure to demonstrate AI ROI in 2026, he has immediate need, active budget, and executive visibility on outcomes. Drew Pinto, Chief Revenue and Technology Officer, is a secondary contact who oversees IT alongside sales and revenue management, but Naveen owns the transformation strategy and architecture decisions. Given the March 2026 leadership restructuring and the new CFO Jen Mason starting April 1st 2026, Naveen represents continuity and deep context on the technology roadmap, making him the highest-probability entry point for any technology solution tied to their AI and cloud transformation.</div></div>
-      </div>
+      <div class="card"><div class="card-body"><div class="content-text">SECTION 6 — SALES PLAY & CONVERSATION STARTERS</div><div class="content-text">1. RECOMMENDED PITCH ANGLE</div><div class="content-text">AI-Enabled Cost Transformation</div><div class="content-text">Marriott is in the middle of a perfect storm for this pitch. They executed $80-90M in G&A cost reductions starting 2025, conducted 833 corporate layoffs in January 2025, and cut customer engagement center staff in October 2025. Simultaneously, they are investing over $350M of their $1.1B technology budget specifically in digital transformation for 2026, building an "agentic mesh" AI layer, and replatforming three core systems (PMS, CRS, loyalty) to cloud-native platforms. The timing is ideal: they need to demonstrate ROI from their massive tech investment while continuing to find cost efficiencies. Position your solution as a way to accelerate their AI transformation while delivering measurable cost takeout that justifies the broader technology spend.</div><div class="content-text">2. CONVERSATION OPENER QUESTIONS</div><div class="content-text">How is the rollout of your cloud-native PMS, CRS, and loyalty platform replatforming progressing across properties in 2026, and what integration challenges are you encountering as you transition from legacy systems while maintaining operational continuity across 9,500 properties?</div><div class="content-text">With your agentic mesh architecture in development and over 150 AI use cases in your AI Incubator, how are you prioritizing which capabilities move from pilot to production, and what governance framework are you using to ensure these AI agents can share intelligence across operations, marketing, customer service, and revenue optimization?</div><div class="content-text">Given the customer engagement center workforce reductions in October 2025 and your Microsoft Copilot pilots for call center agents, what metrics are you using to measure whether AI is successfully creating the "capacity for associates" that CEO Capuano described, while maintaining the human connection guests expect?</div><div class="content-text">Your Marriott Tech Accelerator GCC in Hyderabad launched full operations in Q1 2025. How are you balancing workload between the India GCC, your distributed global technology teams, and external partners like Accenture for your multi-year transformation initiatives?</div><div class="content-text">With Jen Mason transitioning into the CFO role as of March 31, 2026, and the stated goal of identifying cost-saving opportunities for owners and franchisees, how is the finance organization measuring technology ROI differently, and what financial guardrails exist for the $1.1B investment spending this year?</div><div class="content-text">3. LANDMINES TO AVOID</div><div class="content-text">Do not criticize or question their Oracle ecosystem choices. Marriott has deeply committed to Oracle Cloud HCM (one of the largest deployments globally), Oracle Hospitality OPERA Cloud PMS, Oracle Integration Cloud, and Oracle infrastructure. They view Oracle as strategic. Positioning against Oracle or suggesting replacement will immediately end the conversation.</div><div class="content-text">Avoid suggesting complete technology stack overhauls or implying their current transformation is misguided. They are mid-flight on a multi-year, multi-billion dollar replatforming with specific vendors already selected (Oracle, Snowflake, AWS, Azure). They need solutions that complement and accelerate this existing roadmap, not competing visions that would require starting over.</div><div class="content-text">Do not lead with broad, unproven AI promises or generic cost reduction claims. After conducting significant layoffs and announcing specific $80-90M cost reduction targets, leadership will be highly skeptical of vendors who cannot demonstrate concrete, measurable outcomes with clear implementation timelines and proven hospitality industry results.</div><div class="content-text">Never imply that their challenges stem from organizational incompetence or poor past decisions. The recent restructuring, leadership changes (CFO transition, regional realignment), and layoffs are sensitive topics. Frame everything as supporting talented teams navigating massive scale (doubled in size, 142 countries, 414,000 employees) through complex transformation.</div><div class="content-text">4. SUGGESTED NEXT STEP</div><div class="content-text">Request a 45-minute working session with technology and finance stakeholders to walk through one specific AI use case from their 150+ use case inventory that aligns with your solution capabilities. Come prepared with a hospitality industry proof point showing measurable cost reduction and operational improvement metrics. The goal is to demonstrate how your solution integrates with their existing Oracle, Snowflake, and cloud infrastructure while accelerating their agentic mesh vision and delivering quantifiable ROI that Jen Mason's finance organization can track against the $1.1B 2026 technology investment.</div><div class="content-text">5. BEST ENTRY POINT</div><div class="content-text">Naveen Manga, Global Chief Technology Officer</div><div class="content-text">Manga is the most logical entry point given his direct responsibility for Marriott's global technology strategy, innovation, and transformation initiatives. He has been in role since August 2021, giving him deep institutional knowledge while maintaining fresh perspective on the transformation needs. He owns the $1.1B technology investment budget, the AI Incubator with 150+ use cases, the agentic mesh architecture, and the core systems replatforming initiatives. The March 2026 leadership restructuring that consolidated regional operations under new leaders (Satya Anand, Neal Jones) did not impact his role, providing stability. He reports directly to CEO Anthony Capuano, ensuring executive sponsorship for strategic initiatives. While Drew Pinto (EVP and Chief Revenue and Technology Officer) oversees IT along with commercial functions, Manga's singular focus on technology strategy and his mandate to drive innovation makes him the decision-maker for new technology partnerships that support the enterprise transformation. His 20+ years of business technology leadership across industries suggests he will be receptive to solutions with proven cross-industry applications adapted for hospitality scale.</div></div></div>
     </div>
-  
 
-<!-- FOOTER -->
 <div class="report-footer">
   <div class="footer-disclaimer">This report was generated with AI assistance. Data is sourced from publicly available information including company websites, press releases, earnings calls, and news sources. AI tools can introduce errors. Cross-check any data point you intend to act on. Do not share outside ITC Infotech.</div>
   <div class="footer-meta">ITC Infotech · Account Intelligence Engine v0.1 · 28 May 2026</div>
@@ -332,19 +195,329 @@ body {
 
 <script>
 (function() {
-  const s1 = document.querySelector("#snapshot .card-body");
-  const badge = document.getElementById("ownership-badge");
-  if (!s1 || !badge) return;
-  const t = s1.innerText.toLowerCase();
-  if (t.includes("nasdaq") || t.includes("nyse") || t.includes("publicly traded") || t.includes("listed on") || t.includes("stock exchange")) {
-    badge.textContent = "📈 Public Company";
-  } else if (t.includes("private equity") || t.includes("pe-backed") || t.includes("pe backed")) {
-    badge.textContent = "💼 PE-Backed";
-  } else if (t.includes("privately held") || t.includes("private company") || t.includes("family-owned") || t.includes("not publicly traded")) {
-    badge.textContent = "🔒 Private Company";
-  } else {
-    badge.textContent = "⚠️ Verify before use";
+  var cardBodies = document.querySelectorAll('.card-body');
+  cardBodies.forEach(function(cb) {
+    var children = Array.from(cb.children);
+    
+    // Find all content-text children that look like numbered headers
+    var hasNumberedText = children.some(function(el) {
+      return el.classList.contains('content-text') && /^d+.s+[A-Z]/.test(el.textContent.trim());
+    });
+    if (!hasNumberedText) return;
+
+    // Group all children into blocks: each block starts at a numbered header
+    var blocks = [];
+    var currentBlock = null;
+    var preItems = []; // items before first numbered header
+
+    children.forEach(function(el) {
+      var text = el.textContent.trim();
+      var isNumHeader = el.classList.contains('content-text') && /^d+.s+[A-Z]/.test(text);
+      var isExistingItem = el.classList.contains('content-item');
+
+      if (isNumHeader) {
+        if (currentBlock) blocks.push(currentBlock);
+        var match = text.match(/^(d+).s+([^:(]+)/);
+        var num = match ? match[1] : '';
+        var label = match ? match[2].trim() : text;
+        currentBlock = { num: num, label: label, children: [], el: el };
+      } else if (isExistingItem) {
+        if (currentBlock) blocks.push(currentBlock);
+        currentBlock = null;
+        blocks.push({ existing: el });
+      } else {
+        if (currentBlock) {
+          currentBlock.children.push(el);
+        } else {
+          preItems.push(el);
+        }
+      }
+    });
+    if (currentBlock) blocks.push(currentBlock);
+
+    if (blocks.length === 0) return;
+
+    // Rebuild card body
+    cb.innerHTML = '';
+
+    // Add pre-items as hidden (intro text)
+    preItems.forEach(function(el) {
+      el.style.display = 'none';
+      cb.appendChild(el);
+    });
+
+    blocks.forEach(function(block) {
+      if (block.existing) {
+        cb.appendChild(block.existing);
+        return;
+      }
+      var wrapper = document.createElement('div');
+      wrapper.className = 'content-item';
+      var bodyHtml = '<div class="content-body"><div class="content-label">' + block.label + '</div>';
+      wrapper.innerHTML = '<div class="content-num">' + block.num + '</div>' + bodyHtml + '</div>';
+      var bodyEl = wrapper.querySelector('.content-body');
+      block.children.forEach(function(child) {
+        bodyEl.appendChild(child.cloneNode(true));
+      });
+      cb.appendChild(wrapper);
+    });
+  });
+})();
+
+(function() {
+  var cardBodies = document.querySelectorAll('.card-body');
+  cardBodies.forEach(function(cb) {
+    var hasItem = cb.querySelector('.content-item');
+    if (!hasItem) return;
+
+    // Repeatedly scan until no more orphans exist
+    var changed = true;
+    var safety = 0;
+    while (changed && safety < 20) {
+      changed = false;
+      safety++;
+      var children = Array.from(cb.childNodes).filter(function(n) {
+        return n.nodeType === 1; // element nodes only
+      });
+
+      for (var i = 0; i < children.length; i++) {
+        var el = children[i];
+        var isOrphan = (el.classList.contains('content-text') || el.classList.contains('content-bullet'));
+        if (!isOrphan) continue;
+
+        // Find the previous content-item sibling
+        var prevItem = null;
+        for (var j = i - 1; j >= 0; j--) {
+          if (children[j].classList.contains('content-item')) {
+            prevItem = children[j];
+            break;
+          }
+        }
+
+        if (prevItem) {
+          var body = prevItem.querySelector('.content-body');
+          if (body) {
+            body.appendChild(el);
+            changed = true;
+            break; // restart loop after DOM mutation
+          }
+        } else {
+          // No preceding content-item — just hide it
+          el.style.display = 'none';
+          changed = true;
+          break;
+        }
+      }
+    }
+  });
+})();
+
+(function() {
+  // Fix Section 6 Sales Play formatting
+  var salesplay = document.querySelector('#salesplay .card-body');
+  if (salesplay) {
+    var rawText = salesplay.innerText || '';
+    if (rawText.indexOf('RECOMMENDED PITCH ANGLE') !== -1) {
+      function extractBlock(text, startMarker, endMarkers) {
+        var start = text.indexOf(startMarker);
+        if (start === -1) return '';
+        var end = text.length;
+        for (var i = 0; i < endMarkers.length; i++) {
+          var pos = text.indexOf(endMarkers[i], start + startMarker.length);
+          if (pos !== -1 && pos < end) end = pos;
+        }
+        return text.slice(start + startMarker.length, end).trim();
+      }
+
+      var M = ['RECOMMENDED PITCH ANGLE','CONVERSATION OPENER QUESTIONS','LANDMINES TO AVOID','SUGGESTED NEXT STEP','BEST ENTRY POINT'];
+      var pitch    = extractBlock(rawText, M[0], M.slice(1));
+      var openers  = extractBlock(rawText, M[1], M.slice(2));
+      var landmine = extractBlock(rawText, M[2], M.slice(3));
+      var nextstep = extractBlock(rawText, M[3], M.slice(4));
+      var entry    = extractBlock(rawText, M[4], []);
+
+      // Pitch - first line is play type, rest is body
+      var pitchLines = pitch.split('
+').map(function(l){return l.trim();}).filter(function(l){return l.length>0;});
+      var pitchTitle = pitchLines.length > 0 ? pitchLines[0] : '';
+      var pitchBody  = pitchLines.slice(1).join(' ') || pitchTitle;
+
+      // Openers - each non-empty line is a question
+      var openerLines = openers.split('
+').map(function(l){
+        return l.trim().replace(/^Questions*d+:s*/i,'');
+      }).filter(function(l){return l.length > 20;});
+
+      // Landmines - paragraph blocks
+      var lmParas = landmine.split('
+
+').map(function(p){return p.replace(/
+/g,' ').trim();}).filter(function(p){return p.length>0;});
+      if (lmParas.length === 1) {
+        lmParas = landmine.split('
+').filter(function(l){return l.trim().length > 0;});
+      }
+
+      // Entry point - split by paragraph, skip uppercase blocks
+      var entryParas = entry.split('
+
+').map(function(p){return p.trim();}).filter(function(p){return p.length>0;});
+      // If no double newlines, try single
+      if (entryParas.length <= 1) {
+        entryParas = entry.split('
+').map(function(p){return p.trim();}).filter(function(p){return p.length>0;});
+      }
+      // Filter out paragraphs where >65% of letters are uppercase (raw artifact)
+      function isUpperCase(str) {
+        var letters = str.replace(/[^A-Za-z]/g,'');
+        if (letters.length < 10) return false;
+        var upCount = letters.split('').filter(function(c){return c===c.toUpperCase()&&c!==c.toLowerCase();}).length;
+        return (upCount / letters.length) > 0.65;
+      }
+      var entryClean = entryParas.filter(function(p){ return !isUpperCase(p); });
+      // Fallback to all paras if filter removed everything
+      if (entryClean.length === 0) entryClean = entryParas;
+      var entryName = entryClean.length > 0 ? entryClean[0] : '';
+      var entryRole = entryClean.length > 1 ? entryClean[1] : '';
+      var entryText = entryClean.slice(2).join(' ') || entryClean.slice(1).join(' ');
+
+      // Build HTML
+      var html = '';
+
+      // 1. Pitch angle
+      html += '<div class="content-item"><div class="content-num">1</div><div class="content-body">';
+      html += '<div class="content-label">Recommended Pitch Angle</div>';
+      html += '<div class="sp-pitch"><div class="sp-pitch-tag">' + pitchTitle + '</div>';
+      html += '<div class="sp-pitch-text">' + pitchBody + '</div></div>';
+      html += '</div></div>';
+
+      // 2. Openers
+      html += '<div class="content-item"><div class="content-num">2</div><div class="content-body">';
+      html += '<div class="content-label">Conversation Opener Questions</div>';
+      openerLines.forEach(function(q) {
+        html += '<div class="content-bullet"><span class="bullet-dot"></span><span>' + q + '</span></div>';
+      });
+      html += '</div></div>';
+
+      // 3. Landmines
+      html += '<div class="content-item"><div class="content-num">3</div><div class="content-body">';
+      html += '<div class="content-label">Landmines to Avoid</div>';
+      lmParas.forEach(function(lm) {
+        var parts = lm.match(/^([^:]{5,60}):s*(.*)/);
+        if (parts) {
+          html += '<div class="sp-landmine"><div class="sp-landmine-title">&#9888;&#65039; ' + parts[1] + '</div><div class="sp-landmine-text">' + parts[2] + '</div></div>';
+        } else {
+          html += '<div class="sp-landmine"><div class="sp-landmine-text">' + lm + '</div></div>';
+        }
+      });
+      html += '</div></div>';
+
+      // 4. Next step
+      html += '<div class="content-item"><div class="content-num">4</div><div class="content-body">';
+      html += '<div class="content-label">Suggested Next Step</div>';
+      html += '<div class="sp-nextstep">' + nextstep + '</div>';
+      html += '</div></div>';
+
+      // 5. Entry point
+      html += '<div class="content-item"><div class="content-num">5</div><div class="content-body">';
+      html += '<div class="content-label">Best Entry Point</div>';
+      html += '<div class="sp-entry"><div class="sp-entry-name">' + entryName + '</div>';
+      html += '<div class="sp-entry-role">' + entryRole + '</div>';
+      html += '<div class="sp-entry-text">' + entryText + '</div></div>';
+      html += '</div></div>';
+
+      salesplay.innerHTML = html;
+    }
   }
+
+  // Ownership badge
+  var s1 = document.querySelector('#snapshot .card-body');
+  var badge = document.getElementById('ownership-badge');
+  if (s1 && badge) {
+    var t = (s1.innerText || '').toLowerCase();
+    if (t.indexOf('nasdaq') !== -1 || t.indexOf('nyse') !== -1 || t.indexOf('publicly traded') !== -1) {
+      badge.textContent = 'Public Company';
+    } else if (t.indexOf('private equity') !== -1 || t.indexOf('pe-backed') !== -1) {
+      badge.textContent = 'PE-Backed';
+    } else if (t.indexOf('privately held') !== -1 || t.indexOf('private company') !== -1 || t.indexOf('family-owned') !== -1) {
+      badge.textContent = 'Private Company';
+    }
+  }
+})();
+
+(function() {
+  function runLeadershipFix() {
+    var leadership = document.querySelector('#leadership .card-body');
+    if (!leadership) return;
+    var items = leadership.querySelectorAll('.content-item');
+    items.forEach(function(item) {
+      var label = item.querySelector('.content-label');
+      if (!label || label.textContent.trim() !== 'KEY DECISION MAKERS') return;
+      var body = item.querySelector('.content-body');
+      if (!body) return;
+
+      // Collect all text lines from bullets AND content-text inside body
+      var lines = [];
+      Array.from(body.children).forEach(function(child) {
+        if (child.classList.contains('content-bullet')) {
+          var span = child.querySelector('span:last-child');
+          if (span) lines.push(span.textContent.trim());
+        } else if (child.classList.contains('content-text')) {
+          var t = child.textContent.trim();
+          if (t) lines.push(t);
+        }
+      });
+
+      if (lines.length === 0) return;
+
+      var personGroups = [];
+      var current = null;
+      lines.forEach(function(line) {
+        var isNewPerson = /^(CEO|CFO|CTO|COO|Chief|Executive Vice President|President|Global Chief)/i.test(line);
+        if (isNewPerson) {
+          if (current) personGroups.push(current);
+          var colonIdx = line.indexOf(':');
+          if (colonIdx !== -1) {
+            current = { role: line.slice(0, colonIdx).trim(), name: line.slice(colonIdx+1).trim(), tenure: '', background: '', details: [] };
+          } else {
+            current = { role: line, name: '', tenure: '', background: '', details: [] };
+          }
+        } else if (current) {
+          if (/^Tenure:/i.test(line)) {
+            current.tenure = line.replace(/^Tenure:s*/i, '');
+          } else if (/^Background:/i.test(line)) {
+            current.background = line.replace(/^Background:s*/i, '');
+          } else {
+            current.details.push(line);
+          }
+        }
+      });
+      if (current) personGroups.push(current);
+      if (personGroups.length === 0) return;
+
+      var html = '<div class="content-label" style="margin-bottom:10px;">KEY DECISION MAKERS</div>';
+      personGroups.forEach(function(p) {
+        html += '<div style="background:#F8F9FA;border-radius:8px;padding:12px 14px;margin-bottom:10px;border-left:3px solid var(--blue);">';
+        if (p.name) {
+          html += '<div style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:2px;">' + p.name.trim() + '</div>';
+        }
+        html += '<div style="font-size:11px;font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">' + p.role + '</div>';
+        if (p.tenure) {
+          html += '<div style="font-size:11px;color:var(--t3);margin-bottom:5px;">In role: ' + p.tenure + '</div>';
+        }
+        if (p.background) {
+          html += '<div style="font-size:12.5px;color:var(--t2);line-height:1.6;">' + p.background + '</div>';
+        }
+        p.details.forEach(function(d) {
+          html += '<div style="font-size:12px;color:var(--t2);margin-top:4px;padding-left:8px;border-left:2px solid var(--border);">' + d + '</div>';
+        });
+        html += '</div>';
+      });
+      body.innerHTML = html;
+    });
+  }
+  // Run after a short delay to ensure orphan fix has completed
+  setTimeout(runLeadershipFix, 50);
 })();
 </script>
 </body>
