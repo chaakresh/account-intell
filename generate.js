@@ -22,7 +22,7 @@ async function withRetry(fn, label, retries = 3, delayMs = 8000) {
     catch (err) {
       const is429 = err.message && err.message.includes("429");
       if (is429 && i < retries - 1) {
-        console.log(`⚠️  Rate limit on ${label}. Retrying in ${delayMs/1000}s...`);
+        console.log(`\n⚠️  Rate limit on ${label}. Retrying in ${delayMs/1000}s...`);
         await new Promise(r => setTimeout(r, delayMs));
       } else { throw err; }
     }
@@ -30,19 +30,33 @@ async function withRetry(fn, label, retries = 3, delayMs = 8000) {
 }
 
 // ─── Gemini research (returns text + sources) ─────────────────────────────────
-async function research(prompt, label) {
-  return withRetry(async () => {
+async function research(prompt, label, isRetryForRecitation = false) {
+  // On recitation retry, prepend instruction to paraphrase instead of quote
+  const finalPrompt = isRetryForRecitation
+    ? "IMPORTANT: Do NOT reproduce any text verbatim. Paraphrase all information in your own words.\n\n" + prompt
+    : prompt;
+
+  const attemptFn = async () => {
     const model = gemini.getGenerativeModel({
       model: "gemini-2.5-flash",
       tools: [{ googleSearch: {} }],
     });
-    const result = await model.generateContent(prompt);
+    const result = await model.generateContent(finalPrompt);
+
+    // Check for RECITATION block before calling .text()
+    const candidates = result.response.candidates || [];
+    if (candidates.length > 0) {
+      const finishReason = candidates[0].finishReason;
+      if (finishReason === "RECITATION") {
+        throw new Error("RECITATION_BLOCK");
+      }
+    }
+
     const text = result.response.text();
 
     // Extract sources from grounding metadata
     const sources = [];
     try {
-      const candidates = result.response.candidates || [];
       const meta = candidates[0]?.groundingMetadata;
       const chunks = meta?.groundingChunks || [];
       chunks.forEach(chunk => {
@@ -53,7 +67,23 @@ async function research(prompt, label) {
     } catch(e) { /* sources unavailable */ }
 
     return { text, sources };
-  }, label);
+  };
+
+  try {
+    return await withRetry(attemptFn, label);
+  } catch(err) {
+    // On RECITATION, retry once with paraphrase instruction
+    if (err.message === "RECITATION_BLOCK" && !isRetryForRecitation) {
+      console.log(`\n⚠️  RECITATION block on ${label}. Retrying with paraphrase mode...`);
+      return research(prompt, label, true);
+    }
+    // If still failing after retry, return a fallback so the run doesn't crash
+    if (err.message === "RECITATION_BLOCK") {
+      console.log(`\n⚠️  RECITATION block persisted on ${label}. Using fallback.`);
+      return { text: `Data for this section could not be retrieved (content filter). Please research ${label} manually.`, sources: [] };
+    }
+    throw err;
+  }
 }
 
 // ─── Strip markdown ───────────────────────────────────────────────────────────
