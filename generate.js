@@ -342,7 +342,7 @@ function buildHTML(company, sections, sources = []) {
   const sectionCards = sectionDefs.map(s => `
     <div class="section" id="${s.id}">
       <div class="section-hdr">${s.icon} ${s.label}</div>
-      <div class="card"><div class="card-body">${formatContent(clean(sections[s.key] || ""))}</div></div>
+      <div class="card"><div class="card-body">${formatContent(clean((sections[s.key] && sections[s.key].text) || sections[s.key] || ""))}</div></div>
     </div>`).join("");
 
   // Build collapsible sources panel
