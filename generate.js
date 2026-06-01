@@ -488,11 +488,23 @@ body {
 .footer-meta { font-size: 10px; color: var(--t3); text-align: center; font-style: italic; margin-top: 8px; }
 
 @media print {
-  .top-bar { position: relative; }
-  .sec-nav { display: none; }
-  body { padding-bottom: 0; }
-  .section { padding: 12px 10px 0; }
-  .card { break-inside: avoid; }
+  .top-bar, .pdf-banner, .sec-nav, .sources-panel { display: none !important; }
+  body { padding-bottom: 0; background: #fff; font-size: 12px; }
+  .hero { padding: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .hero-company { font-size: 20px; }
+  .section { padding: 10px 8px 0; }
+  .card { box-shadow: none; border: 1px solid #E2E5EC; break-inside: avoid; margin-bottom: 8px; }
+  /* Strip colored backgrounds for clean print */
+  .content-item { padding: 8px 10px; }
+  .sp-pitch { background: none !important; border-left: 2px solid #2E74B5; padding: 8px 10px; }
+  .sp-pitch-tag { font-weight: 700; }
+  .sp-landmine { background: none !important; border-left: 2px solid #BF8A14; padding: 6px 10px; margin-bottom: 4px; }
+  .sp-entry { background: none !important; border-left: 2px solid #059669; padding: 8px 10px; }
+  .sp-nextstep { background: none !important; border: 1px solid #E2E5EC; padding: 8px; }
+  .content-num { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .hero-badge { background: none !important; border: 1px solid rgba(255,255,255,.5); }
+  .report-footer { border-top: 1px solid #1F3864; }
+  a { text-decoration: none; color: inherit; }
 }
 
 /* Hide orphan intro text that floats outside numbered items */

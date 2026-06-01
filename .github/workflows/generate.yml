@@ -51,17 +51,44 @@ jobs:
           (async () => {
             const browser = await puppeteer.launch({ args: ['--no-sandbox','--disable-setuid-sandbox'] });
             const page = await browser.newPage();
-            await page.setViewport({ width: 390, height: 844 });
+            await page.setViewport({ width: 800, height: 1100 });
             await page.goto('file://' + htmlPath, { waitUntil: 'networkidle0' });
             await page.pdf({
               path: 'reports/' + slug + '.pdf',
               format: 'A4',
-              printBackground: true,
-              margin: { top: '10mm', bottom: '10mm', left: '8mm', right: '8mm' }
+              printBackground: false,
+              margin: { top: '12mm', bottom: '12mm', left: '10mm', right: '10mm' }
             });
             await browser.close();
             console.log('PDF generated: reports/' + slug + '.pdf');
           })();
+          "
+
+      - name: Update reports index
+        env:
+          COMPANY: ${{ github.event.inputs.company }}
+        run: |
+          node -e "
+          const fs = require('fs');
+          const company = process.env.COMPANY;
+          const slug = company.toLowerCase().replace(/[^a-z0-9]/g, '_');
+          const indexPath = 'reports/index.json';
+          let reports = [];
+          if (fs.existsSync(indexPath)) {
+            try { reports = JSON.parse(fs.readFileSync(indexPath, 'utf8')); } catch(e) {}
+          }
+          // Remove existing entry for same slug
+          reports = reports.filter(r => r.slug !== slug);
+          // Add new entry at top
+          reports.unshift({
+            company: company,
+            slug: slug,
+            generated: new Date().toISOString(),
+            htmlFile: slug + '.html',
+            pdfFile: slug + '.pdf'
+          });
+          fs.writeFileSync(indexPath, JSON.stringify(reports, null, 2));
+          console.log('Index updated:', reports.length, 'reports');
           "
 
       - name: Commit and push report
@@ -69,7 +96,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/Chaakresh/account-intell.git
-          git add reports/
+          git pull --rebase origin main
           git stash
           git pull --rebase origin main
           git stash pop
