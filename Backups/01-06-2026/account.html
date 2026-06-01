@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>ITC Infotech · Account Intelligence</title>
+<style>
+:root {
+  --navy:   #1F3864;
+  --blue:   #2E74B5;
+  --lblue:  #EBF3FB;
+  --vblue:  #9DC3E6;
+  --green:  #059669;
+  --amber:  #92600A;
+  --bg:     #F0F2F5;
+  --card:   #FFFFFF;
+  --border: #E2E5EC;
+  --t1:     #1A1F36;
+  --t2:     #4A5568;
+  --t3:     #9AA3B0;
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(0,0,0,.06), 0 2px 10px rgba(0,0,0,.05);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  background: var(--bg); color: var(--t1);
+  font-size: 14px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 80px;
+}
+.top-bar { background: var(--navy); padding: 14px 16px; box-shadow: 0 2px 12px rgba(0,0,0,.18); }
+.top-bar-row { display: flex; justify-content: space-between; align-items: flex-start; }
+.top-brand { color: #fff; font-size: 15px; font-weight: 600; }
+.top-sub   { color: var(--vblue); font-size: 10px; margin-top: 2px; }
+.top-date  { color: var(--vblue); font-size: 10px; text-align: right; }
+.hero { background: linear-gradient(135deg, var(--navy) 0%, #2E74B5 100%); padding: 24px 16px 20px; }
+.hero-label { color: var(--vblue); font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 6px; }
+.hero-title { color: #fff; font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+.hero-sub { color: var(--vblue); font-size: 12px; }
+.section { padding: 20px 14px 0; }
+.section-hdr { font-size: 11px; font-weight: 700; color: var(--navy); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 10px; }
+.card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; margin-bottom: 14px; }
+.gen-header { background: var(--navy); padding: 14px 16px; }
+.gen-header-title { color: #fff; font-size: 14px; font-weight: 600; }
+.gen-header-sub { color: var(--vblue); font-size: 11px; margin-top: 3px; }
+.gen-body { padding: 16px; }
+.gen-row { display: flex; gap: 8px; }
+.gen-input {
+  flex: 1; padding: 11px 14px;
+  border: 1.5px solid var(--border); border-radius: 8px;
+  font-size: 14px; color: var(--t1); outline: none;
+  transition: border-color .15s; background: #fff;
+}
+.gen-input:focus { border-color: var(--blue); }
+.gen-btn {
+  background: var(--blue); color: #fff; border: none;
+  border-radius: 8px; padding: 11px 20px;
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  transition: background .15s; white-space: nowrap;
+}
+.gen-btn:hover { background: var(--navy); }
+.gen-btn:disabled { background: var(--t3); cursor: not-allowed; }
+
+/* Status / confirmation boxes */
+.status { border-radius: 8px; padding: 14px; font-size: 13px; line-height: 1.6; display: none; margin-top: 12px; }
+.status.show { display: block; }
+.status-verifying { background: #F0F2F5; border: 1px solid var(--border); color: var(--t2); text-align: center; }
+.status-confirm   { background: var(--lblue); border: 1px solid #C4DCF0; color: var(--navy); }
+.status-pending   { background: #FEF9EC; border: 1px solid #F0D080; color: #78350F; }
+.status-success   { background: #ECFDF5; border: 1px solid #86EFAC; color: #166534; }
+.status-error     { background: #FEF2F2; border: 1px solid #FECACA; color: #991B1B; }
+
+.spin { display: inline-block; animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.countdown { font-size: 11px; opacity: .75; margin-top: 4px; }
+
+/* Confirm card content */
+.confirm-company { font-size: 20px; font-weight: 700; color: var(--navy); margin: 6px 0 4px; }
+.confirm-meta { font-size: 12px; color: var(--t2); margin-bottom: 14px; }
+.confirm-meta span { margin-right: 12px; }
+.confirm-actions { display: flex; gap: 8px; }
+.btn-confirm {
+  flex: 1; background: var(--blue); color: #fff; border: none;
+  border-radius: 8px; padding: 10px; font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: background .15s;
+}
+.btn-confirm:hover { background: var(--navy); }
+.btn-cancel {
+  background: #fff; color: var(--t2); border: 1.5px solid var(--border);
+  border-radius: 8px; padding: 10px 16px; font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: all .15s;
+}
+.btn-cancel:hover { border-color: var(--t2); color: var(--t1); }
+
+/* Report list */
+.report-list { padding: 0; }
+.report-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 13px 16px; border-bottom: 0.5px solid var(--border);
+  transition: background .1s;
+}
+.report-item:last-child { border-bottom: none; }
+.report-item:hover { background: var(--bg); }
+.report-num { flex-shrink: 0; width: 28px; height: 28px; background: var(--lblue); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--blue); }
+.report-info { flex: 1; min-width: 0; }
+.report-name { font-size: 14px; font-weight: 600; color: var(--navy); }
+.report-meta { font-size: 11px; color: var(--t3); margin-top: 2px; }
+.report-actions { display: flex; gap: 6px; flex-shrink: 0; }
+.report-btn { font-size: 11px; font-weight: 600; padding: 5px 11px; border-radius: 6px; text-decoration: none; transition: all .15s; }
+.report-btn-view { background: var(--lblue); color: var(--blue); }
+.report-btn-pdf  { background: #FEF3C7; color: var(--amber); }
+.report-btn-view:hover { background: var(--blue); color: #fff; }
+.report-btn-pdf:hover  { background: var(--amber); color: #fff; }
+
+.empty-state { padding: 32px 16px; text-align: center; color: var(--t3); font-size: 13px; }
+.empty-icon { font-size: 32px; margin-bottom: 8px; }
+
+.loading-state { padding: 20px 16px; text-align: center; color: var(--t3); font-size: 12px; }
+
+/* Floating home */
+.home-fab {
+  position: fixed; bottom: 20px; left: 16px; z-index: 150;
+  background: var(--navy); color: #fff; font-size: 12px; font-weight: 600;
+  padding: 11px 18px; border-radius: 24px; text-decoration: none;
+  box-shadow: 0 4px 16px rgba(0,0,0,.22); letter-spacing: .02em;
+  transition: opacity .15s, transform .15s;
+}
+.home-fab:hover { opacity: .92; transform: translateY(-2px); }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-row">
+    <div>
+      <div class="top-brand">ITC Infotech</div>
+      <div class="top-sub">Account Intelligence · Internal · Sales Only</div>
+    </div>
+    <div class="top-date" id="headerDate"></div>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-label">AI-Powered Pre-Sales Research</div>
+  <div class="hero-title">Account Intelligence</div>
+  <div class="hero-sub">Enter any company name to generate a full intelligence brief</div>
+</div>
+
+<!-- GENERATOR -->
+<div class="section">
+  <div class="section-hdr">Generate New Report</div>
+  <div class="card">
+    <div class="gen-header">
+      <div class="gen-header-title">🎯 Account Report Generator</div>
+      <div class="gen-header-sub">Web Scraping Agent · Synthesizing Agent · 2–3 minutes</div>
+    </div>
+    <div class="gen-body">
+      <div class="gen-row">
+        <input class="gen-input" id="companyInput" type="text" placeholder="e.g. Boeing, Apple, IKEA, msft" autocomplete="off" />
+        <button class="gen-btn" id="genBtn" onclick="handleGenerate()">Generate</button>
+      </div>
+
+      <!-- Verifying -->
+      <div class="status status-verifying" id="statusVerifying">
+        <span class="spin">⏳</span> Identifying company...
+      </div>
+
+      <!-- Confirmation -->
+      <div class="status status-confirm" id="statusConfirm">
+        <div style="font-size:11px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Confirm Company</div>
+        <div class="confirm-company" id="confirmName"></div>
+        <div class="confirm-meta">
+          <span id="confirmIndustry"></span>
+          <span id="confirmCountry"></span>
+          <span id="confirmTicker"></span>
+        </div>
+        <div class="confirm-actions">
+          <button class="btn-confirm" onclick="confirmAndGenerate()">✅ Yes, generate report</button>
+          <button class="btn-cancel" onclick="cancelGenerate()">Cancel</button>
+        </div>
+      </div>
+
+      <!-- Generating -->
+      <div class="status status-pending" id="statusPending">
+        <div><span class="spin">⏳</span> <strong>Generating report for <span id="pendingCompany"></span>...</strong></div>
+        <div class="countdown" id="countdown">Checking in 30s</div>
+      </div>
+
+      <!-- Success -->
+      <div class="status status-success" id="statusSuccess">
+        ✅ <strong>Report ready!</strong> &nbsp;
+        <a id="reportLink" href="#" style="color:#166534;font-weight:600;">View Report →</a>
+        &nbsp;|&nbsp;
+        <a id="pdfLink" href="#" style="color:#166534;font-weight:600;">Download PDF →</a>
+      </div>
+
+      <!-- Error -->
+      <div class="status status-error" id="statusError">
+        ❌ <strong>Error:</strong> <span id="errorMsg"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- REPORT LIST -->
+<div class="section">
+  <div class="section-hdr">Available Reports</div>
+  <div class="card">
+    <div class="report-list" id="reportList">
+      <div class="loading-state"><span class="spin">⏳</span> Loading reports...</div>
+    </div>
+  </div>
+</div>
+
+<a href="index.html" class="home-fab">← Home</a>
+
+<script>
+const GITHUB_OWNER  = 'Chaakresh';
+const GITHUB_REPO   = 'account-intell';
+const RENDER_SERVER = 'https://account-intell.onrender.com';
+const BASE_URL      = 'https://' + GITHUB_OWNER + '.github.io/' + GITHUB_REPO;
+const INDEX_URL     = BASE_URL + '/reports/index.json';
+
+let confirmedCompany = null;
+let confirmedSlug    = null;
+let countdownTimer   = null;
+
+// Date header
+document.getElementById('headerDate').textContent =
+  new Date().toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
+
+// ── Format timestamp ─────────────────────────────────────────────────
+function formatDate(iso) {
+  if (!iso) return '';
+  var d = new Date(iso);
+  return d.toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' }) +
+    ' · ' + d.toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' });
+}
+
+// ── Load report list from GitHub Pages index.json ────────────────────
+function loadReports() {
+  fetch(INDEX_URL + '?t=' + Date.now(), { cache: 'no-cache' })
+    .then(function(r) { return r.ok ? r.json() : []; })
+    .then(function(reports) { renderReports(reports); })
+    .catch(function() { renderReports([]); });
+}
+
+function renderReports(reports) {
+  var list = document.getElementById('reportList');
+  if (!reports || reports.length === 0) {
+    list.innerHTML = '<div class="empty-state"><div class="empty-icon">📂</div>No reports yet. Generate your first report above.</div>';
+    return;
+  }
+  list.innerHTML = reports.map(function(r, i) {
+    return '<div class="report-item">' +
+      '<div class="report-num">' + (i + 1) + '</div>' +
+      '<div class="report-info">' +
+        '<div class="report-name">' + r.company + '</div>' +
+        '<div class="report-meta">' + formatDate(r.generated) + '</div>' +
+      '</div>' +
+      '<div class="report-actions">' +
+        '<a class="report-btn report-btn-view" href="' + BASE_URL + '/reports/' + r.slug + '.html" target="_blank">View</a>' +
+        '<a class="report-btn report-btn-pdf"  href="' + BASE_URL + '/reports/' + r.slug + '.pdf"  target="_blank">PDF</a>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+loadReports();
+
+// ── Status helpers ───────────────────────────────────────────────────
+function hideAll() {
+  ['Verifying','Confirm','Pending','Success','Error'].forEach(function(t) {
+    document.getElementById('status' + t).classList.remove('show');
+  });
+}
+function show(type) { hideAll(); document.getElementById('status' + type).classList.add('show'); }
+
+// ── Countdown ────────────────────────────────────────────────────────
+function startCountdown(secs) {
+  if (countdownTimer) clearInterval(countdownTimer);
+  var el = document.getElementById('countdown');
+  var remaining = secs;
+  el.textContent = 'Checking in ' + remaining + 's';
+  countdownTimer = setInterval(function() {
+    remaining--;
+    if (remaining <= 0) { el.textContent = 'Checking now...'; clearInterval(countdownTimer); }
+    else { el.textContent = 'Checking in ' + remaining + 's'; }
+  }, 1000);
+}
+
+// ── Step 1: Verify company name ──────────────────────────────────────
+function handleGenerate() {
+  var raw = document.getElementById('companyInput').value.trim();
+  if (!raw) { alert('Please enter a company name.'); return; }
+
+  document.getElementById('genBtn').disabled = true;
+  show('Verifying');
+
+  fetch(RENDER_SERVER + '/canonicalize', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ company: raw })
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    confirmedCompany = data.officialName || raw;
+    confirmedSlug    = confirmedCompany.toLowerCase().replace(/[^a-z0-9]/g, '_');
+
+    document.getElementById('confirmName').textContent = confirmedCompany;
+    document.getElementById('confirmIndustry').textContent = data.industry ? '🏭 ' + data.industry : '';
+    document.getElementById('confirmCountry').textContent  = data.country  ? '🌍 ' + data.country  : '';
+    document.getElementById('confirmTicker').textContent   = data.ticker   ? '📈 ' + data.ticker   : '';
+
+    show('Confirm');
+    document.getElementById('genBtn').disabled = false;
+  })
+  .catch(function(e) {
+    // If canonicalize fails (e.g. Render cold start), fall back to raw name
+    confirmedCompany = raw;
+    confirmedSlug = raw.toLowerCase().replace(/[^a-z0-9]/g, '_');
+    document.getElementById('confirmName').textContent = confirmedCompany;
+    document.getElementById('confirmIndustry').textContent = '';
+    document.getElementById('confirmCountry').textContent  = '';
+    document.getElementById('confirmTicker').textContent   = '';
+    show('Confirm');
+    document.getElementById('genBtn').disabled = false;
+  });
+}
+
+// ── Step 2: User confirmed — trigger generate ────────────────────────
+function confirmAndGenerate() {
+  if (!confirmedCompany) return;
+  document.getElementById('pendingCompany').textContent = confirmedCompany;
+  show('Pending');
+  startCountdown(30);
+
+  fetch(RENDER_SERVER + '/generate', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ company: confirmedCompany })
+  })
+  .then(function(r) { return r.json().then(function(d) { return { ok: r.ok, data: d }; }); })
+  .then(function(r) {
+    if (!r.ok) {
+      document.getElementById('errorMsg').textContent = r.data.error || 'Server error';
+      show('Error');
+      return;
+    }
+    setTimeout(function() { pollForReport(confirmedSlug, confirmedCompany, 0); }, 30000);
+  })
+  .catch(function(e) {
+    document.getElementById('errorMsg').textContent = e.message;
+    show('Error');
+  });
+}
+
+// ── Cancel ───────────────────────────────────────────────────────────
+function cancelGenerate() {
+  confirmedCompany = null;
+  confirmedSlug    = null;
+  hideAll();
+  document.getElementById('genBtn').disabled = false;
+}
+
+// ── Poll for report completion ───────────────────────────────────────
+function pollForReport(slug, company, attempt) {
+  if (attempt > 20) {
+    document.getElementById('errorMsg').textContent = 'Timed out. Check GitHub Actions for details.';
+    show('Error');
+    return;
+  }
+  var htmlUrl = BASE_URL + '/reports/' + slug + '.html';
+  fetch(htmlUrl, { method: 'HEAD', cache: 'no-cache' })
+    .then(function(r) {
+      if (r.ok) {
+        document.getElementById('reportLink').href = htmlUrl;
+        document.getElementById('pdfLink').href    = BASE_URL + '/reports/' + slug + '.pdf';
+        show('Success');
+        loadReports(); // refresh list
+      } else {
+        startCountdown(30);
+        setTimeout(function() { pollForReport(slug, company, attempt + 1); }, 30000);
+      }
+    })
+    .catch(function() {
+      startCountdown(30);
+      setTimeout(function() { pollForReport(slug, company, attempt + 1); }, 30000);
+    });
+}
+
+// Enter key
+document.getElementById('companyInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') handleGenerate();
+});
+</script>
+</body>
+</html>
