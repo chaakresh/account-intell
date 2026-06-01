@@ -77,9 +77,7 @@ jobs:
           if (fs.existsSync(indexPath)) {
             try { reports = JSON.parse(fs.readFileSync(indexPath, 'utf8')); } catch(e) {}
           }
-          // Remove existing entry for same slug
           reports = reports.filter(r => r.slug !== slug);
-          // Add new entry at top
           reports.unshift({
             company: company,
             slug: slug,
@@ -96,7 +94,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/Chaakresh/account-intell.git
-          git pull --rebase origin main
+          git add reports/
           git stash
           git pull --rebase origin main
           git stash pop
