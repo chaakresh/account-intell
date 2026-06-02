@@ -119,8 +119,10 @@ function prompts(c) {
 
     s3: `You are a senior sales researcher. Research "${c}" leadership. No intro sentence. Start directly with data.
 
-1. KEY DECISION MAKERS: CEO, CFO, CTO/CDO, COO — full name, tenure, brief background (2 lines max each).
-2. RECENT LEADERSHIP CHANGES: C-suite or VP changes in last 12 months. Flag as timing signals.
+CRITICAL INSTRUCTION: For every executive you list, you MUST verify they are STILL in their current role as of today. Search specifically for "${c} executive departure OR left OR resigned OR stepped down 2024 2025 2026" before listing anyone. If you find evidence someone has departed, DO NOT list them as current — instead note their departure explicitly. If you cannot confirm someone is still in role from a recent source, say so clearly.
+
+1. KEY DECISION MAKERS: CEO, CFO, CTO/CDO/CIO, COO — full name, start date, brief background (2 lines max). Only list people CONFIRMED still in role.
+2. RECENT LEADERSHIP CHANGES: C-suite or VP changes in last 18 months including DEPARTURES. Who left, when, where did they go? Flag all as timing signals.
 3. ORG STRUCTURE SIGNALS: Technology centralized globally or federated by region/BU?
 4. BOARD COMPOSITION: Key board members, PE representation, notable strategic investors.`,
 
@@ -254,6 +256,27 @@ Return only the specific data found. Be concise. 3-5 lines max.`;
 
   const result = await research(prompt, label);
   return result;
+}
+
+// ─── Leadership departure verification (Gemini with Search) ──────────────────
+async function verifyLeadershipDepartures(company, s3text) {
+  const prompt = `You are verifying current executive status for a sales intelligence brief on "${company}".
+
+Do TWO targeted searches:
+1. "${company} executive departed left resigned stepped down 2024 2025 2026"
+2. "${company} new CEO CFO CIO COO appointed 2025 2026"
+
+Current leadership in our research:
+${s3text.slice(0, 1200)}
+
+Return:
+- CONFIRMED DEPARTED: Name, role, departure date, where they went (if known)
+- UNCONFIRMED STILL IN ROLE: Name and role where you could not find recent confirmation (within 6 months) they are still there
+- CONFIRMED STILL IN ROLE: Name and role with the source/date that confirms it
+
+Be specific. Only report what recent sources confirm. If no departures found, say so explicitly.`;
+
+  return research(prompt, "Leadership Verification");
 }
 
 // ─── GPT-4o confidence audit ─────────────────────────────────────────────────
@@ -395,6 +418,19 @@ function formatContent(text) {
     // Bullet items
     if (/^[*•\-]\s+/.test(trimmed)) {
       html += `<div class="content-bullet"><span class="bullet-dot"></span><span>${injectConfidenceBadges(trimmed.replace(/^[*•\-]\s+/, ""))}</span></div>`;
+      i++; continue;
+    }
+    // [DEPARTED] blocks — red, executive no longer in role
+    if (trimmed.startsWith("[DEPARTED")) {
+      const bracketEnd = trimmed.indexOf("]");
+      const content = bracketEnd !== -1 ? trimmed.slice(bracketEnd + 1).trim() : trimmed.slice(9).trim();
+      html += `<div class="departed-block"><span class="departed-tag">⚠ Departed</span><div class="departed-content">${content}</div></div>`;
+      i++; continue;
+    }
+    // [LEADERSHIP VERIFICATION] blocks — blue, verification check result
+    if (trimmed.startsWith("[LEADERSHIP VERIFICATION]")) {
+      const content = trimmed.slice(25).trim();
+      html += `<div class="verify-block"><span class="verify-tag">✓ Leadership Verified</span><div class="verify-content">${content}</div></div>`;
       i++; continue;
     }
     // [GAP FILL] blocks — amber badge with optional qualifier note
@@ -619,6 +655,8 @@ body {
   .src-strip { border-top: 1px solid #E2E5EC; background: none; }
   .src-strip-link { border: 1px solid #E2E5EC; background: none; }
   .gap-fill-block { background: none !important; border-left: 2px solid #F59E0B; }
+  .departed-block { background: none !important; border-left: 2px solid #EF4444; }
+  .verify-block { background: none !important; border-left: 2px solid #3B82F6; }
   .conf-panel { display: none !important; }
   .cf-badge { border: 1px solid #999; background: none !important; color: #555; }
   body { padding-bottom: 0; background: #fff; font-size: 12px; }
@@ -677,6 +715,14 @@ body {
 .gap-fill-tag { display: inline-block; background: #F59E0B; color: #fff; border-radius: 3px; font-size: 9px; font-weight: 700; padding: 1px 5px; letter-spacing: .06em; text-transform: uppercase; margin-right: 6px; vertical-align: middle; }
 .gap-fill-note { font-size: 11px; color: #92600A; font-style: italic; margin-top: 3px; }
 .gap-fill-content { font-size: 12.5px; color: #78350F; line-height: 1.65; margin-top: 4px; }
+
+/* Leadership verification blocks */
+.departed-block { background: #FEF2F2; border-left: 3px solid #EF4444; padding: 8px 12px; border-radius: 0 6px 6px 0; margin: 6px 0; }
+.departed-tag { display: inline-block; background: #EF4444; color: #fff; border-radius: 3px; font-size: 9px; font-weight: 700; padding: 1px 5px; letter-spacing: .06em; text-transform: uppercase; margin-right: 6px; vertical-align: middle; }
+.departed-content { font-size: 12.5px; color: #991B1B; line-height: 1.65; margin-top: 4px; }
+.verify-block { background: #EFF6FF; border-left: 3px solid #3B82F6; padding: 8px 12px; border-radius: 0 6px 6px 0; margin: 6px 0; }
+.verify-tag { display: inline-block; background: #3B82F6; color: #fff; border-radius: 3px; font-size: 9px; font-weight: 700; padding: 1px 5px; letter-spacing: .06em; text-transform: uppercase; margin-right: 6px; vertical-align: middle; }
+.verify-content { font-size: 12.5px; color: #1E40AF; line-height: 1.65; margin-top: 4px; }
 
 /* Inline confidence badges */
 .cf-badge { display: inline-block; font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 3px; letter-spacing: .05em; text-transform: uppercase; vertical-align: middle; margin-left: 3px; cursor: default; white-space: nowrap; }
@@ -1118,6 +1164,19 @@ async function main() {
   sections.s6 = { text: s6text, sources: [] };
   console.log(` ✅`);
 
+  // ── Step 4.5: Leadership departure verification ──────────────────────────────
+  process.stdout.write(`🔍 [Web Scraping Agent] Verifying leadership departures...`);
+  try {
+    const verif = await verifyLeadershipDepartures(company, sections.s3.text);
+    sections.s3.text += `\n\n[LEADERSHIP VERIFICATION] ${verif.text.slice(0, 1200)}`;
+    if (verif.sources.length) {
+      allSources.push(...verif.sources.map(s => ({ ...s, section: "Leadership & Org" })));
+    }
+    console.log(` ✅`);
+  } catch(e) {
+    console.log(` ⚠️  Skipped: ${e.message.slice(0, 50)}`);
+  }
+
   // ── Step 5: GPT-4o confidence audit ─────────────────────────────────────────
   let confidenceFlags = [];
   if (process.env.OPENAI_API_KEY) {
@@ -1128,12 +1187,39 @@ async function main() {
       for (const flag of confidenceFlags) {
         const sec = sections[flag.section];
         if (!sec || !sec.text || !flag.quote) continue;
-        const idx = sec.text.indexOf(flag.quote);
+        const marker = ` [[CF:${flag.type}:${flag.note}]]`;
+
+        // Try 1: exact match
+        let idx = sec.text.indexOf(flag.quote);
         if (idx !== -1) {
-          sec.text = sec.text.slice(0, idx + flag.quote.length)
-            + ` [[CF:${flag.type}:${flag.note}]]`
-            + sec.text.slice(idx + flag.quote.length);
-          matched++;
+          sec.text = sec.text.slice(0, idx + flag.quote.length) + marker + sec.text.slice(idx + flag.quote.length);
+          matched++; continue;
+        }
+
+        // Try 2: normalise whitespace (handles line-break differences)
+        const normText = sec.text.replace(/\s+/g, " ");
+        const normQuote = flag.quote.replace(/\s+/g, " ").trim();
+        const normIdx = normText.indexOf(normQuote);
+        if (normIdx !== -1) {
+          // Find the same position in original text using first 6 words
+          const anchor = normQuote.split(" ").slice(0, 6).join(" ");
+          const anchorIdx = sec.text.indexOf(anchor);
+          if (anchorIdx !== -1) {
+            const insertAt = anchorIdx + anchor.length;
+            sec.text = sec.text.slice(0, insertAt) + marker + sec.text.slice(insertAt);
+            matched++; continue;
+          }
+        }
+
+        // Try 3: first 5 words of quote as anchor
+        const shortAnchor = flag.quote.trim().split(/\s+/).slice(0, 5).join(" ");
+        if (shortAnchor.length > 15) {
+          const shortIdx = sec.text.indexOf(shortAnchor);
+          if (shortIdx !== -1) {
+            const insertAt = shortIdx + shortAnchor.length;
+            sec.text = sec.text.slice(0, insertAt) + marker + sec.text.slice(insertAt);
+            matched++;
+          }
         }
       }
       console.log(` ✅ (${confidenceFlags.length} flagged, ${matched} matched in text)`);
