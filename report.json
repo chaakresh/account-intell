@@ -1,0 +1,31 @@
+{
+  "generated_at": "2026-06-02T11:50:08+05:30",
+  "generated_date": "2 June 2026",
+  "top_signals": [],
+  "sections": {
+    "macro": {
+      "title": "Macro & IT Services",
+      "signals": []
+    },
+    "competitive": {
+      "title": "Competitive Intelligence",
+      "signals": []
+    },
+    "market_structure": {
+      "title": "Market Structure Shifts",
+      "signals": []
+    },
+    "client_verticals": {
+      "title": "Client Verticals",
+      "signals": []
+    },
+    "partner_ecosystem": {
+      "title": "Partner & Ecosystem",
+      "signals": []
+    }
+  },
+  "regulatory": {
+    "last_updated": "2 June 2026",
+    "items": []
+  }
+}
