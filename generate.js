@@ -317,6 +317,14 @@ function formatContent(text) {
       html += `<div class="content-bullet"><span class="bullet-dot"></span><span>${trimmed.replace(/^[*•\-]\s+/, "")}</span></div>`;
       i++; continue;
     }
+    // [GAP FILL] blocks — amber badge with optional qualifier note
+    if (trimmed.startsWith("[GAP FILL")) {
+      const bracketEnd = trimmed.indexOf("]");
+      const inner = bracketEnd > 9 ? trimmed.slice(10, bracketEnd).replace(/^[\s—–-]+/, "").trim() : "";
+      const content = bracketEnd !== -1 ? trimmed.slice(bracketEnd + 1).trim() : trimmed.slice(9).trim();
+      html += `<div class="gap-fill-block"><span class="gap-fill-tag">Gap Fill</span>${inner ? `<div class="gap-fill-note">${inner}</div>` : ""}<div class="gap-fill-content">${content}</div></div>`;
+      i++; continue;
+    }
     // Regular text
     html += `<div class="content-text">${trimmed}</div>`;
     i++;
@@ -339,11 +347,27 @@ function buildHTML(company, sections, sources = []) {
   ];
 
   const navPills = sectionDefs.map(s => `<a href="#${s.id}">${s.icon} ${s.label}</a>`).join("");
-  const sectionCards = sectionDefs.map(s => `
+
+  // Group sources by section label for per-card source strips
+  const sourcesBySection = {};
+  sources.forEach(s => {
+    const label = s.section ? s.section.replace(" (gap fill)", "") : "General";
+    if (!sourcesBySection[label]) sourcesBySection[label] = [];
+    sourcesBySection[label].push(s);
+  });
+
+  const sectionCards = sectionDefs.map(s => {
+    const cardContent = formatContent(clean((sections[s.key] && sections[s.key].text) || sections[s.key] || ""));
+    const sectionSrcs = sourcesBySection[s.label] || [];
+    const srcStrip = sectionSrcs.length > 0
+      ? `<div class="src-strip"><div class="src-strip-label">📎 Sources (${sectionSrcs.length})</div><div class="src-strip-links">${sectionSrcs.map(src => `<a class="src-strip-link" href="${src.url}" target="_blank" rel="noopener" title="${src.title}">${src.title}</a>`).join("")}</div></div>`
+      : "";
+    return `
     <div class="section" id="${s.id}">
       <div class="section-hdr">${s.icon} ${s.label}</div>
-      <div class="card"><div class="card-body">${formatContent(clean((sections[s.key] && sections[s.key].text) || sections[s.key] || ""))}</div></div>
-    </div>`).join("");
+      <div class="card"><div class="card-body">${cardContent}</div>${srcStrip}</div>
+    </div>`;
+  }).join("");
 
   // Build collapsible sources panel
   let sourcesPanel = "";
@@ -489,6 +513,9 @@ body {
 
 @media print {
   .top-bar, .pdf-banner, .sec-nav, .sources-panel { display: none !important; }
+  .src-strip { border-top: 1px solid #E2E5EC; background: none; }
+  .src-strip-link { border: 1px solid #E2E5EC; background: none; }
+  .gap-fill-block { background: none !important; border-left: 2px solid #F59E0B; }
   body { padding-bottom: 0; background: #fff; font-size: 12px; }
   .hero { padding: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .hero-company { font-size: 20px; }
@@ -532,6 +559,19 @@ body {
 .src-link { display: block; font-size: 11px; color: var(--t2); text-decoration: none; padding: 4px 0; border-bottom: 0.5px solid var(--border); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .src-link:last-child { border-bottom: none; }
 .src-link:hover { color: var(--blue); }
+
+/* Section source strip */
+.src-strip { padding: 8px 14px 10px; border-top: 0.5px solid var(--border); background: #FAFBFC; }
+.src-strip-label { font-size: 9px; font-weight: 700; color: var(--t3); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 5px; }
+.src-strip-links { display: flex; flex-wrap: wrap; gap: 5px; }
+.src-strip-link { font-size: 10px; color: var(--blue); text-decoration: none; background: var(--lblue); padding: 2px 8px; border-radius: 10px; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: inline-block; border: 1px solid #C4DCF0; }
+.src-strip-link:hover { background: #D6EAF8; }
+
+/* Gap fill badge */
+.gap-fill-block { background: #FFFBEB; border-left: 3px solid #F59E0B; padding: 8px 12px; border-radius: 0 6px 6px 0; margin: 6px 0; }
+.gap-fill-tag { display: inline-block; background: #F59E0B; color: #fff; border-radius: 3px; font-size: 9px; font-weight: 700; padding: 1px 5px; letter-spacing: .06em; text-transform: uppercase; margin-right: 6px; vertical-align: middle; }
+.gap-fill-note { font-size: 11px; color: #92600A; font-style: italic; margin-top: 3px; }
+.gap-fill-content { font-size: 12.5px; color: #78350F; line-height: 1.65; margin-top: 4px; }
 </style>
 </head>
 <body>
@@ -908,6 +948,7 @@ async function main() {
     { key: "s4", label: "Buying Signals" },
     { key: "s5", label: "Competitive & Vendors" },
   ];
+  const sectionLabelMap = Object.fromEntries(sectionList.map(s => [s.key, s.label]));
 
   for (const { key, label } of sectionList) {
     process.stdout.write(`⏳ [Web Scraping Agent] ${label}...`);
@@ -934,7 +975,7 @@ async function main() {
       if (fillResult.sources.length) {
         allSources.push(...fillResult.sources.map(s => ({
           ...s,
-          section: gap.section + " (gap fill)"
+          section: (sectionLabelMap[gap.section] || gap.section) + " (gap fill)"
         })));
       }
       console.log(` ✅`);
