@@ -1,0 +1,14 @@
+# Environment variables — NEVER commit
+.env
+.env.local
+.env.*.local
+
+# Runtime cache files (daily brief pipeline)
+research_cache.json
+
+# Node modules
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
