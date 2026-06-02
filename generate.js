@@ -177,6 +177,41 @@ function claudeCall(prompt, maxTokens = 2000) {
   });
 }
 
+// ─── OpenAI GPT-4o API call (confidence audit) ───────────────────────────────
+function gptCall(prompt, maxTokens = 2000) {
+  return new Promise((resolve, reject) => {
+    const body = JSON.stringify({
+      model: "gpt-4o",
+      max_tokens: maxTokens,
+      messages: [{ role: "user", content: prompt }],
+      response_format: { type: "json_object" },
+    });
+    const req = https.request({
+      hostname: "api.openai.com",
+      path: "/v1/chat/completions",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
+        "Content-Length": Buffer.byteLength(body),
+      },
+    }, res => {
+      let data = "";
+      res.on("data", c => { data += c; });
+      res.on("end", () => {
+        try {
+          const parsed = JSON.parse(data);
+          if (parsed.error) reject(new Error(parsed.error.message));
+          else resolve(parsed.choices[0].message.content);
+        } catch(e) { reject(new Error("GPT parse error: " + data.slice(0, 200))); }
+      });
+    });
+    req.on("error", reject);
+    req.write(body);
+    req.end();
+  });
+}
+
 // ─── Claude gap checker ───────────────────────────────────────────────────────
 async function checkGaps(c, sections) {
   const sectionSummary = Object.entries(sections).map(([k, v]) =>
@@ -221,6 +256,42 @@ Return only the specific data found. Be concise. 3-5 lines max.`;
   return result;
 }
 
+// ─── GPT-4o confidence audit ─────────────────────────────────────────────────
+async function auditConfidence(company, sections) {
+  const auditSections = ["s1", "s2", "s3", "s4", "s5"];
+  const labelMap = { s1: "Company Snapshot", s2: "Strategic Direction", s3: "Leadership & Org", s4: "Buying Signals", s5: "Competitive & Vendors" };
+
+  const sectionBlocks = auditSections
+    .filter(k => sections[k] && sections[k].text)
+    .map(k => `--- ${k.toUpperCase()} (${labelMap[k]}) ---\n${sections[k].text.slice(0, 1800)}`)
+    .join("\n\n");
+
+  const prompt = `You are a senior fact-checker reviewing a B2B sales intelligence brief for ${company}.
+
+Identify specific claims that leadership should treat with caution. Flag claims that are:
+- UNVERIFIED: stated as fact but no reliable public source is likely to exist, or the claim is speculative
+- INFERRED: derived from indirect evidence only (job postings, LinkedIn, contextual clues) — not directly stated by the company
+- ASSUMED: working assumption with no evidence cited
+- OUTDATED: data likely stale (more than 18 months old and the situation may have changed)
+
+Return ONLY valid JSON in this exact format:
+{"flags": [{"section": "s1", "quote": "exact verbatim phrase", "type": "unverified", "note": "reason in 8 words max"}, ...]}
+
+Rules:
+- "quote" must be VERBATIM text copied exactly from the sections below — 8 to 20 words, unique enough to locate
+- Maximum 12 flags total. Be selective — only flag claims that genuinely matter for a sales conversation
+- Do NOT flag: obvious public facts, known M&A events with press records, company names, widely reported financials
+- PRIORITISE flagging: executive backgrounds/tenures not in press releases, financial figures with no cited source, tech stack claims from job postings only, org structure speculation, headcount estimates without source
+- If confident data is sufficient, return fewer flags. Return {"flags": []} if nothing needs flagging
+
+SECTIONS:
+${sectionBlocks}`;
+
+  const raw = await gptCall(prompt, 2000);
+  const parsed = JSON.parse(raw);
+  return Array.isArray(parsed.flags) ? parsed.flags : [];
+}
+
 // ─── Claude synthesis ─────────────────────────────────────────────────────────
 async function synthesize(c, sections) {
   const context = Object.entries(sections).map(([k,v]) =>
@@ -258,6 +329,15 @@ function parseTable(lines) {
   });
   html += `</table></div>`;
   return html;
+}
+
+// ─── Inject inline confidence badges ─────────────────────────────────────────
+function injectConfidenceBadges(text) {
+  return text.replace(/\[\[CF:(\w+):([^\]]*)\]\]/g, (_, type, note) => {
+    const labels = { inferred: "Inferred", unverified: "Unverified", assumed: "Assumed", outdated: "Outdated" };
+    const safeNote = note.replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+    return `<span class="cf-badge cf-${type}" title="${safeNote}">${labels[type] || type}</span>`;
+  });
 }
 
 // ─── Format section content to HTML ──────────────────────────────────────────
@@ -302,10 +382,10 @@ function formatContent(text) {
           while (j < bodyLines.length && bodyLines[j].startsWith("|")) { tbl.push(bodyLines[j]); j++; }
           bodyHtml += parseTable(tbl);
         } else if (/^[*•\-]\s+/.test(bl)) {
-          bodyHtml += `<div class="content-bullet"><span class="bullet-dot"></span><span>${bl.replace(/^[*•\-]\s+/, "")}</span></div>`;
+          bodyHtml += `<div class="content-bullet"><span class="bullet-dot"></span><span>${injectConfidenceBadges(bl.replace(/^[*•\-]\s+/, ""))}</span></div>`;
           j++;
         } else {
-          bodyHtml += `<div class="content-text">${bl}</div>`;
+          bodyHtml += `<div class="content-text">${injectConfidenceBadges(bl)}</div>`;
           j++;
         }
       }
@@ -314,7 +394,7 @@ function formatContent(text) {
     }
     // Bullet items
     if (/^[*•\-]\s+/.test(trimmed)) {
-      html += `<div class="content-bullet"><span class="bullet-dot"></span><span>${trimmed.replace(/^[*•\-]\s+/, "")}</span></div>`;
+      html += `<div class="content-bullet"><span class="bullet-dot"></span><span>${injectConfidenceBadges(trimmed.replace(/^[*•\-]\s+/, ""))}</span></div>`;
       i++; continue;
     }
     // [GAP FILL] blocks — amber badge with optional qualifier note
@@ -326,14 +406,37 @@ function formatContent(text) {
       i++; continue;
     }
     // Regular text
-    html += `<div class="content-text">${trimmed}</div>`;
+    html += `<div class="content-text">${injectConfidenceBadges(trimmed)}</div>`;
     i++;
   }
   return html;
 }
 
+// ─── Build confidence notes panel ────────────────────────────────────────────
+function buildConfPanel(flags) {
+  if (!flags || flags.length === 0) return "";
+  const sectionLabels = { s1: "Company Snapshot", s2: "Strategic Direction", s3: "Leadership & Org", s4: "Buying Signals", s5: "Competitive & Vendors" };
+  const typeLabels = { inferred: "Inferred", unverified: "Unverified", assumed: "Assumed", outdated: "Outdated" };
+  const items = flags.map(f => `
+    <div class="conf-item">
+      <div class="conf-item-left"><span class="cf-badge cf-${f.type}">${typeLabels[f.type] || f.type}</span></div>
+      <div class="conf-item-right">
+        <div class="conf-item-section">${sectionLabels[f.section] || f.section}</div>
+        <div class="conf-item-quote">"${f.quote}"</div>
+        <div class="conf-item-note">${f.note}</div>
+      </div>
+    </div>`).join("");
+  return `
+<div class="conf-panel">
+  <button class="conf-toggle" onclick="this.parentElement.classList.toggle('open')">
+    ⚠️ Confidence Notes — ${flags.length} item${flags.length !== 1 ? "s" : ""} flagged for leadership review <span class="conf-chevron">▼</span>
+  </button>
+  <div class="conf-body">${items}</div>
+</div>`;
+}
+
 // ─── Build HTML report ────────────────────────────────────────────────────────
-function buildHTML(company, sections, sources = []) {
+function buildHTML(company, sections, sources = [], confidenceFlags = []) {
   const generated = new Date().toLocaleDateString("en-GB", { day:"numeric", month:"long", year:"numeric" });
   const slug = company.toLowerCase().replace(/[^a-z0-9]/g, "_");
 
@@ -516,6 +619,8 @@ body {
   .src-strip { border-top: 1px solid #E2E5EC; background: none; }
   .src-strip-link { border: 1px solid #E2E5EC; background: none; }
   .gap-fill-block { background: none !important; border-left: 2px solid #F59E0B; }
+  .conf-panel { display: none !important; }
+  .cf-badge { border: 1px solid #999; background: none !important; color: #555; }
   body { padding-bottom: 0; background: #fff; font-size: 12px; }
   .hero { padding: 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .hero-company { font-size: 20px; }
@@ -572,6 +677,28 @@ body {
 .gap-fill-tag { display: inline-block; background: #F59E0B; color: #fff; border-radius: 3px; font-size: 9px; font-weight: 700; padding: 1px 5px; letter-spacing: .06em; text-transform: uppercase; margin-right: 6px; vertical-align: middle; }
 .gap-fill-note { font-size: 11px; color: #92600A; font-style: italic; margin-top: 3px; }
 .gap-fill-content { font-size: 12.5px; color: #78350F; line-height: 1.65; margin-top: 4px; }
+
+/* Inline confidence badges */
+.cf-badge { display: inline-block; font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 3px; letter-spacing: .05em; text-transform: uppercase; vertical-align: middle; margin-left: 3px; cursor: default; white-space: nowrap; }
+.cf-inferred   { background: #FEF3C7; color: #92600A; border: 1px solid #F59E0B; }
+.cf-unverified { background: #FEE2E2; color: #991B1B; border: 1px solid #F87171; }
+.cf-assumed    { background: #F3F4F6; color: #374151; border: 1px solid #9CA3AF; }
+.cf-outdated   { background: #EFF6FF; color: #1E40AF; border: 1px solid #93C5FD; }
+
+/* Confidence notes panel */
+.conf-panel { margin: 0 14px 16px; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.conf-toggle { width: 100%; background: #7C3AED; color: #fff; border: none; padding: 12px 16px; font-size: 12px; font-weight: 600; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+.conf-chevron { transition: transform .2s; }
+.conf-panel.open .conf-chevron { transform: rotate(180deg); }
+.conf-body { display: none; background: var(--card); }
+.conf-panel.open .conf-body { display: block; }
+.conf-item { display: flex; gap: 10px; padding: 10px 14px; border-bottom: 0.5px solid var(--border); align-items: flex-start; }
+.conf-item:last-child { border-bottom: none; }
+.conf-item-left { flex-shrink: 0; padding-top: 2px; }
+.conf-item-right { flex: 1; min-width: 0; }
+.conf-item-section { font-size: 9px; font-weight: 700; color: var(--t3); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 3px; }
+.conf-item-quote { font-size: 12px; color: var(--t2); font-style: italic; line-height: 1.5; margin-bottom: 3px; }
+.conf-item-note { font-size: 11px; color: var(--t3); }
 </style>
 </head>
 <body>
@@ -607,6 +734,9 @@ ${sectionCards}
   <div class="footer-disclaimer">This report was generated with AI assistance. Data is sourced from publicly available information including company websites, press releases, earnings calls, and news sources. AI tools can introduce errors. Cross-check any data point you intend to act on. Do not share outside ITC Infotech.</div>
   <div class="footer-meta">ITC Infotech · Account Intelligence Engine v0.1 · ${generated}</div>
 </div>
+
+<!-- CONFIDENCE NOTES PANEL -->
+${buildConfPanel(confidenceFlags)}
 
 <!-- SOURCES PANEL -->
 ${sourcesPanel}
@@ -988,7 +1118,33 @@ async function main() {
   sections.s6 = { text: s6text, sources: [] };
   console.log(` ✅`);
 
-  // ── Step 5: Deduplicate sources ──────────────────────────────────────────────
+  // ── Step 5: GPT-4o confidence audit ─────────────────────────────────────────
+  let confidenceFlags = [];
+  if (process.env.OPENAI_API_KEY) {
+    process.stdout.write(`🔍 [Audit Agent] Confidence check (GPT-4o)...`);
+    try {
+      confidenceFlags = await auditConfidence(company, sections);
+      let matched = 0;
+      for (const flag of confidenceFlags) {
+        const sec = sections[flag.section];
+        if (!sec || !sec.text || !flag.quote) continue;
+        const idx = sec.text.indexOf(flag.quote);
+        if (idx !== -1) {
+          sec.text = sec.text.slice(0, idx + flag.quote.length)
+            + ` [[CF:${flag.type}:${flag.note}]]`
+            + sec.text.slice(idx + flag.quote.length);
+          matched++;
+        }
+      }
+      console.log(` ✅ (${confidenceFlags.length} flagged, ${matched} matched in text)`);
+    } catch(e) {
+      console.log(` ⚠️  Audit skipped: ${e.message.slice(0, 60)}`);
+    }
+  } else {
+    console.log(`ℹ️  OPENAI_API_KEY not set — confidence audit skipped`);
+  }
+
+  // ── Step 6: Deduplicate sources ──────────────────────────────────────────────
   const seen = new Set();
   const uniqueSources = allSources.filter(s => {
     if (seen.has(s.url)) return false;
@@ -996,8 +1152,8 @@ async function main() {
     return true;
   });
 
-  // ── Step 6: Build HTML ───────────────────────────────────────────────────────
-  const html = buildHTML(company, sections, uniqueSources);
+  // ── Step 7: Build HTML ───────────────────────────────────────────────────────
+  const html = buildHTML(company, sections, uniqueSources, confidenceFlags);
   if (!fs.existsSync("reports")) fs.mkdirSync("reports");
   const outPath = path.join("reports", `${slug}.html`);
   fs.writeFileSync(outPath, html);
