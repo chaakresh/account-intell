@@ -379,10 +379,10 @@ function formatContent(text) {
       html += parseTable(tableLines);
       continue;
     }
-    // Numbered section header — flexible pattern catches "(Last 6 months...)" variants
-    const numMatch = trimmed.match(/^(\d+)\.\s+([A-Z][A-Z\s&\/()]+?)(?::|\s*\()/);
+    // Numbered section header — case-insensitive so mixed-case Gemini output still matches
+    const numMatch = trimmed.match(/^(\d+)\.\s+([A-Za-z][A-Za-z\s&\/(),-]+?)(?::|\s*\()/);
     if (numMatch) {
-      const label = numMatch[2].trim();
+      const label = numMatch[2].trim().toUpperCase();
       let bodyLines = [];
       // Capture rest of same line after colon if present
       const colonIdx = trimmed.indexOf(":", numMatch[0].length - 1);
@@ -795,7 +795,7 @@ ${sourcesPanel}
     
     // Find all content-text children that look like numbered headers
     var hasNumberedText = children.some(function(el) {
-      return el.classList.contains('content-text') && /^\d+\.\s+[A-Z]/.test(el.textContent.trim());
+      return el.classList.contains('content-text') && /^\d+\.\s+[A-Za-z]/.test(el.textContent.trim());
     });
     if (!hasNumberedText) return;
 
@@ -806,14 +806,14 @@ ${sourcesPanel}
 
     children.forEach(function(el) {
       var text = el.textContent.trim();
-      var isNumHeader = el.classList.contains('content-text') && /^\d+\.\s+[A-Z]/.test(text);
+      var isNumHeader = el.classList.contains('content-text') && /^\d+\.\s+[A-Za-z]/.test(text);
       var isExistingItem = el.classList.contains('content-item');
 
       if (isNumHeader) {
         if (currentBlock) blocks.push(currentBlock);
         var match = text.match(/^(\d+)\.\s+([^:(]+)/);
         var num = match ? match[1] : '';
-        var label = match ? match[2].trim() : text;
+        var label = match ? match[2].trim().toUpperCase() : text.toUpperCase();
         currentBlock = { num: num, label: label, children: [], el: el };
       } else if (isExistingItem) {
         if (currentBlock) blocks.push(currentBlock);
