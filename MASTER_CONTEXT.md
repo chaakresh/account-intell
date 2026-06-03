@@ -1,6 +1,7 @@
 # ITC Infotech Intelligence Portal — Master Context
 **File:** MASTER_CONTEXT.md
 **Created:** June 2026
+**Last Updated:** 3 June 2026
 **Purpose:** Context continuity for Claude Code and all future sessions on the account-intell project.
 
 ---
@@ -45,7 +46,8 @@ report.json         → Daily brief data (updated by GitHub Actions daily)
 ### APIs
 - **Gemini 2.5 Flash** (`@google/generative-ai`) — web scraping with Google Search grounding
 - **Claude Sonnet** (`claude-sonnet-4-5` via HTTPS) — synthesis, gap checking, reasoning
-- **OpenAI GPT-4o-mini** (via HTTPS) — company name canonicalization only
+- **OpenAI GPT-4o** (via HTTPS) — confidence audit (fact-checking, low-confidence flagging)
+- **OpenAI GPT-4o-mini** (via HTTPS) — company name canonicalization + content formatting
 - **GitHub API** — workflow dispatch via Render server
 
 ### Infrastructure
@@ -66,16 +68,18 @@ https (built-in)        — Claude + OpenAI API calls (no SDK — avoids npm ver
 
 | File | Purpose |
 |------|---------|
-| `generate.js` | Account report generator (Gemini research + Claude synthesis + PDF) |
+| `generate.js` | Account report generator — full pipeline (see Section 6) |
 | `scrape_daily.js` | Daily brief — Step 1: Gemini scrapes 6 sections, gap check/fill, saves `research_cache.json` |
 | `synthesize_daily.js` | Daily brief — Step 2: reads cache, Claude synthesizes per section, saves `report.json` |
 | `generate_daily.js` | Old combined daily script — **ignore, superseded** |
-| `server.js` | Render server — `/canonicalize` (OpenAI) + `/generate` (GitHub dispatch) |
+| `server.js` | Render server — `/canonicalize` (OpenAI GPT-4o-mini) + `/generate` (GitHub dispatch) |
 | `package.json` | Node dependencies |
-| `.env` | Local API keys (never committed) |
+| `.env` | Local API keys — **does not exist in repo, create manually if needed** |
+| `.gitignore` | Protects .env, research_cache.json, node_modules from being committed |
 | `research_cache.json` | Interim scraping output (daily brief pipeline) — not committed |
 | `report.json` | Daily brief output — committed daily by GitHub Actions |
 | `reports/index.json` | Persistent list of all generated account reports with timestamps |
+| `ARCHITECTURE.md` | Complete technical architecture of generate.js pipeline |
 
 ### GitHub Actions workflows
 | File | Trigger | What it does |
@@ -87,11 +91,14 @@ https (built-in)        — Claude + OpenAI API calls (no SDK — avoids npm ver
 
 ## 5. ENVIRONMENT VARIABLES
 
-### Local `.env`
+### Local `.env` (create manually — never commit)
 ```
 GEMINI_API_KEY=...
 ANTHROPIC_API_KEY=...
+OPENAI_API_KEY=...
 ```
+Note: `.env` file does not exist in the repo. Only needed for local testing.
+Production runs entirely via GitHub Actions secrets.
 
 ### Render Environment Variables
 ```
@@ -101,25 +108,31 @@ OPENAI_API_KEY=...      — GPT-4o-mini for canonicalization
 
 ### GitHub Secrets (in account-intell repo)
 ```
-GEMINI_API_KEY
-ANTHROPIC_API_KEY
-GH_PAT
+GEMINI_API_KEY          — Gemini API (web scraping)
+ANTHROPIC_API_KEY       — Claude Sonnet (synthesis, gap check)
+OPENAI_API_KEY          — GPT-4o (confidence audit) + GPT-4o-mini (formatter)
+GH_PAT                  — GitHub PAT for committing reports
 ```
 
 ---
 
 ## 6. ACCOUNT REPORT PIPELINE (`generate.js`)
 
-**Trigger:** User types company name in `account.html` → Render server → GitHub Actions
+**Trigger:** User types company name in `account.html` → Render server canonicalizes via GPT-4o-mini → GitHub Actions triggers `generate.yml`
 
-**Flow:**
+**Full pipeline (as of 3 June 2026):**
 ```
-1. [Web Scraping Agent] Gemini × 5 calls → Sections 1-5 + sources
-2. [Synthesizing Agent] Claude gap check → JSON list of gaps (max 5)
-3. [Web Scraping Agent] Gemini × N targeted fills → appended to weak sections
-4. [Synthesizing Agent] Claude synthesis → Section 6 (Sales Play)
-5. Puppeteer → PDF from HTML
-6. GitHub Actions → reports/slug.html + reports/slug.pdf + reports/index.json committed
+Step 1   Gemini × 5        Web research — S1 through S5 + sources
+Step 2   Claude            Gap check → JSON list of missing data (max 5)
+Step 3   Gemini × 0–5      Targeted gap fills → appended as [GAP FILL] blocks
+Step 4   Claude            S6 Sales Play synthesis (plain text)
+Step 4.5 Gemini            Leadership departure verification → [LEADERSHIP VERIFICATION] block
+Step 4.6 GPT-4o-mini       Content formatter → restructures S1–S5 into clean numbered/bulleted text
+Step 5   GPT-4o            Confidence audit → injects [[CF:type:note]] markers into text
+Step 6   Deduplication     Sources deduped by URL
+Step 7   buildHTML()       Assembles full HTML report with all panels
+         Puppeteer         Generates PDF from HTML
+         GitHub Actions    Commits slug.html + slug.pdf + reports/index.json
 ```
 
 **Output schema (6 sections):**
@@ -130,11 +143,23 @@ GH_PAT
 - S5: Competitive & Vendor Landscape (tech vendors, SI partners, procurement signals, competitive dynamics)
 - S6: Sales Play (pitch angle, conversation openers, landmines, next step, best entry point)
 
+**HTML report features (as of 3 June 2026):**
+- Numbered section items with navy circles
+- Inline confidence badges: `[Inferred]` (amber), `[Unverified]` (red), `[Assumed]` (grey), `[Outdated]` (blue)
+- `[GAP FILL]` amber blocks — secondary research content
+- `[LEADERSHIP VERIFICATION]` blue blocks — executive departure check result
+- `[DEPARTED]` red blocks — confirmed executive departures
+- Section-level source strips (📎 pill links at bottom of each card)
+- Collapsible Confidence Notes panel (⚠️ purple — all flagged items listed)
+- Collapsible Sources panel (📎 navy — all sources grouped by section)
+- Leadership cards (person name, role, tenure, background)
+- Ownership badge auto-detected from S1 content
+
 **Key design decisions:**
-- HTML report uses JS post-processing to fix orphan content, group leadership into person cards, parse Section 6 into styled blocks
-- Execution order: rebuild flat sections → move orphan siblings → Sales Play fix → Leadership grouping (setTimeout 50ms)
-- PDF: `printBackground: false`, stripped backgrounds, left-border lines only
-- Company name canonicalized via OpenAI before generation (apple → Apple Inc.)
+- HTML report uses JS post-processing: orphan rebuilder → orphan mover → Sales Play formatter → ownership badge → leadership cards (setTimeout 50ms)
+- formatContent() regex is case-insensitive — handles both ALL-CAPS and mixed-case Gemini headers
+- PDF: `printBackground: false`, stripped backgrounds, left-border lines only, confidence panel hidden
+- Company name canonicalized via OpenAI GPT-4o-mini before generation
 
 ---
 
@@ -157,6 +182,8 @@ synthesize_daily.js:
 ```
 
 **If synthesis fails:** Just re-run `node synthesize_daily.js` — no re-scraping needed.
+
+**Known issue:** `synthesize_daily.js` intermittently fails with JSON parse error when Claude returns malformed JSON or truncates output (maxTokens: 1200 is tight). Fix deferred — increase maxTokens to 2000 and add retry logic.
 
 **report.json schema (must match exactly — daily.html depends on this):**
 ```json
@@ -184,13 +211,21 @@ synthesize_daily.js:
 
 ## 8. KNOWN ISSUES / TO-DO
 
-- [ ] `synthesize_daily.js` intermittently fails with JSON parse error (Claude returns malformed JSON) — needs more robust JSON extraction or retry logic
-- [ ] Gemini RECITATION blocks handled with retry — working but adds latency
-- [ ] Render free tier spins down after inactivity — first request takes 50+ seconds
+- [ ] `synthesize_daily.js` intermittently fails with JSON parse error — increase maxTokens 1200→2000, add retry logic
+- [ ] Render free tier spins down after inactivity — first request (company canonicalization) takes 50+ seconds
 - [ ] PDF quality: backgrounds stripped via `@media print` — acceptable but not perfect
 - [ ] Monthly report (`monthly.html`) is manually updated — no automation yet
-- [ ] `generate_daily.js` is superseded by the two-script approach — can be deleted
+- [ ] `generate_daily.js` is superseded — can be deleted
 - [ ] `context.py`, `generate_report.py`, `requirements.txt` — old Python files, can be deleted
+- [ ] Gemini RECITATION blocks handled with retry — working but adds latency
+
+**Resolved in June 2026 session:**
+- [x] formatContent() regex was ALL-CAPS only — fixed to case-insensitive `[A-Za-z]`
+- [x] JS post-processor had same regex issue — fixed
+- [x] Sales Play text blobs (join ' ') — fixed to join `<br><br>`
+- [x] No .gitignore — created, protects .env and cache files
+- [x] OPENAI_API_KEY missing from generate.yml — added
+- [x] Confidence badges not matching (indexOf too strict) — 3-tier fallback matching added
 
 ---
 
@@ -222,20 +257,20 @@ KEY OPPORTUNITIES: SAP ECC EOL 2027, Windchill→SaaS migration, EU AI Act compl
 
 ## 10. DESIGN PRINCIPLES (non-negotiable)
 
-- **No Gemini/Claude brand names in UI** — use "Web Scraping Agent" and "Synthesizing Agent"
+- **No Gemini/Claude/OpenAI brand names in UI** — use "Web Scraping Agent", "Synthesizing Agent", "Format Agent", "Audit Agent"
 - **Color theme:** Navy (#1F3864) + Blue (#2E74B5). Monthly = blue, Daily = green (#1B4332), Account = blue
 - **Home button:** Floating FAB bottom-left on all sub-pages (not in header — header space is precious)
 - **Report list:** Reads from `reports/index.json` on GitHub Pages — permanent, shared across all users/devices
 - **Account report:** Two-step UX — canonicalize name first (OpenAI) → show confirmation → then generate
 - **Brutal honesty:** No softening of problems. Flag data risks explicitly. Check thought process before building.
+- **Confidence transparency:** All low-confidence data must be visually tagged. Leadership must know what to verify before using in a conversation.
 
 ---
 
 ## 11. LOCAL COMMANDS
 
 ```bash
-# Account report (test locally)
-cd account-intell
+# Account report (test locally — requires .env with all 3 API keys)
 node generate.js "IKEA"
 
 # Daily brief (two steps)
@@ -246,16 +281,35 @@ node synthesize_daily.js       # saves report.json
 node server.js
 ```
 
+**Note:** `.env` file does not exist in the repo. Create it manually with GEMINI_API_KEY, ANTHROPIC_API_KEY, OPENAI_API_KEY before running locally.
+
 ---
 
-## 12. FUTURE ROADMAP (noted for later)
+## 12. APPROXIMATE COST PER ACCOUNT REPORT
 
+| Step | Model | Purpose | Cost (approx) |
+|------|-------|---------|---------------|
+| Canonicalize | GPT-4o-mini | Company name | ~$0.001 |
+| S1–S5 research | Gemini 2.5 Flash | Web scraping × 5 | ~$0.02–0.05 |
+| Gap check | Claude Sonnet | Find missing data | ~$0.01 |
+| Gap fills | Gemini 2.5 Flash | Fill gaps × 0–5 | ~$0–0.02 |
+| S6 synthesis | Claude Sonnet | Sales play | ~$0.02 |
+| Leadership verify | Gemini 2.5 Flash | Departure check | ~$0.005 |
+| Content formatter | GPT-4o-mini | Structure text | ~$0.006 |
+| Confidence audit | GPT-4o | Flag low-confidence | ~$0.02 |
+| **Total** | | | **~$0.08–0.13** |
+
+---
+
+## 13. FUTURE ROADMAP (noted for later)
+
+- **synthesize_daily.js fix** — increase maxTokens, add JSON retry logic
 - **V2 ITC-specific account report** — pitch angles, rebadging angles, GDC hooks calibrated to ITCI service lines
-- **Gemini consistency fix** — run each section prompt twice, take longer response
+- **Render upgrade** — eliminate cold-start delay ($7/month Starter plan or keep-alive cron)
 - **Monthly report automation** — currently manual update only
-- **Render upgrade** — eliminate cold-start delay for production use
 - **PDF quality** — Puppeteer CSS improvements
+- **Option B (JSON output)** — migrate Gemini section prompts to return structured JSON instead of free-form text, eliminating all formatting/parsing fragility
 
 ---
 
-*Context file created: June 2026. Update and re-upload after significant changes to keep Claude Code sessions in sync.*
+*Last updated: 3 June 2026. Re-upload after significant changes to keep Claude Code sessions in sync.*
