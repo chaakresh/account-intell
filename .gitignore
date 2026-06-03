@@ -5,6 +5,8 @@
 
 # Runtime cache files (daily brief pipeline)
 research_cache.json
+MASTER_CONTEXT.md
+ARCHITECTURE.md
 
 # Node modules
 node_modules/
