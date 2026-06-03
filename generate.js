@@ -179,11 +179,11 @@ function claudeCall(prompt, maxTokens = 2000) {
   });
 }
 
-// ─── OpenAI GPT-4o API call (confidence audit) ───────────────────────────────
-function gptCall(prompt, maxTokens = 2000) {
+// ─── OpenAI API call (model-agnostic) ────────────────────────────────────────
+function gptCall(prompt, maxTokens = 2000, model = "gpt-4o") {
   return new Promise((resolve, reject) => {
     const body = JSON.stringify({
-      model: "gpt-4o",
+      model: model,
       max_tokens: maxTokens,
       messages: [{ role: "user", content: prompt }],
       response_format: { type: "json_object" },
@@ -313,6 +313,51 @@ ${sectionBlocks}`;
   const raw = await gptCall(prompt, 2000);
   const parsed = JSON.parse(raw);
   return Array.isArray(parsed.flags) ? parsed.flags : [];
+}
+
+// ─── GPT-4o-mini content formatter ───────────────────────────────────────────
+async function formatSectionsContent(sections) {
+  const keys = ["s1", "s2", "s3", "s4", "s5"];
+  const labelMap = {
+    s1: "Company Snapshot", s2: "Strategic Direction",
+    s3: "Leadership & Org",  s4: "Buying Signals",
+    s5: "Competitive & Vendors"
+  };
+
+  const blocks = keys
+    .filter(k => sections[k] && sections[k].text)
+    .map(k => `=== ${k.toUpperCase()} (${labelMap[k]}) ===\n${sections[k].text}`)
+    .join("\n\n---\n\n");
+
+  const prompt = `You are a content formatter for a B2B sales intelligence report. Reformat the research sections below for clean, consistent rendering. DO NOT change, add, or remove any factual content — all names, numbers, dates, quotes, and URLs must remain exactly as written.
+
+FORMATTING RULES:
+1. Every subsection MUST begin with its number and ALL-CAPS label on its own line:
+   "1. LABEL NAME:" then a newline, then the content.
+   If a section has no numbers, add them sequentially (1, 2, 3...).
+2. Convert inline prose lists into bullet points using "- " prefix (one item per line).
+3. Split dense paragraphs: maximum 3 sentences per paragraph. Separate paragraphs with a blank line.
+4. Keep all existing markdown tables (|col|col| format) completely unchanged.
+5. PRESERVE VERBATIM — do not alter content or structure of these special blocks:
+   - Any line starting with [GAP FILL
+   - Any line starting with [LEADERSHIP VERIFICATION]
+   - Any line starting with [DEPARTED
+6. Remove generic intro sentences like "Here is the research on..." or "The following section covers...".
+7. Do not summarise, condense, or drop any content.
+
+Return ONLY valid JSON (no markdown, no explanation):
+{"s1": "reformatted text", "s2": "...", "s3": "...", "s4": "...", "s5": "..."}
+
+SECTIONS TO REFORMAT:
+${blocks}`;
+
+  const raw = await gptCall(prompt, 8000, "gpt-4o-mini");
+  const parsed = JSON.parse(raw);
+  for (const k of keys) {
+    if (parsed[k] && typeof parsed[k] === "string" && parsed[k].length > 100) {
+      sections[k].text = parsed[k];
+    }
+  }
 }
 
 // ─── Claude synthesis ─────────────────────────────────────────────────────────
@@ -615,7 +660,7 @@ body {
 }
 .content-body { flex: 1; min-width: 0; overflow-wrap: break-word; word-break: break-word; }
 .content-label { font-size: 10px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
-.content-text { font-size: 13px; color: var(--t2); line-height: 1.65; margin-bottom: 4px; word-wrap: break-word; }
+.content-text { font-size: 13px; color: var(--t2); line-height: 1.7; margin-bottom: 8px; word-wrap: break-word; }
 .content-text:last-child { margin-bottom: 0; }
 
 /* Bullets */
@@ -933,7 +978,7 @@ ${sourcesPanel}
       // Pitch - first line is play type, rest is body
       var pitchLines = pitch.split('\n').map(function(l){return l.trim();}).filter(function(l){return l.length>0;});
       var pitchTitle = pitchLines.length > 0 ? pitchLines[0] : '';
-      var pitchBody  = pitchLines.slice(1).join(' ') || pitchTitle;
+      var pitchBody  = pitchLines.slice(1).join('<br><br>') || pitchTitle;
 
       // Openers - each non-empty line is a question
       var openerLines = openers.split('\n').map(function(l){
@@ -964,7 +1009,7 @@ ${sourcesPanel}
       if (entryClean.length === 0) entryClean = entryParas;
       var entryName = entryClean.length > 0 ? entryClean[0] : '';
       var entryRole = entryClean.length > 1 ? entryClean[1] : '';
-      var entryText = entryClean.slice(2).join(' ') || entryClean.slice(1).join(' ');
+      var entryText = entryClean.slice(2).join('<br><br>') || entryClean.slice(1).join('<br><br>');
 
       // Build HTML
       var html = '';
@@ -1000,7 +1045,7 @@ ${sourcesPanel}
       // 4. Next step
       html += '<div class="content-item"><div class="content-num">4</div><div class="content-body">';
       html += '<div class="content-label">Suggested Next Step</div>';
-      html += '<div class="sp-nextstep">' + nextstep + '</div>';
+      html += '<div class="sp-nextstep">' + nextstep.replace(/\n{2,}/g, '<br><br>').replace(/\n/g, ' ') + '</div>';
       html += '</div></div>';
 
       // 5. Entry point
@@ -1175,6 +1220,15 @@ async function main() {
     console.log(` ✅`);
   } catch(e) {
     console.log(` ⚠️  Skipped: ${e.message.slice(0, 50)}`);
+  }
+
+  // ── Step 4.6: GPT-4o-mini content formatter ──────────────────────────────────
+  process.stdout.write(`✨ [Format Agent] Structuring section content (GPT-4o-mini)...`);
+  try {
+    await formatSectionsContent(sections);
+    console.log(` ✅`);
+  } catch(e) {
+    console.log(` ⚠️  Skipped (original text kept): ${e.message.slice(0, 60)}`);
   }
 
   // ── Step 5: GPT-4o confidence audit ─────────────────────────────────────────
