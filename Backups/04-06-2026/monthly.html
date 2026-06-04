@@ -1,0 +1,2056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="description" content="ITC Infotech Market Intelligence Report — FY2025–26">
+<title>ITC Infotech · Market Intelligence · FY2025–26</title>
+<style>
+:root {
+  --navy:   #1F3864;
+  --blue:   #2E74B5;
+  --lblue:  #EBF3FB;
+  --vblue:  #9DC3E6;
+  --amber:  #BF8A14;
+  --bg:     #F0F2F5;
+  --card:   #FFFFFF;
+  --border: #E2E5EC;
+  --t1:     #1A1F36;
+  --t2:     #4A5568;
+  --t3:     #9AA3B0;
+  --hh-bg:  #1F3864;
+  --hm-bg:  #2E74B5;
+  --hl-bg:  #DEEAF1;
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(0,0,0,.06), 0 2px 10px rgba(0,0,0,.05);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--t1);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 40px;
+}
+
+/* ── STICKY HEADER ────────────────────────────── */
+.top-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--navy);
+  padding: 12px 16px 0;
+  box-shadow: 0 2px 12px rgba(0,0,0,.18);
+}
+.top-bar-row {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  padding-bottom: 10px;
+}
+.top-brand { color: #fff; font-size: 15px; font-weight: 600; line-height: 1.2; }
+.top-sub   { color: var(--vblue); font-size: 10px; margin-top: 2px; }
+.top-date  { color: var(--vblue); font-size: 10px; text-align: right; white-space: nowrap; margin-top: 2px; }
+
+/* Section nav pills */
+.sec-nav {
+  display: flex; gap: 4px;
+  overflow-x: auto; padding-bottom: 10px;
+  scrollbar-width: none;
+}
+.sec-nav::-webkit-scrollbar { display: none; }
+.sec-nav a {
+  flex-shrink: 0;
+  color: rgba(255,255,255,.65);
+  font-size: 11px; font-weight: 500;
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,.2);
+  transition: all .15s;
+  white-space: nowrap;
+}
+.sec-nav a:hover, .sec-nav a.active {
+  background: rgba(255,255,255,.15);
+  color: #fff;
+  border-color: rgba(255,255,255,.4);
+}
+
+/* ── SECTION WRAPPER ──────────────────────────── */
+.section { padding: 20px 14px 0; }
+.section-hdr {
+  font-size: 11px; font-weight: 700;
+  color: var(--navy); letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.section-desc {
+  font-size: 12px; color: var(--t3);
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+
+/* ── CARDS ────────────────────────────────────── */
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+/* ── SIGNAL CARDS ─────────────────────────────── */
+.sig-signal {
+  background: var(--navy);
+  padding: 14px 16px;
+}
+.sig-signal-label {
+  font-size: 9px; font-weight: 700;
+  color: var(--vblue); letter-spacing: .1em;
+  text-transform: uppercase; margin-bottom: 6px;
+}
+.sig-signal-text { color: #fff; font-size: 13px; line-height: 1.55; }
+.sig-signal-src  { color: var(--vblue); font-size: 10px; font-style: italic; margin-top: 6px; }
+.sig-lens {
+  background: var(--lblue);
+  padding: 14px 16px;
+}
+.sig-lens-label {
+  font-size: 9px; font-weight: 700;
+  color: var(--blue); letter-spacing: .1em;
+  text-transform: uppercase; margin-bottom: 6px;
+}
+.sig-lens-text { color: var(--t1); font-size: 13px; line-height: 1.55; }
+.sig-lens-src  { color: var(--t3); font-size: 10px; font-style: italic; margin-top: 6px; }
+.sig-geo-badge {
+  display: inline-block;
+  background: rgba(255,255,255,.15);
+  color: #fff; font-size: 10px; font-weight: 600;
+  padding: 2px 8px; border-radius: 20px;
+  margin-bottom: 8px;
+}
+
+/* ── STRUCTURAL SIGNAL ITEMS ──────────────────── */
+.struct-item {
+  display: flex; gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 0.5px solid var(--border);
+}
+.struct-item:last-child { border-bottom: none; }
+.struct-num {
+  flex-shrink: 0;
+  width: 22px; height: 22px;
+  background: var(--navy);
+  color: #fff;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700;
+  margin-top: 1px;
+}
+.struct-name { font-size: 13px; font-weight: 600; color: var(--navy); line-height: 1.3; }
+.struct-desc { font-size: 12px; color: var(--t2); line-height: 1.5; margin-top: 3px; }
+.struct-src  { font-size: 10px; color: var(--t3); font-style: italic; margin-top: 3px; }
+
+/* ── REGULATORY TIMELINE ─────────────────────── */
+.reg-item {
+  display: flex; gap: 14px;
+  padding: 14px 16px;
+  border-bottom: 0.5px solid var(--border);
+  position: relative;
+}
+.reg-item:last-child { border-bottom: none; }
+.reg-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+.reg-dot-wrap { position: relative; }
+.reg-dot {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  border: 2.5px solid #fff;
+  flex-shrink: 0;
+}
+.reg-line {
+  width: 2px; flex: 1; min-height: 20px;
+  background: var(--border);
+  margin-top: 4px;
+}
+.reg-item:last-child .reg-line { display: none; }
+.reg-badge {
+  display: inline-block;
+  font-size: 9px; font-weight: 700;
+  padding: 2px 7px; border-radius: 20px;
+  letter-spacing: .04em; margin-bottom: 5px;
+}
+.badge-active   { background: var(--blue);  color: #fff; }
+.badge-upcoming { background: var(--amber); color: #fff; }
+.badge-building { background: var(--vblue); color: var(--navy); }
+.reg-name { font-size: 14px; font-weight: 600; color: var(--navy); }
+.reg-date { font-size: 11px; color: var(--t3); margin: 2px 0 6px; }
+.reg-desc { font-size: 12px; color: var(--t2); line-height: 1.5; }
+
+/* ── COMPETITOR CARDS ─────────────────────────── */
+.comp-header {
+  background: #EEF2F8;
+  padding: 14px 16px;
+  border-left: 4px solid #1F3864;
+}
+.comp-name { color: #1F3864; font-size: 16px; font-weight: 600; }
+.comp-period { color: #6B7280; font-size: 11px; margin-top: 2px; }
+.comp-rows { padding: 0; }
+.comp-row {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  padding: 10px 16px;
+  border-bottom: 0.5px solid var(--border);
+  gap: 12px;
+}
+.comp-row:last-child { border-bottom: none; }
+.comp-row-label {
+  font-size: 11px; font-weight: 600; color: var(--t3);
+  flex-shrink: 0; width: 110px;
+  padding-top: 1px;
+}
+.comp-row-val { font-size: 12.5px; color: var(--t1); line-height: 1.4; text-align: right; }
+.comp-threat-row {
+  background: #FFFBEB;
+  border-top: 1.5px solid #F0D080;
+}
+.comp-threat-row .comp-row-label { color: #92600A; }
+.comp-threat-row .comp-row-val   { color: #78350F; }
+.comp-moves { padding: 12px 16px; background: #FAFBFC; }
+.comp-moves-hdr { font-size: 11px; font-weight: 700; color: var(--navy); margin-bottom: 8px; letter-spacing: .04em; text-transform: uppercase; }
+.comp-move {
+  display: flex; gap: 8px; font-size: 12px; color: var(--t2);
+  line-height: 1.45; margin-bottom: 7px;
+}
+.comp-move:last-child { margin-bottom: 0; }
+.comp-move-dot { flex-shrink: 0; width: 5px; height: 5px; background: var(--blue); border-radius: 50%; margin-top: 6px; }
+.comp-src { font-size: 10px; color: var(--t3); font-style: italic; padding: 8px 16px; background: #FAFBFC; }
+
+/* ── GEO HEATMAP ──────────────────────────────── */
+.heatmap-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.heatmap-table { border-collapse: collapse; min-width: 100%; font-size: 11px; }
+.heatmap-table th {
+  padding: 6px 8px; text-align: center;
+  font-size: 9.5px; font-weight: 600; color: var(--t3);
+  line-height: 1.2; vertical-align: bottom;
+  white-space: nowrap; background: #FAFBFC;
+  border-bottom: 1px solid var(--border);
+}
+.heatmap-table th:first-child { text-align: left; }
+.heatmap-table td {
+  padding: 9px 8px; text-align: center;
+  font-size: 10.5px; font-weight: 600;
+  border: 2px solid #fff;
+}
+.geo-label { text-align: left !important; font-size: 12px; font-weight: 600; color: var(--navy); white-space: nowrap; background: #FAFBFC !important; border: none !important; }
+.hh { background: #B4C9E4; color: #1F3864; border-radius: 4px; font-weight: 700; }
+.hm { background: #C9DDEF; color: #1F3864; border-radius: 4px; font-weight: 700; }
+.hl { background: #E8F3FA; color: #4A5568; border-radius: 4px; font-weight: 700; border: 1px solid #C4DCF0; }
+.heatmap-legend { display: flex; gap: 10px; padding: 10px 16px; align-items: center; flex-wrap: wrap; }
+.heatmap-legend-label { font-size: 10px; color: var(--t3); font-weight: 500; }
+.leg-chip { font-size: 10px; font-weight: 600; padding: 3px 10px; border-radius: 4px; }
+.heatmap-note { font-size: 10px; color: var(--t3); font-style: italic; padding: 0 16px 12px; line-height: 1.4; }
+
+/* ── AI MATURITY ──────────────────────────────── */
+.ai-bar {
+  display: flex; height: 58px;
+  margin: 12px 16px;
+  border-radius: 6px; overflow: hidden; gap: 2px;
+}
+.ai-seg {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 6px 4px; text-align: center;
+}
+.ai-pct  { font-size: 15px; font-weight: 700; margin-bottom: 2px; }
+.ai-lab  { font-size: 9.5px; line-height: 1.2; }
+.ai-insight { font-size: 12px; color: var(--t2); font-style: italic; padding: 0 16px 6px; line-height: 1.5; }
+.ai-src     { font-size: 10px; color: var(--t3); font-style: italic; padding: 0 16px 14px; }
+
+/* ── DASHBOARD COMP GRID ──────────────────────── */
+.dash-comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); margin: 0 0 12px; }
+.dash-comp-cell { background: var(--card); padding: 12px 14px; }
+.dcell-name { font-size: 12px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+.dcell-rev  { font-size: 13px; font-weight: 700; color: var(--navy); }
+.dcell-fy   { font-size: 10px; color: var(--t3); margin-left: 3px; }
+.dcell-gr   { font-size: 13px; font-weight: 700; margin-top: 2px; }
+.dcell-plat { font-size: 11px; color: var(--t2); margin-top: 4px; }
+.dcell-deal { font-size: 10.5px; color: var(--t3); margin-top: 2px; font-style: italic; }
+
+/* ── EMERGING PATTERNS ────────────────────────── */
+.pattern-item {
+  padding: 14px 16px;
+  border-bottom: 0.5px solid var(--border);
+}
+.pattern-item:last-child { border-bottom: none; }
+.pattern-num  { font-size: 10px; font-weight: 700; color: var(--blue); letter-spacing: .06em; margin-bottom: 4px; }
+.pattern-name { font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 5px; }
+.pattern-desc { font-size: 12.5px; color: var(--t2); line-height: 1.55; }
+
+/* ── SOURCES ──────────────────────────────────── */
+.sources-group { margin-bottom: 8px; }
+.sources-toggle {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 16px; cursor: pointer;
+  border-bottom: 0.5px solid var(--border);
+  user-select: none;
+}
+.sources-toggle-label { font-size: 12px; font-weight: 600; color: var(--navy); }
+.sources-toggle-count { font-size: 11px; color: var(--t3); }
+.sources-arrow { color: var(--t3); transition: transform .2s; font-size: 12px; }
+.sources-toggle.open .sources-arrow { transform: rotate(180deg); }
+.sources-list { display: none; padding: 8px 0; }
+.sources-toggle.open + .sources-list { display: block; }
+.source-entry {
+  display: flex; gap: 8px;
+  padding: 6px 16px;
+  border-bottom: 0.5px solid var(--border);
+}
+.source-entry:last-child { border-bottom: none; }
+.source-num  { flex-shrink: 0; font-size: 10px; color: var(--t3); width: 22px; padding-top: 2px; }
+.source-link { font-size: 11.5px; color: var(--blue); text-decoration: none; line-height: 1.4; }
+.source-link:hover { text-decoration: underline; }
+.source-text { font-size: 11.5px; color: var(--t2); line-height: 1.4; }
+
+/* ── BOTTOM NAV ───────────────────────────────── */
+
+
+/* ── UTILITY ──────────────────────────────────── */
+.divider { height: 1px; background: var(--border); margin: 4px 0; }
+.tag {
+  display: inline-block;
+  font-size: 9.5px; font-weight: 600;
+  padding: 2px 7px; border-radius: 3px;
+  margin-bottom: 6px;
+}
+
+@media (min-width: 520px) {
+  body { max-width: 520px; margin: 0 auto; }
+}
+
+
+/* ── RISK / OPPORTUNITY CARDS ────────────────────────────────────── */
+.ro-card { margin-bottom: 8px; }
+.ro-hdr {
+  padding: 11px 16px;
+  display: flex; align-items: center; gap: 8px;
+  font-size: 10.5px; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.risk-hdr {
+  background: #FFF7ED; color: #92400E;
+  border-bottom: 1.5px solid #FED7AA;
+  border-left: 4px solid #F59E0B;
+}
+.opp-hdr {
+  background: #F0FDF4; color: #065F46;
+  border-bottom: 1.5px solid #A7F3D0;
+  border-left: 4px solid #10B981;
+}
+.ro-badge {
+  margin-left: auto; font-size: 9px; font-weight: 600;
+  background: rgba(0,0,0,.07); color: inherit;
+  padding: 2px 8px; border-radius: 20px;
+}
+.ro-list { list-style: none; padding: 6px 16px 10px; }
+.ro-list li {
+  font-size: 12.5px; color: var(--t1); line-height: 1.55;
+  padding: 7px 0 7px 16px; position: relative;
+  border-bottom: 0.5px solid var(--border);
+}
+.ro-list li:last-child { border-bottom: none; }
+.risk-list li::before {
+  content: '↓'; position: absolute; left: 0; top: 8px;
+  color: #F59E0B; font-size: 11px; font-weight: 700;
+}
+.opp-list li::before {
+  content: '↑'; position: absolute; left: 0; top: 8px;
+  color: #10B981; font-size: 11px; font-weight: 700;
+}
+/* ── SOURCE POPUP SPANS ──────────────────────────────────────────── */
+.src-pop {
+  display: inline;
+  color: var(--blue); font-size: 10px; font-style: italic;
+  border-bottom: 1px dotted var(--blue);
+  cursor: pointer; padding: 0 2px; border-radius: 2px;
+  white-space: nowrap;
+  transition: background .1s;
+}
+.src-pop:hover { background: rgba(46,116,181,.1); }
+/* ── POPUP OVERLAY & BOTTOM SHEET ───────────────────────────────── */
+.pop-overlay {
+  position: fixed; inset: 0; z-index: 400;
+  background: rgba(0,0,0,.42);
+  opacity: 0; pointer-events: none;
+  transition: opacity .2s;
+}
+.pop-overlay.show { opacity: 1; pointer-events: all; }
+.pop-sheet {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 401;
+  background: var(--card);
+  border-radius: 16px 16px 0 0;
+  padding: 0 20px max(28px, env(safe-area-inset-bottom, 28px));
+  transform: translateY(100%);
+  transition: transform .28s cubic-bezier(.32,.72,0,1);
+  box-shadow: 0 -8px 32px rgba(0,0,0,.13);
+  max-height: 60vh; overflow-y: auto;
+}
+.pop-sheet.show { transform: translateY(0); }
+.pop-handle {
+  width: 40px; height: 4px; background: #DDD; border-radius: 2px;
+  margin: 12px auto 18px; flex-shrink: 0;
+}
+.pop-tag {
+  font-size: 9.5px; font-weight: 700; color: var(--blue);
+  letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px;
+}
+.pop-name {
+  font-size: 16px; font-weight: 600; color: var(--navy);
+  line-height: 1.3; margin-bottom: 8px;
+}
+.pop-desc {
+  font-size: 13px; color: var(--t2); line-height: 1.6; margin-bottom: 18px;
+}
+.pop-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--navy); color: #fff;
+  font-size: 13px; font-weight: 500;
+  padding: 10px 20px; border-radius: 8px; text-decoration: none;
+}
+.pop-link:active { opacity: .85; }
+.pop-no-link { font-size: 12px; color: var(--t3); font-style: italic; }
+.pop-close {
+  position: absolute; top: 14px; right: 16px;
+  background: #F0F0F0; border: none; border-radius: 50%;
+  width: 30px; height: 30px; font-size: 15px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--t2); flex-shrink: 0;
+}
+@media (min-width: 520px) {
+  .pop-sheet { max-width: 520px; left: 50%; transform: translateX(-50%) translateY(100%); }
+  .pop-sheet.show { transform: translateX(-50%) translateY(0); }
+}
+
+
+/* ── TIER DIVIDERS ───────────────────────────────────────────────────── */
+.tier-div {
+  display: flex; align-items: baseline; gap: 10px;
+  padding: 14px 14px 8px;
+}
+.tier-div-label {
+  font-size: 11px; font-weight: 700; color: var(--navy);
+  letter-spacing: .08em; text-transform: uppercase;
+}
+.tier-div-sub { font-size: 10px; color: var(--t3); }
+
+/* ── COMPETITIVE CONTEXT TABLE ───────────────────────────────────────── */
+.ctx-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
+.ctx-table { border-collapse: collapse; font-size: 10.5px; white-space: nowrap; min-width: 680px; }
+.ctx-table th {
+  padding: 6px 10px; text-align: center;
+  font-size: 9.5px; font-weight: 700; color: var(--t3);
+  background: #FAFBFC; border-bottom: 1px solid var(--border);
+}
+.ctx-table th:first-child { text-align: left; }
+.ctx-table td {
+  padding: 7px 10px; border-bottom: 0.5px solid var(--border);
+  vertical-align: middle;
+}
+.ctx-table tr:last-child td { border-bottom: none; }
+.ctx-name { font-size: 11px; font-weight: 600; color: var(--navy); }
+.ctx-tier-t1 { display: inline-block; background: var(--navy); color: #fff; font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 3px; }
+.ctx-tier-mid { display: inline-block; background: var(--blue); color: #fff; font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 3px; }
+.ctx-tier-ref { display: inline-block; background: #E2E5EC; color: var(--t2); font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 3px; }
+.ctx-rev { font-weight: 600; color: var(--navy); text-align: right; }
+.ctx-grow-pos { font-weight: 700; color: #10B981; text-align: center; }
+.ctx-grow-neg { font-weight: 700; color: #EF4444; text-align: center; }
+.ctx-grow-flat { font-weight: 700; color: var(--t3); text-align: center; }
+.ctx-ai { font-size: 10px; color: var(--t2); }
+.ctx-bpm { font-size: 10px; color: var(--t2); }
+.ctx-ref-row td { background: #F8F9FA; color: var(--t3); font-style: italic; }
+.ctx-note { font-size: 10px; color: var(--t3); font-style: italic; padding: 8px 14px 4px; }
+
+/* ── BPM SECTION ──────────────────────────────────────────────────────── */
+.bpm-card { margin-bottom: 12px; }
+.bpm-hdr {
+  background: #1F3864; padding: 14px 16px;
+  border-left: 4px solid #9DC3E6;
+}
+.bpm-hdr-num { font-size: 10px; font-weight: 700; color: #9DC3E6; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 4px; }
+.bpm-hdr-title { font-size: 15px; font-weight: 600; color: #fff; }
+.bpm-body { padding: 14px 16px; }
+.bpm-body p { font-size: 12.5px; color: var(--t2); line-height: 1.6; margin-bottom: 10px; }
+.bpm-body p:last-child { margin-bottom: 0; }
+.bpm-stat { display: flex; gap: 12px; padding: 8px 0; border-bottom: 0.5px solid var(--border); align-items: flex-start; }
+.bpm-stat:last-child { border-bottom: none; }
+.bpm-stat-icon { flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; margin-top: 1px; }
+.bpm-stat-icon.neg { background: #FEF2F2; }
+.bpm-stat-icon.pos { background: #F0FDF4; }
+.bpm-stat-icon.neu { background: #F0F9FF; }
+.bpm-stat-text { font-size: 12.5px; color: var(--t1); line-height: 1.5; }
+.bpm-stat-src { font-size: 10px; color: var(--t3); font-style: italic; margin-top: 2px; }
+.bpm-opp-item { padding: 10px 0; border-bottom: 0.5px solid var(--border); }
+.bpm-opp-item:last-child { border-bottom: none; }
+.bpm-opp-title { font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+.bpm-opp-desc { font-size: 12px; color: var(--t2); line-height: 1.55; }
+.bpm-summary {
+  background: #F0FDF4; border-left: 4px solid #10B981;
+  padding: 14px 16px; border-radius: 0 0 var(--radius) var(--radius);
+}
+.bpm-summary-hdr { font-size: 10px; font-weight: 700; color: #065F46; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; }
+.bpm-summary-text { font-size: 12.5px; color: #14532D; line-height: 1.6; }
+
+
+/* ── FLOATING PAGE SWITCH ─────────────────────── */
+.page-switch {
+  position: fixed; bottom: 20px; right: 16px; z-index: 150;
+  background: #1B4332;
+  color: #fff; font-size: 12px; font-weight: 600;
+  padding: 11px 18px; border-radius: 24px;
+  text-decoration: none; white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(0,0,0,.22);
+  letter-spacing: .02em;
+  transition: opacity .15s, transform .15s;
+}
+.page-switch:hover { opacity: .92; transform: translateY(-2px); }
+
+
+/* ── DAILY BRIEF WIDGET ───────────────────────── */
+.db-sig-item {
+  display: flex; gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 0.5px solid var(--border);
+}
+.db-sig-item:last-child { border-bottom: none; }
+.db-sig-num {
+  flex-shrink: 0; width: 20px; height: 20px;
+  background: var(--navy); color: #fff;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700; margin-top: 2px;
+}
+.db-sig-section { font-size: 9px; font-weight: 600; color: var(--t3); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 3px; }
+.db-sig-headline { font-size: 13px; font-weight: 600; color: var(--navy); line-height: 1.35; margin-bottom: 4px; }
+.db-sig-sowhat { font-size: 12px; color: var(--t2); line-height: 1.45; }
+.db-sev-badge {
+  display: inline-flex; align-items: center; gap: 3px;
+  font-size: 9px; font-weight: 700; padding: 2px 7px;
+  border-radius: 20px; text-transform: uppercase;
+  letter-spacing: .04em; margin-bottom: 4px;
+}
+.db-sev-red   { background: #FEE2E2; color: #991B1B; }
+.db-sev-amber { background: #FEF3C7; color: #92400E; }
+.db-sev-green { background: #D1FAE5; color: #065F46; }
+.db-dot { width: 5px; height: 5px; border-radius: 50%; }
+.db-dot-red   { background: #DC2626; }
+.db-dot-amber { background: #D97706; }
+.db-dot-green { background: #059669; }
+.db-view-all {
+  display: block; text-align: center;
+  padding: 14px; font-size: 13px; font-weight: 600;
+  color: var(--blue); text-decoration: none;
+  border-top: 1px solid var(--border);
+  background: #FAFBFC;
+}
+.db-view-all:hover { background: var(--lblue); }
+.db-error {
+  padding: 16px; font-size: 12px; color: var(--t3);
+  text-align: center; font-style: italic;
+}
+.db-loading {
+  text-align: center; padding: 30px 20px; color: var(--t3);
+}
+.db-spinner {
+  width: 24px; height: 24px; border-radius: 50%;
+  border: 2px solid var(--border); border-top-color: var(--blue);
+  animation: spin .8s linear infinite; margin: 0 auto 10px;
+}
+
+
+/* Floating home button */
+.home-fab {
+  position: fixed; bottom: 20px; left: 16px; z-index: 150;
+  background: var(--navy);
+  color: #fff; font-size: 12px; font-weight: 600;
+  padding: 11px 18px; border-radius: 24px;
+  text-decoration: none; white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(0,0,0,.22);
+  letter-spacing: .02em;
+  transition: opacity .15s, transform .15s;
+}
+.home-fab:hover { opacity: .92; transform: translateY(-2px); }
+</style>
+</head>
+<body>
+
+<!-- STICKY TOP BAR -->
+<div class="top-bar">
+  <div class="top-bar-row">
+    <div>
+      <div class="top-brand">ITC Infotech Market Intelligence</div>
+      <div class="top-sub">External signals · FY2025–26 Annual Review</div>
+    </div>
+    <div class="top-date">May 2026<br>Leadership Only<br><span style="font-size:9px;background:rgba(255,255,255,.15);padding:1px 6px;border-radius:10px;letter-spacing:.06em">MONTHLY</span></div>
+  </div>
+  <nav class="sec-nav" aria-label="Jump to section">
+    <a href="#dashboard">Dashboard</a>
+    <a href="#geo">Geo Signals</a>
+    <a href="#industry">Industry</a>
+    <a href="#competitors">Competitors</a>
+    <a href="#risks">Risks</a>
+    <a href="#opportunities">Opportunities</a>
+    <a href="#daily-brief">Daily Brief</a>
+    <a href="#sources">Sources</a>
+  </nav>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     SECTION: DASHBOARD
+══════════════════════════════════════════════════════════ -->
+
+
+
+
+
+<div class="section" id="dashboard">
+  <div class="section-hdr">Executive Dashboard</div>
+  <div class="section-desc">At-a-glance — what are the most important external shifts shaping the IT services market right now?</div>
+
+  <!-- Structural Signals -->
+  <div class="card">
+    <div style="padding:12px 16px 4px">
+      <div class="section-hdr" style="margin-bottom:0">Top Structural Signals</div>
+    </div>
+    <div class="struct-item">
+      <div class="struct-num">1</div>
+      <div>
+        <div class="struct-name">AI spend remains protected across all verticals</div>
+        <div class="struct-desc">97% of CPG/retail respondents expect AI budgets to increase. Ring-fenced even as discretionary IT contracts.</div>
+        <div class="struct-src">NVIDIA · McKinsey / LatentView</div>
+      </div>
+    </div>
+    <div class="struct-item">
+      <div class="struct-num">2</div>
+      <div>
+        <div class="struct-name">Vendor consolidation accelerating — $13B renewal wave</div>
+        <div class="struct-desc">$13B in IT contracts up for renewal in 2025-26. 68% of CIOs planning 20% vendor count reduction.</div>
+        <div class="struct-src">ISG · SAP CIO Survey</div>
+      </div>
+    </div>
+    <div class="struct-item">
+      <div class="struct-num">3</div>
+      <div>
+        <div class="struct-name">SAP migration wave tightening consulting supply</div>
+        <div class="struct-desc">64% of SAP customers mid-migration toward 2027 ECC end date. Consulting rates rising 30–50% in 2026–27.</div>
+        <div class="struct-src">ASUG / Precisely · IC Euro</div>
+      </div>
+    </div>
+    <div class="struct-item">
+      <div class="struct-num">4</div>
+      <div>
+        <div class="struct-name">Regulatory mandates creating non-discretionary spend</div>
+        <div class="struct-desc">DORA (Jan 2025), EU AI Act (Aug 2026), KSA e-invoicing (Jul 2026) — mandatory, time-bound programs with committed budgets.</div>
+        <div class="struct-src">Deloitte DORA Survey · ZATCA</div>
+      </div>
+    </div>
+    <div class="struct-item">
+      <div class="struct-num">5</div>
+      <div>
+        <div class="struct-name">AI industrialization gap persists — only 5% fully operational</div>
+        <div class="struct-desc">~50% have AI in production; only 5% have industrialized end-to-end. The gap is where managed services demand concentrates.</div>
+        <div class="struct-src">Capgemini-Microsoft · WEF</div>
+      </div>
+    </div>
+    <div class="struct-item">
+      <div class="struct-num">6</div>
+      <div>
+        <div class="struct-name">Sovereign cloud now an operational prerequisite</div>
+        <div class="struct-desc">Microsoft Saudi Azure (live 2026), AWS whole-of-govt Australia (Jan 2025), and GCC bank AI on local infra — all active. Data sovereignty is a current procurement requirement in ME and APAC.</div>
+        <div class="struct-src">DTA Australia · Microsoft</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Regulatory Snapshot -->
+  <div class="card">
+    <div style="padding:12px 16px 4px">
+      <div class="section-hdr" style="margin-bottom:0">Regulatory Deadline Snapshot</div>
+    </div>
+    <div class="reg-item">
+      <div class="reg-left">
+        <div class="reg-dot" style="background:#2E74B5;box-shadow:0 0 0 2px #2E74B5"></div>
+        <div class="reg-line"></div>
+      </div>
+      <div>
+        <span class="reg-badge badge-active">Active now</span>
+        <div class="reg-name">DORA</div>
+        <div class="reg-date">January 2025</div>
+        <div class="reg-desc">EU Digital Operational Resilience Act. 83% of EU financial entities have formal cost estimates. 64% budgeting €2–5M per institution. 3,600+ German institutions responding.</div>
+      </div>
+    </div>
+    <div class="reg-item">
+      <div class="reg-left">
+        <div class="reg-dot" style="background:#BF8A14;box-shadow:0 0 0 2px #BF8A14"></div>
+        <div class="reg-line"></div>
+      </div>
+      <div>
+        <span class="reg-badge badge-upcoming">12 months</span>
+        <div class="reg-name">KSA e-invoicing</div>
+        <div class="reg-date">July 2026</div>
+        <div class="reg-desc">Fatoorah Phase 2 mandatory for all Saudi businesses. Requires ZATCA-compliant systems — immediate ERP and SAP integration demand.</div>
+      </div>
+    </div>
+    <div class="reg-item">
+      <div class="reg-left">
+        <div class="reg-dot" style="background:#BF8A14;box-shadow:0 0 0 2px #BF8A14"></div>
+        <div class="reg-line"></div>
+      </div>
+      <div>
+        <span class="reg-badge badge-upcoming">13 months</span>
+        <div class="reg-name">EU AI Act</div>
+        <div class="reg-date">August 2026</div>
+        <div class="reg-desc">Full high-risk AI system compliance required. Fines: €35M or 7% of global turnover. BFSI and Manufacturing most exposed. Credit scoring and risk models in scope.</div>
+      </div>
+    </div>
+    <div class="reg-item">
+      <div class="reg-left">
+        <div class="reg-dot" style="background:#9DC3E6;box-shadow:0 0 0 2px #9DC3E6"></div>
+        <div class="reg-line"></div>
+      </div>
+      <div>
+        <span class="reg-badge badge-building">Building now</span>
+        <div class="reg-name">SAP ECC end</div>
+        <div class="reg-date">December 2027</div>
+        <div class="reg-desc">SAP ECC maintenance deadline approaching. Migration urgency is building now — consulting capacity already constrained, rates rising 30–50% in 2026–27.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Competitor Mini-Grid -->
+    <div class="card" style="overflow:hidden">
+    <div style="padding:12px 14px 8px">
+      <div class="section-hdr" style="margin-bottom:2px">Competitor quick-scan</div>
+      <div style="font-size:10.5px;color:var(--t3);margin-bottom:10px">10 peers across Tier 1 and mid-tier. Swipe to scroll.</div>
+    </div>
+    <div class="ctx-scroll">
+      <table class="ctx-table">
+        <thead>
+          <tr>
+            <th style="text-align:left;min-width:120px">Company</th>
+            <th>Revenue</th>
+            <th>Growth (CC)</th>
+            <th style="min-width:110px">AI Platform</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ctx-name">TCS</span> <span class="ctx-tier-t1">T1</span></td><td class="ctx-rev">$30.0B</td><td class="ctx-grow-neg">−2.4%</td><td class="ctx-ai">WisdomNext</td></tr>
+          <tr><td><span class="ctx-name">Cognizant</span> <span class="ctx-tier-t1">T1</span></td><td class="ctx-rev">$21.1B <span style="font-size:9px;color:var(--t3)">CY25</span></td><td class="ctx-grow-pos">+6.4%</td><td class="ctx-ai">Neuro AI Suite</td></tr>
+          <tr><td><span class="ctx-name">Infosys</span> <span class="ctx-tier-t1">T1</span></td><td class="ctx-rev">$20.2B</td><td class="ctx-grow-pos">+3.1%</td><td class="ctx-ai">Topaz Fabric</td></tr>
+          <tr><td><span class="ctx-name">HCLTech</span> <span class="ctx-tier-t1">T1</span></td><td class="ctx-rev">$14.7B</td><td class="ctx-grow-pos">+3.9%</td><td class="ctx-ai">AI Force</td></tr>
+          <tr><td><span class="ctx-name">Wipro</span> <span class="ctx-tier-t1">T1</span></td><td class="ctx-rev">$9.9B</td><td class="ctx-grow-neg">−1.6%</td><td class="ctx-ai">ai360</td></tr>
+          <tr><td><span class="ctx-name">TechM</span> <span class="ctx-tier-mid">Mid</span></td><td class="ctx-rev">$6.4B</td><td class="ctx-grow-flat">+0.6%</td><td class="ctx-ai">AmplifAI</td></tr>
+          <tr><td><span class="ctx-name">LTM</span> <span class="ctx-tier-mid">Mid</span></td><td class="ctx-rev">$4.8B</td><td class="ctx-grow-pos">+5.3%</td><td class="ctx-ai">BlueVerse</td></tr>
+          <tr><td><span class="ctx-name">Mphasis</span> <span class="ctx-tier-mid">Mid</span></td><td class="ctx-rev">$1.80B</td><td class="ctx-grow-pos">+6.7%</td><td class="ctx-ai">NeoIP</td></tr>
+          <tr><td><span class="ctx-name">Coforge</span> <span class="ctx-tier-mid">Mid</span></td><td class="ctx-rev">$1.87B</td><td class="ctx-grow-pos">+28.7%</td><td class="ctx-ai">Quasar</td></tr>
+          <tr><td><span class="ctx-name">Persistent</span> <span class="ctx-tier-mid">Mid</span></td><td class="ctx-rev">$1.65B</td><td class="ctx-grow-pos">+17.4%</td><td class="ctx-ai">SASVA</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="padding:8px 14px 12px">
+      <a href="#competitors" style="font-size:11px;color:var(--blue);text-decoration:none;font-weight:500">View full profiles in Section 3 →</a>
+    </div>
+  </div>
+
+  <!-- Geo Heatmap -->
+  <div class="card">
+    <div style="padding:12px 16px 8px">
+      <div class="section-hdr" style="margin-bottom:0">Geography Signal Heatmap</div>
+    </div>
+    <div class="heatmap-scroll">
+      <table class="heatmap-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>IT Growth</th>
+            <th>Regulatory</th>
+            <th>AI Demand</th>
+            <th>Cloud</th>
+            <th>Outsourcing</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="geo-label">Americas</td><td class="hh">High</td><td class="hm">Mod.</td><td class="hh">High</td><td class="hh">High</td><td class="hh">High</td></tr>
+          <tr><td class="geo-label">Europe</td><td class="hh">High</td><td class="hh">High</td><td class="hh">High</td><td class="hm">Mod.</td><td class="hh">High</td></tr>
+          <tr><td class="geo-label">Middle East</td><td class="hh">High</td><td class="hm">Mod.</td><td class="hh">High</td><td class="hm">Mod.</td><td class="hm">Mod.</td></tr>
+          <tr><td class="geo-label">APAC</td><td class="hm">Mod.</td><td class="hm">Mod.</td><td class="hh">High</td><td class="hh">High</td><td class="hm">Mod.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="heatmap-legend">
+      <span class="heatmap-legend-label">Signal:</span>
+      <span class="leg-chip hh">High</span>
+      <span class="leg-chip hm">Moderate</span>
+      <span class="leg-chip hl" style="border:0.5px solid #9DC3E6">Developing</span>
+    </div>
+    <div class="heatmap-note">Middle East "High" growth momentum reflects 17.9% CAGR — fastest-growing IT services geography globally. "Moderate" = developing, not weak.</div>
+  </div>
+
+  <!-- AI Maturity -->
+  <div class="card">
+    <div style="padding:12px 16px 4px">
+      <div class="section-hdr" style="margin-bottom:0">AI Market Transition — Manufacturing, 2025</div>
+    </div>
+    <div class="ai-bar">
+      <div class="ai-seg" style="flex:47;background:#E9ECEF">
+        <div class="ai-pct" style="color:#495057">~50%</div>
+        <div class="ai-lab" style="color:#6B7280">Exploring /<br>pre-pilot</div>
+      </div>
+      <div class="ai-seg" style="flex:43;background:#2E74B5">
+        <div class="ai-pct" style="color:#fff">~45%</div>
+        <div class="ai-lab" style="color:#BDD7EE">In production<br>(not industrialized)</div>
+      </div>
+      <div class="ai-seg" style="flex:10;background:#1F3864;min-width:72px">
+        <div class="ai-pct" style="color:#fff">5%</div>
+        <div class="ai-lab" style="color:#9DC3E6">Industrialized<br>end-to-end</div>
+      </div>
+    </div>
+    <div class="ai-insight">The gap between "in production" and "industrialized" is where implementation and managed services demand concentrates.</div>
+    <div class="ai-src">Capgemini-Microsoft · WEF Lighthouse Network</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     SECTION 1: GEO & MARKET SIGNALS
+══════════════════════════════════════════════════════════ -->
+
+
+<div class="section" id="geo">
+  <div class="section-hdr">Section 1 · Geo &amp; Market Signals</div>
+  <div class="section-desc">Macro-level technology spending, economic, and regulatory signals across ITCI's four primary geographies.</div>
+
+  <!-- 1.1 Americas -->
+    <div class="card ro-card">
+    <div class="ro-hdr risk-hdr">Risks<span class="ro-badge">1.1 · Americas</span></div>
+    <ul class="ro-list risk-list">
+        <li>H-1B wage-tier lottery + $100K surcharge (effective Sep 2025) materially increases onsite delivery costs for all Indian IT firms operating in the US. <span class="src-pop" data-src="isg">ISG</span></li>
+        <li>US tariff regime raised effective import rate to 7.7% — highest since 1947 — compressing margins for Manufacturing and CPG clients. <span class="src-pop" data-src="isg">ISG</span></li>
+        <li>Tariffs decelerating smaller discretionary IT services projects across CPG and Manufacturing. <span class="src-pop" data-src="isg">ISG</span></li>
+    </ul>
+  </div>
+
+  <div class="card ro-card">
+    <div class="ro-hdr opp-hdr">Opportunities</div>
+    <ul class="ro-list opp-list">
+        <li>Worldwide IT spend projected at $6.31T in 2026, +13.5% YoY; IT services growing 8.7%. <span class="src-pop" data-src="gartner-2026">Gartner</span></li>
+        <li>$13B in IT contracts up for renewal by end-2025; <span class="src-pop" data-src="isg">ISG</span> 68% of CIOs planning a 20% reduction in vendor count — structural window for consolidated multi-service providers. <span class="src-pop" data-src="sap-cio">SAP CIO Survey</span></li>
+        <li>CPG AI adoption: 71% in at least one function in 2024 (up from 42% in 2023). <span class="src-pop" data-src="mckinsey-latentview-2024">McKinsey / LatentView</span> 97% of CPG/retail expect AI spend to increase next fiscal year. <span class="src-pop" data-src="nvidia-jan2025">NVIDIA</span></li>
+        <li>Tariffs redirecting CPG and Manufacturing spend toward large cost-optimization and AI-led automation programs — which remain resilient even as smaller projects slow. <span class="src-pop" data-src="isg">ISG</span></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="sig-lens">
+      <div class="sig-lens-label">ITCI Lens</div>
+      <div class="sig-lens-text">ITCI's Americas-concentrated revenue base sits at the intersection of all four macro forces simultaneously. The H-1B surcharge resets the onsite delivery cost baseline industry-wide for all Indian IT firms equally. The $13B renewal wave and 68% CIO vendor-reduction intention represent a structural procurement shift directly affecting mid-tier IT firms with multi-vertical Americas portfolios.</div>
+    </div>
+  </div>
+
+  <!-- 1.2 Europe -->
+    <div class="card ro-card">
+    <div class="ro-hdr risk-hdr">Risks<span class="ro-badge">1.2 · Europe</span></div>
+    <ul class="ro-list risk-list">
+        <li>SAP consulting rates projected to rise 30–50% in 2026–27 as 30,000+ remaining ECC customers compete for a constrained SI talent pool. <span class="src-pop" data-src="ic-euro-2025">IC Euro</span></li>
+        <li>EU AI Act fines of up to €35M or 7% of global turnover for non-compliance by August 2026. <span class="src-pop" data-src="eu-ai-act">European Commission AI Act</span></li>
+    </ul>
+  </div>
+
+  <div class="card ro-card">
+    <div class="ro-hdr opp-hdr">Opportunities</div>
+    <ul class="ro-list opp-list">
+        <li>European IT spend projected at $1.4T in 2026, +11.1%. <span class="src-pop" data-src="gartner-2026">Gartner, 2026</span></li>
+        <li>DORA (Jan 2025 active): 83% of EU financial entities have formal cost estimates; 64% budgeting €2–5M/institution — mandatory, committed spend. <span class="src-pop" data-src="deloitte-dora-2025">Deloitte</span> 3,600+ German institutions responding. <span class="src-pop" data-src="fortinet-2026">Fortinet, 2026</span></li>
+        <li>EU AI Act August 2026 deadline creates non-discretionary compliance programs in BFSI and Manufacturing regardless of macro conditions. <span class="src-pop" data-src="eu-ai-act">EU AI Act</span></li>
+        <li>European banking cloud outsourcing +13.5% YoY to avg €57M/institution. <span class="src-pop" data-src="ecb-feb2025">ECB</span> UK: 57% of organisations planning outsourcing increase in 2025.</li>
+        <li>CPG S/4HANA migration wave (Nestlé 112 countries, Unilever Clean Core, LVMH) generating sustained multi-year SI work with consulting talent tightening and pricing power rising. <span class="src-pop" data-src="ic-euro-2025">IC Euro</span></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="sig-lens">
+      <div class="sig-lens-label">ITCI Lens</div>
+      <div class="sig-lens-text">European CPG and BFSI are generating the most immediate IT services demand. The SAP migration wave creates sustained multi-year program work with consulting talent tightening and rates rising through 2027. The EU AI Act August 2026 deadline creates mandatory, time-bound compliance spend in BFSI and Manufacturing — formally budget-committed by 83% of European institutions. European banking cloud adoption and UK outsourcing expansion signal live procurement activity across the region.</div>
+    </div>
+  </div>
+
+  <!-- 1.3 Middle East -->
+    <div class="card ro-card">
+    <div class="ro-hdr risk-hdr">Risks<span class="ro-badge">1.3 · Middle East</span></div>
+    <ul class="ro-list risk-list">
+        <li>Large KSA public-sector and regulated-sector programs face significant structural constraints for pure offshore models — established local presence or a credentialed local partnership is typically required.</li>
+        <li>Saudization and Emiratization requirements demand 100,000+ specialised tech workers annually, limiting staffing model options for Indian IT firms.</li>
+    </ul>
+  </div>
+
+  <div class="card ro-card">
+    <div class="ro-hdr opp-hdr">Opportunities</div>
+    <ul class="ro-list opp-list">
+        <li>KSA IT services market: $20.1B in 2025, projected $45.8B by 2030 at 17.9% CAGR — fastest-growing IT services geography globally. <span class="src-pop" data-src="mordor-ksa-2025">Mordor Intelligence</span></li>
+        <li>Middle East BFSI IT: $11.4B in 2025 at 6.1% CAGR — highest BFSI IT growth rate of any region globally. <span class="src-pop" data-src="dataintelo-bfsi-2025">Dataintelo</span></li>
+        <li>KSA e-invoicing mandate (Fatoorah Phase 2) effective July 2026 — ZATCA-compliant systems required for all Saudi businesses, creating immediate ERP/SAP integration demand. <span class="src-pop" data-src="zatca-2025">ZATCA</span></li>
+        <li>GCC banks moved AI from pilot to production in 2025. <span class="src-pop" data-src="mors-dec2025">Mors Software</span> Alibaba Cloud + Wio Bank MoU for AI-powered banking agents on local Dubai infrastructure. <span class="src-pop" data-src="alibaba-cloud-oct2025">Alibaba Cloud</span></li>
+        <li>Microsoft Saudi Azure construction complete (Dec 2024), enabling local data-sovereign cloud deployment for banking and government. <span class="src-pop" data-src="microsoft-dec2024">Microsoft</span></li>
+        <li>Saudi Aramco deployed $1.8B in AI-realised value in 2024 across 442 use cases — signals executive-level AI commitment at the highest levels of Saudi industry. <span class="src-pop" data-src="aramco-2024">Saudi Aramco</span></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="sig-lens">
+      <div class="sig-lens-label">ITCI Lens</div>
+      <div class="sig-lens-text">The Middle East is the fastest-growing IT services geography globally at 17.9% CAGR, driven by Vision 2030 mandates that are structural rather than cyclical. Local cloud infrastructure — Microsoft Saudi Azure and expanding AWS — removes a previous barrier to enterprise cloud adoption in banking and government. The July 2026 e-invoicing mandate is a specific, time-bound demand signal for ERP and SAP integration capabilities. Large KSA programs typically require established local presence or a credentialed local partnership — pure offshore delivery faces significant structural constraints.</div>
+    </div>
+  </div>
+
+  <!-- 1.4 APAC -->
+    <div class="card ro-card">
+    <div class="ro-hdr risk-hdr">Risks<span class="ro-badge">1.4 · APAC</span></div>
+    <ul class="ro-list risk-list">
+        <li>Infosys acquired Versent Group (A$233M, AUD 211M revenue, 650 staff, AWS Premier, 40%+ ASX100 clients) — 6x Blazeclan's estimated FY24 revenue, locking in key AWS credentials and enterprise coverage. <span class="src-pop" data-src="infosys-versent-aug2025">Infosys</span></li>
+        <li>Capgemini acquired Cloud4C Singapore, securing a Singapore-anchored hybrid cloud managed-services position. <span class="src-pop" data-src="cci-aug2025">CCI Filing</span></li>
+        <li>TCS launched two Singapore innovation centres in 2025 (AI Research &amp; Innovation Centre Jul 2025; Google Cloud Gemini Centre Dec 2025), deepening its Singapore enterprise presence.</li>
+        <li>Wipro signed a $1B Olam transformation deal and acquired Mindsprint — 3,200 staff — in April 2026, establishing a significant Singapore-HQ enterprise footprint.</li>
+        <li>Australia's whole-of-government AWS arrangement channels government cloud programs through a defined, credentialed partner network. <span class="src-pop" data-src="dta-jan2025">DTA Australia</span></li>
+    </ul>
+  </div>
+
+  <div class="card ro-card">
+    <div class="ro-hdr opp-hdr">Opportunities</div>
+    <ul class="ro-list opp-list">
+        <li>Australia public cloud market: $24–29B in 2025. AWS leads at 32.3% IaaS share; Azure at 23.6% and growing fastest. <span class="src-pop" data-src="synergy-2025">Synergy Research</span></li>
+        <li>Singapore: 74% of enterprises with 200+ employees adopted at least one public cloud by end-2025. AWS committed an additional $12B in Singapore infrastructure between 2024 and 2028.</li>
+        <li>APAC cloud and digital transformation demand is structurally growing — greenfield enterprise AI, cloud migration, and managed services programs are active across ANZ and Singapore MNC ecosystem.</li>
+        <li>Blazeclan's AWS Premier credentials, Snowflake Elite partnership, and nine-country operational footprint provide a foundation to compete in cloud-native programs across the region.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="sig-lens">
+      <div class="sig-lens-label">ITCI Lens</div>
+      <div class="sig-lens-text">The APAC cloud market is large and growing. These competitor moves are directionally relevant rather than directly comparable to Blazeclan's current scale — they illustrate the pace and nature of competitive investment in the region. Infosys-Versent is six times Blazeclan's estimated FY24 revenue with AWS Premier sovereign cloud credentials and 40%+ ASX100 client coverage. Australia's whole-of-government AWS arrangement routes government programs through a defined partner network. Blazeclan's FY24 revenue and pipeline trajectory require internal data to assess against this intensified competitive context.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     SECTION 2: INDUSTRY SIGNALS
+══════════════════════════════════════════════════════════ -->
+
+
+<div class="section" id="industry">
+  <div class="section-hdr">Section 2 · Industry Signals</div>
+  <div class="section-desc">Technology investment shifts, AI adoption patterns, and IT budget direction across ITCI's four core verticals.</div>
+
+  <!-- 2.1 CPG & Retail -->
+    <div class="card ro-card">
+    <div class="ro-hdr risk-hdr">Risks<span class="ro-badge">2.1 · CPG &amp; Retail</span></div>
+    <ul class="ro-list risk-list">
+        <li>Tariffs decelerating smaller discretionary IT projects in CPG and retail while larger cost-optimization programs remain resilient. <span class="src-pop" data-src="isg">ISG</span></li>
+        <li>SAP consulting talent pool constrained — rates rising 30–50% in 2026–27. <span class="src-pop" data-src="ic-euro-2025">IC Euro</span> Delivery capacity risk for firms without established S/4HANA credentials in a supply-constrained market.</li>
+    </ul>
+  </div>
+
+  <div class="card ro-card">
+    <div class="ro-hdr opp-hdr">Opportunities</div>
+    <ul class="ro-list opp-list">
+        <li>US retail technology budgets: $113B in 2026, +6.6% YoY; software is 46% of total retail tech spend. <span class="src-pop" data-src="forrester-retail-2026">Forrester, 2026</span></li>
+        <li>64% of SAP customers expect to be live or mid-migration to S/4HANA by end-2025 → sustained multi-year SI work. SAP consulting market exceeded $16B in 2025. <span class="src-pop" data-src="asug-precisely-2025">ASUG / Precisely</span> <span class="src-pop" data-src="ic-euro-2025">IC Euro</span></li>
+        <li>CPG AI: 89% using or piloting AI; 97% expect AI spend to increase next fiscal year. <span class="src-pop" data-src="nvidia-jan2025">NVIDIA</span> 100% of surveyed retailers committed AI funding for 2025. <span class="src-pop" data-src="valere-mar2025">Valere</span></li>
+        <li>Retail media network spend: $58.79B in 2025 → $69.33B in 2026, driving data engineering and analytics integration demand. <span class="src-pop" data-src="emarketer-h2-2025">eMarketer</span></li>
+        <li>B2B ecommerce adding $11.16T at 15.2% CAGR through 2028 → platform and integration services demand. <span class="src-pop" data-src="technavio-2025">Technavio</span></li>
+        <li>Tariff-driven cost pressure redirecting CPG spend toward supply chain resilience and automation — direct adjacency to ERP and analytics. <span class="src-pop" data-src="isg">ISG</span></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="sig-lens">
+      <div class="sig-lens-label">ITCI Lens</div>
+      <div class="sig-lens-text">CPG and Retail has moved into a Day-2 AI phase: large clients have substantially built digital platforms and incremental investment is shifting toward intelligence layers — demand forecasting AI, supply chain optimization, retail media analytics, and agentic commerce. The 2027 SAP ECC deadline creates a mandatory migration wave with rising consulting rates and constrained talent supply. IT services firms with verified S/4HANA credentials are in a structurally favorable demand position through 2027. Tariff-driven cost pressure redirects spend toward cost-optimization and supply chain resilience — direct adjacencies to ERP and analytics service lines.</div>
+    </div>
+  </div>
+
+  <!-- 2.2 Manufacturing -->
+    <div class="card ro-card">
+    <div class="ro-hdr risk-hdr">Risks<span class="ro-badge">2.2 · Manufacturing</span></div>
+    <ul class="ro-list risk-list">
+        <li>Only 5% of manufacturers have industrialized end-to-end digital operations — large gap between AI deployment (~50%) and industrialization creates execution-risk in scoping and delivery expectations. <span class="src-pop" data-src="capgemini-microsoft-2025">Capgemini-Microsoft</span></li>
+        <li>Tariffs and supply chain disruption creating capital expenditure uncertainty — some manufacturers pausing or deprioritizing smaller discretionary programs. <span class="src-pop" data-src="isg">ISG</span></li>
+    </ul>
+  </div>
+
+  <div class="card ro-card">
+    <div class="ro-hdr opp-hdr">Opportunities</div>
+    <ul class="ro-list opp-list">
+        <li>Global manufacturing digital transformation spend: $224.7B in 2026, +13.8% YoY. Automotive leads at $87.3B. <span class="src-pop" data-src="abi-research-2026">ABI Research, 2026</span></li>
+        <li>Cloud PLM: 42% market share growing at 8.1% CAGR; 81% of industrial companies expect SaaS to become the PLM standard — active migration pipeline from the 58% still on-premise. <span class="src-pop" data-src="custom-market-insights-2026">Custom Market Insights, 2026</span> <span class="src-pop" data-src="aras-2024">Aras</span></li>
+        <li>~45% of manufacturers have AI in production but have not industrialized it — this gap is where implementation, integration, and managed services demand concentrates. <span class="src-pop" data-src="capgemini-microsoft-2025">Capgemini-Microsoft</span> <span class="src-pop" data-src="wef-oct2024">WEF</span></li>
+        <li>172 WEF Lighthouse factories reporting 50% average labour productivity boost — executive proof points driving broader adoption across industrial sectors. <span class="src-pop" data-src="wef-oct2024">WEF</span></li>
+        <li>Reshoring: 244,000 US manufacturing jobs in 2024; tariffs cited as motivator in 454% more decisions in 2025 vs 2024; 88% in high/medium-high-tech sectors → greenfield plant IT demand across MES, IoT, and data infrastructure. <span class="src-pop" data-src="reshoring-2024">Reshoring Initiative</span></li>
+        <li>MES market doubling to $40.3B by 2035. <span class="src-pop" data-src="abi-research-2026">ABI Research, 2026</span></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="sig-lens">
+      <div class="sig-lens-label">ITCI Lens</div>
+      <div class="sig-lens-text">Manufacturing has passed an inflection where roughly half of large manufacturers have AI in production, but only 5% have industrialized it. The gap between deployment and industrialization is where implementation and managed services work concentrates. Cloud PLM growing at 8.1% CAGR with 42% current share and 81% of industrial companies expecting SaaS to become standard represents a defined and active migration market. Reshoring-driven new high-tech manufacturing capacity creates greenfield plant IT demand. Tariffs are redirecting manufacturing IT toward cost-optimization and automation rather than reducing overall spend.</div>
+    </div>
+  </div>
+
+  <!-- 2.3 Travel & Hospitality -->
+    <div class="card ro-card">
+    <div class="ro-hdr risk-hdr">Risks<span class="ro-badge">2.3 · Travel &amp; Hospitality</span></div>
+    <ul class="ro-list risk-list">
+        <li>Legacy maintenance consumes 60–80% of T&amp;H IT budgets, limiting available budget for net-new capability programs. <span class="src-pop" data-src="rise-up-labs-2026">Rise Up Labs, 2026</span></li>
+        <li>Hotel loyalty program costs rising 4.4% annually vs 2.7% revenue growth — financial pressure on programme investment even as membership scale grows. <span class="src-pop" data-src="whitesky-sep2025">Whitesky</span></li>
+    </ul>
+  </div>
+
+  <div class="card ro-card">
+    <div class="ro-hdr opp-hdr">Opportunities</div>
+    <ul class="ro-list opp-list">
+        <li>Airline IT spend: $37B in 2024 (up from $35B in 2023); IT as % of revenue rose to 3.8%; 72% of airline IT executives expect further increase in 2025. <span class="src-pop" data-src="sita-2024">SITA</span> Data and GenAI is the top investment priority for 56% of airlines.</li>
+        <li>Hotel IT grew 4.6% in 2024 vs 4.0% total expense growth — IT outpacing overall hotel cost inflation. Biggest increases in PMS, reservations, POS, and guest-facing technologies. <span class="src-pop" data-src="cbre-jul2025">CBRE</span></li>
+        <li>Oracle OPERA Cloud: 31%+ YoY increase in properties; Accor migrating its entire global portfolio across 110 countries to OPERA Cloud PMS — a live, large-scale procurement wave. <span class="src-pop" data-src="oracle-sep2025">Oracle</span></li>
+        <li>AI in production with quantified outcomes: Four Seasons Peninsula Papagayo — 50% buffet waste reduction in 8 months; IHG predictive housekeeping AI; Hilton and Marriott deploying AI for pricing. <span class="src-pop" data-src="bcg-feb2026">BCG, Feb 2026</span></li>
+        <li>Legacy maintenance backlog at 60–80% of T&amp;H IT budgets creates structural, sustained multi-year modernization work regardless of discretionary budget conditions. <span class="src-pop" data-src="rise-up-labs-2026">Rise Up Labs, 2026</span></li>
+        <li>Total travel spending forecast at $1.37T in 2026; online bookings projected at $1.07T in 2025.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="sig-lens">
+      <div class="sig-lens-label">ITCI Lens</div>
+      <div class="sig-lens-text">Both airlines and hotels are increasing IT spend above general expense growth trends. The sector is in a core-systems modernisation phase anchored by PMS, CRS, and loyalty platform replacement — Oracle OPERA Cloud is emerging as the consolidation standard, with large-scale migrations underway at major hotel groups. AI is past pilot in T&H with quantified outcomes. Legacy maintenance at 60–80% of T&H IT budgets creates a structural modernization backlog supporting sustained multi-year program work. Loyalty platform economics force platform investment regardless of discretionary budget conditions.</div>
+    </div>
+  </div>
+
+  <!-- 2.4 BFSI -->
+    <div class="card ro-card">
+    <div class="ro-hdr risk-hdr">Risks<span class="ro-badge">2.4 · BFSI</span></div>
+    <ul class="ro-list risk-list">
+        <li>61% of global banking IT is run-the-bank operations — the addressable change-the-bank portion is only 39% of the $176B total market. <span class="src-pop" data-src="ey-2025">EY</span></li>
+        <li>Only 8% of banks developing GenAI at strategic enterprise level; 78% remain tactical — limits average deal size and duration for AI-led engagements. <span class="src-pop" data-src="ibm-feb2025">IBM IBV</span></li>
+        <li>Regulatory compliance programs are mandatory but competitively neutral — every IT services firm faces the same compliance-driven opportunity simultaneously with no structural advantage for any single provider.</li>
+    </ul>
+  </div>
+
+  <div class="card ro-card">
+    <div class="ro-hdr opp-hdr">Opportunities</div>
+    <ul class="ro-list opp-list">
+        <li>Global banking IT spend: $176B in 2025, +5.4% YoY. Banking AI spend: $31.3B in 2024 growing to ~$40B in 2025 at 27% CAGR. <span class="src-pop" data-src="ey-2025">EY</span> <span class="src-pop" data-src="statista-2025">Statista</span></li>
+        <li>DORA compliance (Jan 2025 active): 64% of EU financial entities budgeting €2–5M/institution — mandatory, committed spend. <span class="src-pop" data-src="deloitte-dora-2025">Deloitte</span> 3,600+ German institutions responding. <span class="src-pop" data-src="fortinet-2026">Fortinet, 2026</span></li>
+        <li>EU AI Act August 2026: mandatory governance for AI in credit scoring and risk assessment — BFSI is the most exposed sector. <span class="src-pop" data-src="eu-ai-act">EU AI Act</span></li>
+        <li>European banking cloud outsourcing +13.5% YoY; UK outsourcing expansion adding ~£3B. <span class="src-pop" data-src="ecb-feb2025">ECB</span></li>
+        <li>Middle East BFSI: $11.4B at 6.1% CAGR — highest BFSI growth globally; GCC banks actively deploying AI in production. <span class="src-pop" data-src="dataintelo-bfsi-2025">Dataintelo</span> <span class="src-pop" data-src="mors-dec2025">Mors Software</span></li>
+        <li>GenAI industrialization gap (52% using vs 8% at strategic level) → sustained AI implementation and governance services work. <span class="src-pop" data-src="ibm-feb2025">IBM IBV</span></li>
+        <li>Core banking modernization market: $17.94B in 2026; mid-sized banks and digital entrants actively replacing legacy platforms.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="sig-lens">
+      <div class="sig-lens-label">ITCI Lens</div>
+      <div class="sig-lens-text">BFSI IT budgets are growing but 61% remains in run-the-bank. Within the 39% change-the-bank portion, regulatory compliance — DORA, Basel IV, EU AI Act — is the least discretionary category: mandatory, time-bound, and formally budget-committed by 83% of European institutions. GenAI adoption is broad (52%) but industrialization is narrow (8%) — this gap represents the AI implementation and governance services opportunity. The Middle East BFSI market is growing faster than any other geography at 6.1% CAGR with local cloud infrastructure now deployable.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     SECTION 3: COMPETITIVE INTELLIGENCE
+══════════════════════════════════════════════════════════ -->
+
+
+
+<!-- ══════════════════════════════════════════════════════════
+     SECTION 3: COMPETITIVE INTELLIGENCE
+══════════════════════════════════════════════════════════ -->
+<div class="section" id="competitors">
+  <div class="section-hdr">Section 3 · Competitive Intelligence</div>
+  <div class="section-desc">Financial and strategic profiles across five Tier 1 incumbents and five mid-tier challengers. A competitive context table leads the section for rapid CEO scanning, followed by full profiles. All data sourced from FY2026 annual reports, earnings transcripts, and investor presentations (April 2025–March 2026). Cognizant on calendar year CY2025.</div>
+
+  <!-- Competitive Landscape At A Glance -->
+  <div class="card" style="overflow:hidden;margin-bottom:16px">
+    <div style="padding:12px 16px 8px;background:var(--lblue);border-bottom:1px solid var(--border)">
+      <div class="section-hdr" style="margin:0;font-size:10px">Competitive Landscape at a Glance</div>
+      <div style="font-size:10px;color:var(--t3);margin-top:2px">All 10 peers plus ITCI reference row. Swipe to scroll. CC = Constant Currency.</div>
+    </div>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
+      <table class="ctx-table">
+        <thead>
+          <tr>
+            <th>Company</th><th>Tier</th><th>Revenue</th><th>Growth (CC)</th><th>EBIT</th><th style="min-width:130px">AI Platform</th><th>AI Revenue</th><th style="min-width:120px">Key FY26 Move</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ctx-name">TCS</span></td><td style="text-align:center"><span class="ctx-tier-t1">T1</span></td><td class="ctx-rev">$30.0B</td><td class="ctx-grow-neg">−2.4%</td><td style="text-align:center;font-weight:600">25.0%</td><td class="ctx-ai">WisdomNext</td><td style="text-align:center;font-weight:600;color:var(--navy)">$2.3B</td><td class="ctx-bpm">Coastal Cloud<br><span style="font-size:9.5px;color:var(--t3)">$700M acqn</span></td></tr>
+          <tr><td><span class="ctx-name">Cognizant</span></td><td style="text-align:center"><span class="ctx-tier-t1">T1</span></td><td class="ctx-rev">$21.1B<span style="font-size:9px;color:var(--t3)"> CY25</span></td><td class="ctx-grow-pos">+6.4%</td><td style="text-align:center;font-weight:600">15.8%</td><td class="ctx-ai">Neuro AI Suite</td><td style="text-align:center;color:var(--t3);font-size:9.5px">N/D</td><td class="ctx-bpm">Belcan ER&amp;D<br><span style="font-size:9.5px;color:var(--t3)">$1.3B acqn</span></td></tr>
+          <tr><td><span class="ctx-name">Infosys</span></td><td style="text-align:center"><span class="ctx-tier-t1">T1</span></td><td class="ctx-rev">$20.2B</td><td class="ctx-grow-pos">+3.1%</td><td style="text-align:center;font-weight:600">20.3%</td><td class="ctx-ai">Topaz Fabric</td><td style="text-align:center;color:var(--t3);font-size:9.5px">N/D</td><td class="ctx-bpm">Truist $500M<br><span style="font-size:9.5px;color:var(--t3)">GCC BOT deal</span></td></tr>
+          <tr><td><span class="ctx-name">HCLTech</span></td><td style="text-align:center"><span class="ctx-tier-t1">T1</span></td><td class="ctx-rev">$14.7B</td><td class="ctx-grow-pos">+3.9%</td><td style="text-align:center;font-weight:600">17.2%</td><td class="ctx-ai">AI Force</td><td style="text-align:center;font-weight:600;color:var(--navy)">$620M</td><td class="ctx-bpm">AI Factory<br><span style="font-size:9.5px;color:var(--t3)">&gt;$100M deal</span></td></tr>
+          <tr><td><span class="ctx-name">Wipro</span></td><td style="text-align:center"><span class="ctx-tier-t1">T1</span></td><td class="ctx-rev">$9.9B</td><td class="ctx-grow-neg">−1.6%</td><td style="text-align:center;font-weight:600">17.2%</td><td class="ctx-ai">ai360</td><td style="text-align:center;color:var(--t3);font-size:9.5px">N/D</td><td class="ctx-bpm">Mindsprint<br><span style="font-size:9.5px;color:var(--t3)">CPG supply chain</span></td></tr>
+          <tr><td><span class="ctx-name">Tech Mahindra</span></td><td style="text-align:center"><span class="ctx-tier-mid">Mid</span></td><td class="ctx-rev">$6.4B</td><td class="ctx-grow-flat">+0.6%</td><td style="text-align:center;font-weight:600">12.6%</td><td class="ctx-ai">AmplifAI / Helix</td><td style="text-align:center;color:var(--t3);font-size:9.5px">N/D</td><td class="ctx-bpm">Fortius +290bps<br><span style="font-size:9.5px;color:var(--t3)">margin turnaround</span></td></tr>
+          <tr><td><span class="ctx-name">LTM</span></td><td style="text-align:center"><span class="ctx-tier-mid">Mid</span></td><td class="ctx-rev">$4.8B</td><td class="ctx-grow-pos">+5.3%</td><td style="text-align:center;font-weight:600">15.4%</td><td class="ctx-ai">BlueVerse / iNXT</td><td style="text-align:center;color:var(--t3);font-size:9.5px">N/D</td><td class="ctx-bpm">Rebranded LTM<br><span style="font-size:9.5px;color:var(--t3)">69% AI pipeline</span></td></tr>
+          <tr><td><span class="ctx-name">Mphasis</span></td><td style="text-align:center"><span class="ctx-tier-mid">Mid</span></td><td class="ctx-rev">$1.80B</td><td class="ctx-grow-pos">+6.7%</td><td style="text-align:center;font-weight:600">15.3%</td><td class="ctx-ai">NeoIP</td><td style="text-align:center;color:var(--t3);font-size:9.5px">N/D</td><td class="ctx-bpm">TAP acqn<br><span style="font-size:9.5px;color:var(--t3)">CPG AI push</span></td></tr>
+          <tr><td><span class="ctx-name">Coforge</span></td><td style="text-align:center"><span class="ctx-tier-mid">Mid</span></td><td class="ctx-rev">$1.87B</td><td class="ctx-grow-pos">+28.7%</td><td style="text-align:center;font-weight:600">14.4%</td><td class="ctx-ai">Quasar</td><td style="text-align:center;color:var(--t3);font-size:9.5px">N/D</td><td class="ctx-bpm">Cigniti+Encora<br><span style="font-size:9.5px;color:var(--t3)">dual acqns</span></td></tr>
+          <tr><td><span class="ctx-name">Persistent</span></td><td style="text-align:center"><span class="ctx-tier-mid">Mid</span></td><td class="ctx-rev">$1.65B</td><td class="ctx-grow-pos">+17.4%</td><td style="text-align:center;font-weight:600">15.6%</td><td class="ctx-ai">SASVA</td><td style="text-align:center;color:var(--t3);font-size:9.5px">N/D</td><td class="ctx-bpm">Customer Zero AI<br><span style="font-size:9.5px;color:var(--t3)">120+ patents</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="ctx-note">N/D = not separately disclosed. Cognizant on calendar year (CY25). All others FY2026 (April 2025–March 2026). Sources: Company Q4 FY26 earnings releases, annual reports, investor presentations.</div>
+  </div>
+
+<div class="tier-div">
+  <span class="tier-div-label">Tier 1 — Incumbent Scale</span>
+  <span class="tier-div-sub">TCS · Infosys · Wipro · HCLTech · Cognizant</span>
+</div>
+
+  <div class="card">
+    <div class="comp-header" style="border-left:4px solid #1F3864">
+      <div class="comp-name">Tata Consultancy Services (TCS)</div>
+      <div class="comp-period">FY2026 — Full Year (April 2025 – March 2026) · 584,519 employees</div>
+    </div>
+    <div class="comp-rows">
+      <div class="comp-row"><div class="comp-row-label">Revenue (USD)</div><div class="comp-row-val">$30.0B full year (₹2,67,021 Cr; +4.6% INR) | Q4 ₹70,698 Cr — dollar revenue -0.5% YoY due to currency headwinds</div></div>
+      <div class="comp-row"><div class="comp-row-label">Growth</div><div class="comp-row-val">-0.5% USD / -2.4% CC — currency-impacted; EBIT expanded to 25.0% (highest in four years) despite top-line pressure</div></div>
+      <div class="comp-row"><div class="comp-row-label">EBIT Margin</div><div class="comp-row-val">25.0% full year — highest in four years (+70bps YoY excl. exceptional items). Net margin 19.8% (up from 19.0%). Q4 EBIT: 25.3%.</div></div>
+      <div class="comp-row"><div class="comp-row-label">TCV Wins</div><div class="comp-row-val">$40.7B full year (highest ever) / $12B Q4 — five mega-deals closed; vendor-consolidation contracts dominating order book</div></div>
+      <div class="comp-row"><div class="comp-row-label">AI Platform</div><div class="comp-row-val">WisdomNext: evolved from GenAI aggregator to full enterprise agentic automation stack. Drives the "Infrastructure-to-Intelligence" continuum across TCS engagements. $2.3B annualized AI revenue.</div></div>
+      <div class="comp-row"><div class="comp-row-label">AI Revenue</div><div class="comp-row-val">$2.3B annualized AI revenue — crossed in Q4 FY26. Most advanced AI revenue disclosure in the peer group. OpenAI, AMD, and ABB confirmed as strategic AI partners.</div></div>
+      <div class="comp-row comp-threat-row"><div class="comp-row-label">Key Signal</div><div class="comp-row-val">$40.7B TCV at 25.0% EBIT margin — TCS generates the capital to acquire its way into every niche it cannot win organically. Coastal Cloud ($700M) is the playbook: buy boutique expertise, bundle into mega-deals, price mid-tier competitors out of bidding.</div></div>
+      <div class="comp-row comp-threat-row"><div class="comp-row-label">Threat to ITCI</div><div class="comp-row-val">Coastal Cloud acquisition ($700M) — 600+ certified Salesforce, data, and AI specialists embedded in TCS's CPG and Retail Americas pipeline, directly threatening ITCI's Digital Experience practice in its largest vertical (CPG &amp; Retail, 40% revenue).</div></div>
+    </div>
+    <div class="comp-moves"><div class="comp-moves-hdr">Key Strategic Moves</div>
+<div class="comp-move"><div class="comp-move-dot"></div><div>Coastal Cloud acquisition ($700M) — premier US Salesforce, data, and AI consulting firm; 600+ specialists, 3,091 certifications. Operates as distinct brand. <span class="src-pop" data-src="tcs-fy26">TCS Q4 FY26</span></div></div>
+<div class="comp-move"><div class="comp-move-dot"></div><div>OpenAI, AMD, and ABB strategic partnerships — "Build–Partner–Acquire" strategy to capture end-to-end transformation mega-deals. <span class="src-pop" data-src="tcs-fy26">TCS FY26</span></div></div>
+<div class="comp-move"><div class="comp-move-dot"></div><div>$40.7B TCV (all-time record) — five mega-deals closed FY26; global manufacturer supply chain AI transformation among key wins. <span class="src-pop" data-src="tcs-fy26">TCS Q4 FY26, Apr 2026</span></div></div></div>
+    <div class="comp-src">Sources: TCS Q4 FY26 press release (tcs.com/newsroom, April 9, 2026) · TCS Integrated Annual Report FY2026 · TCS FY26 earnings call transcript</div>
+  </div>
+
+  <div class="card">
+    <div class="comp-header" style="border-left:4px solid #2E74B5">
+      <div class="comp-name">Infosys</div>
+      <div class="comp-period">FY2026 — Full Year (April 2025 – March 2026) · 328,594 employees</div>
+    </div>
+    <div class="comp-rows">
+      <div class="comp-row"><div class="comp-row-label">Revenue (USD)</div><div class="comp-row-val">$20.158B full year | Q4 $5.07B — highest revenue ever. FY27 guided at 1.5–3.5% CC amid cautious macro outlook.</div></div>
+      <div class="comp-row"><div class="comp-row-label">Growth</div><div class="comp-row-val">+4.7% USD / +3.1% CC — driven by 96 large deals (highest ever count) and European market recovery</div></div>
+      <div class="comp-row"><div class="comp-row-label">EBIT Margin</div><div class="comp-row-val">20.3% full year (-80bps YoY) — margin deliberately compressed by co-investment deal pricing. $3.7B free cash flow funds aggressive deal structuring.</div></div>
+      <div class="comp-row"><div class="comp-row-label">TCV Wins</div><div class="comp-row-val">$14.9B full year (55% net-new) / 96 large deals — 55% net-new ratio confirms active incumbent displacement. Communications, Manufacturing, and European markets leading.</div></div>
+      <div class="comp-row"><div class="comp-row-label">AI Platform</div><div class="comp-row-val">Infosys Topaz Fabric: AI-first ecosystem embedding GenAI into enterprise operations. 300+ Agentic AI solutions in production. Co-investment model: funds automation buildout to lock long-term contracts.</div></div>
+      <div class="comp-row comp-threat-row"><div class="comp-row-label">Key Signal</div><div class="comp-row-val">$500M Truist Financial GCC Build-Operate-Transfer deal — Infosys builds, operates, and transfers a 4,500-person captive centre in Hyderabad. Capital-intensive BOT model that no mid-tier firm can finance or compete against.</div></div>
+      <div class="comp-row comp-threat-row"><div class="comp-row-label">Threat to ITCI</div><div class="comp-row-val">GCC BOT model ($500M Truist) + 55% net-new displacement across 96 large deals — systematically taking advisory and implementation work from incumbent vendors in BFSI (10%) and Manufacturing (25%). ITCI cannot match the balance sheet required.</div></div>
+    </div>
+    <div class="comp-moves"><div class="comp-moves-hdr">Key Strategic Moves</div>
+<div class="comp-move"><div class="comp-move-dot"></div><div>Truist Financial $500M GCC Build-Operate-Transfer — 4,500 employees, Hyderabad; permanent shift to capital-heavy operating models. <span class="src-pop" data-src="infosys-fy26">Infosys Q4 FY26</span></div></div>
+<div class="comp-move"><div class="comp-move-dot"></div><div>96 large deals at 55% net-new ratio — active incumbent displacement in Communications, Manufacturing, and European markets. <span class="src-pop" data-src="infosys-fy26">Infosys Q4 FY26, Apr 2026</span></div></div>
+<div class="comp-move"><div class="comp-move-dot"></div><div>300+ Agentic AI solutions in production — Topaz Fabric deployed for cost-optimization; $14.9B TCV confirms AI-led deals converting. <span class="src-pop" data-src="infosys-fy26">Infosys FY26</span></div></div></div>
+    <div class="comp-src">Sources: Infosys Q4 FY26 earnings release (infosys.com/investors, April 23, 2026) · Infosys FY26 Annual Report · Q4 FY26 earnings call transcript</div>
+  </div>
+
+  <div class="card">
+    <div class="comp-header" style="border-left:4px solid #1F3864">
+      <div class="comp-name">HCLTech</div>
+      <div class="comp-period">FY2026 — Full Year (April 2025 – March 2026) · 227,181 employees</div>
+    </div>
+    <div class="comp-rows">
+      <div class="comp-row"><div class="comp-row-label">Revenue (USD)</div><div class="comp-row-val">$14.664B full year (+5.9% USD) | ER&amp;D grew 9.8% CC (strongest segment) | HCLSoftware ARR: $1.03B | FY27 guidance: +1.0%–4.0% CC</div></div>
+      <div class="comp-row"><div class="comp-row-label">Growth</div><div class="comp-row-val">+3.9% CC — ER&amp;D dominance drives differentiation. CEO flagged "AI deflation" risk of 3–5% revenue dip in FY27 from AI efficiency compression.</div></div>
+      <div class="comp-row"><div class="comp-row-label">EBIT Margin</div><div class="comp-row-val">17.2% full year (-110bps YoY) | FY27 EBIT guidance: 17.5%–18.5% — disciplined focus on high-yield engineering contracts</div></div>
+      <div class="comp-row"><div class="comp-row-label">AI Platform</div><div class="comp-row-val">HCLTech AI Force: full-stack AI and GenAI platform for OT/IT convergence, software engineering, and enterprise operations. $620M annualized Advanced AI revenue in production. AI Factory programme &gt;$100M with global tech major.</div></div>
+      <div class="comp-row"><div class="comp-row-label">AI Revenue</div><div class="comp-row-val">$620M annualized Advanced AI revenue — production-grade, 25–30% efficiency improvements and 95% accuracy in FS data extraction documented in client deployments.</div></div>
+      <div class="comp-row comp-threat-row"><div class="comp-row-label">Key Signal</div><div class="comp-row-val">$620M in annualized Advanced AI revenue confirmed in production — ER&amp;D at 9.8% CC is the fastest-growing segment and exactly where ITCI's Industry 4.0 and PLM practice operates.</div></div>
+      <div class="comp-row comp-threat-row"><div class="comp-row-label">Threat to ITCI</div><div class="comp-row-val">End-to-end AI transformation of European luxury fashion brand (finance + manufacturing + supply chain + retail in one engagement) — directly threatens ITCI's CPG &amp; Retail vertical (40%). A unified "manufacturing-to-retail" AI platform marginalizes ITCI's isolated SAP consulting modules.</div></div>
+    </div>
+    <div class="comp-moves"><div class="comp-moves-hdr">Key Strategic Moves</div>
+<div class="comp-move"><div class="comp-move-dot"></div><div>European luxury fashion major: end-to-end AI-led transformation spanning finance, HR, manufacturing, supply chain, and retail — unified platform across the full value chain. <span class="src-pop" data-src="hcl-fy26">HCLTech Q4 FY26</span></div></div>
+<div class="comp-move"><div class="comp-move-dot"></div><div>AI Factory programme &gt;$100M with global technology major — Advanced AI revenue crossed $620M annualized. <span class="src-pop" data-src="hcl-fy26">HCLTech FY26</span></div></div>
+<div class="comp-move"><div class="comp-move-dot"></div><div>Semiconductor AI Engineering: AI Force for physical design of next-generation chip platforms — ER&amp;D growing 9.8% CC. <span class="src-pop" data-src="hcl-fy26">HCLTech FY26</span></div></div></div>
+    <div class="comp-src">Sources: HCLTech Q4 FY26 Investor Release (hcltech.com, April 21, 2026) · HCLTech FY26 Annual Report · Q4 FY26 earnings call transcript</div>
+  </div>
+
+  <div class="card">
+    <div class="comp-header" style="border-left:4px solid #2E74B5">
+      <div class="comp-name">Wipro</div>
+      <div class="comp-period">FY2026 — Full Year (April 2025 – March 2026) · 242,156 employees</div>
+    </div>
+    <div class="comp-rows">
+      <div class="comp-row"><div class="comp-row-label">Revenue (USD)</div><div class="comp-row-val">$9.9B IT services (gross ₹926.2B / $10.5B incl. non-IT) | Large deal bookings $7.8B (+45.4% YoY) | Total bookings $16.4B (+14% YoY)</div></div>
+      <div class="comp-row"><div class="comp-row-label">Growth</div><div class="comp-row-val">-1.6% CC — only Tier 1 firm to decline in FY26. Q1 FY27 guidance: -2.0% to 0% CC. Americas BFSI remains structurally soft.</div></div>
+      <div class="comp-row"><div class="comp-row-label">EBIT Margin</div><div class="comp-row-val">17.2% IT services full year (+20bps YoY). ₹150B ($1.8B) buyback approved. Net income: $1,406.5M.</div></div>
+      <div class="comp-row"><div class="comp-row-label">AI Platform</div><div class="comp-row-val">Wipro ai360: WEGA (intelligent automation / AI execution) + WINGS (predictive insights / performance intelligence). New AI Native Business &amp; Platforms unit launched FY26.</div></div>
+      <div class="comp-row comp-threat-row"><div class="comp-row-label">Key Signal</div><div class="comp-row-val">-1.6% CC revenue despite $7.8B deal bookings (+45.4%) — execution gap is the core risk. $16.4B total bookings signals pipeline; conversion to revenue will define FY27.</div></div>
+      <div class="comp-row comp-threat-row"><div class="comp-row-label">Threat to ITCI</div><div class="comp-row-val">Alpha Net Consulting ($70.8M) + Mindsprint (CPG supply chain AI, 3,200 staff, April 2026) together give Wipro upstream consulting in US Manufacturing/MedTech and embedded domain AI in CPG — intercepting architectural decisions before ITCI's SAP and Industry 4.0 bids are even invited.</div></div>
+    </div>
+    <div class="comp-moves"><div class="comp-moves-hdr">Key Strategic Moves</div>
+<div class="comp-move"><div class="comp-move-dot"></div><div>Mindsprint acquisition (Olam Group IT arm, 3,200 staff, 8-year strategic deal, April 2026) — proprietary supply chain AI across farm-to-fork commodity trading and CPG. <span class="src-pop" data-src="wipro-fy26">Wipro, Apr 2026</span></div></div>
+<div class="comp-move"><div class="comp-move-dot"></div><div>Alpha Net Consulting acquisition ($70.8M) — US enterprise consulting client relationships, $37.3M annual revenue; Manufacturing and MedTech specialist access. <span class="src-pop" data-src="wipro-fy26">Wipro Q4 FY26</span></div></div>
+<div class="comp-move"><div class="comp-move-dot"></div><div>₹150B ($1.8B) buyback + MedTech Post Market Surveillance AI engagement — regulated-industry consulting pivot. <span class="src-pop" data-src="wipro-fy26">Wipro FY26</span></div></div></div>
+    <div class="comp-src">Sources: Wipro Q4 FY26 press release (wipro.com, April 16, 2026) · Wipro FY26 SEC Form 6-K · Q4 FY26 earnings call transcript</div>
+  </div>
+
+  <div class="card">
+    <div class="comp-header" style="border-left:4px solid #2E74B5">
+      <div class="comp-name">Cognizant</div>
+      <div class="comp-period">Calendar Year 2025 (January–December 2025) · 351,600 employees</div>
+    </div>
+    <div class="comp-rows">
+      <div class="comp-row"><div class="comp-row-label">Revenue (USD)</div><div class="comp-row-val">$21.1B CY25 / $19.73B CY24 · +6.4% CC in CY25 / +1.9% CC in CY24. Belcan acquisition contributed 260bps to CY25 growth.</div></div>
+      <div class="comp-row"><div class="comp-row-label">Growth</div><div class="comp-row-val">+6.4% CC CY25 — highest growth of Tier 1 peers, aided by Belcan acquisition and NextGen execution</div></div>
+      <div class="comp-row"><div class="comp-row-label">EBIT Margin</div><div class="comp-row-val">15.8% adj. (CY25) — lowest margin among Tier 1 peers; expansion underway. 28 large deals (&gt;$100M) signed in CY25.</div></div>
+      <div class="comp-row"><div class="comp-row-label">AI Platform</div><div class="comp-row-val">Cognizant Neuro® AI Suite / Neuro IT Operations: enterprise orchestration platform embedding agentic AI into mission-critical workflows. Partnerships: Anthropic, Microsoft, Adobe. Named Microsoft's 2025 Partner of Year for Intelligent Automation.</div></div>
+      <div class="comp-row comp-threat-row"><div class="comp-row-label">Key Signal</div><div class="comp-row-val">Belcan ($1.3B) acquisition cross-pollinated with Neuro AI Suite — Cognizant can now combine deep aerospace/industrial engineering credentials with AI orchestration, winning the exact Industry 4.0 and supply chain deals ITCI competes for.</div></div>
+      <div class="comp-row comp-threat-row"><div class="comp-row-label">Threat to ITCI</div><div class="comp-row-val">Belcan's Aerospace and Defense ER&amp;D expertise + Neuro AI Suite freezes ITCI out of the high-end Manufacturing PLM market — Cognizant can now claim domain authority ITCI previously used to differentiate in Manufacturing (25% revenue).</div></div>
+    </div>
+    <div class="comp-moves"><div class="comp-moves-hdr">Key Strategic Moves</div>
+<div class="comp-move"><div class="comp-move-dot"></div><div>Belcan acquisition ($1.3B) — established leadership in Aerospace, Defense, and ER&amp;D; cross-selling Neuro AI into engineering clients. <span class="src-pop" data-src="cognizant-cy25">Cognizant</span></div></div>
+<div class="comp-move"><div class="comp-move-dot"></div><div>Kohler Co. enterprise digital modernization — Neuro IT Operations for manufacturing predictive maintenance and production data transformation. <span class="src-pop" data-src="cognizant-cy25">Cognizant</span></div></div>
+<div class="comp-move"><div class="comp-move-dot"></div><div>28 large deals (&gt;$100M) in CY25 — turnaround converting to deal flow; $1.6B capital return programme maintaining investor confidence. <span class="src-pop" data-src="cognizant-cy25">Cognizant</span></div></div></div>
+    <div class="comp-src">Sources: Cognizant Q4 CY25 &amp; Full-Year 2025 Results (investors.cognizant.com, Feb 2026) · Cognizant CY24 Annual Report · press releases</div>
+  </div>
+
+<div class="tier-div">
+  <span class="tier-div-label">Mid-Tier — High-Growth Challengers</span>
+  <span class="tier-div-sub">LTM · Tech Mahindra · Coforge · Persistent · Mphasis</span>
+</div>
+
+<div class="card">
+    <div class="comp-header">
+      <div class="comp-name">LTM (LTIMindtree)</div>
+      <div class="comp-period">FY2026 — Full Year (April 2025 – March 2026) · 87,950 employees — rebranded from LTIMindtree to LTM in FY26</div>
+    </div>
+    <div class="comp-rows">
+      <div class="comp-row"><div class="comp-row-label">FY Revenue (USD)</div><div class="comp-row-val">$4.764B full year (+6.1% USD / +5.3% CC)<br><span style="font-size:11px;color:#9AA3B0">Cash and investments: $1.63B (all-time high) · 69% of pipeline AI-led</span></div></div>
+      <div class="comp-row"><div class="comp-row-label">Growth (CC)</div><div class="comp-row-val" style="color:#1F3864;font-weight:600">+5.3% CC — post-merger integration complete via rebrand. Fit4Future efficiency programme. FY27 EBIT guidance: 14.0%–18.0%.</div></div>
+      <div class="comp-row"><div class="comp-row-label">EBIT Margin</div><div class="comp-row-val">15.4% FY26 (+90bps YoY). $1.63B cash (all-time high) provides acquisition optionality.<br><span style="font-size:11px;color:#9AA3B0">69% of deal pipeline is AI-led</span></div></div>
+      <div class="comp-row"><div class="comp-row-label">AI Platform</div><div class="comp-row-val">LTM BlueVerse / iNXT: AI-centric platform bridging digital and physical product ecosystems for IT/OT convergence. iNXT targets MedTech and Manufacturing — directly overlapping with PLM and Industry 4.0.</div></div>
+      <div class="comp-row comp-threat-row"><div class="comp-row-label">Threat to ITCI</div><div class="comp-row-val">iNXT platform for digital-physical product ecosystem development explicitly targets IT/OT convergence in Manufacturing and MedTech — directly competing with ITCI's PTC Windchill PLM practice and Industry 4.0 offering. $1.63B cash funds aggressive deal pricing ITCI cannot match.</div></div>
+    </div>
+    <div class="comp-moves">
+      <div class="comp-moves-hdr">Key Strategic Moves</div>
+      <div class="comp-move"><div class="comp-move-dot"></div><div>Rebranded from LTIMindtree to LTM — post-merger integration complete; pivots to "Business Creativity" partner narrative. FY27 go-to-market acceleration beginning.</div></div>
+      <div class="comp-move"><div class="comp-move-dot"></div><div>MedTech iNXT deployment: multi-year product development and support engagement — digital-physical ecosystem connecting hardware with analytics platforms.</div></div>
+      <div class="comp-move"><div class="comp-move-dot"></div><div>Fit4Future programme: EBIT +90bps to 15.4%; $1.63B cash all-time high; 69% AI-led pipeline converting to new deals.</div></div>
+    </div>
+    <div class="comp-src">Sources: LTM Q4 FY26 Earnings Release (April 23, 2026) · LTM FY26 Annual Report · Q4 FY26 investor presentation</div>
+  </div>
+
+  <div class="card">
+    <div class="comp-header" style="border-left:4px solid #4472C4">
+      <div class="comp-name">Tech Mahindra</div>
+      <div class="comp-period">FY2026 — Full Year (April 2025 – March 2026) · 147,623 employees</div>
+    </div>
+    <div class="comp-rows">
+      <div class="comp-row"><div class="comp-row-label">Revenue (USD)</div><div class="comp-row-val">$6.385B full year (+2.0% USD / +0.6% CC) | $3.79B TCV (highest in five years) | Highest-ever total dividend: ₹51/share</div></div>
+      <div class="comp-row"><div class="comp-row-label">Growth</div><div class="comp-row-val">+0.6% CC — stabilized after two years of decline. Project Fortius restructuring complete; entering "reaping returns" growth phase in FY27.</div></div>
+      <div class="comp-row"><div class="comp-row-label">EBIT Margin</div><div class="comp-row-val">12.6% full year (+290bps YoY) — largest single-year EBIT expansion in peer group FY26. FY27 target: 15.0% EBIT margin.</div></div>
+      <div class="comp-row"><div class="comp-row-label">Vertical Mix</div><div class="comp-row-val">Communications 33.1% / Manufacturing 17.3% / BFSI 16.1% — Telecom defining vertical; Manufacturing accelerating under IT/OT convergence</div></div>
+      <div class="comp-row"><div class="comp-row-label">AI Platform</div><div class="comp-row-val">TechM AmplifAI / Project Helix: agentic AI for zero-touch operations and industry use cases. New AI-native pricing: fixed-price and outcome-based contracts replacing T&amp;M billing.</div></div>
+      <div class="comp-row comp-threat-row"><div class="comp-row-label">Key Signal</div><div class="comp-row-val">290bps EBIT expansion in one year — the turnaround is financially real. TechM now has the margin buffer to aggressively underbid mid-tier competitors on Manufacturing and PLM deals. The constraint that protected ITCI from TechM pricing pressure in FY25 no longer applies.</div></div>
+      <div class="comp-row comp-threat-row"><div class="comp-row-label">Threat to ITCI</div><div class="comp-row-val">North American automotive OEM IT/OT support win + restored 12.6% EBIT — TechM can now price Manufacturing engagements aggressively and absorb transition costs ITCI ($400M scale) cannot match.</div></div>
+    </div>
+    <div class="comp-moves"><div class="comp-moves-hdr">Key Strategic Moves</div>
+<div class="comp-move"><div class="comp-move-dot"></div><div>Project Fortius: deliberate exit of low-margin contracts — 290bps EBIT expansion, $3.79B TCV (5-year high), highest-ever dividend ₹51/share. <span class="src-pop" data-src="techm-fy26">TechM Q4 FY26</span></div></div>
+<div class="comp-move"><div class="comp-move-dot"></div><div>Multi-year European telecom AI transformation: global customer support + quote-to-bill + post-sales via agentic AI — flagship FY26 large deal. <span class="src-pop" data-src="techm-fy26">TechM FY26</span></div></div>
+<div class="comp-move"><div class="comp-move-dot"></div><div>North American automotive OEM: strategic application engineering and mission-critical system support — Manufacturing IT/OT convergence beachhead. <span class="src-pop" data-src="techm-fy26">TechM FY26</span></div></div></div>
+    <div class="comp-src">Sources: Tech Mahindra Q4 FY26 Earnings (insights.techmahindra.com, April 22, 2026) · Q4 FY26 earnings call transcript</div>
+  </div>
+
+<div class="card">
+    <div class="comp-header" style="background:#EEF1FB;border-left:4px solid #4472C4">
+      <div class="comp-name">Coforge</div>
+      <div class="comp-period">FY2026 — Full Year (April 2025 – March 2026) · 35,777 employees (incl. Cigniti + Encora)</div>
+    </div>
+    <div class="comp-rows">
+      <div class="comp-row"><div class="comp-row-label">FY Revenue (USD)</div><div class="comp-row-val">$1.870B full year (+29.2% USD / +28.7% CC) — fastest revenue growth of all 10 peers in FY26<br><span style="font-size:11px;color:#9AA3B0">12-month executable order book: $1.75B (record, +16.4% YoY)</span></div></div>
+      <div class="comp-row"><div class="comp-row-label">Growth (CC)</div><div class="comp-row-val" style="color:#1F3864;font-weight:700">+28.7% CC — inorganic via Cigniti and Encora; organic ~15%. EBITDA &gt;20.5% guided FY27.</div></div>
+      <div class="comp-row"><div class="comp-row-label">EBIT Margin</div><div class="comp-row-val">14.4% FY26 / EBITDA &gt;20.5% FY27 guided — 95% workforce AI-certified; 10.9% attrition (industry-leading)<br><span style="font-size:11px;color:#9AA3B0">$158M UK 5-year contract anchors record Q4 FY26</span></div></div>
+      <div class="comp-row"><div class="comp-row-label">AI Platform</div><div class="comp-row-val">Coforge Quasar / ForgeX: composable agentic AI platform enabling outcomes-based pricing. 95% of workforce AI-certified. AI embedded as core delivery mechanism in all large FY26 deals.</div></div>
+      <div class="comp-row comp-threat-row"><div class="comp-row-label">Key Signal</div><div class="comp-row-val">Cigniti + Encora dual acquisitions create an AI-native digital assurance and nearshore engineering firm at $1.87B revenue with &gt;20% EBITDA — Coforge absorbed the most mid-tier market share in FY26.</div></div>
+      <div class="comp-row comp-threat-row"><div class="comp-row-label">Threat to ITCI</div><div class="comp-row-val">Cigniti (AI-native digital assurance) + Encora (9,000+ nearshore engineers, Americas) combination commoditizes ITCI's legacy testing and implementation services in Hospitality (15%) and CPG/Retail (40%) — delivered faster, cheaper, and more AI-natively.</div></div>
+    </div>
+    <div class="comp-moves">
+      <div class="comp-moves-hdr">Key Strategic Moves</div>
+      <div class="comp-move"><div class="comp-move-dot"></div><div>Cigniti Technologies merger (NCLT approval May 2026) — dominance in AI-native digital assurance and software testing. <span class="src-pop" data-src="coforge-fy26">Coforge FY26</span></div></div>
+      <div class="comp-move"><div class="comp-move-dot"></div><div>Encora acquisition — 9,000+ nearshore engineers in Americas; AI engineering talent for US and European CPG, Retail, and Hospitality accounts. <span class="src-pop" data-src="coforge-fy26">Coforge FY26</span></div></div>
+      <div class="comp-move"><div class="comp-move-dot"></div><div>$158M, 5-year UK digital transformation contract — record quarter; $1.75B executable order book (+16.4% YoY). <span class="src-pop" data-src="coforge-fy26">Coforge Q4 FY26, May 2026</span></div></div>
+    </div>
+    <div class="comp-src">Sources: Coforge Q4 FY26 Earnings Release (May 5, 2026) · Coforge FY26 Annual Report · Q4 FY26 investor presentation</div>
+  </div>
+
+<div class="card">
+    <div class="comp-header" style="border-left:4px solid #4472C4">
+      <div class="comp-name">Persistent Systems</div>
+      <div class="comp-period">FY2026 — Full Year (April 2025 – March 2026) · 27,502 employees</div>
+    </div>
+    <div class="comp-rows">
+      <div class="comp-row"><div class="comp-row-label">FY Revenue (USD)</div><div class="comp-row-val">$1.654B full year (+17.3% USD / +17.4% CC) — fastest-growing IT services brand globally (Brand Finance 2026)<br><span style="font-size:11px;color:#9AA3B0">120+ AI patents filed in FY26</span></div></div>
+      <div class="comp-row"><div class="comp-row-label">Growth (CC)</div><div class="comp-row-val" style="color:#1F3864;font-weight:700">+17.4% CC — pure-play digital engineering. FY27 analyst consensus: 15%–16%. No legacy BPO or infrastructure drag.</div></div>
+      <div class="comp-row"><div class="comp-row-label">EBIT Margin</div><div class="comp-row-val">15.6% FY26 — maintained despite wage inflation via "Customer Zero" Agentic AI deployment. 120+ AI patents filed FY26.</div></div>
+      <div class="comp-row"><div class="comp-row-label">AI Platform</div><div class="comp-row-val">Persistent SASVA: Agentic AI for software development lifecycle acceleration and complex data modernization. Deployed internally first ("Customer Zero") to absorb cost shocks before client rollout. 120+ AI patents.</div></div>
+      <div class="comp-row comp-threat-row"><div class="comp-row-label">Key Signal</div><div class="comp-row-val">Brand Finance: fastest-growing IT services brand globally in 2026 — a $1.65B firm generating disproportionate credibility. 120+ AI patents in one year signals R&amp;D depth ITCI has not matched.</div></div>
+      <div class="comp-row comp-threat-row"><div class="comp-row-label">Threat to ITCI</div><div class="comp-row-val">Hardware-to-software engineering carveouts (Hi-Tech client migration from hardware to software-led platforms) threaten ITCI's Industry 4.0 and PLM practices — manufacturers choosing Persistent's product engineering pedigree over ITCI's SAP/ERP consulting at CTO level.</div></div>
+    </div>
+    <div class="comp-moves">
+      <div class="comp-moves-hdr">Key Strategic Moves</div>
+      <div class="comp-move"><div class="comp-move-dot"></div><div>Hi-Tech major hardware-to-software carveout — end-to-end engineering carveout; transitioning legacy hardware manufacturer to agile software entity. <span class="src-pop" data-src="persistent-fy26">Persistent Q4 FY26</span></div></div>
+      <div class="comp-move"><div class="comp-move-dot"></div><div>"Customer Zero" for Agentic AI — SASVA deployed internally first; absorbs wage inflation via AI productivity before client commercialization. <span class="src-pop" data-src="persistent-fy26">Persistent FY26</span></div></div>
+      <div class="comp-move"><div class="comp-move-dot"></div><div>120+ AI patents filed FY26 + Brand Finance fastest-growing IT brand globally in 2026. <span class="src-pop" data-src="persistent-fy26">Persistent FY26</span></div></div>
+    </div>
+    <div class="comp-src">Sources: Persistent Systems Q4 FY26 Earnings (April 21, 2026) · Persistent FY26 Annual Report · Q4 FY26 investor presentation</div>
+  </div>
+
+<div class="card">
+    <div class="comp-header" style="background:#EEF2F8;border-left:4px solid #1F3864">
+      <div class="comp-name">Mphasis</div>
+      <div class="comp-period">FY2026 — Full Year (April 2025 – March 2026) · ~31,000 employees</div>
+    </div>
+    <div class="comp-rows">
+      <div class="comp-row"><div class="comp-row-label">FY Revenue (USD)</div><div class="comp-row-val">$1,796M (~$1.8B)<br><span style="font-size:11px;color:#9AA3B0">Direct Q: $437M · $445M · $451M · $456M (total Q4: $463M)</span></div></div>
+      <div class="comp-row"><div class="comp-row-label">Growth (CC)</div><div class="comp-row-val" style="color:#4472C4;font-weight:600">6.7% CC / 8.9% USD direct channel YoY<br>BFS +15% YoY Q4 · Insurance +46.5% YoY Q4</div></div>
+      <div class="comp-row"><div class="comp-row-label">EBIT Margin</div><div class="comp-row-val">15.3% FY / 15.4% Q4 — held within 14.75%–15.75% target band<br><span style="font-size:11px;color:#9AA3B0">Net profit ₹18,626M · Direct channel 98.6% of revenue</span></div></div>
+      <div class="comp-row"><div class="comp-row-label">FY TCV Wins</div><div class="comp-row-val">$2.12B FY26 new TCV (+68% YoY) / $407M Q4<br><span style="font-size:11px;color:#9AA3B0">60% of FY26 TCV is AI-led · 64% AI-led in Q4 · 69% of forward pipeline AI-led. Management confirms TCV is net-new, not renewals.</span></div></div>
+      <div class="comp-row"><div class="comp-row-label">AI Platform</div><div class="comp-row-val">NeoIP: unified AI orchestration platform with Ontosphere knowledge graph (launched Oct 27, 2025). Client outcomes cited: 60% efficiency improvement, 50% incident-resolution time reduction. TAP (Theory and Practice) acquisition (Apr 21, 2026): Continuum AI decision-intelligence (ML + behavioral economics) for Financial Services, Retail, and CPG. TAP CEO joins as EVP – CPG &amp; Head of Decision AI.</div></div>
+      <div class="comp-row comp-threat-row"><div class="comp-row-label">Threat to ITCI</div><div class="comp-row-val">Among mid-tier peers, Mphasis is disclosing the highest AI-led TCV proportion: 60% of $2.12B FY26 TCV described as AI-led and net-new. TAP acquisition signals deliberate Retail/CPG push beyond core BFSI. AWS T&amp;H Global Partner of Year (Dec 2024) demonstrates vertical T&amp;H credibility. NeoIP's cited client outcome metrics provide specific data points that AI-narrative-only pitches cannot easily match.</div></div>
+    </div>
+    <div class="comp-moves">
+      <div class="comp-moves-hdr">Key Strategic Moves</div>
+      <div class="comp-move"><div class="comp-move-dot"></div><div>NeoIP platform launch (Oct 27, 2025) — Ontosphere knowledge graph. 60% efficiency gains, 50% incident-resolution improvement in early deployments. <span style="color:#9AA3B0;font-size:11px">Mphasis press release, Oct 27, 2025</span></div></div>
+      <div class="comp-move"><div class="comp-move-dot"></div><div>TAP (Theory and Practice) acquisition (Apr 21, 2026, CAD $10M + $20M earnout) — Continuum AI decision-intelligence for Retail, CPG, and Financial Services. Explicit Retail/CPG vertical push. <span style="color:#9AA3B0;font-size:11px">PR Newswire, Apr 21, 2026</span></div></div>
+      <div class="comp-move"><div class="comp-move-dot"></div><div>AWS Industry Partner of Year – Travel &amp; Hospitality Global (Dec 2024). <span style="color:#9AA3B0;font-size:11px">AWS Partner Award, Dec 2024</span></div></div>
+      <div class="comp-move"><div class="comp-move-dot"></div><div>FY27 guidance: high single to low double-digit revenue growth within 14.75%–15.75% EBIT band. <span style="color:#9AA3B0;font-size:11px">Mphasis Q4 FY26 Earnings Call, Apr 30, 2026</span></div></div>
+    </div>
+    <div class="comp-src">Sources: Mphasis FY26 Q4 Earnings Call Transcript Apr 30, 2026 · Q4 FY26 press release · Q2 and Q3 FY26 earnings presentations · PR Newswire Apr 21, 2026</div>
+  </div>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<div class="section" id="risks">
+  <div class="section-hdr">Risks — Consolidated View</div>
+  <div class="section-desc">Key risks synthesised across geographies, industry verticals, competitive landscape, and market patterns. All sourced from Sections 1–3 of this report.</div>
+
+  <div class="card ro-card">
+    <div class="ro-hdr risk-hdr">Geo Risks<span class="ro-badge">Americas · Europe · Middle East · APAC</span></div>
+    <ul class="ro-list risk-list">
+      <li>H-1B wage-tier lottery + $100K surcharge (effective Sep 2025) materially increases onsite delivery costs for all Indian IT firms in the US. <span class="src-pop" data-src="isg">ISG</span></li>
+      <li>US tariff regime raised effective import rate to 7.7% — highest since 1947 — compressing margins for Manufacturing and CPG clients. <span class="src-pop" data-src="isg">ISG</span></li>
+      <li>Tariffs decelerating smaller discretionary IT services projects across CPG and Manufacturing. <span class="src-pop" data-src="isg">ISG</span></li>
+      <li>SAP consulting rates projected to rise 30–50% in 2026–27 as 30,000+ remaining ECC customers compete for a constrained SI talent pool. <span class="src-pop" data-src="ic-euro-2025">IC Euro</span></li>
+      <li>EU AI Act fines of up to €35M or 7% of global turnover for non-compliance by August 2026. <span class="src-pop" data-src="eu-ai-act">European Commission AI Act</span></li>
+      <li>Large KSA public-sector programs require established local presence or credentialed local partnership — pure offshore delivery faces structural constraints.</li>
+      <li>Saudization and Emiratization requirements demand 100,000+ specialised tech workers annually, limiting staffing model options for Indian IT firms.</li>
+      <li>Infosys acquired Versent Group (A$233M — 6x Blazeclan's estimated FY24 revenue) locking in AWS Premier credentials and 40%+ ASX100 client coverage in APAC. <span class="src-pop" data-src="infosys-versent-aug2025">Infosys</span></li>
+      <li>Capgemini acquired Cloud4C Singapore; TCS launched two Singapore innovation centres; Wipro acquired Mindsprint (3,200 staff, April 2026) — APAC competitive intensity around Blazeclan has materially increased in 12 months.</li>
+      <li>Australia's whole-of-government AWS arrangement channels government cloud programs through a defined, credentialed partner network. <span class="src-pop" data-src="dta-jan2025">DTA Australia</span></li>
+    </ul>
+  </div>
+
+  <div class="card ro-card">
+    <div class="ro-hdr risk-hdr">Industry Risks<span class="ro-badge">CPG · Manufacturing · T&amp;H · BFSI</span></div>
+    <ul class="ro-list risk-list">
+      <li>Only 5% of manufacturers have industrialized end-to-end digital operations — large gap between AI deployment (~50%) and industrialization creates scoping and delivery expectation risk. <span class="src-pop" data-src="capgemini-microsoft-2025">Capgemini-Microsoft</span></li>
+      <li>Tariffs and supply chain disruption creating capital expenditure uncertainty — some manufacturers pausing or deprioritizing smaller discretionary programs. <span class="src-pop" data-src="isg">ISG</span></li>
+      <li>SAP consulting talent pool constrained — delivery capacity risk for firms without established S/4HANA credentials in a supply-constrained market. <span class="src-pop" data-src="ic-euro-2025">IC Euro</span></li>
+      <li>Legacy maintenance consumes 60–80% of T&amp;H IT budgets, limiting available budget for net-new capability programs. <span class="src-pop" data-src="rise-up-labs-2026">Rise Up Labs, 2026</span></li>
+      <li>Hotel loyalty program costs rising 4.4% annually vs 2.7% revenue growth — financial pressure on programme investment. <span class="src-pop" data-src="whitesky-sep2025">Whitesky</span></li>
+      <li>61% of global banking IT is run-the-bank operations — addressable change-the-bank portion is only 39% of the $176B total market. <span class="src-pop" data-src="ey-2025">EY</span></li>
+      <li>Only 8% of banks developing GenAI at strategic enterprise level — limits average deal size and duration for AI-led BFSI engagements. <span class="src-pop" data-src="ibm-feb2025">IBM IBV</span></li>
+      <li>Regulatory compliance programs are mandatory but competitively neutral — every IT services firm faces the same compliance-driven opportunity simultaneously.</li>
+    </ul>
+  </div>
+
+  <div class="card ro-card">
+    <div class="ro-hdr risk-hdr">Market Pattern Risks<span class="ro-badge">Structural · Competitive</span></div>
+    <ul class="ro-list risk-list">
+      <li>$13B in IT contracts up for renewal with 68% of CIOs planning a 20% vendor reduction — consolidation wave structurally favours Tier 1 multi-service providers over mid-tier specialists. <span class="src-pop" data-src="isg">ISG</span> <span class="src-pop" data-src="sap-cio">SAP CIO Survey</span></li>
+      <li>Mid-tier competitors (LTIM BlueVerse, Persistent SASVA, Coforge AgentSphere, Mphasis NeoIP) have all launched proprietary AI platforms — platform ownership is becoming a prerequisite for large-deal credibility, not merely AI capability.</li>
+      <li>AI-led TCV disclosure is becoming a baseline expectation: Mphasis 60% AI-led, Coforge AI embedded in all 14 large FY25 deals. Competitive conversations increasingly require quantified metrics, not narrative positioning.</li>
+      <li>Sovereign cloud localization is a current procurement requirement in Middle East and APAC regulated sectors — IT firms without local cloud credentials face structural access barriers in government and banking programs.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SECTION: OPPORTUNITIES (CONSOLIDATED)
+══════════════════════════════════════════════ -->
+<div class="section" id="opportunities">
+  <div class="section-hdr">Opportunities — Consolidated View</div>
+  <div class="section-desc">Key opportunities synthesised across geographies, industry verticals, BPM disruption analysis, and market patterns. Sourced from Sections 1–4 of this report.</div>
+
+  <div class="card ro-card">
+    <div class="ro-hdr opp-hdr">Geo Opportunities<span class="ro-badge">Americas · Europe · Middle East · APAC</span></div>
+    <ul class="ro-list opp-list">
+      <li>Worldwide IT spend: $6.31T in 2026, +13.5% YoY; IT services growing 8.7%. <span class="src-pop" data-src="gartner-2026">Gartner</span></li>
+      <li>$13B in IT contracts up for renewal; 68% of CIOs planning 20% vendor reduction — structural window for consolidated multi-service providers with Americas portfolios. <span class="src-pop" data-src="isg">ISG</span> <span class="src-pop" data-src="sap-cio">SAP CIO Survey</span></li>
+      <li>CPG AI: 71% adoption in at least one function (up from 42% in 2023); 97% expect AI spend to increase next fiscal year — AI budgets ring-fenced in ITCI's primary vertical. <span class="src-pop" data-src="nvidia-jan2025">NVIDIA Survey</span></li>
+      <li>Tariffs redirecting CPG and Manufacturing spend toward large cost-optimization and AI-led automation programs — which remain resilient even as smaller projects slow. <span class="src-pop" data-src="isg">ISG</span></li>
+      <li>European IT spend: $1.4T in 2026, +11.1%. DORA: 83% of EU financial entities have formal cost estimates, 64% budgeting €2–5M/institution — mandatory, committed spend. <span class="src-pop" data-src="gartner-2026">Gartner, 2026</span> <span class="src-pop" data-src="deloitte-dora-2025">Deloitte</span></li>
+      <li>EU AI Act August 2026 deadline creates non-discretionary compliance programs in BFSI and Manufacturing regardless of macro conditions. <span class="src-pop" data-src="eu-ai-act">EU AI Act</span></li>
+      <li>CPG S/4HANA migration wave (Nestlé 112 countries, Unilever Clean Core, LVMH) generating sustained multi-year SI work with rising rates through 2027. <span class="src-pop" data-src="ic-euro-2025">IC Euro</span></li>
+      <li>KSA IT market: $20.1B in 2025, projected $45.8B by 2030 at 17.9% CAGR — fastest-growing IT services geography globally. <span class="src-pop" data-src="mordor-ksa-2025">Mordor Intelligence</span></li>
+      <li>KSA e-invoicing Fatoorah Phase 2 (July 2026) — ZATCA-compliant ERP/SAP integration mandatory for all Saudi businesses, creating immediate demand. <span class="src-pop" data-src="zatca-2025">ZATCA</span></li>
+      <li>Middle East BFSI: $11.4B at 6.1% CAGR — highest BFSI IT growth rate of any region globally; GCC banks moved AI from pilot to production in 2025. <span class="src-pop" data-src="dataintelo-bfsi-2025">Dataintelo</span></li>
+      <li>Australia public cloud: $24–29B in 2025. Singapore: 74% enterprise cloud adoption with AWS committing $12B infrastructure 2024–2028. Blazeclan's AWS Premier credentials provide a foundation. <span class="src-pop" data-src="synergy-2025">Synergy Research</span></li>
+    </ul>
+  </div>
+
+  <div class="card ro-card">
+    <div class="ro-hdr opp-hdr">Industry Opportunities<span class="ro-badge">CPG · Manufacturing · T&amp;H · BFSI</span></div>
+    <ul class="ro-list opp-list">
+      <li>SAP consulting market exceeded $16B in 2025; 64% of SAP customers live or mid-migration to S/4HANA by end-2025 — sustained multi-year pipeline with pricing power rising. <span class="src-pop" data-src="asug-precisely-2025">ASUG / Precisely</span> <span class="src-pop" data-src="ic-euro-2025">IC Euro</span></li>
+      <li>US retail technology budgets: $113B in 2026, +6.6% YoY; software is 46% of total retail tech spend. <span class="src-pop" data-src="forrester-retail-2026">Forrester, 2026</span></li>
+      <li>Global manufacturing digital transformation: $224.7B in 2026, +13.8% YoY. Cloud PLM at 42% share growing 8.1% CAGR; 81% of industrial companies expect SaaS PLM to become standard. <span class="src-pop" data-src="abi-research-2026">ABI Research, 2026</span></li>
+      <li>~45% of manufacturers have AI in production but have not industrialized it — this gap is where implementation and managed services demand concentrates. <span class="src-pop" data-src="capgemini-microsoft-2025">Capgemini-Microsoft</span></li>
+      <li>Reshoring: 244,000 US manufacturing jobs in 2024; 88% in high/medium-high-tech sectors — greenfield plant IT demand across MES, IoT, and data infrastructure. MES market doubling to $40.3B by 2035. <span class="src-pop" data-src="reshoring-2024">Reshoring Initiative</span></li>
+      <li>Oracle OPERA Cloud: 31%+ YoY property increase; Accor migrating entire global portfolio across 110 countries — a live, large-scale T&amp;H procurement wave. <span class="src-pop" data-src="oracle-sep2025">Oracle</span></li>
+      <li>Legacy maintenance backlog at 60–80% of T&amp;H IT budgets creates structural, sustained multi-year modernization work regardless of discretionary budget conditions. <span class="src-pop" data-src="rise-up-labs-2026">Rise Up Labs, 2026</span></li>
+      <li>Banking AI spend: $31.3B in 2024 growing to ~$40B in 2025 at 27% CAGR. GenAI industrialization gap (52% using vs 8% strategic) — sustained AI implementation and governance services work. <span class="src-pop" data-src="statista-2025">Statista</span></li>
+      <li>European banking cloud outsourcing +13.5% YoY; UK outsourcing expansion adding ~£3B — live procurement activity across ITCI's European BFSI accounts. <span class="src-pop" data-src="ecb-feb2025">ECB</span></li>
+    </ul>
+  </div>
+
+  <div class="card ro-card">
+    <div class="ro-hdr opp-hdr">BPM Disruption — The ITCI Opportunity<span class="ro-badge">AI-Native · No Legacy Conflict</span></div>
+    <ul class="ro-list opp-list">
+      <li>Legacy BPM is a $10B+ market in active contraction. The replacement market — AI-native process platforms priced on outcomes — is in formation and no single firm owns it yet. <span class="src-pop" data-src="nasscom-2025">NASSCOM, 2025</span></li>
+      <li>Every Tier 1 firm faces the innovator's dilemma: cannot fully cannibalize $2–4B BPS revenue bases without shareholder consequences. ITCI has zero legacy BPO exposure — can enter purely on an AI-native, outcome-based mandate with no internal conflict. <span class="src-pop" data-src="techm-q4-fy25">TechM Q4 FY25</span> <span class="src-pop" data-src="infosys-bpm-fy25">Infosys BPM</span></li>
+      <li>Priority entry: mid-market clients and captive GCCs lacking internal AI engineering depth but under pressure to show productivity gains — too small for Tier 1 priority, too complex for pure-play automation vendors. Entry verticals: BFSI claims/underwriting, CPG order-to-cash, Healthcare prior auth. <span class="src-pop" data-src="nasscom-2025">NASSCOM, 2025</span></li>
+      <li>What clients need: orchestration over staffing (AI integration contracts, not BPO contracts), agentic engineering (autonomous process execution), outcome-based pricing (per transaction, not per FTE) — structurally breaks comparison with legacy BPO.</li>
+    </ul>
+  </div>
+
+  <div class="card ro-card">
+    <div class="ro-hdr opp-hdr">Market Pattern Opportunities<span class="ro-badge">Structural · Timing</span></div>
+    <ul class="ro-list opp-list">
+      <li>AI budgets ring-fenced across all verticals: 97% of CPG/retail expect AI spend to increase; only 8% of banks at strategic AI level — the gap between broad adoption and industrialization indicates sustained implementation demand. <span class="src-pop" data-src="nvidia-jan2025">NVIDIA Survey</span> <span class="src-pop" data-src="ibm-feb2025">IBM IBV</span></li>
+      <li>DORA (Jan 2025), EU AI Act (Aug 2026), KSA e-invoicing (Jul 2026) — all live mandatory programs. 83% of European institutions have formal cost estimates. Budget-committed regardless of macro conditions. <span class="src-pop" data-src="deloitte-dora-2025">Deloitte</span></li>
+      <li>Microsoft Saudi Azure operational (Dec 2024), AWS whole-of-government Australia — local data-sovereign cloud is a current procurement requirement in regulated sectors, creating credentialed partner demand. <span class="src-pop" data-src="microsoft-dec2024">Microsoft</span> <span class="src-pop" data-src="dta-jan2025">DTA Australia</span></li>
+      <li>M&amp;A functioning as AI capability accelerator — small valuations with large credential impact (Coforge-Cigniti, Mphasis-TAP, Infosys-Versent). Targeted acquisitions change go-to-market narratives and deal eligibility immediately.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SECTION: DAILY BRIEF WIDGET
+══════════════════════════════════════════════ -->
+<div class="section" id="daily-brief">
+  <div class="section-hdr">Daily Intelligence Brief</div>
+  <div class="section-desc">Today's top signals — updated every morning at 7:00 AM IST.</div>
+
+  <div class="card" id="db-widget-card">
+    <div class="db-loading">
+      <div class="db-spinner"></div>
+      <div style="font-size:12px">Loading today's brief...</div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="sources">
+  <div class="section-hdr">Sources &amp; References</div>
+  <div class="section-desc">All data points cited in this report. Tap any entry to open the source. Organised by section.</div>
+
+  <div class="card">
+
+    <div class="sources-group">
+      <div class="sources-toggle" onclick="this.classList.toggle('open')">
+        <span class="sources-toggle-label">Section 1 — Geo &amp; Market Signals</span>
+        <span style="display:flex;gap:6px;align-items:center"><span class="sources-toggle-count">24 sources</span><span class="sources-arrow">▼</span></span>
+      </div>
+      <div class="sources-list">
+        <div class="source-entry"><div class="source-num">1</div><div><a class="source-link" href="https://www.gartner.com/en/newsroom/press-releases/2026-04-07-gartner-forecasts-worldwide-it-spending-to-grow-13-5-percent-in-2026" target="_blank">Gartner IT Spending Forecast, April 2026. "Gartner Forecasts Worldwide IT Spending to Grow 13.5% in 2026."</a></div></div>
+        <div class="source-entry"><div class="source-num">2</div><div><a class="source-link" href="https://isg-one.com/articles/how-will-tariffs-impact-it-services-spending-in-2025" target="_blank">ISG. "Index Insider: How Will Tariffs Impact IT Services Spending in 2025?" March 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">3</div><div class="source-text">SAP / ISG. SAP CIO Survey on vendor consolidation intentions, August 2025.</div></div>
+        <div class="source-entry"><div class="source-num">4</div><div><a class="source-link" href="https://www.latentview.com/blog/faq-how-ai-is-transforming-innovation-in-the-cpg-industry/" target="_blank">McKinsey. CPG AI adoption rate, cited by LatentView. 2024.</a></div></div>
+        <div class="source-entry"><div class="source-num">5</div><div><a class="source-link" href="https://blogs.nvidia.com/blog/ai-in-retail-cpg/" target="_blank">NVIDIA. "AI in Retail and CPG: Retail and CPG Industry Survey 2025." January 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">6</div><div><a class="source-link" href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" target="_blank">European Commission. EU Artificial Intelligence Act: enforcement timeline and penalty schedule. 2024.</a></div></div>
+        <div class="source-entry"><div class="source-num">7</div><div><a class="source-link" href="https://www.deloitte.com/global/en/services/risk-advisory/blogs/dora-regulation-survey.html" target="_blank">Deloitte. "European Survey on DORA 2025." 36 financial entities, 28 countries.</a></div></div>
+        <div class="source-entry"><div class="source-num">8</div><div><a class="source-link" href="https://www.fortinet.com/blog/industry-trends/cybersecurity-and-banking-regulations-in-2026-and-beyond" target="_blank">Fortinet. "Cybersecurity and Banking Regulations in 2026 and Beyond." 2026.</a></div></div>
+        <div class="source-entry"><div class="source-num">9</div><div><a class="source-link" href="https://www.ecb.europa.eu/pub/annual-reports/supervisory/2025/html" target="_blank">ECB Banking Supervision Report: cloud outsourcing data. February 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">10</div><div><a class="source-link" href="https://iceuro.com/how-big-is-the-sap-s4hana-migration-market" target="_blank">IC Euro. "How Big Is the SAP S/4HANA Migration Market in 2025?" 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">11</div><div><a class="source-link" href="https://www.mordorintelligence.com/industry-reports/saudi-arabia-it-services-market" target="_blank">Mordor Intelligence. KSA IT Services Market Report. 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">12</div><div><a class="source-link" href="https://dataintelo.com/report/it-spending-in-bfsi-sector-market" target="_blank">Dataintelo. "IT Spending in BFSI Market Research Report 2034." 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">13</div><div><a class="source-link" href="https://www.aramco.com/en/investors/annual-report" target="_blank">Saudi Aramco. Annual Report 2024: AI deployment and value realisation figures.</a></div></div>
+        <div class="source-entry"><div class="source-num">14</div><div><a class="source-link" href="https://morssoftware.com/digital-transformation-trends-reshaping-gcc-banking" target="_blank">Mors Software. "Digital Transformation Trends Reshaping GCC Banking in 2025." December 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">15</div><div><a class="source-link" href="https://www.alibabacloud.com/en/press-room/2025" target="_blank">Alibaba Cloud. "Alibaba Cloud and Wio Bank Ink MoU." October 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">16</div><div><a class="source-link" href="https://news.microsoft.com/source/mena/features/microsoft-shares-strong-progress-on-datacenter-region-in-saudi-arabia/" target="_blank">Microsoft. "Microsoft Shares Strong Progress on Datacenter Region in Saudi Arabia." December 4, 2024.</a></div></div>
+        <div class="source-entry"><div class="source-num">17</div><div><a class="source-link" href="https://zatca.gov.sa/en/E-Invoicing/Pages/default.aspx" target="_blank">ZATCA. Fatoorah Phase 2 e-invoicing mandate, July 2026. zatca.gov.sa.</a></div></div>
+        <div class="source-entry"><div class="source-num">18</div><div><a class="source-link" href="https://www.infosys.com/newsroom/press-releases/2025/acquire-versent-group.html" target="_blank">Infosys. Press release: Acquisition of Versent Group from Telstra. August 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">19</div><div class="source-text">Competition Commission of India. Order approving Capgemini–Cloud4C acquisition. August 2025.</div></div>
+        <div class="source-entry"><div class="source-num">20</div><div><a class="source-link" href="https://www.tcs.com/who-we-are/newsroom/press-release" target="_blank">TCS. Press releases: AI Research &amp; Innovation Centre, Singapore (Jul 2025); Google Cloud Gemini Centre (Dec 2025).</a></div></div>
+        <div class="source-entry"><div class="source-num">21</div><div><a class="source-link" href="https://www.wipro.com/newsroom/press-releases/" target="_blank">Wipro. Press release: $1B Olam transformation deal and Mindsprint acquisition. April 2026.</a></div></div>
+        <div class="source-entry"><div class="source-num">22</div><div><a class="source-link" href="https://www.dta.gov.au/news/australia-signs-whole-government-agreement-amazon-web-services" target="_blank">Australian Digital Transformation Agency. Whole-of-government AWS arrangement. January 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">23</div><div><a class="source-link" href="https://www.srgresearch.com/articles" target="_blank">Synergy Research Group. Australia public cloud IaaS market share data. 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">24</div><div class="source-text">ITC Infotech. Blazeclan Technologies revenue, FY24 group financial disclosures (estimated; requires internal reconciliation).</div></div>
+      </div>
+    </div>
+
+
+
+    <div class="sources-group">
+      <div class="sources-toggle" onclick="this.classList.toggle('open')">
+        <span class="sources-toggle-label">Section 2 — Industry Signals</span>
+        <span style="display:flex;gap:6px;align-items:center"><span class="sources-toggle-count">35 sources</span><span class="sources-arrow">▼</span></span>
+      </div>
+      <div class="sources-list">
+        <div class="source-entry"><div class="source-num">25</div><div><a class="source-link" href="https://www.forrester.com/report/us-tech-forecast-2026-for-retail/" target="_blank">Forrester. "US Tech Forecast 2026 for Retail: Make Every Tech Dollar Count." 2026.</a></div></div>
+        <div class="source-entry"><div class="source-num">26</div><div><a class="source-link" href="https://www.latentview.com/blog/faq-how-ai-is-transforming-innovation-in-the-cpg-industry/" target="_blank">McKinsey, cited by LatentView. CPG AI adoption rate survey. 2024.</a></div></div>
+        <div class="source-entry"><div class="source-num">27</div><div><a class="source-link" href="https://blogs.nvidia.com/blog/ai-in-retail-cpg/" target="_blank">NVIDIA. Retail and CPG AI Survey. January 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">28</div><div><a class="source-link" href="https://valere.io/insights/state-of-ai-in-retail-2025/" target="_blank">Valere. "State of AI in Retail 2025." March 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">29</div><div><a class="source-link" href="https://www.precisely.com/resource-center/research-reports/new-research-reveals-sap-s-4hana-migration-momentum" target="_blank">ASUG / Precisely. "New Research Reveals SAP S/4HANA Migration Momentum." 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">30</div><div><a class="source-link" href="https://www.emarketer.com/content/us-retail-media-ad-spending-forecast" target="_blank">eMarketer. US Retail Media Ad Spending Forecast and Trends H2 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">31</div><div><a class="source-link" href="https://www.mordorintelligence.com/industry-reports/retail-media-network-market" target="_blank">Mordor Intelligence. Retail Media Networks Market. 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">32</div><div><a class="source-link" href="https://www.fugo.ai/blog/retail-media-growth-statistics" target="_blank">Fugo. "Retail Media Growth Statistics and Trends." 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">33</div><div><a class="source-link" href="https://www.technavio.com/report/b2b-e-commerce-market-analysis" target="_blank">Technavio. B2B E-Commerce Market Analysis 2023–2028.</a></div></div>
+        <div class="source-entry"><div class="source-num">34</div><div><a class="source-link" href="https://www.abiresearch.com/market-research/product/7784060-top-5-manufacturing-trends-to-know-in-2026/" target="_blank">ABI Research. "Top 5 Manufacturing Trends to Know in 2026." 2026.</a></div></div>
+        <div class="source-entry"><div class="source-num">35</div><div><a class="source-link" href="https://www.capgemini.com/insights/research-library/ai-in-manufacturing/" target="_blank">Capgemini / Microsoft. Manufacturing AI industrialization rates research. 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">36</div><div><a class="source-link" href="https://www.weforum.org/agenda/2024/10/new-lighthouses-industry-4-0/" target="_blank">World Economic Forum. Global Lighthouse Network update: 172 factories. October 2024.</a></div></div>
+        <div class="source-entry"><div class="source-num">37</div><div><a class="source-link" href="https://www2.deloitte.com/us/en/insights/industry/manufacturing/manufacturing-industry-outlook.html" target="_blank">Deloitte. "2026 Manufacturing Industry Outlook." 2026.</a></div></div>
+        <div class="source-entry"><div class="source-num">38</div><div><a class="source-link" href="https://www.custommarketinsights.com/report/process-lifecycle-management-market/" target="_blank">Custom Market Insights. "Global Process Lifecycle Management Market 2026–2035." 2026.</a></div></div>
+        <div class="source-entry"><div class="source-num">39</div><div><a class="source-link" href="https://www.aras.com/en/news/press/2024/2024-spotlight-survey-results-state-of-plm-software" target="_blank">Aras Corporation. "Spotlight on the Future 2024: 81% of Industrial Companies Say SaaS Will Become Standard for PLM." September 2024.</a></div></div>
+        <div class="source-entry"><div class="source-num">40</div><div><a class="source-link" href="https://www.abiresearch.com/market-research/product/manufacturing-software-trends/" target="_blank">ABI Research. "Manufacturing Software Trends and Outlook 2025."</a></div></div>
+        <div class="source-entry"><div class="source-num">41</div><div><a class="source-link" href="https://www.reshorenow.org/content/uploads/2024-Annual-Report.pdf" target="_blank">Reshoring Initiative. "2024 Annual Report." qualitymag.com/reshoring-initiative.</a></div></div>
+        <div class="source-entry"><div class="source-num">42</div><div><a class="source-link" href="https://customertimes.com/blog/ai-automation-manufacturing-report/" target="_blank">CustomerTimes. "AI Automation in Manufacturing: 2025 Report."</a></div></div>
+        <div class="source-entry"><div class="source-num">43</div><div><a class="source-link" href="https://www.sita.aero/resources/surveys-reports/air-transport-it-insights-2024/" target="_blank">SITA. "Air Transport IT Insights 2024." 379 airlines surveyed.</a></div></div>
+        <div class="source-entry"><div class="source-num">44</div><div><a class="source-link" href="https://www.cbre.com/insights/books/trends-in-the-hotel-industry-2025" target="_blank">CBRE. "Monitoring the Rise in Technology Expenditures." July 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">45</div><div><a class="source-link" href="https://www.oracle.com/news/announcement/oracle-hospitality-opera-cloud-selected-by-accor-2025-09-04/" target="_blank">Oracle. "Oracle Hospitality OPERA Cloud Selected by Accor for Global PMS." September 4, 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">46</div><div><a class="source-link" href="https://hospitalitytech.com/hotels-expand-adoption-opera-cloud" target="_blank">HospitalityTech. "Hotels Expand Adoption of OPERA Cloud." June 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">47</div><div><a class="source-link" href="https://www.bcg.com/publications/2026/ai-first-hotels" target="_blank">BCG. "AI-First Hotels: Leaner, Faster, Smarter." February 2026.</a></div></div>
+        <div class="source-entry"><div class="source-num">48</div><div><a class="source-link" href="https://appinventiv.com/blog/ai-in-hospitality-industry/" target="_blank">Appinventiv. "AI in Hospitality." September 2024.</a></div></div>
+        <div class="source-entry"><div class="source-num">49</div><div><a class="source-link" href="https://whiteskyhospitality.com/state-of-hotel-loyalty-2025/" target="_blank">Whitesky Hospitality. "The State of Hotel Loyalty 2025." September 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">50</div><div><a class="source-link" href="https://riseuplabs.com/legacy-system-modernization-trends/" target="_blank">Rise Up Labs. "Legacy System Modernization Trends 2026."</a></div></div>
+        <div class="source-entry"><div class="source-num">51</div><div><a class="source-link" href="https://www.ustravel.org/research/travel-forecasts" target="_blank">US Travel Association. US Travel Forecast. May 2026.</a></div></div>
+        <div class="source-entry"><div class="source-num">52</div><div><a class="source-link" href="https://www.phocuswright.com/Travel-Research/Market-Overview/Travel-Forward" target="_blank">Phocuswright. "Travel Forward: Data, Insights and Trends for 2026."</a></div></div>
+        <div class="source-entry"><div class="source-num">53</div><div><a class="source-link" href="https://www.ey.com/en_gl/banking-capital-markets/global-banking-outlook" target="_blank">EY. "Global Banking Outlook 2025."</a></div></div>
+        <div class="source-entry"><div class="source-num">54</div><div><a class="source-link" href="https://www.statista.com/statistics/banking-sector-spending-on-ai/" target="_blank">Statista. Global Banking Sector AI and GenAI Spending Forecast. 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">55</div><div><a class="source-link" href="https://newsroom.ibm.com/2025-02-04-new-ibm-institute-for-business-value-study" target="_blank">IBM. IBM Institute for Business Value study on bank GenAI adoption. February 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">56</div><div><a class="source-link" href="https://investors.dxc.com/news-releases/news-release-details/dxc-technology-and-thought-machine-launch-digital-banking" target="_blank">DXC Technology. DXC and Thought Machine joint managed service for banking. June 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">57</div><div><a class="source-link" href="https://articles.uvnetware.com/future-of-bfsi-technology-2026" target="_blank">UV Netware. "Future of BFSI Technology 2026."</a></div></div>
+        <div class="source-entry"><div class="source-num">58</div><div><a class="source-link" href="https://www.consultancy.eu/news/banking/driving-regulatory-transformation-in-banking-lessons-from-basel-iv" target="_blank">Consultancy.eu. "Driving Regulatory Transformation in Banking: Lessons from Basel IV." 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">59</div><div><a class="source-link" href="https://www.accuracy.com/insights/2026-strategic-challenges-for-the-banking-sector/" target="_blank">Accuracy. "2026 Strategic Challenges for the Banking Sector."</a></div></div>
+      </div>
+    </div>
+
+
+
+    <div class="sources-group">
+      <div class="sources-toggle" onclick="this.classList.toggle('open')">
+        <span class="sources-toggle-label">Section 3 — Competitive Intelligence</span>
+        <span style="display:flex;gap:6px;align-items:center"><span class="sources-toggle-count">44 sources</span><span class="sources-arrow">▼</span></span>
+      </div>
+      <div class="sources-list">
+        <div class="source-entry"><div class="source-num">60</div><div><a class="source-link" href="https://www.lnt.in/LTSubsidiaryReport2025/pdf/LTIMINDTREE%20LIMITED.pdf" target="_blank">LTM. FY25 Integrated Annual Report 2024–25.</a></div></div>
+        <div class="source-entry"><div class="source-num">61</div><div><a class="source-link" href="https://www.ltimindtree.com/investor-relations/quarterly-results/" target="_blank">LTM. Q4 FY25 Earnings Presentation and press releases.</a></div></div>
+        <div class="source-entry"><div class="source-num">62</div><div class="source-text">HDFC Securities. LTM Research Update. November 2024.</div></div>
+        <div class="source-entry"><div class="source-num">63</div><div><a class="source-link" href="https://www.businesswire.com/news/home/20250331/en/LTIMindtree-Announces-Strategic-Partnership-with-Google-Cloud" target="_blank">LTM / Google Cloud. Strategic Agentic AI partnership press release. March 31, 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">64</div><div><a class="source-link" href="https://www.businesswire.com/news/home/20250618062579/en/LTIMindtree-Launches-BlueVerse-An-AI-Ecosystem-that-will-Define-the-Enterprise-of-the-Future" target="_blank">LTM. "LTM Launches BlueVerse." June 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">65</div><div><a class="source-link" href="https://economictimes.com/tech/information-tech/ltimindtree-wins-its-largest-ever-deal-sources-peg-size-at-580-million/articleshow/124342656.cms" target="_blank">Economic Times. LTM ADM agribusiness $450M deal. May 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">66</div><div><a class="source-link" href="https://www.techcircle.in/2025/10/07/ltimindtree-secures-record-580-mn-deal-from-global-media-giant/" target="_blank">Techcircle. LTM $580M media deal. October 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">67</div><div><a class="source-link" href="https://www.business-standard.com/companies/news/ltimindtree-inks-100-mn-multi-year-deal-with-us-based-chemicals-major-125102700706_1.html" target="_blank">Business Standard. LTM $100M chemicals deal. October 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">68</div><div><a class="source-link" href="https://www.persistent.com/wp-content/uploads/2025/04/analyst-presentation-and-factsheet-q4fy25.pdf" target="_blank">Persistent Systems. FY25 Q4 Investor Presentation.</a></div></div>
+        <div class="source-entry"><div class="source-num">69</div><div><a class="source-link" href="https://www.persistent.com/media/press-releases/q4-fy25-results/" target="_blank">Persistent Systems. Q4 FY25 Press Release. April 24, 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">70</div><div><a class="source-link" href="https://www.persistent.com/wp-content/uploads/2025/06/persistent-annual-report-2025.pdf" target="_blank">Persistent Systems. 35th Annual Report 2024–25.</a></div></div>
+        <div class="source-entry"><div class="source-num">71</div><div><a class="source-link" href="https://www.persistent.com/media/press-releases/persistent-systems-to-acquire-arrka/" target="_blank">Persistent Systems. Press release: Arrka acquisition. September 2024.</a></div></div>
+        <div class="source-entry"><div class="source-num">72</div><div><a class="source-link" href="https://www.everestgrp.com/press-releases/persistent-systems-everest-group-growth-honor-of-the-year-2025/" target="_blank">Everest Group. "Persistent Systems: Growth Honor of the Year 2025." September 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">73</div><div class="source-text">Google Cloud. Partner award: Persistent Systems Infrastructure Modernization Partner of Year – APAC. April 2025.</div></div>
+        <div class="source-entry"><div class="source-num">74</div><div class="source-text">Databricks. Persistent Systems Brickbuilder Specialization for Healthcare &amp; Life Sciences. May 2026.</div></div>
+        <div class="source-entry"><div class="source-num">75</div><div><a class="source-link" href="https://ca.investing.com/news/company-news/coforge-ltd-bom532541-q4-2025-earnings-call-highlights-strong-order-intake-and-revenue--3994274" target="_blank">Coforge. FY25 Q4 Earnings Call Highlights.</a></div></div>
+        <div class="source-entry"><div class="source-num">76</div><div><a class="source-link" href="https://news.coforge.com/newsroom/press-release/coforge-closes-an-exceptional-fy25-with-32-cc-growth" target="_blank">Coforge. "Coforge Closes an Exceptional FY25 with 32.0% CC Growth." May 5, 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">77</div><div><a class="source-link" href="https://investors.sabre.com/news-releases/news-release-details/sabre-launches-strategic-collaboration-trusted-engineering" target="_blank">Sabre Corporation. "Sabre Launches Strategic Collaboration with Coforge." March 3, 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">78</div><div><a class="source-link" href="https://www.coforge.com/who-we-are/newsroom/press-release/coforge-successfully-closes-cigniti-acquisition" target="_blank">Coforge. "Coforge Successfully Closes Cigniti Acquisition."</a></div></div>
+        <div class="source-entry"><div class="source-num">79</div><div><a class="source-link" href="https://investors.coforge.com/hubfs/Investor-Presentation-and-Factsheet-Q4FY26.pdf" target="_blank">Coforge. Q4 FY26 Investor Presentation.</a></div></div>
+        <div class="source-entry"><div class="source-num">80</div><div><a class="source-link" href="https://www.icicidirect.com/mailcontent/idirect_coforge_q4fy25.pdf" target="_blank">ICICI Direct. Coforge Q4 FY25 Result Update research note.</a></div></div>
+        <div class="source-entry"><div class="source-num">81</div><div><a class="source-link" href="https://www.mphasis.com/content/dam/mphasis-com/global/en/investors/financial-results/2026/transcript-of-earnings-call-q4-2026.pdf" target="_blank">Mphasis. FY26 Q4 Earnings Conference Call Transcript. April 30, 2026.</a></div></div>
+        <div class="source-entry"><div class="source-num">82</div><div><a class="source-link" href="https://www.mphasis.com/content/dam/mphasis-com/global/en/investors/financial-results/2026/q4-earnings-press-release.pdf" target="_blank">Mphasis. Q4 FY26 press release.</a></div></div>
+        <div class="source-entry"><div class="source-num">83</div><div><a class="source-link" href="https://www.mphasis.com/home/corporate/investors.html" target="_blank">Mphasis. Q2 and Q3 FY26 Earnings Presentations.</a></div></div>
+        <div class="source-entry"><div class="source-num">84</div><div><a class="source-link" href="https://www.mphasis.com/content/dam/mphasis-com/global/en/investors/governance/intimation-of-press-release-27-oct-25.pdf" target="_blank">Mphasis. Press release: NeoIP platform launch. October 27, 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">85</div><div><a class="source-link" href="https://www.prnewswire.com/news-releases/mphasis-acquires-theory-and-practice-business-intelligence-inc-strengthening-its-decisioning-intelligence-capabilities-302749097.html" target="_blank">PR Newswire. "Mphasis Acquires Theory and Practice Business Intelligence Inc." April 21, 2026.</a></div></div>
+        <div class="source-entry"><div class="source-num">86</div><div class="source-text">AWS. Partner Award: Mphasis Industry Partner of Year – Travel &amp; Hospitality Global. December 2024.</div></div>
+        <div class="source-entry"><div class="source-num">87</div><div><a class="source-link" href="https://www.alphaspread.com/security/nse/mphasis/investor-relations/earnings-call/q4-2026" target="_blank">Alpha Spread; Investorfeed. Mphasis TCV and AI-led deal data from earnings calls. 2026.</a></div></div>
+        <div class="source-entry"><div class="source-num">88</div><div><a class="source-link" href="https://www.tcs.com/who-we-are/newsroom/press-release/tcs-financial-results-q4-fy-2025" target="_blank">TCS. "TCS Financial Results Q4 FY25 — Crosses $30 Billion Revenue Milestone." Press release. April 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">89</div><div><a class="source-link" href="https://on.tcs.com/Annual-Report-2025" target="_blank">TCS. Integrated Annual Report 2024–25.</a></div></div>
+        <div class="source-entry"><div class="source-num">90</div><div><a class="source-link" href="https://www.tcs.com/content/dam/tcs/investor-relations/financial-statements/2024-25/q4/Management%20Commentary/Transcript%20of%20the%20Q4%202024-25%20Earnings%20Conference%20Call%20held%20at%201900%20hrs%20IST%20on%20Apr%2010,%202025.pdf" target="_blank">TCS. Transcript of Q4 2024–25 Earnings Conference Call. April 10, 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">91</div><div><a class="source-link" href="https://www.tcs.com/who-we-are/newsroom/press-release/tcs-launches-wisdomnext-an-industry-first-genai-aggregation-platform" target="_blank">TCS. "TCS Launches WisdomNext, an Industry-First GenAI Aggregation Platform." June 4, 2024.</a></div></div>
+        <div class="source-entry"><div class="source-num">92</div><div><a class="source-link" href="https://www.infosys.com/investors/reports-filings/quarterly-results/2024-2025/q4/documents/transcripts/earningscall.pdf" target="_blank">Infosys. Q4 FY25 Earnings Conference Call transcript. April 17, 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">93</div><div><a class="source-link" href="https://www.infosys.com/investors/reports-filings/annual-report/annual/documents/infosys-ar-25.pdf" target="_blank">Infosys. Integrated Annual Report 2024–25.</a></div></div>
+        <div class="source-entry"><div class="source-num">94</div><div><a class="source-link" href="https://www.infosysbpm.com/about/documents/annual-report-2025.pdf" target="_blank">Infosys BPM. Annual Report 2025. Reports ~$1.6B revenue and +1.4% YoY growth.</a></div></div>
+        <div class="source-entry"><div class="source-num">95</div><div><a class="source-link" href="https://www.wipro.com/content/dam/nexus/en/investor/quarterly-results/2024-2025/q4fy25/press-release-q4fy25.pdf" target="_blank">Wipro. "Wipro Announces Results for the Quarter and Year Ended March 31, 2025." Press release. April 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">96</div><div><a class="source-link" href="https://www.wipro.com/content/dam/nexus/en/investor/quarterly-results/2024-2025/q4fy25/q4fy25-earnings-transcript.pdf" target="_blank">Wipro. Q4 FY25 Earnings Call Transcript. April 16, 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">97</div><div><a class="source-link" href="https://www.hcltech.com/sites/default/files/documents/investor-reports/HCLTech-Q4-FY25-Investor-Release.pdf" target="_blank">HCLTech. Q4 &amp; Annual FY2025 Investor Release.</a></div></div>
+        <div class="source-entry"><div class="source-num">98</div><div><a class="source-link" href="https://www.hcltech.com/sites/default/files/document/open/annual-report/2025-08/Annual-Report-2024-25_0.pdf" target="_blank">HCLTech. Annual Report 2024–25.</a></div></div>
+        <div class="source-entry"><div class="source-num">99</div><div><a class="source-link" href="https://www.hcltech.com/sites/default/files/documents/investor-reports/HCLTech-Earnings-Q4FY25-Transcript.pdf" target="_blank">HCLTech. Q4 FY25 Earnings Call Transcript. April 22, 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">100</div><div><a class="source-link" href="https://investors.cognizant.com/news-and-events/news/news-details/2026/Cognizant-Reports-Fourth-Quarter-and-Full-Year-2025-Results/default.aspx" target="_blank">Cognizant. "Cognizant Reports Fourth Quarter and Full-Year 2025 Results." February 2026.</a></div></div>
+        <div class="source-entry"><div class="source-num">101</div><div><a class="source-link" href="https://insights.techmahindra.com/investors/tml-q4-fy-25-earnings-presentation.pdf" target="_blank">Tech Mahindra. Q4 FY25 Earnings Presentation.</a></div></div>
+        <div class="source-entry"><div class="source-num">102</div><div><a class="source-link" href="https://insights.techmahindra.com/investors/tml-q4-fy-25-earnings-transcript.pdf" target="_blank">Tech Mahindra. Q4 FY25 Earnings Call Transcript. April 24, 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">103</div><div><a class="source-link" href="https://insights.techmahindra.com/investors/tml-q1-fy-26-press-release.pdf" target="_blank">Tech Mahindra. Q1 FY26 Press Release. July 16, 2025. Reports EBIT up 34% YoY and deal wins up 51% YoY.</a></div></div>
+      </div>
+    </div>
+
+
+    <div class="sources-group">
+      <div class="sources-toggle" onclick="this.classList.toggle('open')">
+        <span class="sources-toggle-label">Section 4 — BPM Disruption &amp; Opportunity</span>
+        <span style="display:flex;gap:6px;align-items:center"><span class="sources-toggle-count">9 sources</span><span class="sources-arrow">▼</span></span>
+      </div>
+      <div class="sources-list">
+        <div class="source-entry"><div class="source-num">104</div><div><a class="source-link" href="https://nasscom.in/knowledge-center/publications/technology-sector-india-strategic-review-2025" target="_blank">NASSCOM. "Technology Sector in India: Strategic Review 2025." Reports tech headcount at 5.80M, +2.2% YoY, net hiring 126,000. February 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">105</div><div><a class="source-link" href="https://www.techmahindra.com/insights/views/how-ai-driven-automation-reshaping-business-process-management-2025/" target="_blank">Tech Mahindra. "AI &amp; Automation: The BPM Evolution in 2025." Insights article. February 3, 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">106</div><div><a class="source-link" href="https://www.infosysbpm.com/services/global-capability-centers/insights/innovating-with-ai-powered-automation.html" target="_blank">Infosys BPM. "Innovating with AI-Powered Automation." 2025. On AI adoption in GCCs and enterprise process transformation.</a></div></div>
+        <div class="source-entry"><div class="source-num">107</div><div><a class="source-link" href="https://www.cognizant.com/en_us/services/documents/cognizant-gen-ai-in-business-operations.pdf" target="_blank">Cognizant. "Gen AI in Business Operations." Whitepaper. May 2025. Traces GenAI evolution and re-architecture of BPM operating models.</a></div></div>
+        <div class="source-entry"><div class="source-num">108</div><div><a class="source-link" href="https://www.wipro.com/business-process/gen-ai-services/" target="_blank">Wipro. GenAI Services page. 2025. Cites 6–8% quality improvement and 12–15% productivity gains in live GenAI-powered operations.</a></div></div>
+        <div class="source-entry"><div class="source-num">109</div><div><a class="source-link" href="https://www.mphasis.com/home/services/business-process-services.html" target="_blank">Mphasis. Business Process Services — NextOps. Service page describing AI-led automation, intelligent workflows, and digital-first delivery.</a></div></div>
+        <div class="source-entry"><div class="source-num">110</div><div><a class="source-link" href="https://www.coforge.com/what-we-do/success-stories/redefining-travel-insurance-distribution-with-on-demand-coverage-and-scalable-platform" target="_blank">Coforge. "Redefining Travel Insurance Distribution with On-Demand Coverage and Scalable Platform." Case study. July 10, 2024.</a></div></div>
+        <div class="source-entry"><div class="source-num">111</div><div><a class="source-link" href="https://www.persistent.com/wp-content/uploads/2025/07/healthcare-and-hospital-solutions.pdf" target="_blank">Persistent Systems. "Healthcare and Hospital Solutions: Intelligent Automation." Solutions document. 2025.</a></div></div>
+        <div class="source-entry"><div class="source-num">112</div><div><a class="source-link" href="https://newsroom.accenture.com/news/2025/accenture-technology-vision-2025-new-age-of-ai-to-bring-unprecedented-autonomy-to-business" target="_blank">Accenture. "Accenture Technology Vision 2025: New Age of AI to Bring Unprecedented Autonomy to Business." January 7, 2025.</a></div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Report Footer -->
+<div style="margin:24px 14px 8px;padding:16px;background:#F8F9FA;border-radius:10px;border-top:2px solid #1F3864">
+  <div style="font-size:10px;font-weight:700;color:#1F3864;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">Prepared by the CEO Office · ITC Infotech · Internal · Leadership Only</div>
+  <div style="font-size:11.5px;color:#4B5563;line-height:1.7;margin-bottom:10px">This report was produced with substantial AI assistance in research synthesis, competitive analysis, and writing. All data points have been traced to primary sources — annual reports, earnings transcripts, and verified press releases — and are accurate to the best of our knowledge as of May 2026. AI tools can introduce errors despite verification. Cross-check anything you intend to act on, and apply your own judgment.</div>
+  <div style="font-size:11px;color:#6B7280;font-style:italic;text-align:center;">For corrections or queries, contact Chakresh, mention version v5.18</div>
+</div>
+
+<!-- Spacer above bottom nav -->
+<div style="height:16px"></div>
+
+<!-- BOTTOM NAV -->
+
+
+
+
+<!-- SOURCE POPUP -->
+<div class="pop-overlay" id="popOverlay"></div>
+<div class="pop-sheet" id="popSheet" role="dialog" aria-modal="true" aria-label="Source information">
+  <div class="pop-handle"></div>
+  <button class="pop-close" id="popClose" aria-label="Close">✕</button>
+  <div class="pop-tag">Source</div>
+  <div class="pop-name" id="popName"></div>
+  <div class="pop-desc" id="popDesc"></div>
+  <div id="popLinkWrap"></div>
+</div>
+
+
+<script>
+// ── Source lookup table ───────────────────────────────────────────
+const SRCS = {
+
+
+  "tcs-fy26": {
+    name: "TCS Q4 FY26 Annual Report & Earnings",
+    desc: "TCS Q4 FY26 press release and earnings. Reports $30.0B revenue, $40.7B TCV (record), 25.0% EBIT margin (4-year high), $2.3B annualized AI revenue, Coastal Cloud acquisition ($700M). Source: tcs.com newsroom, April 9, 2026.",
+    url: "https://www.tcs.com/who-we-are/newsroom/press-release/tcs-financial-results-q4-fy-2026"
+  },
+  "infosys-fy26": {
+    name: "Infosys Q4 FY26 Earnings, April 2026",
+    desc: "Infosys Q4 FY26 results. Reports $20.158B revenue, 20.3% EBIT, 96 large deals at $14.9B TCV (55% net-new), $500M Truist Financial GCC BOT deal. FY27 guided at 1.5-3.5% CC. Source: Infosys investor relations, April 23, 2026.",
+    url: "https://www.infosys.com/investors/reports-filings/quarterly-results/2025-2026/q4/"
+  },
+  "hcl-fy26": {
+    name: "HCLTech Q4 FY26 Investor Release, April 2026",
+    desc: "HCLTech FY26 results. Reports $14.664B revenue (+3.9% CC), 17.2% EBIT, $620M annualized Advanced AI revenue, AI Force platform. ER&D grew 9.8% CC. European luxury fashion major transformation win. Source: hcltech.com, April 21, 2026.",
+    url: "https://www.hcltech.com/investors/quarterly-results"
+  },
+  "wipro-fy26": {
+    name: "Wipro Q4 FY26 Press Release & SEC Form 6-K",
+    desc: "Wipro FY26 results. Reports $9.9B IT services (-1.6% CC), 17.2% EBIT, $7.8B large deal bookings (+45.4% YoY), Alpha Net Consulting acquisition ($70.8M), Mindsprint acquisition (April 2026), ₹150B buyback. Source: wipro.com, April 16, 2026.",
+    url: "https://www.wipro.com/investors/quarterly-results/"
+  },
+  "techm-fy26": {
+    name: "Tech Mahindra Q4 FY26 Earnings, April 2026",
+    desc: "TechM FY26 results. Reports $6.385B revenue (+0.6% CC), 12.6% EBIT (+290bps via Project Fortius), $3.79B TCV (5-year high). North American automotive OEM win, European telecom AI transformation flagship deal. Source: insights.techmahindra.com, April 22, 2026.",
+    url: "https://insights.techmahindra.com/investors"
+  },
+  "ltm-fy26": {
+    name: "LTM (LTIMindtree) Q4 FY26 Earnings, April 2026",
+    desc: "LTM FY26 results. Reports $4.764B revenue (+5.3% CC), 15.4% EBIT, $1.63B cash (all-time high). Rebranded from LTIMindtree to LTM. 69% AI-led pipeline. iNXT MedTech deployment. Source: ltimindtree.com/investors, April 23, 2026.",
+    url: "https://www.ltimindtree.com/investors/financial-results/"
+  },
+  "coforge-fy26": {
+    name: "Coforge Q4 FY26 Earnings, May 2026",
+    desc: "Coforge FY26 results. Reports $1.870B revenue (+28.7% CC), 14.4% EBIT, $1.75B order book (record). Cigniti merger (May 2026 NCLT), Encora acquisition, $158M UK 5-year deal. 95% workforce AI-certified. Source: coforge.com/investors, May 5, 2026.",
+    url: "https://www.coforge.com/investors/quarterly-results"
+  },
+  "persistent-fy26": {
+    name: "Persistent Systems Q4 FY26 Earnings, April 2026",
+    desc: "Persistent FY26 results. Reports $1.654B revenue (+17.4% CC), 15.6% EBIT. Brand Finance fastest-growing IT brand globally 2026. 120+ AI patents. Customer Zero SASVA strategy. Hardware-to-software carveout for Hi-Tech major. Source: persistent.com/investors, April 21, 2026.",
+    url: "https://www.persistent.com/investors/financial-results/"
+  },
+  "tcs-fy25": {
+    name: "TCS FY25 Annual Report & Earnings",
+    desc: "TCS Q4 FY25 press release and earnings transcript. Reports $30.18B revenue crossing the $30B milestone, $39.4B TCV, 24.3% EBIT margin, and annualized AI revenue of $2.3B. Source: tcs.com newsroom, April 2025.",
+    url: "https://www.tcs.com/who-we-are/newsroom/press-release/tcs-financial-results-q4-fy-2025"
+  },
+  "tcs-wisdomnext": {
+    name: "TCS WisdomNext GenAI Platform",
+    desc: "TCS launched WisdomNext on June 4, 2024 as an industry-first GenAI aggregation platform. Evolved through 2025-26 into a modular enterprise-grade agentic automation platform. Source: TCS newsroom, June 2024.",
+    url: "https://www.tcs.com/who-we-are/newsroom/press-release/tcs-launches-wisdomnext-an-industry-first-genai-aggregation-platform"
+  },
+  "infosys-fy25-earnings": {
+    name: "Infosys Q4 FY25 Earnings Conference Call, April 2025",
+    desc: "Infosys Q4 FY25 earnings call transcript. Reports $19.3B revenue, 21.1% EBIT margin, 96 large deals with $11.6B TCV (56% net-new), Europe growing 15% CC in Q4. Source: Infosys investor relations, April 17, 2025.",
+    url: "https://www.infosys.com/investors/reports-filings/quarterly-results/2024-2025/q4/documents/transcripts/earningscall.pdf"
+  },
+  "infosys-bpm-fy25": {
+    name: "Infosys BPM Annual Report 2025",
+    desc: "Infosys BPM standalone annual report. Reports revenues of INR 13,554 crore (~$1.6B) with only 1.4% YoY growth — significantly lagging core IT, confirming deliberate strategic cannibalization via Topaz AI automation. Source: infosysbpm.com, July 2025.",
+    url: "https://www.infosysbpm.com/about/documents/annual-report-2025.pdf"
+  },
+  "wipro-fy25": {
+    name: "Wipro Q4 FY25 Press Release & Earnings Transcript, April 2025",
+    desc: "Wipro Q4 FY25 results. Reports $10.4B gross revenue (-0.7% YoY), IT services margin expanded 90bps to 17.1%, net income up 18.9% to $1.53B. Phoenix Group 10-year BPaaS deal cited. Source: wipro.com, April 2025.",
+    url: "https://www.wipro.com/content/dam/nexus/en/investor/quarterly-results/2024-2025/q4fy25/press-release-q4fy25.pdf"
+  },
+  "hcl-fy25": {
+    name: "HCLTech Q4 FY25 Investor Release & Annual Report 2025",
+    desc: "HCLTech FY25 results. Reports $13.84B revenue, 18.3% EBIT, $9.26B new deal TCV. Advanced AI revenue annualized at ~$620M. AI Force platform delivering 25-30% efficiency improvements in FS deployments. Source: hcltech.com, April 2025.",
+    url: "https://www.hcltech.com/sites/default/files/documents/investor-reports/HCLTech-Q4-FY25-Investor-Release.pdf"
+  },
+  "cognizant-cy25": {
+    name: "Cognizant FY25 (CY2025) Full-Year Results",
+    desc: "Cognizant CY2025 results. Reports $21.1B revenue (+6.4% CC), 28 large deals signed, 15.8% adjusted EBIT. Belcan acquisition contributed 260bps. Bupa Hong Kong BPaaS deal cited. Source: Cognizant investor relations, February 2026.",
+    url: "https://investors.cognizant.com/news-and-events/news/news-details/2026/Cognizant-Reports-Fourth-Quarter-and-Full-Year-2025-Results/default.aspx"
+  },
+  "techm-q4-fy25": {
+    name: "Tech Mahindra Q4 FY25 Earnings Presentation",
+    desc: "Tech Mahindra Q4 FY25 investor presentation. Reports $6.264B revenue (+0.3% CC), EBIT expanded 360bps to 9.7%, BPS segment contracted 5.5% in Q4. $2.7B net-new TCV. Communications 33.1%, Manufacturing 17.3%, BFSI 16.1% of revenue. Source: insights.techmahindra.com, April 2025.",
+    url: "https://insights.techmahindra.com/investors/tml-q4-fy-25-earnings-presentation.pdf"
+  },
+  "nasscom-2025": {
+    name: "NASSCOM Technology Sector India Strategic Review 2025",
+    desc: "NASSCOM annual review of India's technology sector. Reports employee base rising to 5.95 million (+2.2% YoY) with net hiring of 126,000 — confirming no mass BPO layoffs yet despite accelerating AI adoption. Source: nasscom.in, February 2025.",
+    url: "https://nasscom.in/knowledge-center/publications/technology-sector-india-strategic-review-2025"
+  },
+  "mphasis-nextops": {
+    name: "Mphasis Business Process Services — NextOps",
+    desc: "Mphasis NextOps positions AI-led automation, intelligent workflows, and digital-first delivery as replacements for traditional BPS operations, signalling explicit pivot from FTE-based BPO to AI-outcome-led operations. Source: mphasis.com/services.",
+    url: "https://www.mphasis.com/home/services/business-process-services.html"
+  },
+
+  "gartner-2026": {
+    name: "Gartner IT Spending Forecast, April 2026",
+    desc: "Quarterly worldwide IT spending forecast. The April 2026 revision projected global IT spend at $6.31 trillion, +13.5% YoY, with IT services growing 8.7%. Gartner revises upward three times during the year; this is the most recent revision.",
+    url: "https://www.gartner.com/en/newsroom/press-releases/2026-04-07-gartner-forecasts-worldwide-it-spending-to-grow-13-5-percent-in-2026"
+  },
+  "isg": {
+    name: "ISG",
+    desc: "ISG analysis of how 2025 US tariff policy is expected to affect IT services spending across CPG, Manufacturing, and other sectors. Reports the H-1B surcharge impact and $13B contract renewal wave.",
+    url: "https://isg-one.com/articles/how-will-tariffs-impact-it-services-spending-in-2025"
+  },
+  "sap-cio": {
+    name: "SAP CIO Survey, August 2025",
+    desc: "Survey of enterprise CIOs on technology vendor consolidation intentions. Found 68% plan to reduce vendor count by 20%, coinciding with $13B in IT contract renewals due in 2025.",
+    url: null
+  },
+  "mckinsey-latentview-2024": {
+    name: "McKinsey / LatentView, 2024",
+    desc: "McKinsey research on AI adoption rates in the CPG industry, showing 71% of CPG leaders adopted AI in at least one business function in 2024, up from 42% in 2023.",
+    url: "https://www.latentview.com/blog/faq-how-ai-is-transforming-innovation-in-the-cpg-industry/"
+  },
+  "nvidia-jan2025": {
+    name: "NVIDIA Retail & CPG Industry Survey, January 2025",
+    desc: "NVIDIA survey of CPG and retail respondents on AI adoption and spending plans. Found 89% using or piloting AI; 97% expect AI spend to increase next fiscal year.",
+    url: "https://blogs.nvidia.com/blog/ai-in-retail-cpg/"
+  },
+  "eu-ai-act": {
+    name: "EU Artificial Intelligence Act (European Commission, 2024)",
+    desc: "European Commission regulatory framework for AI systems. Sets three enforcement deadlines: Feb 2025 (prohibited practices), Aug 2025 (GPAI governance), and Aug 2026 (full high-risk compliance, fines up to €35M or 7% of global turnover).",
+    url: "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai"
+  },
+  "deloitte-dora-2025": {
+    name: "Deloitte European DORA Survey, 2025",
+    desc: "Deloitte survey of 36 European financial entities across 28 countries on DORA (Digital Operational Resilience Act) compliance costs. Found 83% have formal cost estimates; 64% budgeting €2–5M per institution.",
+    url: "https://www.deloitte.com/global/en/services/risk-advisory/blogs/dora-regulation-survey.html"
+  },
+  "fortinet-2026": {
+    name: "Fortinet Banking Regulations Report, 2026",
+    desc: "Fortinet analysis of cybersecurity and banking regulation impact. Reports 3,600+ German financial institutions actively responding to DORA cyber-resilience requirements.",
+    url: "https://www.fortinet.com/blog/industry-trends/cybersecurity-and-banking-regulations-in-2026-and-beyond"
+  },
+  "ecb-feb2025": {
+    name: "ECB Banking Supervision Report, February 2025",
+    desc: "European Central Bank data on financial institution IT outsourcing trends. Found cloud outsourcing rose 13.5% YoY to an average of €57M per significant institution.",
+    url: "https://www.ecb.europa.eu/pub/annual-reports/supervisory/2025/html"
+  },
+  "ic-euro-2025": {
+    name: "IC Euro SAP Market Analysis, 2025",
+    desc: "Analysis of the SAP S/4HANA migration consulting market. Reports the market exceeded $16B in 2025; consulting rates projected to rise 30–50% in 2026–27 as remaining ECC customers compete for a constrained talent pool.",
+    url: "https://iceuro.com/how-big-is-the-sap-s4hana-migration-market"
+  },
+  "mordor-ksa-2025": {
+    name: "Mordor Intelligence KSA IT Services Market Report, 2025",
+    desc: "Market research report on the Saudi Arabia IT services industry. Projects growth from $20.1B in 2025 to $45.8B by 2030 at 17.9% CAGR — the fastest-growing IT services geography globally.",
+    url: "https://www.mordorintelligence.com/industry-reports/saudi-arabia-it-services-market"
+  },
+  "dataintelo-bfsi-2025": {
+    name: "Dataintelo IT Spending in BFSI Market Research, 2025",
+    desc: "Market research on IT spending in Banking, Financial Services, and Insurance. Reports Middle East BFSI IT at $11.4B growing at 6.1% CAGR — the highest BFSI IT growth rate of any geography globally.",
+    url: "https://dataintelo.com/report/it-spending-in-bfsi-sector-market"
+  },
+  "aramco-2024": {
+    name: "Saudi Aramco Annual Report, 2024",
+    desc: "Saudi Aramco's annual report documenting $1.8B in AI-realised value in 2024 across 442 deployed AI use cases, signalling executive-level AI commitment at the highest levels of Saudi industry.",
+    url: "https://www.aramco.com/en/investors/annual-report"
+  },
+  "zatca-2025": {
+    name: "ZATCA Fatoorah Phase 2 e-Invoicing Mandate",
+    desc: "Saudi Zakat, Tax and Customs Authority mandate requiring all Saudi businesses to adopt ZATCA-compliant e-invoicing by July 2026. Creates immediate ERP and SAP integration demand across the Kingdom.",
+    url: "https://zatca.gov.sa/en/E-Invoicing/Pages/default.aspx"
+  },
+  "mors-dec2025": {
+    name: "Mors Software GCC Banking Report, December 2025",
+    desc: "Report on digital transformation trends reshaping GCC banking in 2025, documenting the transition of Gulf financial institutions from AI pilots to full production deployments.",
+    url: "https://morssoftware.com/digital-transformation-trends-reshaping-gcc-banking"
+  },
+  "alibaba-cloud-oct2025": {
+    name: "Alibaba Cloud / Wio Bank MoU, October 2025",
+    desc: "Alibaba Cloud press release announcing an MoU with UAE's Wio Bank for AI-powered banking agent deployment using the Qwen LLM on local data centres in Dubai.",
+    url: "https://www.alibabacloud.com/en/press-room/2025"
+  },
+  "microsoft-dec2024": {
+    name: "Microsoft Saudi Arabia Datacenter Announcement, December 2024",
+    desc: "Microsoft announcement confirming construction completion of three Saudi Azure availability zones, with commercial availability expected in 2026. Enables local data-sovereign cloud deployment for banking and government in KSA.",
+    url: "https://news.microsoft.com/source/mena/features/microsoft-shares-strong-progress-on-datacenter-region-in-saudi-arabia/"
+  },
+  "infosys-versent-aug2025": {
+    name: "Infosys Versent Acquisition, August 2025",
+    desc: "Infosys press release on the A$233M acquisition of Versent Group from Telstra. Versent had AUD 211M revenue, 650 staff, AWS Premier Partner with Digital Sovereignty Competency, and clients across 40%+ of the ASX100.",
+    url: "https://www.infosys.com/newsroom/press-releases/2025/acquire-versent-group.html"
+  },
+  "cci-aug2025": {
+    name: "Competition Commission of India — Capgemini/Cloud4C Acquisition Approval, August 2025",
+    desc: "CCI order approving Capgemini's acquisition of Cloud4C, a Singapore-anchored hybrid cloud managed services provider, giving Capgemini a strengthened position in APAC cloud services.",
+    url: null
+  },
+  "dta-jan2025": {
+    name: "Australian Digital Transformation Agency, January 2025",
+    desc: "Australia's DTA announcement of a 3-year whole-of-government AWS arrangement covering 140+ Commonwealth, state, and local government agencies, routing government cloud programs through a defined partner network.",
+    url: "https://www.dta.gov.au/news/australia-signs-whole-government-agreement-amazon-web-services"
+  },
+  "synergy-2025": {
+    name: "Synergy Research Group, 2025",
+    desc: "Cloud infrastructure market share data for Australia. Reports AWS leading at 32.3% IaaS share, Azure at 23.6% (growing fastest), and GCP at 12.7%.",
+    url: "https://www.srgresearch.com/articles"
+  },
+  "forrester-retail-2026": {
+    name: "Forrester US Tech Forecast 2026 for Retail",
+    desc: "Forrester's technology spending forecast for the US retail sector. Projects $113B in 2026, +6.6% YoY, with software accounting for 46% of total retail tech spend. Three in five retail IT organisations rank industry cloud adoption a top initiative.",
+    url: "https://www.forrester.com/report/us-tech-forecast-2026-for-retail/"
+  },
+  "asug-precisely-2025": {
+    name: "ASUG / Precisely SAP S/4HANA Research, 2025",
+    desc: "Research on SAP S/4HANA migration momentum. Found 59% of SAP customers fully or partially live on S/4HANA; 64% expect to be live or mid-migration by end-2025.",
+    url: "https://www.precisely.com/resource-center/research-reports/new-research-reveals-sap-s-4hana-migration-momentum"
+  },
+  "emarketer-h2-2025": {
+    name: "eMarketer US Retail Media Ad Spending Forecast, H2 2025",
+    desc: "eMarketer forecast showing US retail media network spend at $58.79B in 2025, rising to $69.33B in 2026. CPG captured 25.75% of 2025 RMN spend; nearly 80% of major retailers now operate a retail media network.",
+    url: "https://www.emarketer.com/content/us-retail-media-ad-spending-forecast"
+  },
+  "valere-mar2025": {
+    name: "Valere State of AI in Retail, March 2025",
+    desc: "Survey of retail AI adoption and funding. Found 100% of surveyed retailers have committed AI funding for 2025; 37.5% demonstrate advanced enterprise-wide AI capabilities.",
+    url: "https://valere.io/insights/state-of-ai-in-retail-2025/"
+  },
+  "technavio-2025": {
+    name: "Technavio B2B E-Commerce Market Analysis, 2025",
+    desc: "Market analysis of global B2B e-commerce. Projects the market adding $11.16 trillion between 2023 and 2028 at a 15.2% CAGR, driven by digital commerce platform adoption in CPG and Manufacturing.",
+    url: "https://www.technavio.com/report/b2b-e-commerce-market-analysis"
+  },
+  "abi-research-2026": {
+    name: "ABI Research Top Manufacturing Trends, 2026",
+    desc: "ABI Research analysis of manufacturing digital transformation. Projects $224.7B in global spend in 2026, +13.8% YoY; Automotive leads at $87.3B. Also covers MES market doubling to $40.3B by 2035.",
+    url: "https://www.abiresearch.com/market-research/product/7784060-top-5-manufacturing-trends-to-know-in-2026/"
+  },
+  "capgemini-microsoft-2025": {
+    name: "Capgemini-Microsoft Manufacturing AI Research, 2025",
+    desc: "Research on AI adoption and industrialization in manufacturing. Found 35% of manufacturers had AI in production in 2024, rising to ~50% by 2025, but only 5% have achieved industrialized end-to-end digital operations.",
+    url: "https://www.capgemini.com/insights/research-library/ai-in-manufacturing/"
+  },
+  "wef-oct2024": {
+    name: "WEF Global Lighthouse Network, October 2024",
+    desc: "World Economic Forum update on its Global Lighthouse Network. 172 factories designated as of October 2024, reporting an average 50% labour productivity boost from scaled AI, advanced analytics, and Industry 4.0 technologies.",
+    url: "https://www.weforum.org/agenda/2024/10/new-lighthouses-industry-4-0/"
+  },
+  "aras-2024": {
+    name: "Aras Spotlight on the Future Survey, 2024",
+    desc: "Survey of industrial companies on PLM software delivery preferences. Found 81% believe SaaS will become the standard delivery model for PLM, strongly signalling cloud migration intent across the industrial sector.",
+    url: "https://www.aras.com/en/news/press/2024/2024-spotlight-survey-results-state-of-plm-software"
+  },
+  "reshoring-2024": {
+    name: "Reshoring Initiative 2024 Annual Report",
+    desc: "Annual report documenting 244,000 US manufacturing jobs from reshoring and FDI in 2024. Tariffs cited as a motivator in 454% more reshoring decisions in 2025 vs 2024; 88% of 2024 reshoring jobs in high or medium-high-tech sectors.",
+    url: "https://www.reshorenow.org/content/uploads/2024-Annual-Report.pdf"
+  },
+  "custom-market-insights-2026": {
+    name: "Custom Market Insights PLM Market Report, 2026",
+    desc: "PLM market research projecting $62.84B market in 2026 at 6.95% CAGR. Cloud PLM holds 42% market share in 2025, growing at 8.1% CAGR; cloud implementations deploy 50–60% faster than on-premise equivalents.",
+    url: "https://www.custommarketinsights.com/report/process-lifecycle-management-market/"
+  },
+  "sita-2024": {
+    name: "SITA Air Transport IT Insights 2024",
+    desc: "SITA annual survey of 379 airlines on IT investment priorities. Found airline IT spend at $37B in 2024, up from $35B; IT as % of airline revenue rose to 3.8%; 72% expect further increase in 2025. Data and GenAI cited as top priority by 56%.",
+    url: "https://www.sita.aero/resources/surveys-reports/air-transport-it-insights-2024/"
+  },
+  "cbre-jul2025": {
+    name: "CBRE Trends in the Hotel Industry, July 2025",
+    desc: "CBRE analysis of hotel industry technology expenditures. Reports hotel IT spend grew 4.6% in 2024 vs 4.0% total hotel expense growth, with biggest increases in PMS, reservations, POS, and guest-facing technologies.",
+    url: "https://www.cbre.com/insights/books/trends-in-the-hotel-industry-2025"
+  },
+  "oracle-sep2025": {
+    name: "Oracle / Accor OPERA Cloud Press Release, September 2025",
+    desc: "Oracle press release announcing Accor selected Oracle Hospitality OPERA Cloud for global PMS migration across its portfolio in 110 countries, one of the largest hospitality PMS migrations announced in 2025.",
+    url: "https://www.oracle.com/news/announcement/oracle-hospitality-opera-cloud-selected-by-accor-2025-09-04/"
+  },
+  "bcg-feb2026": {
+    name: "BCG AI-First Hotels Report, February 2026",
+    desc: "BCG analysis of AI deployment outcomes in hospitality. Documents Four Seasons Peninsula Papagayo achieving 50% buffet waste reduction in 8 months via Winnow AI, and IHG deploying predictive housekeeping AI across properties.",
+    url: "https://www.bcg.com/publications/2026/ai-first-hotels"
+  },
+  "whitesky-sep2025": {
+    name: "Whitesky Hospitality State of Hotel Loyalty, September 2025",
+    desc: "Annual report on hotel loyalty program economics. Reports global hotel loyalty membership at 675M in 2024 (+14.5% YoY), with program costs rising 4.4% annually vs 2.7% revenue growth — forcing platform redesign investment.",
+    url: "https://whiteskyhospitality.com/state-of-hotel-loyalty-2025/"
+  },
+  "rise-up-labs-2026": {
+    name: "Rise Up Labs Legacy Modernization Trends, 2026",
+    desc: "Industry analysis of legacy system modernization across sectors. Reports legacy maintenance consumes 60–80% of Travel & Hospitality IT budgets, creating a structural and sustained modernization backlog.",
+    url: "https://riseuplabs.com/legacy-system-modernization-trends/"
+  },
+  "ey-2025": {
+    name: "EY Global Banking Outlook 2025",
+    desc: "EY analysis of global banking sector IT spending. Reports $176B in 2025 (up from $167B), with only 39% classified as change-the-bank investment and 61% as run-the-bank operations.",
+    url: "https://www.ey.com/en_gl/banking-capital-markets/global-banking-outlook"
+  },
+  "ibm-feb2025": {
+    name: "IBM Institute for Business Value Study, February 2025",
+    desc: "IBM IBV study on GenAI adoption in financial services. Found only 8% of banks developing GenAI at strategic enterprise level; 78% remain tactical despite 52% broadly using GenAI in some capacity.",
+    url: "https://newsroom.ibm.com/2025-02-04-new-ibm-institute-for-business-value-study"
+  },
+  "statista-2025": {
+    name: "Statista Banking AI Spending Forecast, 2025",
+    desc: "Statista data on global banking sector AI and GenAI spending. Reports $31.3B in 2024 growing to approximately $40B in 2025 at a 27% CAGR.",
+    url: "https://www.statista.com/statistics/banking-sector-spending-on-ai/"
+  }
+};
+
+// ── Popup logic ───────────────────────────────────────────────────
+const overlay = document.getElementById('popOverlay');
+const sheet   = document.getElementById('popSheet');
+const nameEl  = document.getElementById('popName');
+const descEl  = document.getElementById('popDesc');
+const linkWrap = document.getElementById('popLinkWrap');
+
+function showPopup(key) {
+  const src = SRCS[key];
+  if (!src) return;
+  nameEl.textContent = src.name;
+  descEl.textContent = src.desc;
+  if (src.url) {
+    linkWrap.innerHTML = `<a class="pop-link" href="${src.url}" target="_blank" rel="noopener">Open source →</a>`;
+  } else {
+    linkWrap.innerHTML = `<span class="pop-no-link">No direct link available — see Sources appendix in the full report.</span>`;
+  }
+  overlay.classList.add('show');
+  sheet.classList.add('show');
+  sheet.scrollTop = 0;
+}
+
+function hidePopup() {
+  overlay.classList.remove('show');
+  sheet.classList.remove('show');
+}
+
+document.addEventListener('click', e => {
+  const sp = e.target.closest('.src-pop');
+  if (sp) { e.stopPropagation(); showPopup(sp.dataset.src); return; }
+  if (overlay.classList.contains('show') &&
+      !sheet.contains(e.target)) hidePopup();
+});
+
+document.getElementById('popClose').addEventListener('click', hidePopup);
+
+/* ─── DAILY BRIEF WIDGET ──────────────────────── */
+function escH(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function dbSevBadge(sev) {
+  const s = (sev||'green').toLowerCase();
+  const map = {
+    red:   ['db-sev-red',   'db-dot-red',   'Red — Act Now'],
+    amber: ['db-sev-amber', 'db-dot-amber', 'Amber — Monitor'],
+    green: ['db-sev-green', 'db-dot-green', 'Green — Aware']
+  };
+  const [cls, dot, label] = map[s] || map.green;
+  return `<span class="db-sev-badge ${cls}"><span class="db-dot ${dot}"></span>${label}</span>`;
+}
+
+async function loadDailyWidget() {
+  try {
+    const res = await fetch('./report.json?t=' + Date.now());
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+
+    const top = (data.top_signals || []).slice(0, 5);
+    const items = top.map((s, i) => `
+      <div class="db-sig-item">
+        <div class="db-sig-num">${i+1}</div>
+        <div style="flex:1">
+          <div class="db-sig-section">${escH(s.section || '')}</div>
+          ${dbSevBadge(s.severity)}
+          <div class="db-sig-headline">${escH(s.headline)}</div>
+          <div class="db-sig-sowhat">${escH(s.so_what)}</div>
+        </div>
+      </div>`).join('');
+
+    const dateStr = data.generated_date || '';
+    document.getElementById('db-widget-card').innerHTML =
+      `<div style="padding:10px 16px 6px;border-bottom:0.5px solid var(--border);display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:11px;font-weight:700;color:var(--navy)">Top ${top.length} Signals Today</span>
+        <span style="font-size:10px;color:var(--t3)">${escH(dateStr)}</span>
+       </div>
+       ${items}
+       <a class="db-view-all" href="daily.html">View Full Daily Brief &rarr;</a>`;
+  } catch(e) {
+    document.getElementById('db-widget-card').innerHTML =
+      `<div class="db-error">Daily brief unavailable — check back after 7:00 AM IST.<br><small style="opacity:.6">${e.message}</small></div>`;
+  }
+}
+
+loadDailyWidget();
+
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') hidePopup();
+});
+</script>
+
+<div style="text-align:center;padding:20px 20px 30px;font-size:10px;color:var(--t3);line-height:1.7">
+  ITC Infotech · Market Intelligence Report · Leadership Only<br>
+  Last updated: May 2026 · Next edition: June 2026<br>
+  AI-assisted compilation · All data sourced and cited
+</div>
+
+
+
+
+<a href="daily.html" class="page-switch">Daily Brief →</a>
+
+<a href="index.html" class="home-fab">← Home</a>
+</body>
+</html>

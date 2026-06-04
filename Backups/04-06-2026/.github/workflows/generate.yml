@@ -1,0 +1,104 @@
+name: Generate Account Report
+
+on:
+  workflow_dispatch:
+    inputs:
+      company:
+        description: 'Company name to generate report for'
+        required: true
+        type: string
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+          persist-credentials: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install @google/generative-ai dotenv
+
+      - name: Generate HTML report
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          COMPANY: ${{ github.event.inputs.company }}
+        run: node generate.js
+
+      - name: Install Puppeteer
+        run: npm install puppeteer
+
+      - name: Generate PDF from HTML
+        env:
+          COMPANY: ${{ github.event.inputs.company }}
+        run: |
+          node -e "
+          const puppeteer = require('puppeteer');
+          const fs = require('fs');
+          const path = require('path');
+          const company = process.env.COMPANY;
+          const slug = company.toLowerCase().replace(/[^a-z0-9]/g, '_');
+          const htmlPath = path.resolve('reports/' + slug + '.html');
+          (async () => {
+            const browser = await puppeteer.launch({ args: ['--no-sandbox','--disable-setuid-sandbox'] });
+            const page = await browser.newPage();
+            await page.setViewport({ width: 800, height: 1100 });
+            await page.goto('file://' + htmlPath, { waitUntil: 'networkidle0' });
+            await page.pdf({
+              path: 'reports/' + slug + '.pdf',
+              format: 'A4',
+              printBackground: false,
+              margin: { top: '12mm', bottom: '12mm', left: '10mm', right: '10mm' }
+            });
+            await browser.close();
+            console.log('PDF generated: reports/' + slug + '.pdf');
+          })();
+          "
+
+      - name: Update reports index
+        env:
+          COMPANY: ${{ github.event.inputs.company }}
+        run: |
+          node -e "
+          const fs = require('fs');
+          const company = process.env.COMPANY;
+          const slug = company.toLowerCase().replace(/[^a-z0-9]/g, '_');
+          const indexPath = 'reports/index.json';
+          let reports = [];
+          if (fs.existsSync(indexPath)) {
+            try { reports = JSON.parse(fs.readFileSync(indexPath, 'utf8')); } catch(e) {}
+          }
+          reports = reports.filter(r => r.slug !== slug);
+          reports.unshift({
+            company: company,
+            slug: slug,
+            generated: new Date().toISOString(),
+            htmlFile: slug + '.html',
+            pdfFile: slug + '.pdf'
+          });
+          fs.writeFileSync(indexPath, JSON.stringify(reports, null, 2));
+          console.log('Index updated:', reports.length, 'reports');
+          "
+
+      - name: Commit and push report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/Chaakresh/account-intell.git
+          git add reports/
+          git stash
+          git pull --rebase origin main
+          git stash pop
+          git add reports/
+          git commit -m "Add report: ${{ github.event.inputs.company }}" || echo "Nothing to commit"
+          git push origin main
