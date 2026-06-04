@@ -32,7 +32,7 @@ async function withRetry(fn, label, retries = 3, delayMs = 8000) {
 async function research(prompt, label, isRetryForRecitation = false) {
   return withRetry(async () => {
     const model = gemini.getGenerativeModel({
-      model: "gemini-2.5-flash-preview-05-20",
+      model: "gemini-2.5-flash",
       tools: [{ googleSearch: {} }],
     });
     const result = await model.generateContent(prompt);
