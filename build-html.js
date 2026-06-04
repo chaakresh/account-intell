@@ -60,7 +60,7 @@ function renderTable(block) {
   if (!block.headers || !block.rows) return "";
   const thead = `<tr>${block.headers.map(h => `<th>${esc(h)}</th>`).join("")}</tr>`;
   const tbody = block.rows.map(row =>
-    `<tr>${row.map(cell => `<td>${esc(String(cell))}</td>`).join("")}</tr>`
+    `<tr>${row.map(cell => `<td>${injectConfidenceBadges(esc(String(cell)))}</td>`).join("")}</tr>`
   ).join("");
   return `<div class="tbl-wrap"><table class="data-table">${thead}${tbody}</table></div>`;
 }

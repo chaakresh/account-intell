@@ -66,7 +66,14 @@ async function research(prompt, label, isRetryForRecitation = false) {
 function prompts(c) {
   return {
     s1: `Research ${c} for a B2B sales intelligence brief. Provide structured factual information on:
-1. REVENUE & FINANCIALS: Latest revenue figures, growth rates, profitability, margin trends, guidance
+1. REVENUE & FINANCIALS: Provide the last 3 fiscal years where available, each labelled with its fiscal year and currency:
+   - Total revenue / turnover (per year) and YoY growth %
+   - Gross profit and gross margin %
+   - Operating profit (EBIT) and operating margin %
+   - EBITDA
+   - Net profit / net income and net margin %
+   - Forward guidance or analyst estimates if public
+   If the company is private and figures are undisclosed, state that explicitly and give any available estimates with their source.
 2. EMPLOYEE COUNT & LOCATIONS: Global headcount, key office locations, India presence/GCC
 3. RECENT NEWS & EVENTS: Last 90 days — acquisitions, partnerships, leadership changes, product launches
 4. M&A ACTIVITY: Recent acquisitions or divestitures (last 2 years)
@@ -320,6 +327,7 @@ PERSON (for s3 "people" array — extract ALL named executives):
 RULES:
 1. Every numbered subsection header (e.g. "1. REVENUE & FINANCIALS:") becomes one numbered ITEM.
 2. All content under that header goes into "body" as text / bullet / table BLOCKs.
+2a. FINANCIALS TABLE (important): For the s1 "REVENUE & FINANCIALS" subsection, extract every quantitative financial figure into a single two-column table BLOCK with headers ["Metric","Value"]. One row per data point — e.g. ["Revenue (2022)","€646M gross annual turnover"], ["Revenue (2021)","€550M"], ["Operating margin","12%"], ["Net profit","€48M"], ["Gross margin","..."], ["EBITDA","..."], ["Employees","..."]. Include Revenue (per year), Gross margin, Operating margin, Net profit, EBITDA, and any other figures wherever available. Keep [[CF:...]] markers attached to the relevant cell value. Put any non-numeric narrative (e.g. "private entity, does not disclose margins") as a "text" BLOCK BEFORE the table. Only build the table if at least one numeric figure exists; otherwise use bullets/text as normal.
 3. Special blocks ([GAP FILL...], [LEADERSHIP VERIFICATION], [DEPARTED...]) become top-level ITEMs — NOT nested inside a numbered item's body.
 4. For s3: extract every named executive into the "people" array. Look for "Role: Name", bullet lines beginning with a title, or "Name — Role" patterns.
 5. Preserve any [[CF:type:note]] markers verbatim inside text strings — do not alter or remove them.
@@ -426,6 +434,15 @@ function injectMarkersIntoStructured(structuredSections, confidenceFlags) {
         if (block.text) {
           const result = tryInsert(block.text);
           if (result) { block.text = result; found = true; break outer; }
+        }
+        // Table cells (e.g. financials table)
+        if (block.type === "table" && Array.isArray(block.rows)) {
+          for (const row of block.rows) {
+            for (let ci = 0; ci < row.length; ci++) {
+              const result = tryInsert(String(row[ci]));
+              if (result) { row[ci] = result; found = true; break outer; }
+            }
+          }
         }
       }
     }
