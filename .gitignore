@@ -11,6 +11,7 @@ ARCHITECTURE.md
 
 # Node modules
 node_modules/
+Backups/
 
 # OS files
 .DS_Store
