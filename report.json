@@ -1,298 +1,31 @@
 {
-  "generated_at": "2026-06-10T11:35:15+05:30",
-  "generated_date": "10 June 2026",
-  "top_signals": [
-    {
-      "section": "Competitive Intelligence",
-      "headline": "Cognizant Partners with Siemens to Launch Industry 4.0 Joint Practice",
-      "summary": "Cognizant has formed a strategic alliance with Siemens to create a dedicated Industry 4.0 practice, combining Siemens' industrial software portfolio with Cognizant's IT services. This joint practice directly targets manufacturing clients for digital transformation.",
-      "severity": "red",
-      "so_what": "ITCI's manufacturing vertical and Windchill PLM services face intensified competition from a Siemens-backed competitor offering integrated solutions.",
-      "action": "Evaluate partnership opportunities with PTC or alternative industrial software vendors to create differentiated joint go-to-market offerings.",
-      "sources": []
-    },
-    {
-      "section": "Market Structure Shifts",
-      "headline": "PTC Announces Mandatory SaaS-Only Licensing for New Windchill Customers",
-      "summary": "PTC has declared that all new Windchill customers must adopt SaaS-only licensing models starting immediately. This eliminates on-premise deployment options for new implementations.",
-      "severity": "red",
-      "so_what": "ITCI's Windchill implementation and hosting services require immediate pivot to SaaS deployment models or risk losing new customer acquisition opportunities.",
-      "action": "Launch dedicated Windchill+ SaaS migration practice and retrain delivery teams on cloud-native PLM architectures within 90 days.",
-      "sources": []
-    },
-    {
-      "section": "Competitive Intelligence",
-      "headline": "LTIMindtree Launches Dedicated SAP S/4HANA Migration Factory in Middle East",
-      "summary": "LTIMindtree has established a specialized SAP S/4HANA migration factory in the Middle East region to accelerate ERP transformation projects. This industrialized delivery model targets the growing demand for SAP modernization.",
-      "severity": "amber",
-      "so_what": "ITCI's SAP practice in the high-growth Middle East market faces competition from LTIMindtree's factory-based delivery model offering faster time-to-value.",
-      "action": "Assess feasibility of establishing similar migration factory capabilities in Middle East to compete on industrialized delivery.",
-      "sources": []
-    },
-    {
-      "section": "Partner & Ecosystem",
-      "headline": "SAP Extends Premier Support for ECC Until 2030 Select Customers",
-      "summary": "SAP has announced extended premier support for ECC systems until December 2030 for select enterprise customers. This extension provides additional runway for customers delaying S/4HANA migrations.",
-      "severity": "red",
-      "so_what": "ITCI's S/4HANA migration revenue pipeline faces risk of customer deferrals and delayed transformation projects through 2030.",
-      "action": "Reposition SAP practice toward incremental modernization and hybrid landscape services rather than full migration-only offerings.",
-      "sources": []
-    },
-    {
-      "section": "Macro & IT Services",
-      "headline": "Middle East IT Services Market Grows 11.4% in Q1 2026",
-      "summary": "The Middle East IT services market expanded 11.4% year-over-year in Q1 2026, significantly outpacing global growth rates. Cloud transformation and digital government initiatives are primary growth drivers.",
-      "severity": "green",
-      "so_what": "ITCI should accelerate Middle East market investment as regional growth substantially exceeds global IT spending trends of 6.8%.",
-      "action": "Develop targeted Middle East expansion plan with focus on cloud migration and government digital transformation capabilities.",
-      "sources": []
-    }
-  ],
+  "generated_at": "2026-06-11T11:52:34+05:30",
+  "generated_date": "11 June 2026",
+  "top_signals": [],
   "sections": {
     "macro": {
       "title": "Macro & IT Services",
-      "signals": [
-        {
-          "headline": "Global IT Services Spending Growth Slows to 6.8% in 2026",
-          "summary": "Industry analysts project IT services spending growth moderating from 8.1% in 2025 to 6.8% in 2026 amid macroeconomic uncertainty and client budget scrutiny. Discretionary transformation projects face longer sales cycles while run-the-business services remain stable.",
-          "severity": "amber",
-          "so_what": "CIO 360's AI-RunOps and App Modernization pipeline velocity in Americas CPG & Retail vertical (40% of revenue) faces extended deal closure timelines as clients prioritize cost optimization over innovation spend.",
-          "action": "Shift Q3-Q4 sales emphasis toward cost-takeout narratives for S/4HANA migration and SAP ECC end-of-maintenance 2027 deadline urgency in Manufacturing vertical to maintain deal momentum.",
-          "sources": [
-            {
-              "name": "Industry Analysis",
-              "url": "https://www.gartner.com"
-            }
-          ]
-        },
-        {
-          "headline": "Indian Rupee Depreciates 4.2% Against Dollar YTD June 2026",
-          "summary": "The INR has weakened from 82.5 to 86.0 per USD through June 2026, driven by rising US treasury yields and capital outflows from emerging markets. This creates margin tailwinds for India-based delivery centers billing in USD/EUR.",
-          "severity": "green",
-          "so_what": "ITCI's Bengaluru and Kolkata delivery hubs gain 3-4% operating margin uplift on Americas and EMEAI revenue streams, particularly benefiting Cloud and CIO 360 service lines with offshore-heavy delivery models.",
-          "action": "Accelerate AI Centre of Excellence hiring in Kolkata to capitalize on favorable cost arbitrage while investing margin gains into GenAI capability buildout for Industry 4.0 offerings.",
-          "sources": [
-            {
-              "name": "Reserve Bank of India",
-              "url": "https://www.rbi.org.in"
-            }
-          ]
-        },
-        {
-          "headline": "Middle East IT Services Market Grows 11.4% in Q1 2026",
-          "summary": "GCC countries led by Saudi Arabia and UAE drive double-digit IT services growth, fueled by Vision 2030 digital transformation mandates and sovereign wealth fund technology investments. Cloud infrastructure and ERP modernization dominate spending.",
-          "severity": "green",
-          "so_what": "EMEAI geography expansion into KSA e-invoicing compliance and SAP S/4HANA migration projects aligns with fastest-growing regional market, leveraging existing Middle East presence and CIO 360 ERP capabilities.",
-          "action": "Establish dedicated Saudi Arabia sales and delivery pod by Q3 2026, partnering with BlazeClan cloud expertise to target Vision 2030 government and semi-government entity pipeline.",
-          "sources": [
-            {
-              "name": "IDC Middle East",
-              "url": "https://www.idc.com"
-            }
-          ]
-        }
-      ]
+      "signals": []
     },
     "competitive": {
       "title": "Competitive Intelligence",
-      "signals": [
-        {
-          "headline": "Infosys Acquires InSemi to Strengthen Embedded Engineering Capabilities Globally",
-          "summary": "Infosys has acquired InSemi, a semiconductor design services firm, to expand its embedded systems and chip design capabilities targeting automotive and industrial clients. This move directly challenges mid-tier players in the automotive embedded engineering space.",
-          "severity": "amber",
-          "so_what": "InSemi acquisition strengthens Infosys's position against ITCI's Industry 4.0 Embedded Engineering practice serving Manufacturing vertical clients like Ferrari and Volvo.",
-          "action": "Assess differentiation strategy for embedded offerings and evaluate strategic partnerships with automotive chip vendors to defend Manufacturing accounts.",
-          "sources": [
-            {
-              "name": "Industry Analysis",
-              "url": "https://example.com/infosys-insemi"
-            }
-          ]
-        },
-        {
-          "headline": "LTIMindtree Launches Dedicated SAP S/4HANA Migration Factory in Middle East",
-          "summary": "LTIMindtree opened a specialized S/4HANA migration delivery center in Dubai targeting the December 2027 ECC deadline with fixed-price packages for regional enterprises. The factory model offers 20-30% cost advantage over traditional delivery.",
-          "severity": "amber",
-          "so_what": "LTIMindtree's Middle East SAP factory directly competes with CIO 360 ERP (S/4HANA) expansion plans in EMEAI geography, particularly KSA opportunities.",
-          "action": "Accelerate Middle East S/4HANA partner ecosystem development and explore industrialized delivery models for Q3 2026 launch.",
-          "sources": [
-            {
-              "name": "Market Intelligence",
-              "url": "https://example.com/ltimindtree-s4"
-            }
-          ]
-        },
-        {
-          "headline": "Cognizant Partners with Siemens to Launch Industry 4.0 Joint Practice",
-          "summary": "Cognizant and Siemens announced a global partnership to deliver integrated Xcelerator and MindSphere solutions with dedicated co-innovation labs in Germany and US. This alliance targets CPG and discrete manufacturing digital twin implementations.",
-          "severity": "red",
-          "so_what": "Siemens partnership positions Cognizant to compete directly against ITCI's Industry 4.0 Digital Twins practice in CPG vertical (~40% revenue) and Manufacturing clients like IKEA.",
-          "action": "Urgently evaluate PTC-Siemens interoperability positioning and consider strategic alliances to defend Digital Twins pipeline in CPG & Retail vertical.",
-          "sources": [
-            {
-              "name": "Partnership Announcement",
-              "url": "https://example.com/cognizant-siemens"
-            }
-          ]
-        }
-      ]
+      "signals": []
     },
     "market_structure": {
       "title": "Market Structure Shifts",
-      "signals": [
-        {
-          "headline": "SAP Extends ECC Support Deadline to December 2030",
-          "summary": "SAP has announced a three-year extension of mainstream maintenance for ECC systems from 2027 to 2030, reducing urgency for S/4HANA migrations. This delays the $25B+ migration wave that mid-tier integrators were positioning to capture in 2026-2027.",
-          "severity": "amber",
-          "so_what": "CIO 360's ERP S/4HANA practice loses near-term pipeline velocity across CPG & Retail clients (IKEA, Heineken, Coca-Cola) who now defer 2026-2027 budgeted migrations.",
-          "action": "Pivot ERP positioning from 'urgent migration' to 'selective modernization' and bundle with AI-RunOps to maintain deal size and margin.",
-          "sources": [
-            {
-              "name": "Industry Analysis",
-              "url": "https://www.sap.com/ecc-support"
-            }
-          ]
-        },
-        {
-          "headline": "PTC Announces Mandatory SaaS-Only Licensing for New Windchill Customers",
-          "summary": "PTC's FY26 policy mandates all new Windchill deals after July 2026 must be Windchill+ SaaS subscriptions, eliminating perpetual on-premise licenses. Existing customers face 25-30% price increases upon renewal to incentivize cloud migration.",
-          "severity": "red",
-          "so_what": "DxP PLM Consulting faces compressed margins on Windchill+ implementations and client pushback in Manufacturing vertical (Liebherr, KONE, Ferrari) with on-premise data sovereignty requirements.",
-          "action": "Develop hybrid deployment architecture using BlazeClan cloud expertise to offer sovereignty-compliant Windchill+ hosting in Germany and Singapore for Manufacturing clients.",
-          "sources": [
-            {
-              "name": "PTC Partner Network",
-              "url": "https://www.ptc.com/windchill-licensing"
-            }
-          ]
-        },
-        {
-          "headline": "Accenture Acquires Middle East SI for $800M Cloud Expansion",
-          "summary": "Accenture's acquisition of Dubai-based cloud integrator strengthens hyperscaler partnerships (AWS, Azure, Google Cloud) across GCC markets, directly competing in KSA and UAE public sector deals. The combined entity now controls 18% of Middle East cloud infrastructure spend.",
-          "severity": "amber",
-          "so_what": "Cloud service line's EMEAI expansion into KSA e-invoicing compliance and Middle East digitization faces intensified Tier 1 competition with deeper hyperscaler rebates and government relationships.",
-          "action": "Accelerate BlazeClan integration to leverage APAC delivery cost advantage and position CLOUDLYTICS/CSPM as differentiated FinOps play for cost-conscious GCC enterprises.",
-          "sources": [
-            {
-              "name": "M&A Intelligence",
-              "url": "https://www.accenture.com/me-acquisition"
-            }
-          ]
-        }
-      ]
+      "signals": []
     },
     "client_verticals": {
       "title": "Client Verticals",
-      "signals": [
-        {
-          "headline": "No primary source intelligence available for client vertical analysis",
-          "summary": "Research systems returned zero signals for CPG & Retail, Manufacturing, Travel & Hospitality, BFSI, and Aerospace & Defense verticals as of 10 June 2026. This gap prevents proactive risk identification across 40% CPG/Retail and 25% Manufacturing revenue concentrations.",
-          "severity": "amber",
-          "so_what": "CIO 360 SAP S/4HANA pipeline in CPG & Retail (IKEA, Heineken, Coca-Cola) lacks competitive intelligence ahead of ECC 2027 deadlines.",
-          "action": "Commission manual vertical scans focusing on top 10 accounts across CPG/Retail and Manufacturing for Q2 2026.",
-          "sources": []
-        },
-        {
-          "headline": "IKEA and Nike strategic initiatives unmonitored in primary revenue vertical",
-          "summary": "CPG & Retail accounts representing ~40% of ITCI revenue have no tracked signals for digital transformation, cloud migration, or supply chain modernization activity. Competitors may be capturing S/4HANA and Industry 4.0 opportunities during this intelligence blackout.",
-          "severity": "amber",
-          "so_what": "Industry 4.0 Supply Chain and CIO 360 ERP expansion in CPG & Retail vertical at risk from Infosys and TCS account mining.",
-          "action": "Activate direct client listening posts through delivery leads for IKEA, Nike, Heineken by 20 June 2026.",
-          "sources": []
-        },
-        {
-          "headline": "Manufacturing vertical intelligence gap exposes Windchill renewal risk",
-          "summary": "Zero monitoring of Liebherr, KONE, Ferrari, and Volvo leaves DxP PLM renewal pipeline exposed to competitive displacement. PTC Windchill+ SaaS migration opportunities in Manufacturing (~25% revenue) cannot be qualified without client technology roadmap visibility.",
-          "severity": "amber",
-          "so_what": "DxP Windchill+ migration revenue in Manufacturing vertical (Liebherr, KONE) vulnerable to Cognizant and Persistent PLM practices.",
-          "action": "Brief DxP account teams to submit manual client roadmap updates for top 5 Manufacturing PLM accounts by 17 June 2026.",
-          "sources": []
-        }
-      ]
+      "signals": []
     },
     "partner_ecosystem": {
       "title": "Partner & Ecosystem",
-      "signals": [
-        {
-          "headline": "PTC Announces Windchill+ SaaS Price Increase Effective July 2026",
-          "summary": "PTC has communicated a 15-18% price increase for Windchill+ SaaS subscriptions starting July 2026, citing AI feature enhancements and infrastructure costs. Existing on-premise Windchill customers face higher migration costs, potentially delaying cloud transitions.",
-          "severity": "amber",
-          "so_what": "DxP service line margins on Windchill+ migration projects in Manufacturing vertical (Liebherr, KONE, Ferrari) face compression as customers resist higher subscription costs and delay cloud adoption timelines.",
-          "action": "DxP leadership should develop value-added AI integration packages that justify price increases and accelerate pre-July migration commitments with top 10 Manufacturing accounts.",
-          "sources": [
-            {
-              "name": "Industry Intelligence",
-              "url": "https://example.com/ptc-pricing-2026"
-            }
-          ]
-        },
-        {
-          "headline": "SAP Extends Premier Support for ECC Until 2030 Select Customers",
-          "summary": "SAP announced a premium extended support option allowing select enterprise customers to delay S/4HANA migration until 2030, contradicting the 2027 end-of-maintenance deadline. This targets customers spending over €50M annually who pay 3.5% additional maintenance fees.",
-          "severity": "red",
-          "so_what": "CIO 360's S/4HANA migration pipeline in CPG & Retail vertical (IKEA, Heineken, Coca-Cola) and BFSI (BlackRock, Goldman Sachs) faces immediate risk as large accounts defer transformations, directly impacting FY27-28 bookings.",
-          "action": "CIO 360 and vertical leads must immediately audit S/4HANA pipeline, identify at-risk deals, and pivot messaging to AI-RunOps and cloud cost optimization to retain engagement during extended ECC lifecycles.",
-          "sources": [
-            {
-              "name": "SAP News",
-              "url": "https://example.com/sap-ecc-extension-2030"
-            }
-          ]
-        },
-        {
-          "headline": "AWS Launches Partner-Exclusive Gen AI Accelerator for APAC Mid-Market",
-          "summary": "AWS introduced a $50M co-funding program exclusively for Premier Tier partners to deliver Gen AI solutions to mid-market customers across APAC, with priority access to Bedrock models. Partners like Infosys, Capgemini, and local specialists receive 30% project cost subsidies through Q1 2027.",
-          "severity": "green",
-          "so_what": "BlazeClan's AWS partnership and APAC footprint (Singapore, Australia) can leverage this program to accelerate Industry 4.0 Gen AI adoption in Manufacturing and expand Cloud service line revenue in high-growth APAC markets.",
-          "action": "BlazeClan and Cloud leadership should immediately apply for Premier Tier qualification and co-develop 3-5 Gen AI accelerators targeting Manufacturing digital twin and supply chain use cases for APAC mid-market.",
-          "sources": [
-            {
-              "name": "AWS Partner Network",
-              "url": "https://example.com/aws-genai-apac-2026"
-            }
-          ]
-        }
-      ]
+      "signals": []
     }
   },
   "regulatory": {
-    "last_updated": "10 June 2026",
-    "items": [
-      {
-        "name": "SAP ECC Extended Support Deadline",
-        "region": "Global",
-        "date": "December 2030",
-        "status": "active",
-        "description": "SAP has extended premier support for ECC systems until end of 2030 for select customers, delaying mandatory S/4HANA migrations. ITCI must adjust SAP transformation sales cycles and diversify service offerings beyond full migration projects to address extended timelines."
-      },
-      {
-        "name": "PTC Windchill SaaS-Only Mandate",
-        "region": "Global",
-        "date": "Immediate (June 2026)",
-        "status": "active",
-        "description": "PTC requires all new Windchill customers to adopt SaaS-only licensing with no on-premise options available. ITCI's Windchill practice must immediately pivot implementation methodology, infrastructure services, and team capabilities to SaaS-native delivery models."
-      },
-      {
-        "name": "PTC Windchill+ Price Increase",
-        "region": "Global",
-        "date": "July 2026",
-        "status": "upcoming",
-        "description": "PTC implementing price increases for Windchill+ SaaS effective July 2026, impacting customer total cost of ownership. ITCI should proactively engage existing Windchill clients regarding budget implications and position value-added services to justify increased platform costs."
-      },
-      {
-        "name": "EU Digital Operational Resilience Act (DORA)",
-        "region": "European Union",
-        "date": "January 2025",
-        "status": "active",
-        "description": "DORA mandates financial services organizations implement comprehensive ICT risk management, incident reporting, and third-party vendor oversight. ITCI must ensure compliance frameworks for EU financial services clients and position resilience consulting services for ongoing regulatory adherence."
-      },
-      {
-        "name": "India Data Protection Act Implementation",
-        "region": "India",
-        "date": "September 2026",
-        "status": "upcoming",
-        "description": "India's comprehensive data protection legislation enters enforcement phase in Q3 2026 with stringent localization and consent requirements. ITCI's offshore delivery model requires immediate assessment of data handling procedures and potential infrastructure adjustments for client data residency compliance."
-      }
-    ]
+    "last_updated": "11 June 2026",
+    "items": []
   }
 }
